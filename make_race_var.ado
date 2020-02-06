@@ -31,7 +31,7 @@ program make_race_var
 	local needed_vars = cond("`dataset'" == "acs", "rac1p hisp", "prdtrace pehspnon")
 	foreach var in `needed_vars' {
 		capture confirm variable `var'
-		if _rc{
+		if _rc != 0 {
 			display `"{err}Variable `var' needed but not found."'
 			exit
 		}
@@ -45,36 +45,36 @@ program make_race_var
 	* acs ------------------------------------------------------------------
 
 	if "`dataset'" == "acs" {
-		qui generate `new_varname' = 1 if rac1p == 1
+		quietly generate `new_varname' = 1 if rac1p == 1
 		if `categories' == 2 {
-			qui replace `new_varname' = 2 if rac1p != 1 | hisp != 1
+			quietly replace `new_varname' = 2 if rac1p != 1 | hisp != 1
 		}
 		if `categories' >= 4 {
-			qui replace `new_varname' = 2 if rac1p == 2
-			qui replace `new_varname' = 4 if !inlist(rac1p, 1, 2)
+			quietly replace `new_varname' = 2 if rac1p == 2
+			quietly replace `new_varname' = 4 if !inlist(rac1p, 1, 2)
 		}
 		if `categories' >= 5 {
-			qui replace `new_varname' = . if `new_varname' == 4
-			qui replace `new_varname' = 4 if rac1p == 6 
-			qui replace `new_varname' = 5 if !inlist(rac1p, 1, 2, 6)
+			quietly replace `new_varname' = . if `new_varname' == 4
+			quietly replace `new_varname' = 4 if rac1p == 6 
+			quietly replace `new_varname' = 5 if !inlist(rac1p, 1, 2, 6)
 		}
 		if `categories' >= 6 {
-			qui replace `new_varname' = . if `new_varname' == 5
-			qui replace `new_varname' = 5 if inrange(rac1p, 3, 5) 
-			qui replace `new_varname' = 6 if !inrange(rac1p, 1, 6) 
+			quietly replace `new_varname' = . if `new_varname' == 5
+			quietly replace `new_varname' = 5 if inrange(rac1p, 3, 5) 
+			quietly replace `new_varname' = 6 if !inrange(rac1p, 1, 6) 
 		}
 		if `categories' >= 7 {
-			qui replace `new_varname' = . if `new_varname' == 6
-			qui replace `new_varname' = 6 if rac1p == 7
-			qui replace `new_varname' = 7 if !inrange(rac1p, 1, 7)
+			quietly replace `new_varname' = . if `new_varname' == 6
+			quietly replace `new_varname' = 6 if rac1p == 7
+			quietly replace `new_varname' = 7 if !inrange(rac1p, 1, 7)
 		}
 		
 		if `categories' == 8 {
-			qui replace `new_varname' = . if `new_varname' == 7
-			qui replace `new_varname' = (rac1p - 1) if inlist(rac1p, 8, 9)
+			quietly replace `new_varname' = . if `new_varname' == 7
+			quietly replace `new_varname' = (rac1p - 1) if inlist(rac1p, 8, 9)
 		}
 		if `categories' > 2 {
-			qui replace `new_varname' = 3 if hisp != 1
+			quietly replace `new_varname' = 3 if hisp != 1
 		}
 	}
 	

@@ -1,7 +1,6 @@
 *! v 0.1.0 	20200127
 *! description Apply adjustment factors 'adjinc' and 'adjhsg' to ACS microdata.
 
-
 program apply_acs_adj_factors
 
 	syntax [anything], [PREfix(string)] [SUFFix(string)]
@@ -21,15 +20,15 @@ program apply_acs_adj_factors
 	
 	foreach var in `inc_vars' {
 		capture confirm variable `var'
-		if !_rc {
-			qui gen `prefix'`var'`suffix' = `var' * adjinc / 1000000 
+		if !_rc != 0 {
+			quietly generate `prefix'`var'`suffix' = `var' * adjinc / 1000000 
 		}
 	}
 	
 	foreach var in `hous_vars' {
 			capture confirm variable `var'
-		if !_rc {
-			qui gen  `prefix'`var'`suffix' = `var' * adjhsg / 1000000 
+		if !_rc != 0 {
+			quietly generate `prefix'`var'`suffix' = `var' * adjhsg / 1000000 
 		}
 	}
 

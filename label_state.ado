@@ -1,31 +1,66 @@
-*! v 1.0.2 	20200124
-*! description Label state FIPS code variable with state names.
+*! v 0.1.0
+
+/***
+Title
+====== 
+
+__label_state__ {hline 2} Label state FIPS code variable with state names.
 
 
-* TODO 
-* instead of specifying variable name, specify dataset acs or cps? 
-*	then var is st if acs and gestfips if cps?
+Description
+-----------
+
+__label_state__ labels state [FIPS code](https://www.census.gov/geographies/reference-files/2018/demo/popest/2018-fips.html) variables with the full state name.   
+The 50 states, District of Columbia, and Puerto Rico are supported.
+
+
+Syntax
+------ 
+
+> __label_state__ {it}{help varname}{sf}
+
+If __varname__ is a string variable, it will be destringed.  
+Defaults to _st,_ the American Community Survey PUMS variable for state FIPS codes.{p_end}
+
+
+Example(s)
+----------
+
+    Label 'gestfips', the variable for state FIPS code in the CPS, with state names.
+        {bf:. label_state gestfips}
+
+Website
+-------
+
+[github.com/CenterOnBudget/cbppstatautils](https://github.com/CenterOnBudget/cbppstatautils)
+
+
+- - -
+
+This help file was dynamically produced by 
+[MarkDoc Literate Programming package](http://www.haghish.com/markdoc/) 
+***/
+
+* capture program drop label_state
+
 
 program label_state
 
+	syntax varname
+
 	version 8
-	
-	// default to 'st', the ACS state FIPS code variable, otherwise user input
-	if ("`1'" == "") local state_var = "st"		
-	else local state_var = "`1'"
-	
+
 	// confirm state variable exists
-	capture confirm variable `state_var'
-	if _rc {
-			display `"{err}Variable `state_var' needed but not found."'
-			exit
-	}
+	confirm variable `varlist'
 	
 	// destring in case variable is string with leading zeros
-	qui destring `state_var', replace 	
+	capture confirm string `varlist' 
+	if _rc != 0 {
+		quietly destring `varlist', replace 
+	}
 	
 	// drop state_lbl if it exists
-	cap label drop state_lbl			
+	capture label drop state_lbl			
 	
 	// define label
 	#delimit ;							
@@ -85,6 +120,7 @@ program label_state
 	#delimit cr
 	
 	// apply label
-	label values `state_var' state_lbl		
+	label values `varlist' state_lbl		
+	
 
 end
