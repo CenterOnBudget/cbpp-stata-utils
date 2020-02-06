@@ -6,5 +6,5 @@
 ## Installation
 
 ```
-net install cbppstatautils, from(https://raw.githubusercontent.com/centeronbudget/cbppstatautils/master/")
+net install cbppstatautils, from("https://raw.githubusercontent.com/centeronbudget/cbppstatautils/master/")
 ```
