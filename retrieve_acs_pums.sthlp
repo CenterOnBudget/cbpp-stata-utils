@@ -21,19 +21,19 @@ The .dta files will be named the same as the original .csv files: psam_[record_t
 
 {title:Syntax}
 
-{p 8 8 2} {bf:retrieve_acs_pums}, {bf:state({it:str})} {bf:year({it:#})} [{it:options}]
+{p 8 8 2} {bf:retrieve_acs_pums}, {bf:state({it:string})} {bf:year({it:integer})} [{it:options}]
 
 {synoptset 27 tabbed}{...}
 {synopthdr}
 {synoptline}
 {syntab:Required}
-	{synopt:{opt st:ate(str)}}state postal appreviation (2 characters, case insensitive).{p_end}
-	{synopt:{opt year(#)}}2005 to 2018 for the one-year sample; 2007 to 2018 for the five-year sample.{p_end}
+	{synopt:{opt st:ate(string)}}state postal appreviation (2 characters, case insensitive).{p_end}
+	{synopt:{opt year(integer)}}2005 to 2018 for the one-year sample; 2007 to 2018 for the five-year sample.{p_end}
 	
 {syntab:Optional}
-    {synopt:{opt sample(#)}}5 for the five-year sample or 1 for the one-year sample. Defaults to 1.{p_end}
-    {synopt:{opt dest_dir(str)}}specifies the directory in which the data will be placed. Defaults to the current working directory.{p_end}
-	{synopt:{opt rec:ord_type(str)}}record type to retrieve: person, household, or both (the default). Abbreviations {it:h, hhld, hous, p,} and {it:pers} are also accepted.{p_end}
+    {synopt:{opt sample(integer)}}5 for the five-year sample or 1 for the one-year sample. Defaults to 1.{p_end}
+    {synopt:{opt dest_dir(string)}}specifies the directory in which the data will be placed. Defaults to the current working directory.{p_end}
+	{synopt:{opt rec:ord_type(string)}}record type to retrieve: person, household, or both (the default). Abbreviations {it:h, hhld, hous, p,} and {it:pers} are also accepted.{p_end}
 	{synopt:{opt keep_zip}}.zip files will not be deleted after unzipping.{p_end}
 	{synopt:{opt keep_csv}}.csv files will not be deleted after .dta files are created.{p_end}
 	{synopt:{opt replace}}existing files will be replaced if they exist.{p_end}

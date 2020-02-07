@@ -20,19 +20,19 @@ The generated .do files will be named {bf:lbl_acs_pums_[year]_[sample]yr.do.} Fi
 
 {title:Syntax}
 
-{p 8 8 2} {bf:make_acs_pums_lbls}, {bf:year({it:#})} [{it:options}]
+{p 8 8 2} {bf:make_acs_pums_lbls}, {bf:year({it:integer})} [{it:options}]
 
-{synoptset 27 tabbed}{...}
+{synoptset 24 tabbed}{...}
 {synopthdr}
 {synoptline}
 {syntab:Required}
-	{synopt:{opt year(#)}}2013 to 2018.{p_end}
+	{synopt:{opt year(integer)}}2013 to 2018.{p_end}
 	
 {syntab:Optional}
-    {synopt:{opt sample(#)}}5 for the five-year sample or 1 for the one-year sample. Defaults to 1.{p_end}
-    {synopt:{opt dest_dir(str)}}specifies the directory in which the data will be placed. Defaults to the current working directory.{p_end}
+    {synopt:{opt sample(integer)}}5 for the five-year sample or 1 for the one-year sample. Defaults to 1.{p_end}
+    {synopt:{opt dest_dir(string)}}the directory in which the data will be placed. Defaults to the current working directory.{p_end}
 	{synopt:{opt keep_txt}}the original data dictionary .txt file will not be deleted after the .do file is created.{p_end}
-	{synopt:{opt replace}}existing files will be replaced if they exist..
+	{synopt:{opt replace}}existing files will be replaced if they exist.
 
 
 
@@ -50,7 +50,6 @@ The generated .do files will be named {bf:lbl_acs_pums_[year]_[sample]yr.do.} Fi
 
 {p 4 4 2}
 {browse "https://github.com/CenterOnBudget/cbppstatautils":github.com/CenterOnBudget/cbppstatautils}
-
 
 {space 4}{hline}
 
