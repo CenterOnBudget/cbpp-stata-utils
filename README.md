@@ -14,7 +14,7 @@ This repository is under active development and contents are subject to change. 
 
 To install the `cbppstatautils` package, run:
 ```
-net install cbppstatautils, from(https://raw.githubusercontent.com/CenterOnBudget/cbppstatautils/master/) replace
+net install cbppstatautils, from(https://raw.githubusercontent.com/CenterOnBudget/cbpp-stata-utils/master/) replace
 ```
 To update your installation to the latest version, run:
 ```
@@ -22,5 +22,5 @@ ado update cbppstatautils
 ```
 
 ## License
-View the [license](https://github.com/CenterOnBudget/cbppstatautils/blob/master/LICENSE).
+View the [license](https://github.com/CenterOnBudget/cbpp-stata-utils/blob/master/LICENSE).
 
