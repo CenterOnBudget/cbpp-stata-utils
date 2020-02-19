@@ -5,8 +5,8 @@ d Distribution-Date: 20200206
 * programs and help files
 f label_state.ado
 f label_state.sthlp
-f retrieve_acs_pums.ado
-f retrieve_acs_pums.sthlp
+f get_acs_pums.ado
+f get_acs_pums.sthlp
 f make_acs_pums_lbls.ado
 f make_acs_pums_lbls.sthlp
 
