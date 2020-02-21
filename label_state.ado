@@ -4,7 +4,7 @@
 Title
 ====== 
 
-__label_state__ {hline 2} Label state FIPS code variable with state names.
+__label_state__ {hline 2} Label state FIPS code variable with state names or postal abbreviations.
 
 
 Description
