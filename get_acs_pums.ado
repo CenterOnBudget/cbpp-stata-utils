@@ -48,7 +48,7 @@ Example(s)
     Retreive household records from the 2011 five-year sample for Vermont, and keep the original .csv files.
         {bf:. get_acs_pums, state(vt) year(2011) record_type(hhld) sample(5) keep_csv}
 
-	Retreive household records from the 2013 one-year sample for Arizona, and save the files to my_datasets.
+    Retreive household records from the 2013 one-year sample for Arizona, and save the files to my_datasets.  
         {bf:. get_acs_pums, state(az) year(2013) record_type(h) dest_dir(my_datasets)}
 
 

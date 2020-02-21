@@ -8,7 +8,8 @@
 
 
 {title:Description}
-{break}    6
+
+{p 4 4 2}
 {bf:get_acs_pums} downloads American Community Survey  {browse "https://www.census.gov/programs-surveys/acs/technical-documentation/pums.html":public use microdata} files from the  {browse "https://www.census.gov/programs-surveys/acs/data/data-via-ftp.html":Census Bureau FTP} and creates {help dta} versions of the files.    {break}
 
 {p 4 4 2}
@@ -48,8 +49,7 @@ The .dta files will be named the same as the original .csv files: psam_[record_t
     Retreive household records from the 2011 five-year sample for Vermont, and keep the original .csv files.
         {bf:. get_acs_pums, state(vt) year(2011) record_type(hhld) sample(5) keep_csv}
 
-{p 4 4 2}
-	Retreive household records from the 2013 one-year sample for Arizona, and save the files to my_datasets.
+    Retreive household records from the 2013 one-year sample for Arizona, and save the files to my_datasets.  
         {bf:. get_acs_pums, state(az) year(2013) record_type(h) dest_dir(my_datasets)}
 
 
