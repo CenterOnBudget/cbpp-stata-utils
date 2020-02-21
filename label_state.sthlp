@@ -10,18 +10,18 @@
 {title:Description}
 
 {p 4 4 2}
-{bf:label_state} labels state  {browse "https://www.census.gov/geographies/reference-files/2018/demo/popest/2018-fips.html":FIPS code} variables with the full state name.     {break}
-The 50 states, District of Columbia, and Puerto Rico are supported.
+{bf:label_state} labels state  {browse "https://www.census.gov/geographies/reference-files/2018/demo/popest/2018-fips.html":FIPS code} variables with the full state name (the default) or postal abbreviation.    {break}
+The 50 states, District of Columbia, Puerto Rico, and U.S. territories are supported.
 
 
 
 {title:Syntax}
 
-{p 8 8 2} {bf:label_state} {it}{help varname}{sf}
+{p 8 8 2} {bf:label_state} {it}{help varname}{sf}, [{it:abbrv}]
 
 {p 4 4 2}
-If {bf:varname} is a string variable, it will be destringed.    {break}
-Defaults to {it:st,} the American Community Survey PUMS variable for state FIPS codes.{p_end}
+If the state FIPS code variable {bf:varname} is a string, it will be destringed.      {break}
+To label with two-character postal abbreviations (e.g. "VT") rather than the full state name, use the {it:abbrv} option.
 
 
 
@@ -38,8 +38,6 @@ Defaults to {it:st,} the American Community Survey PUMS variable for state FIPS 
 
 
 {space 4}{hline}
-
-{p 4 4 2}
 This help file was dynamically produced by 
 {browse "http://www.haghish.com/markdoc/":MarkDoc Literate Programming package} 
 
