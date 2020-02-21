@@ -3,7 +3,7 @@
 {title:Title}
 
 {p 4 4 2}
-{bf:label_state} {hline 2} Label state FIPS code variable with state names.
+{bf:label_state} {hline 2} Label state FIPS code variable with state names or postal abbreviations.
 
 
 
