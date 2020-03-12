@@ -62,7 +62,7 @@
 {break}    								  3 	Hispanic (of any race)
 {break}    								  4		Asian Non-Hisp.
 {break}    								  5 	AIAN Non-Hisp.
-{break}    								  6 	NHPI Non-Hisp.
+{break}    								  6 	NHOPI Non-Hisp.
 {break}    								  7 	 {bf:ACS:} Another Race or Mult. Races Non-Hisp 
 {break}    								  7		 {bf:CPS:} Mult. Races Non-Hisp.{p_end}
 
@@ -71,7 +71,7 @@
 {break}    								  3 	Hispanic (of any race)
 {break}    								  4		Asian Non-Hisp.
 {break}    								  5 	AIAN Non-Hisp.
-{break}    								  6 	NHPI Non-Hisp.
+{break}    								  6 	NHOPI Non-Hisp.
 {break}    								  7 	Some Other Race Non-Hisp 
 {break}    								  8		Mutliple Races{p_end}
 {p2colreset}{...}

@@ -59,7 +59,7 @@ Category Definitions / Labels
 								  3 	Hispanic (of any race)
 								  4		Asian Non-Hisp.
 								  5 	AIAN Non-Hisp.
-								  6 	NHPI Non-Hisp.
+								  6 	NHOPI Non-Hisp.
 								  7 	 __ACS:__ Another Race or Mult. Races Non-Hisp 
 								  7		 __CPS:__ Mult. Races Non-Hisp.{p_end}
 
@@ -68,7 +68,7 @@ Category Definitions / Labels
 								  3 	Hispanic (of any race)
 								  4		Asian Non-Hisp.
 								  5 	AIAN Non-Hisp.
-								  6 	NHPI Non-Hisp.
+								  6 	NHOPI Non-Hisp.
 								  7 	Some Other Race Non-Hisp 
 								  8		Mutliple Races{p_end}
 {p2colreset}{...}
@@ -233,7 +233,7 @@ program generate_race_var
 			label define `new_varname'_lbl 5 "AIAN Non-Hisp.", add
 		}
 		if `categories' >= 7 {
-			label define `new_varname'_lbl 6 "NHPI Non-Hisp.", add
+			label define `new_varname'_lbl 6 "NHOPI Non-Hisp.", add
 		}
 		if `categories' == 8 & "`dataset'" == "acs" {
 			label define `new_varname'_lbl 7 "Some Other Race Non-Hisp.", add

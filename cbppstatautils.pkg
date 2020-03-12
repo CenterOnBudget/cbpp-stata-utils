@@ -1,5 +1,5 @@
-v 0.0.1
-d Distribution-Date: 20200206
+v 0.0.3
+d Distribution-Date: 20200312
 
 
 * programs and help files
@@ -9,6 +9,10 @@ f get_acs_pums.ado
 f get_acs_pums.sthlp
 f make_acs_pums_lbls.ado
 f make_acs_pums_lbls.sthlp
+f get_cpiu.ado
+f get_cpiu.sthlp
+f generate_race_var.ado
+f generate_race_var.sthlp
 
 * internal utilities
 f _import_text.ado
