@@ -76,11 +76,11 @@ Category Definitions / Labels
 Example(s)
 ----------
 
-   Generate a 5-category race-ethnicity variable for ACS microdata.
-        {bf:. generate_race_var, categories(5) dataset(acs)}
+   Generate a 5-category race-ethnicity variable named "race_5" for ACS microdata.
+        {bf:. generate_race_var race_5, categories(5) dataset(acs)}
 
-    Generate an unlabeled 2-category race-ethnicity variable for CPS microdata.
-        {bf:. generate_race_var, categories(5) dataset(cps) no_label}
+    Generate an unlabeled 2-category (person of color/white non-Hispanic) race-ethnicity variable for CPS microdata.
+        {bf:. generate_race_var person_of_color, categories(2) dataset(cps) no_label}
 
 		
 Website

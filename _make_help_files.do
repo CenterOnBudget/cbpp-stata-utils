@@ -8,7 +8,7 @@ local files_list 	get_acs_pums.ado 			///
 					label_state.ado 			///
 					get_cpiu.ado				///
 					generate_race_var.ado		///
-					apply_acs_adj_factors.ado
+					generate_acs_adj_vars.ado
 
 foreach f of local files_list {
 	markdoc "`f'", export(sthlp) replace style("simple")

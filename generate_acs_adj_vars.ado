@@ -67,8 +67,8 @@ program define generate_acs_adj_vars
 		local suffix "_adj"
 	}
 	
-	local adj_inc = cond("`pre_2008'" == "", adjinc, adjust)
-	local adj_hsg = cond("`pre_2008'" == "", adjhsg, adjust)
+	local adj_inc = cond("`pre_2008'" == "", "adjinc", "adjust")
+	local adj_hsg = cond("`pre_2008'" == "", "adjhsg", "adjust")
 		
 	local inc_vars "pincp pernp wagp ssp ssip intp pap oip retp semp fincp hincp"
 	local hous_vars "conp elep fulp gasp grntp insp mhp mrgp smocp rntp smp watp"

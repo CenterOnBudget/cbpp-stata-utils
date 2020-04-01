@@ -2,6 +2,8 @@
 
 # CBPP Stata Utility Programs
 
+[![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
+
 ## About
 
 `cbppstatautils` contains Stata utility programs created by and for researchers at the [Center on Budget and Policy Priorities](https://www.cbpp.org). Most of the programs are for working with American Community Survey or Current Population Survey microdata.
