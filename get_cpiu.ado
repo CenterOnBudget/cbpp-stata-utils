@@ -23,7 +23,7 @@ __get_cpiu__ supports annual (calendar year) average inflation series from 1978 
 Syntax
 ------ 
 
-> __get_cpiu_, [__merge__ __replace__ __matrix(_matname_)__] [_options_]
+> __get_cpiu_, [__merge__ __clear__ __matrix(_matname_)__] [_options_]
 
 {synoptset 27 tabbed}{...}
 {synopthdr}
@@ -32,7 +32,7 @@ Syntax
 	
 	{synopt:{opt merge}}merge the inflations series into existing data in memory. Data in memory must have a variable named 'year'.{p_end}
 	{synopt:{opt clear}}replace data in memory with the inflation series. Cannot be combined with 'merge'.{p_end}
-	{synopt:{opt matrix(matname)}}load the inflation series into a matrix.{p_end}
+	{synopt:{opt mat:rix(matname)}}load the inflation series into a matrix.{p_end}
 	
 {syntab:Optional}
     {synopt:{opt rs}}load the CPI-U-RS, the preferred series for inflation-adjusting Census data.{p_end}
@@ -75,12 +75,13 @@ This help file was dynamically produced by
 /* for debugging:
 	capture program drop get_cpiu
 	sysuse uslifeexp2.dta, clear
-	replace year = year + 70
+	replace year = year + 79
 **/
+
 
 program define get_cpiu
 
-	syntax , [merge clear matrix(name) base_year(integer) rs use_cache]
+	syntax , [merge clear MATrix(name) base_year(integer 0) rs use_cache]
 
 	* checks ------------------------------------------------------------------
 	
@@ -142,8 +143,8 @@ program define get_cpiu
 			// CPI-U RS 1978-latest available
 			copy "https://www.bls.gov/cpi/research-series/allitems.xlsx" 	///
 				 "cpiu_rs.xlsx", replace
-			quietly import excel "cpiu_rs.xlsx", cellrange(A7) firstrow case(lower) clear
-			label variable avg  // remove variable label of mysterious origin
+			// cell range will need to be updated each year when a new row is added
+			quietly import excel using "cpiu_rs.xlsx", cellrange(A6:N49) firstrow case(lower) clear
 			rename avg `series'
 			keep year `series'
 			quietly drop if missing(`series')
@@ -153,7 +154,7 @@ program define get_cpiu
 			// CPI-U 
 			copy "https://download.bls.gov/pub/time.series/cu/cu.data.1.AllItems" 	///
 				 "cpiu_current.txt", replace
-			quietly import delimited "cpiu_current.txt", clear
+			quietly import delimited using "cpiu_current.txt", clear
 			quietly keep if regexm(series_id, "CUUR0000SA0")
 			quietly keep if year >= 1978 & period == "M13"
 			label variable value  // remove variable label of mysterious origin
@@ -170,7 +171,7 @@ program define get_cpiu
 	
 	* if base year provided, calculate adjustment factor ----------------------
 	
-	if "`base_year'" != "" {
+	if `base_year' != 0 {
 	
 		// check that base year is present in series
 		quietly levelsof year, local(years) separate("|")

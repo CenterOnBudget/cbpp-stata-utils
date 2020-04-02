@@ -25,7 +25,7 @@ The program automatically caches the retreived data series. Users can load cache
 
 {title:Syntax}
 
-{p 8 8 2} {bf:get_cpiu}, [{bf:merge} {bf:replace} {bf:matrix({it:matname})}] [{it:options}]
+{p 8 8 2} {bf:get_cpiu}, [{bf:merge} {bf:clear} {bf:matrix({it:matname})}] [{it:options}]
 
 {synoptset 27 tabbed}{...}
 {synopthdr}
@@ -34,7 +34,7 @@ The program automatically caches the retreived data series. Users can load cache
 	
 	{synopt:{opt merge}}merge the inflations series into existing data in memory. Data in memory must have a variable named {c 39}year{c 39}.{p_end}
 	{synopt:{opt clear}}replace data in memory with the inflation series. Cannot be combined with {c 39}merge{c 39}.{p_end}
-	{synopt:{opt matrix(matname)}}load the inflation series into a matrix.{p_end}
+	{synopt:{opt mat:rix(matname)}}load the inflation series into a matrix.{p_end}
 	
 {syntab:Optional}
     {synopt:{opt rs}}load the CPI-U-RS, the preferred series for inflation-adjusting Census data.{p_end}
