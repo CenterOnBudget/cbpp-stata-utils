@@ -1,5 +1,4 @@
 *! v 0.1.0
-* depends: _import_text
 
 /***
 Title

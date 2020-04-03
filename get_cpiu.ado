@@ -23,7 +23,7 @@ __get_cpiu__ supports annual (calendar year) average inflation series from 1978 
 Syntax
 ------ 
 
-> __get_cpiu_, [__merge__ __clear__ __matrix(_matname_)__] [_options_]
+> __get_cpiu__, [__merge__ __clear__ __matrix(_matname_)__] [_options_]
 
 {synoptset 27 tabbed}{...}
 {synopthdr}
