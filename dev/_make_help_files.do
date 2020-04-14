@@ -8,7 +8,7 @@ local files_list 	get_acs_pums.ado 			///
 					label_state.ado 			///
 					get_cpiu.ado				///
 					generate_race_var.ado		///
-					generate_acs_adj_vars.ado
+					generate_aian_var.ado		///
 					generate_acs_adj_vars.ado	///
 					generate_acs_major_group.ado
 
