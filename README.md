@@ -16,7 +16,7 @@ This repository is under active development and contents are subject to change. 
 
 To install the `cbppstatautils` package, run:
 ```
-net install cbppstatautils, from(https://raw.githubusercontent.com/CenterOnBudget/cbpp-stata-utils/master/build) replace
+net install cbppstatautils, from(https://raw.githubusercontent.com/CenterOnBudget/cbpp-stata-utils/master/src) replace
 ```
 To update your installation to the latest version, run:
 ```
