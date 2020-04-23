@@ -138,9 +138,9 @@ program define get_cpiu
 	}
 	
 	if `download' {
-        
-        tempfile data // tempfile for retrieved data
-        
+		
+		tempfile data // tempfile for retrieved data
+		
 		if "`rs'" != "" {
 			// CPI-U RS 1978-latest available
 			copy "https://www.bls.gov/cpi/research-series/allitems.xlsx" `data'
