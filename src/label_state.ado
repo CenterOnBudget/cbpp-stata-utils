@@ -1,4 +1,3 @@
-*! v 0.1.0
 
 /***
 Title
@@ -28,6 +27,8 @@ Example(s)
 
     Label 'gestfips', the variable for state FIPS code in the CPS, with state names.
         {bf:. label_state gestfips}
+	Label 'st', the variable for state FIPS code in the ACS, with state abbreviations.
+        {bf:. label_state st, abbrv}
 
 Website
 -------
@@ -42,13 +43,9 @@ This help file was dynamically produced by
 
 * capture program drop label_state
 
-
 program label_state
 
 	syntax varname, [abbrv]
-
-	// confirm state variable exists
-	confirm variable `varlist'
 
 	// destring in case variable is string with leading zeros
 	capture confirm string `varlist' 
