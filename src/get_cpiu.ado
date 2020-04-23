@@ -137,14 +137,15 @@ program define get_cpiu
 		use "`cache_dir'//`series'.dta", clear
 	}
 	
-	if `download' { 
-
+	if `download' {
+        
+        tempfile data // tempfile for retrieved data
+        
 		if "`rs'" != "" {
 			// CPI-U RS 1978-latest available
-			copy "https://www.bls.gov/cpi/research-series/allitems.xlsx" 	///
-				 "cpiu_rs.xlsx", replace
+			copy "https://www.bls.gov/cpi/research-series/allitems.xlsx" `data'
 			// cell range will need to be updated each year when a new row is added
-			quietly import excel using "cpiu_rs.xlsx", cellrange(A6:N49) firstrow case(lower) clear
+			quietly import excel using `data', cellrange(A6:N49) firstrow case(lower) clear
 			rename avg `series'
 			keep year `series'
 			quietly drop if missing(`series')
@@ -152,9 +153,8 @@ program define get_cpiu
 		
 		if "`rs'" == "" {
 			// CPI-U 
-			copy "https://download.bls.gov/pub/time.series/cu/cu.data.1.AllItems" 	///
-				 "cpiu_current.txt", replace
-			quietly import delimited using "cpiu_current.txt", clear
+			copy "https://download.bls.gov/pub/time.series/cu/cu.data.1.AllItems" `data'
+			quietly import delimited using `data', clear
 			quietly keep if regexm(series_id, "CUUR0000SA0")
 			quietly keep if year >= 1978 & period == "M13"
 			label variable value  // remove variable label of mysterious origin
