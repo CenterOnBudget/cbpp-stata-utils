@@ -10,7 +10,7 @@
 {title:Description}
 
 {p 4 4 2}
-{bf:generate_race_var} generates a categorial variable for race-ethnicity. It can be used with CPS or ACS microdata. Users may specify the desired number of levels: 2, 4, 5-7 for CPS and 2, 4, 5-7 for ACS.
+{bf:generate_race_var} generates a categorial variable for race-ethnicity. It can be used with CPS or ACS microdata. Users may specify the desired number of levels: 2, 4, 5-7 for CPS and 2, 4, 5-8 for ACS.
 
 
 
@@ -28,7 +28,7 @@
 	{synopt:{opt data:set(string)}}CPS or ACS (case insensitive).{p_end}
 	
 {syntab:Optional}
-    {synopt:{opt no_label}}{it:newvar} will not be labelled.{p_end}
+    {synopt:{opt nolab:el}}{it:newvar} will not be labelled.{p_end}
     {synopt:{opt replace}}{it:newvar} will be replaced if it exists.{p_end}
 
 
@@ -83,7 +83,7 @@
         {bf:. generate_race_var race_5, categories(5) dataset(acs)}
 
     Generate an unlabeled 2-category (person of color/white non-Hispanic) race-ethnicity variable for CPS microdata.
-        {bf:. generate_race_var person_of_color, categories(2) dataset(cps) no_label}
+        {bf:. generate_race_var person_of_color, categories(2) dataset(cps) nolabel}
 
 		
 

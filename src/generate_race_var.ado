@@ -218,7 +218,7 @@ program generate_race_var
 	
 	* create label ------------------------------------------------------------
 	
-	if "`no_label'" == "" {
+	if "`nolabel'" == "" {
 	
 		capture label drop `new_varname'_lbl
 		

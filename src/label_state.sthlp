@@ -29,6 +29,8 @@ To label with two-character postal abbreviations (e.g. "VT") rather than the ful
 
     Label 'gestfips', the variable for state FIPS code in the CPS, with state names.
         {bf:. label_state gestfips}
+    Label 'st', the variable for state FIPS code in the ACS, with state abbreviations.
+		{bf:. label_state st, abbrv}
 
 
 {title:Website}
