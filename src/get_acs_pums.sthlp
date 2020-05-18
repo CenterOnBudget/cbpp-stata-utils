@@ -21,6 +21,9 @@ If the option {bf:state} is not specified, the program will download the nationa
 {p 4 4 2}
 State PUMS .dta files will be named the same as the original .csv files: psam_[record_type][state_fips_code] for 2017 and later, and ss[year][record_type][state] for earlier years. In the example above, the filename would be psam_h50.dta (50 is the state FIPS code for Vermont; if the user were retrieving data for 2016 instead of 2018, the file name would be ss16hvt.dta. National PUMS .dta are named psam_[record_type]us for 2017 and later, and ss[year][record_type]us for earlier years.
 
+{p 4 4 2}
+Note that data for Puerto Rico is not available prior to 2005.
+
 
 
 {title:Syntax}
@@ -31,7 +34,7 @@ State PUMS .dta files will be named the same as the original .csv files: psam_[r
 {synopthdr}
 {synoptline}
 {syntab:Required}
-	{synopt:{opt year(integer)}}2005 to 2018 for the one-year sample; 2007 to 2018 for the five-year sample.{p_end}
+	{synopt:{opt year(integer)}}2003 to 2018 for the one-year sample; 2007 to 2018 for the five-year sample.{p_end}
 	
 {syntab:Optional}
     {synopt:{opt sample(integer)}}5 for the five-year sample or 1 for the one-year sample. Defaults to 1.{p_end}

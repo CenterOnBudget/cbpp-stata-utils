@@ -17,6 +17,8 @@ If the option __state__ is not specified, the program will download the national
 
 State PUMS .dta files will be named the same as the original .csv files: psam_[record_type][state_fips_code] for 2017 and later, and ss[year][record_type][state] for earlier years. In the example above, the filename would be psam_h50.dta (50 is the state FIPS code for Vermont; if the user were retrieving data for 2016 instead of 2018, the file name would be ss16hvt.dta. National PUMS .dta are named psam_[record_type]us for 2017 and later, and ss[year][record_type]us for earlier years.
 
+Note that data for Puerto Rico is not available prior to 2005.
+
 
 Syntax
 ------ 
@@ -27,7 +29,7 @@ Syntax
 {synopthdr}
 {synoptline}
 {syntab:Required}
-	{synopt:{opt year(integer)}}2005 to 2018 for the one-year sample; 2007 to 2018 for the five-year sample.{p_end}
+	{synopt:{opt year(integer)}}2003 to 2018 for the one-year sample; 2007 to 2018 for the five-year sample.{p_end}
 	
 {syntab:Optional}
     {synopt:{opt sample(integer)}}5 for the five-year sample or 1 for the one-year sample. Defaults to 1.{p_end}
@@ -80,8 +82,8 @@ program define get_acs_pums
 		exit
 	}
 
-	if !inrange(`year', 2005, 2018){
-		display as error "year(`year') invalid. Year must be between 2005 and 2018."
+	if !inrange(`year', 2003, 2018){
+		display as error "year(`year') invalid. Year must be between 2003 and 2018."
 		exit
 	}
 	if `year' < 2009 & `sample' == 5 {
@@ -113,6 +115,11 @@ program define get_acs_pums
 			exit
 		}
 		clear
+		
+		if "`state'" == "pr" & `year' < 2005 {
+			display as error "Data for Puerto Rico is not available prior to 2005."
+			exit
+		}
 	}
 	
 	// Set directory ----------------------------------------------------------
@@ -182,7 +189,7 @@ program define get_acs_pums
 		
 		local yr = substr(string(`year'), 3, 2)
 						
-		if "`state'" != "" {
+		if "`state'" != "" | ("`state'" == "" & `year' > 2005) {
 			if `year' < 2017 {
 				local csv_file "ss`yr'`rt'`state'.csv"
 			}
@@ -195,8 +202,13 @@ program define get_acs_pums
 				clear
 			}
 		}
-		// define "chunked" filenames if national sample
-		if "`state'" == "" {
+		
+		if "`state'" == "" & `year' <= 2005 {
+			local csv_file "ss`yr'`rt'us.csv"
+		}
+		
+		// define "chunked" filenames if national sample 2006 or later
+		if "`state'" == "" & `year' > 2005 {
 			local prefix = cond(`year' < 2017, "ss`yr'`rt'us", "psam_`rt'us")
 			if `sample' == 5 {
 				local letters "a b c d"
@@ -218,6 +230,7 @@ program define get_acs_pums
 			local dta_file = subinstr("`f'", ".csv", "", .)
 			quietly save "`dta_file'", `replace'
 		}
+		
 		if "`keep_csv'" == "" {
 			display as result "Deleting `rec_type_message' .csv file..."
 			foreach f of local csv_file {
@@ -227,7 +240,7 @@ program define get_acs_pums
 		
 		// Append chunked files if national sample ----------------------------
 		
-		if "`state'" == "" {
+		if "`state'" == "" & `year' > 2005 {
 			display as result "Appending `rec_type_message' .dta files..."
 			local appended_file = "`prefix'" + ".dta"
 			clear
@@ -247,6 +260,7 @@ program define get_acs_pums
 	}
 	
 	// Reset to original working directory ------------------------------------
+	
 	quietly cd "`start_dir'"  
 	clear
 	display as result "{bf:Complete.}"
