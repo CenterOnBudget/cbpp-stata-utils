@@ -34,7 +34,7 @@ Note that data for Puerto Rico is not available prior to 2005.
 {synopthdr}
 {synoptline}
 {syntab:Required}
-	{synopt:{opt year(integer)}}2003 to 2018 for the one-year sample; 2007 to 2018 for the five-year sample.{p_end}
+	{synopt:{opt year(integer)}}2000 to 2018 for the one-year sample; 2007 to 2018 for the five-year sample.{p_end}
 	
 {syntab:Optional}
     {synopt:{opt sample(integer)}}5 for the five-year sample or 1 for the one-year sample. Defaults to 1.{p_end}
