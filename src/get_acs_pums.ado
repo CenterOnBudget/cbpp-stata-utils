@@ -29,7 +29,7 @@ Syntax
 {synopthdr}
 {synoptline}
 {syntab:Required}
-	{synopt:{opt year(integer)}}2003 to 2018 for the one-year sample; 2007 to 2018 for the five-year sample.{p_end}
+	{synopt:{opt year(integer)}}2000 to 2018 for the one-year sample; 2007 to 2018 for the five-year sample.{p_end}
 	
 {syntab:Optional}
     {synopt:{opt sample(integer)}}5 for the five-year sample or 1 for the one-year sample. Defaults to 1.{p_end}
@@ -82,8 +82,8 @@ program define get_acs_pums
 		exit
 	}
 
-	if !inrange(`year', 2003, 2018){
-		display as error "year(`year') invalid. Year must be between 2003 and 2018."
+	if !inrange(`year', 2000, 2018){
+		display as error "year(`year') invalid. Year must be between 2000 and 2018."
 		exit
 	}
 	if `year' < 2009 & `sample' == 5 {
@@ -190,7 +190,10 @@ program define get_acs_pums
 		local yr = substr(string(`year'), 3, 2)
 						
 		if "`state'" != "" | ("`state'" == "" & `year' > 2005) {
-			if `year' < 2017 {
+		    if `year' == 2000 {
+			    local csv_file "c2ss`rt'`state'.csv"
+			}
+			if inrange(`year', 2001, 2017) {
 				local csv_file "ss`yr'`rt'`state'.csv"
 			}
 			if `year' >= 2017 {
@@ -203,7 +206,11 @@ program define get_acs_pums
 			}
 		}
 		
-		if "`state'" == "" & `year' <= 2005 {
+		if "`state'" == ""  & `year' == 2000 {
+		    local csv_file "c2ss`rt'us.csv"
+		}
+		
+		if "`state'" == "" & inrange(`year', 2001, 2005) {
 			local csv_file "ss`yr'`rt'us.csv"
 		}
 		
