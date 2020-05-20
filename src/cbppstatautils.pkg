@@ -1,5 +1,5 @@
 v 0.0.3
-d Distribution-Date: 20200518
+d Distribution-Date: 20200520
 
 
 * programs and help files
@@ -15,6 +15,8 @@ f generate_race_var.ado
 f generate_race_var.sthlp
 f generate_acs_major_group.ado
 f generate_acs_major_group.sthlp
+f generate_acs_adj_vars.ado
+f generate_acs_adj_vars.sthlp
 f declare_acs_svy_design.ado
 f declare_acs_svy_design.sthlp
 
