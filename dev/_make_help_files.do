@@ -10,7 +10,8 @@ local files_list 	get_acs_pums.ado 				///
 					generate_race_var.ado			///
 					generate_acs_adj_vars.ado		///
 					generate_acs_major_group.ado	///
-					declare_acs_svy_design.ado
+					declare_acs_svy_design.ado		///
+					load_data.ado
 
 foreach f of local files_list {
 	markdoc "`f'", export(sthlp) replace style("simple")
