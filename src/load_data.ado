@@ -49,7 +49,7 @@ This help file was dynamically produced by
 ***/
 
 
- capture program drop load_data
+* capture program drop load_data
 
 program define load_data 
 
@@ -130,3 +130,13 @@ program define load_data
  
 end
 
+
+
+program define load
+
+	syntax namelist(name=dataset), Years(numlist sort) [Vars(namelist)] [clear]
+	
+	load_data `dataset', years(`years') vars(`vars') `clear'
+	
+end
+	
