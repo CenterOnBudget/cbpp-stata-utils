@@ -203,7 +203,9 @@ program define get_cpiu
 	* restore and merge if 'merge' specified ----------------------------------
 	
 	if "`merge'" != "" {
-		restore
+		if "`matrix'" == "" {
+			restore
+		}
 		merge m:1 year using `temp', nogenerate keep(master match) nolabel noreport
 	}
 	
