@@ -9,7 +9,7 @@
 {title:Updates}
 
 {p 4 4 2}
-Run {bf:__{stata cbppstatautils, update}__} to update to the latest version.
+Run {bf:{stata cbppstatautils, update}} to update to the latest version.
 
 
 {title:Contents}
