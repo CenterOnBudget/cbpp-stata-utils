@@ -19,11 +19,15 @@ Users may specify a single year or multiple years to the __years__ option as a {
 
 The default is to load all variables in the dataset. Users may specify a subset of variables to load in the __vars__ option.
 
+To save the loaded data as a new dataset, use the __saveas__ option. If the file passed to __saveas__ already exists, it will be replaced.
+
+Note: When loading multiple years of ACS datasets including 2018 data, _serialno_ will be edited to facilitate appending (_serialno_ is string in 2018 and numeric in prior years): "00" and "01" will be substituted for "HU" and "GQ", respectively, and the variable will be destringed.
+
 
 Syntax
 ------ 
 
-> __load_data__ _dataset_, __{cmdab:y:ears}(_{help numlist}_)__ [__{cmdab:v:ars}(_{help varlist}_)__ __clear__]
+> __load_data__ _dataset_, __{cmdab:y:ears}(_{help numlist}_)__ [__{cmdab:v:ars}(_{help varlist}_)__ __saveas(_{help filename}_)__ __clear__]
 
 
 Example(s)
@@ -50,10 +54,11 @@ This help file was dynamically produced by
 
 
 * capture program drop load_data
+* capture program drop load
 
 program define load_data 
 
-	syntax namelist(name=dataset), Years(numlist sort) [Vars(namelist)] [clear]
+	syntax namelist(name=dataset), Years(numlist sort) [Vars(namelist)] [saveas(string)] [clear]
 	
 	if "${spdatapath}" == "" {
 		display as error "Global 'spdatapath' not found."
@@ -94,6 +99,8 @@ program define load_data
 			display as error "years(`years') invalid. Datasets library has ACS data for 2000-2018."
 			exit
 		}
+		numlist "`years'"
+		local n_years : word count `r(numlist)'
 	}
 	
 	// confirm all files exist
@@ -117,16 +124,28 @@ program define load_data
 	tempfile temp 
 	quietly save `temp', emptyok
 	foreach y of local years {
+		display "Loading `y' `dataset' data..."
 		if "`dataset'" == "CPS" {
 			quietly use `vars' using "${spdatapath}`dataset'/mar`y'/mar`y'.dta", clear	
 		}
 		if "`dataset'" == "ACS" {
 			quietly use `vars' using "${spdatapath}`dataset'/`y'/`y'us.dta", clear
+			if `y' == 2018 & `n_years' > 1 {
+				quietly replace serialno = ustrregexra(serialno, "HU", "00")
+				quietly replace serialno = ustrregexra(serialno, "GQ", "01")
+				destring serialno, replace
+				display "serialno for 2018 sample edited and destringed to facilitate appending."
+			}
 		}
 		quietly append using `temp' 
 		quietly save `temp', replace
 	}
+	display "Done."
 	use `temp', clear
+	
+	if "`saveas'" != "" {
+		save "`saveas'", replace	
+	}
  
 end
 
@@ -134,9 +153,9 @@ end
 
 program define load
 
-	syntax namelist(name=dataset), Years(numlist sort) [Vars(namelist)] [clear]
+	syntax namelist(name=dataset), Years(numlist sort) [Vars(namelist)] [saveas(string)] [clear]
 	
-	load_data `dataset', years(`years') vars(`vars') `clear'
+	load_data `dataset', years(`years') vars(`vars') saveas(`saveas') `clear'
 	
 end
-	
+

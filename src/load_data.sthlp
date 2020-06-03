@@ -24,11 +24,17 @@ Users may specify a single year or multiple years to the {bf:years} option as a 
 {p 4 4 2}
 The default is to load all variables in the dataset. Users may specify a subset of variables to load in the {bf:vars} option.
 
+{p 4 4 2}
+To save the loaded data as a new dataset, use the {bf:saveas} option. If the file passed to {bf:saveas} already exists, it will be replaced.
+
+{p 4 4 2}
+Note: When loading multiple years of ACS datasets including 2018 data, {it:serialno} will be edited to facilitate appending ({it:serialno} is string in 2018 and numeric in prior years): "00" and "01" will be substituted for "HU" and "GQ", respectively, and the variable will be destringed.
+
 
 
 {title:Syntax}
 
-{p 8 8 2} {bf:load_data} {it:dataset}, {bf:{cmdab:y:ears}({it:{help numlist}})} [{bf:{cmdab:v:ars}({it:{help varlist}})} {bf:clear}]
+{p 8 8 2} {bf:load_data} {it:dataset}, {bf:{cmdab:y:ears}({it:{help numlist}})} [{bf:{cmdab:v:ars}({it:{help varlist}})} {bf:saveas({it:{help filename}})} {bf:clear}]
 
 
 

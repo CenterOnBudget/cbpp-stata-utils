@@ -20,7 +20,7 @@ net install cbppstatautils, from(https://raw.githubusercontent.com/CenterOnBudge
 ```
 To update your installation to the latest version, run:
 ```
-ado update cbppstatautils, update
+cbppstatautils, update
 ```
 
 ## License
@@ -33,19 +33,20 @@ View the [license](https://github.com/CenterOnBudget/cbpp-stata-utils/blob/maste
 
 | Program | Description |
 |---------|-------------|
-|`get_acs_pums` | Retrieve ACS PUMS files from the Census Bureau FTP. |
-|`make_acs_pums_lbls` | Generate .do files to label ACS PUMS data. | 
-|`generate_acs_adj_vars` | Generate adjusted versions of ACS PUMS income and housing variables using 'adjinc' and 'adjhsg'. |
-|`generate_acs_major_group` | Generate categorical variable for major industry and/or occupation groups in ACS PUMS data. |
+| `load_data` | Load CPS or ACS microdata from the CBPP datasets library into memory. |
+| `get_acs_pums` | Retrieve ACS PUMS files from the Census Bureau FTP. |
+| `make_acs_pums_lbls` | Generate .do files to label ACS PUMS data. | 
+| `generate_acs_adj_vars` | Generate adjusted versions of ACS PUMS income and housing variables using 'adjinc' and 'adjhsg'. |
+| `generate_acs_major_group` | Generate categorical variable for major industry and/or occupation groups in ACS PUMS data. |
 | `generate_race_var` | Generate categorical variable for race/ethnicity in CPS or ACS microdata. |
 | `label_state` | Label a numeric state FIPS code variable with state names or postal abbreviations. |
-|`get_cpiu` | Retrieve annual CPI-U or CPI-U-RS series as a dataset, variable, or matrix. |
+| `get_cpiu` | Retrieve annual CPI-U or CPI-U-RS series as a dataset, variable, or matrix. |
 
 
 ### Data
 
 | Dataset | Description |
 |---------|-------------|
-|`state_fips` | State names, FIPS codes, and postal abbreviations. |
+| `state_fips` | State names, FIPS codes, and postal abbreviations. |
 
 
