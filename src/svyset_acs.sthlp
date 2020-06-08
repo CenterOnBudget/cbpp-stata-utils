@@ -3,26 +3,26 @@
 {title:Title}
 
 {p 4 4 2}
-{bf:declare_acs_svy_design} {hline 2} Declare the survey design for ACS PUMS.
+{bf:svyset_acs} {hline 2} Declare the survey design for ACS PUMS.
 
 
 
 {title:Description}
 
 {p 4 4 2}
-{bf:declare_acs_svy_design} is a shortcut program to declare the survey design for ACS PUMS without using {bf:{help svyset}}. 
+{bf:svyset_acs} is a shortcut program to declare the survey design for ACS PUMS.
 
 {p 4 4 2}
 In person-level data with the {it:rep_weights} option, it is the equivalent to typing "svyset [iw=pwgtp], vce(sdr) sdrweight(pwgtp1 - pwgtp80) mse".
 	
 {p 4 4 2}
-That command can be hard to remember and repeatedly copy-pasting can be troublesome; {bf:declare_acs_svy_design} provides a more convenient way.    {break}
+That command can be hard to remember and repeatedly copy-pasting can be troublesome; {bf:svyset_acs} provides a more convenient way.    {break}
 
 
 
 {title:Syntax}
 
-{p 8 8 2} {bf:declare_acs_svy_design}, {bf:record_type({it:string})} [{it:rep_weights}]
+{p 8 8 2} {bf:svyset_acs}, {bf:{cmdab:rec:ord_type}({it:string})} [{it:{cmdab:rep:_weights}}]
 
 {p 4 4 2}
 Users must pass the record type of the data in memory (person or household) to {bf:record_type}. Abbreviations {it:h, hhld, hous, p,} and {it:pers} are also accepted.
@@ -35,7 +35,7 @@ To specify that replicate weights be used in the survey design, use the {bf:rep_
 {title:Example(s)}
 
     Survey set household-level ACS PUMS data using replicate weights.
-        {bf:. declare_acs_svy_design, record_type(hhld) rep_weights}
+        {bf:. svyset_acs, record_type(hhld) rep_weights}
 
 
 

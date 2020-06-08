@@ -17,7 +17,7 @@
 {title:Syntax}
 
 {p 4 4 2}
-{bf:generate_race_var} {it:{help newvar}}, {bf:categories({it:integer})} {bf:dataset({it:string})} [{it:options}]
+{bf:generate_race_var} {it:{help newvar}}, {bf:{cmdab:cat:egories}({it:integer})} {bf:{cmdab:data:set}({it:string})} [{it:options}]
 
 
 {synoptset 24 tabbed}{...}

@@ -24,6 +24,7 @@ See the  {browse "https://www2.census.gov/programs-surveys/acs/tech_docs/pums/da
 
 {p 8 8 2} {bf:generate_acs_adj_vars} , [{bf:prefix({it:string}) suffix({it:string}) pre_2008}]
 
+{synopthdr}
 {synopt:{opt pre:fix(string)}}prefix to prepend to the variable name.{p_end}
 {synopt:{opt suf:fix(string)}}suffix to append to the or variable name. Defaults to "_adj".{p_end}
 

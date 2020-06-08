@@ -25,7 +25,7 @@ The program automatically caches the retreived data series. Users can load cache
 
 {title:Syntax}
 
-{p 8 8 2} {bf:get_cpiu}, [{bf:merge} {bf:clear} {bf:matrix({it:matname})}] [{it:options}]
+{p 8 8 2} {bf:get_cpiu}, [{bf:merge} {bf:clear} {bf:{cmdab:mat:rix}({it:matname})}] [{it:options}]
 
 {synoptset 27 tabbed}{...}
 {synopthdr}

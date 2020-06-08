@@ -21,6 +21,7 @@ Syntax
 
 > __generate_acs_adj_vars__ , [__prefix(_string_) suffix(_string_) pre_2008__]
 
+{synopthdr}
 {synopt:{opt pre:fix(string)}}prefix to prepend to the variable name.{p_end}
 {synopt:{opt suf:fix(string)}}suffix to append to the or variable name. Defaults to "_adj".{p_end}
 

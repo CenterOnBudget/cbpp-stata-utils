@@ -13,22 +13,22 @@
 {bf:load_data} loads CPS or ACS microdata from the CBPP datasets library into memory. 
 
 {p 4 4 2}
-This program will only work for Center staff who have synched these datasets from the SharePoint datasets library, and have set up the global {c 39}spdatapath{c 39}. 
+This program will only work for Center staff who have synched these datasets from the SharePoint datasets library, and have set up the global {c 39}spdatapath{c 39}.    {break}
 
 {p 4 4 2}
-If {it:dataset} is ACS, the program will load the one-year merged person-household ACS files. If {it:dataset} is CPS, the program will load the merged person-family-household CPS ASEC files. Available years are 1980-2019 for CPS and 2000-2018 for ACS.
+If {it:dataset} is ACS, the program will load the one-year merged person-household ACS files. If {it:dataset} is CPS, the program will load the merged person-family-household CPS ASEC files. Available years are 1980-2019 for CPS and 2000-2018 for ACS.    {break}
 
 {p 4 4 2}
-Users may specify a single year or multiple years to the {bf:years} option as a {help numlist}. If multiple years are specified, the datasets will be appended together before loading.
+Users may specify a single year or multiple years to the {bf:years} option as a {help numlist}. If multiple years are specified, the datasets will be appended together before loading.    {break}
 
 {p 4 4 2}
-The default is to load all variables in the dataset. Users may specify a subset of variables to load in the {bf:vars} option.
+The default is to load all variables in the dataset. Users may specify a subset of variables to load in the {bf:vars} option.    {break}
 
 {p 4 4 2}
-To save the loaded data as a new dataset, use the {bf:saveas} option. If the file passed to {bf:saveas} already exists, it will be replaced.
+To save the loaded data as a new dataset, use the {bf:saveas} option. If the file passed to {bf:saveas} already exists, it will be replaced.    {break}
 
 {p 4 4 2}
-Note: When loading multiple years of ACS datasets including 2018 data, {it:serialno} will be edited to facilitate appending ({it:serialno} is string in 2018 and numeric in prior years): "00" and "01" will be substituted for "HU" and "GQ", respectively, and the variable will be destringed.
+Note: When loading multiple years of ACS datasets including 2018 data, {it:serialno} will be edited to facilitate appending ({it:serialno} is string in 2018 and numeric in prior years): "00" and "01" will be substituted for "HU" and "GQ", respectively, and the variable will be destringed.    {break}
 
 
 

@@ -11,17 +11,17 @@ Description
 
 __load_data__ loads CPS or ACS microdata from the CBPP datasets library into memory. 
 
-This program will only work for Center staff who have synched these datasets from the SharePoint datasets library, and have set up the global 'spdatapath'. 
+This program will only work for Center staff who have synched these datasets from the SharePoint datasets library, and have set up the global 'spdatapath'.  
 
-If _dataset_ is ACS, the program will load the one-year merged person-household ACS files. If _dataset_ is CPS, the program will load the merged person-family-household CPS ASEC files. Available years are 1980-2019 for CPS and 2000-2018 for ACS.
+If _dataset_ is ACS, the program will load the one-year merged person-household ACS files. If _dataset_ is CPS, the program will load the merged person-family-household CPS ASEC files. Available years are 1980-2019 for CPS and 2000-2018 for ACS.  
 
-Users may specify a single year or multiple years to the __years__ option as a {help numlist}. If multiple years are specified, the datasets will be appended together before loading.
+Users may specify a single year or multiple years to the __years__ option as a {help numlist}. If multiple years are specified, the datasets will be appended together before loading.  
 
-The default is to load all variables in the dataset. Users may specify a subset of variables to load in the __vars__ option.
+The default is to load all variables in the dataset. Users may specify a subset of variables to load in the __vars__ option.  
 
-To save the loaded data as a new dataset, use the __saveas__ option. If the file passed to __saveas__ already exists, it will be replaced.
+To save the loaded data as a new dataset, use the __saveas__ option. If the file passed to __saveas__ already exists, it will be replaced.  
 
-Note: When loading multiple years of ACS datasets including 2018 data, _serialno_ will be edited to facilitate appending (_serialno_ is string in 2018 and numeric in prior years): "00" and "01" will be substituted for "HU" and "GQ", respectively, and the variable will be destringed.
+Note: When loading multiple years of ACS datasets including 2018 data, _serialno_ will be edited to facilitate appending (_serialno_ is string in 2018 and numeric in prior years): "00" and "01" will be substituted for "HU" and "GQ", respectively, and the variable will be destringed.  
 
 
 Syntax

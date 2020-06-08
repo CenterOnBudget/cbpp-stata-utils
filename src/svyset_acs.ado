@@ -3,23 +3,23 @@
 Title
 ====== 
 
-__declare_acs_svy_design__ {hline 2} Declare the survey design for ACS PUMS.
+__svyset_acs__ {hline 2} Declare the survey design for ACS PUMS.
 
 
 Description
 -----------
 
-__declare_acs_svy_design__ is a shortcut program to declare the survey design for ACS PUMS without using __{help svyset}__. 
+__svyset_acs__ is a shortcut program to declare the survey design for ACS PUMS.
 
 In person-level data with the _rep_weights_ option, it is the equivalent to typing "svyset [iw=pwgtp], vce(sdr) sdrweight(pwgtp1 - pwgtp80) mse".
 	
-That command can be hard to remember and repeatedly copy-pasting can be troublesome; __declare_acs_svy_design__ provides a more convenient way.  
+That command can be hard to remember and repeatedly copy-pasting can be troublesome; __svyset_acs__ provides a more convenient way.  
 
 
 Syntax
 ------ 
 
-> __declare_acs_svy_design__, __record_type(_string_)__ [_rep_weights_]
+> __svyset_acs__, __{cmdab:rec:ord_type}(_string_)__ [_{cmdab:rep:_weights}_]
 
 Users must pass the record type of the data in memory (person or household) to __record_type__. Abbreviations _h, hhld, hous, p,_ and _pers_ are also accepted.
 
@@ -30,7 +30,7 @@ Example(s)
 ----------
 
     Survey set household-level ACS PUMS data using replicate weights.
-        {bf:. declare_acs_svy_design, record_type(hhld) rep_weights}
+        {bf:. svyset_acs, record_type(hhld) rep_weights}
 
 
 Website
@@ -44,9 +44,11 @@ This help file was dynamically produced by
 [MarkDoc Literate Programming package](http://www.haghish.com/markdoc/) 
 ***/
 
+
+* capture program drop svyset_acs
 * capture program drop declare_acs_svy_design
 
-program declare_acs_svy_design
+program svyset_acs
 
 	syntax , RECord_type(string) [REP_weights]
 	
@@ -80,4 +82,10 @@ program declare_acs_svy_design
 
 end
 
+
+// for compatibility: old program name
+program define declare_acs_svy_design
+	syntax , RECord_type(string) [REP_weights]
+	svyset_acs, record_type(`record_type') `rep_weights'
+end
 

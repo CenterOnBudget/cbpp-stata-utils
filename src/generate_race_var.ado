@@ -15,7 +15,7 @@ __generate_race_var__ generates a categorial variable for race-ethnicity. It can
 Syntax
 ------ 
 
-__generate_race_var__ _{help newvar}_, __categories(_integer_)__ __dataset(_string_)__ [_options_]
+__generate_race_var__ _{help newvar}_, __{cmdab:cat:egories}(_integer_)__ __{cmdab:data:set}(_string_)__ [_options_]
 
 
 {synoptset 24 tabbed}{...}
