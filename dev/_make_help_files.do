@@ -3,6 +3,12 @@
 local pkg_dir "C:\Users\\`c(username)'\Documents\GitHub\cbpp-stata-utils\src"
 cd "`pkg_dir'"
 
+capture which markdoc
+if _rc != 0 {
+	net install github, from("https://haghish.github.io/github/") replace
+	github install haghish/markdoc, stable
+}
+
 local files_list 	get_acs_pums.ado 				///
 					make_acs_pums_lbls.ado 			///
 					label_state.ado 				///
@@ -10,8 +16,10 @@ local files_list 	get_acs_pums.ado 				///
 					generate_race_var.ado			///
 					generate_acs_adj_vars.ado		///
 					generate_acs_major_group.ado	///
-					declare_acs_svy_design.ado		///
+					svyset_acs.ado					///
 					load_data.ado					///
+					inspect_2.ado					///
+					labeller.ado					///
 					cbppstatautils.ado
 
 foreach f of local files_list {
