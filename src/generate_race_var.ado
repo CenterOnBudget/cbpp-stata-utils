@@ -189,7 +189,7 @@ program generate_race_var
 		if "`dataset'" == "cps" {
 			generate `new_varname' = 1 if prdtrace == 1
 			if `categories' == 2 {
-				replace `new_varname' == 2 if prdtrace != 1 | pehspnon == 1
+				replace `new_varname' = 2 if prdtrace != 1 | pehspnon == 1
 			}
 			if `categories' >= 4 {
 				replace `new_varname' = 2 if prdtrace == 2
@@ -203,7 +203,7 @@ program generate_race_var
 			if `categories' >= 6 {
 				replace `new_varname' = . if `new_varname' == 5
 				replace `new_varname' = 5 if prdtrace == 3
-				replace `new_varname' = 6 if !inrange(prdtrace, 1, 5)
+				replace `new_varname' = 6 if !inrange(prdtrace, 1, 4)
 			}
 			if `categories' >= 7 {
 				replace `new_varname' = . if `new_varname' == 6
