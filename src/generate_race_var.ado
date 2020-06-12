@@ -34,43 +34,43 @@ Category Definitions / Labels
 -----------------------------
 
 {p2colset 4 22 22 2}
-{p2col:{bf}categories({it:2}){sf}}1 	White Non-Hisp.
-								  2 	Not White Non-Hisp.{p_end}
+{p2col:{bf}categories({it:2}){sf}}1 	White, not Latino
+								  2 	Not White, not Latino{p_end}
 
-{p2col:{bf}categories({it:4}){sf}}1 	White Non-Hisp.		
-								  2 	Black Non-Hisp.
-								  3 	Hispanic (of any race)
-								  4 	Another Race or Mult. Races Non-Hisp.{p_end}
+{p2col:{bf}categories({it:4}){sf}}1 	White, not Latino		
+								  2 	Black, not Latino
+								  3 	Latino (of any race)
+								  4 	Another Race or Mult. Races, not Latino{p_end}
 
-{p2col:{bf}categories({it:5}){sf}}1 	White Non-Hisp.		
-								  2 	Black Non-Hisp.
-								  3 	Hispanic (of any race)
-								  4		Asian Non-Hisp.
-								  5 	Another Race or Mult. Races Non-Hisp.{p_end}
+{p2col:{bf}categories({it:5}){sf}}1 	White, not Latino		
+								  2 	Black, not Latino
+								  3 	Latino (of any race)
+								  4		Asian, not Latino
+								  5 	Another Race or Mult. Races, not Latino{p_end}
 
-{p2col:{bf}categories({it:6}){sf}}1 	White Non-Hisp.		
-								  2 	Black Non-Hisp.
-								  3 	Hispanic (of any race)
-								  4		Asian Non-Hisp.
-								  5 	AIAN Non-Hisp.
-								  6 	Another Race or Mult. Races Non-Hisp.{p_end}
+{p2col:{bf}categories({it:6}){sf}}1 	White, not Latino		
+								  2 	Black, not Latino
+								  3 	Latino (of any race)
+								  4		Asian, not Latino
+								  5 	AIAN, not Latino
+								  6 	Another Race or Mult. Races, not Latino{p_end}
 
-{p2col:{bf}categories({it:7}){sf}}1 	White Non-Hisp.		
-								  2 	Black Non-Hisp.
-								  3 	Hispanic (of any race)
-								  4		Asian Non-Hisp.
-								  5 	AIAN Non-Hisp.
-								  6 	NHOPI Non-Hisp.
-								  7 	 __ACS:__ Another Race or Mult. Races Non-Hisp 
-								  7		 __CPS:__ Mult. Races Non-Hisp.{p_end}
+{p2col:{bf}categories({it:7}){sf}}1 	White, not Latino		
+								  2 	Black, not Latino
+								  3 	Latino (of any race)
+								  4		Asian, not Latino
+								  5 	AIAN, not Latino
+								  6 	NHOPI, not Latino
+								  7 	 __ACS:__ Another Race or Mult. Races, not Latino 
+								  7		 __CPS:__ Mult. Races, not Latino{p_end}
 
-{p2col:{bf}categories({it:8}){sf}}1 	White Non-Hisp.{p_end}
-{p2col:{it:ACS only}}2 	Black Non-Hisp.
-								  3 	Hispanic (of any race)
-								  4		Asian Non-Hisp.
-								  5 	AIAN Non-Hisp.
-								  6 	NHOPI Non-Hisp.
-								  7 	Some Other Race Non-Hisp 
+{p2col:{bf}categories({it:8}){sf}}1 	White, not Latino{p_end}
+{p2col:{it:ACS only}}2 	Black, not Latino
+								  3 	Latino (of any race)
+								  4		Asian, not Latino
+								  5 	AIAN, not Latino
+								  6 	NHOPI, not Latino
+								  7 	Some Other Race, not Latino 
 								  8		Mutliple Races{p_end}
 {p2colreset}{...}
 	
@@ -80,7 +80,7 @@ Example(s)
    Generate a 5-category race-ethnicity variable named "race_5" for ACS microdata.
         {bf:. generate_race_var race_5, categories(5) dataset(acs)}
 
-    Generate an unlabeled 2-category (person of color/white non-Hispanic) race-ethnicity variable for CPS microdata.
+    Generate an unlabeled 2-category (person of color/white, not Latino) race-ethnicity variable for CPS microdata.
         {bf:. generate_race_var person_of_color, categories(2) dataset(cps) nolabel}
 
 		
@@ -193,7 +193,7 @@ program generate_race_var
 			}
 			if `categories' >= 4 {
 				replace `new_varname' = 2 if prdtrace == 2
-				replace `new_varname' = 4 if !inlist(rac1p, 1, 2)
+				replace `new_varname' = 4 if !inlist(prdtrace, 1, 2)
 			}
 			if `categories' >= 5 {
 				replace `new_varname' = . if `new_varname' == 4
@@ -222,33 +222,33 @@ program generate_race_var
 	
 		capture label drop `new_varname'_lbl
 		
-		label define `new_varname'_lbl 	1 "White Non-Hisp."
+		label define `new_varname'_lbl 	1 "White, not Latino"
 		
 		if `categories' == 2 {
-			label define `new_varname'_lbl 2 "Not White Non-Hisp.", add
+			label define `new_varname'_lbl 2 "Not White, not Latino", add
 		}
 		if `categories' >= 4 {
-			label define `new_varname'_lbl 2 "Black Non-Hisp.", add
+			label define `new_varname'_lbl 2 "Black, not Latino", add
 		}
 		if `categories' >= 5 {
-			label define `new_varname'_lbl 4 "Asian Non-Hisp.", add
+			label define `new_varname'_lbl 4 "Asian, not Latino", add
 		}
 		if `categories' >= 6 {
-			label define `new_varname'_lbl 5 "AIAN Non-Hisp.", add
+			label define `new_varname'_lbl 5 "AIAN, not Latino", add
 		}
 		if `categories' >= 7 {
-			label define `new_varname'_lbl 6 "NHOPI Non-Hisp.", add
+			label define `new_varname'_lbl 6 "NHOPI, not Latino", add
 		}
 		if `categories' == 8 & "`dataset'" == "acs" {
-			label define `new_varname'_lbl 7 "Some Other Race Non-Hisp.", add
-			label define `new_varname'_lbl 8 "Multiple Races Non-Hisp.", add
+			label define `new_varname'_lbl 7 "Some Other Race, not Latino", add
+			label define `new_varname'_lbl 8 "Multiple Races, not Latino", add
 		}
 		if inrange(`categories', 2, 7) {
 			local acs_lbl_mod = cond("`dataset'" == "acs", "Another Race or ", "")
-			label define `new_varname'_lbl `categories' "`acs_lbl_mod'Mult. Races Non-Hisp.", add
+			label define `new_varname'_lbl `categories' "`acs_lbl_mod'Mult. Races, not Latino", add
 		}
 		if `categories' > 2 {
-			label define  `new_varname'_lbl 3 "Hispanic (of any race)", add
+			label define  `new_varname'_lbl 3 "Latino (of any race)", add
 		}
 		
 		label values `new_varname' `new_varname'_lbl
