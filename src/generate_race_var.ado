@@ -189,7 +189,7 @@ program generate_race_var
 		if "`dataset'" == "cps" {
 			generate `new_varname' = 1 if prdtrace == 1
 			if `categories' == 2 {
-				replace `new_varname' == 2 if prdtrace != 1 | pehspnon == 1
+				replace `new_varname' = 2 if prdtrace != 1 | pehspnon == 1
 			}
 			if `categories' >= 4 {
 				replace `new_varname' = 2 if prdtrace == 2
@@ -203,7 +203,7 @@ program generate_race_var
 			if `categories' >= 6 {
 				replace `new_varname' = . if `new_varname' == 5
 				replace `new_varname' = 5 if prdtrace == 3
-				replace `new_varname' = 6 if !inrange(prdtrace, 1, 5)
+				replace `new_varname' = 6 if !inrange(prdtrace, 1, 4)
 			}
 			if `categories' >= 7 {
 				replace `new_varname' = . if `new_varname' == 6
@@ -239,14 +239,21 @@ program generate_race_var
 		if `categories' >= 7 {
 			label define `new_varname'_lbl 6 "NHOPI, not Latino", add
 		}
+
+		if inrange(`categories', 3, 6) {
+			label define `new_varname'_lbl `categories' "Another Race or Mult. Races, not Latino", add
+		}
+		
+		if `categories' == 7 {
+			local acs_mod = cond("`dataset'" == "acs", "Another Race or ", "")
+			label define `new_varname'_lbl 7 "`acs_mod'Mult. Races, not Latino.", add
+		}
+		
 		if `categories' == 8 & "`dataset'" == "acs" {
-			label define `new_varname'_lbl 7 "Some Other Race, not Latino", add
-			label define `new_varname'_lbl 8 "Multiple Races, not Latino", add
+			label define `new_varname'_lbl 7 "Some Other Race, not Latino.", add
+			label define `new_varname'_lbl 8 "Multiple Races, not Latino.", add
 		}
-		if inrange(`categories', 2, 7) {
-			local acs_lbl_mod = cond("`dataset'" == "acs", "Another Race or ", "")
-			label define `new_varname'_lbl `categories' "`acs_lbl_mod'Mult. Races, not Latino", add
-		}
+		
 		if `categories' > 2 {
 			label define  `new_varname'_lbl 3 "Latino (of any race)", add
 		}
