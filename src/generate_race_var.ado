@@ -249,6 +249,7 @@ program generate_race_var
 			label define `new_varname'_lbl 7 "`acs_mod'Mult. Races, not Latino.", add
 		}
 		
+		if `categories' == 8 & "`dataset'" == "acs" {
 			label define `new_varname'_lbl 7 "Some Other Race, not Latino.", add
 			label define `new_varname'_lbl 8 "Multiple Races, not Latino.", add
 		}
