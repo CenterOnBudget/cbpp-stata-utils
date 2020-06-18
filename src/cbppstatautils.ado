@@ -23,6 +23,8 @@ Contents
 
 > __{help generate_acs_major_group}__ : Generate categorical variable for major industry and/or occupation groups in ACS PUMS data.
 
+> __{help svyset_acs}__ : Declare the survey design for ACS PUMS.
+
 > __{help generate_race_var}__ : Generate categorical variable for race/ethnicity in CPS or ACS microdata.
 
 > __{help label_state}__ : Label a numeric state FIPS code variable with state names or postal abbreviations.

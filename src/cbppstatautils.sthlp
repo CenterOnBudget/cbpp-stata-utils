@@ -24,6 +24,8 @@ Run {bf:{stata cbppstatautils, update}} to update to the latest version.
 
 {p 8 8 2} {bf:{help generate_acs_major_group}} : Generate categorical variable for major industry and/or occupation groups in ACS PUMS data.
 
+{p 8 8 2} {bf:{help svyset_acs}} : Declare the survey design for ACS PUMS.
+
 {p 8 8 2} {bf:{help generate_race_var}} : Generate categorical variable for race/ethnicity in CPS or ACS microdata.
 
 {p 8 8 2} {bf:{help label_state}} : Label a numeric state FIPS code variable with state names or postal abbreviations.
