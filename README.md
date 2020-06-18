@@ -38,9 +38,13 @@ View the [license](https://github.com/CenterOnBudget/cbpp-stata-utils/blob/maste
 | `make_acs_pums_lbls` | Generate .do files to label ACS PUMS data. | 
 | `generate_acs_adj_vars` | Generate adjusted versions of ACS PUMS income and housing variables using 'adjinc' and 'adjhsg'. |
 | `generate_acs_major_group` | Generate categorical variable for major industry and/or occupation groups in ACS PUMS data. |
+| `svyset_acs` | Declare the survey design for ACS PUMS. |
 | `generate_race_var` | Generate categorical variable for race/ethnicity in CPS or ACS microdata. |
 | `label_state` | Label a numeric state FIPS code variable with state names or postal abbreviations. |
 | `get_cpiu` | Retrieve annual CPI-U or CPI-U-RS series as a dataset, variable, or matrix. |
+| `etotal` | Flexible counts and totals. |
+| `labeller` | Define and apply variable and value labels in one step. |
+| `inspect_2` | Summary statistics for positive, zero, negative, and missing values. |
 
 
 ### Data
