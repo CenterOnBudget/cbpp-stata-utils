@@ -29,6 +29,12 @@ Contents
 
 > __{help get_cpiu}__ : Retrieve annual CPI-U or CPI-U-RS series as a dataset, variable, or matrix.
 
+> __{help etotal}__ : Flexible counts and totals.
+
+> __{help labeller}__ : Define and apply variable and value labels in one step.
+
+> __{help inspect_2}__ : Summary statistics for positive, zero, negative, and missing values. 
+
 
 Website
 -------

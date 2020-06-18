@@ -20,6 +20,7 @@ local files_list 	get_acs_pums.ado 				///
 					load_data.ado					///
 					inspect_2.ado					///
 					labeller.ado					///
+					etotal.ado						///
 					cbppstatautils.ado
 
 foreach f of local files_list {

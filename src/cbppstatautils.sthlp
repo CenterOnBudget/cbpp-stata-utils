@@ -30,6 +30,12 @@ Run {bf:{stata cbppstatautils, update}} to update to the latest version.
 
 {p 8 8 2} {bf:{help get_cpiu}} : Retrieve annual CPI-U or CPI-U-RS series as a dataset, variable, or matrix.
 
+{p 8 8 2} {bf:{help etotal}} : Flexible counts and totals.
+
+{p 8 8 2} {bf:{help labeller}} : Define and apply variable and value labels in one step.
+
+{p 8 8 2} {bf:{help inspect_2}} : Summary statistics for positive, zero, negative, and missing values. 
+
 
 
 {title:Website}

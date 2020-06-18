@@ -13,13 +13,13 @@ A cross between {help summarize} and {help inspect}, __inspect_2__ gives the fre
 
 Users may specify the _save_ option to store the results in a matrix. The matrix (or matrices, if passing a {help varlist}) will be named _inspect_[varname]_.
 
-{bf:fweight}s, {bf:iweight}s, and {bf:pweight}s are allowed; see {help weight}.
-
 
 Syntax
 ------ 
 
 > __inspect_2__ _{help varlist}_ [_{help if}_] [_{help weight}_], [__save__]
+
+{bf:fweight}s, {bf:iweight}s, and {bf:pweight}s are allowed; see {help weight}.
 
 
 Example(s)
@@ -137,7 +137,8 @@ program define inspect_2
 				title(`v') 	///
 				cspec(& %14s | %13.0fc & %8.4f | %13.0fc & %13.0fc & %13.0fc &) ///
 				rspec(&|`rand'|&)
-				
+		display ""
+		
 		if "`save'" != "" {
 			matrix inspect_`v' = `results'
 		}		

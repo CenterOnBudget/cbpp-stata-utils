@@ -15,14 +15,14 @@ A cross between {help summarize} and {help inspect}, {bf:inspect_2} gives the fr
 {p 4 4 2}
 Users may specify the {it:save} option to store the results in a matrix. The matrix (or matrices, if passing a {help varlist}) will be named {it:inspect_[varname]}.
 
-{p 4 4 2}
-{bf:fweight}s, {bf:iweight}s, and {bf:pweight}s are allowed; see {help weight}.
-
 
 
 {title:Syntax}
 
 {p 8 8 2} {bf:inspect_2} {it:{help varlist}} [{it:{help if}}] [{it:{help weight}}], [{bf:save}]
+
+{p 4 4 2}
+{bf:fweight}s, {bf:iweight}s, and {bf:pweight}s are allowed; see {help weight}.
 
 
 
