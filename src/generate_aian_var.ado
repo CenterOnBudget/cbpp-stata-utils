@@ -10,7 +10,7 @@ Description
 
 __generate_aian_var__ generates a categorial variable for American Indian/Alaska Native (AI/AN) identification. It can be used with CPS or ACS microdata.
 
-This variable is the preferred universe for presenting Census data intended to represent the Native American population. For more information, see [link to document](www.cbpp.org).
+This variable is the preferred universe for presenting Census data intended to represent the Native American population: AIAN alone or in combination, Latino or not Latino. For more information, see [link to document](www.cbpp.org).
 
 
 Syntax
@@ -26,7 +26,7 @@ __generate_aian_var__ _{help newvar}_, [_options_]
 	{synopt:{opt data:set(string)}}CPS or ACS (case insensitive).{p_end}
 	
 {syntab:Optional}
-    {synopt:{opt no_label}}{it:newvar} will not be labelled.{p_end}
+    {synopt:{opt nolab:el}}{it:newvar} will not be labelled.{p_end}
     {synopt:{opt replace}}{it:newvar} will be replaced if it exists.{p_end}
 
 	
@@ -52,7 +52,7 @@ This help file was dynamically produced by
 
 program generate_race_var
 
-	syntax name(name = new_varname), DATAset(string) [no_label replace]
+	syntax name(name = new_varname), DATAset(string) [NOLABel replace]
 	
 	* checks ------------------------------------------------------------------
 	
@@ -61,6 +61,7 @@ program generate_race_var
 		capture confirm variable `new_varname' 
 		if _rc == 0 {
 			display as error "`new_varname' already defined. Choose another name or use 'replace' option." 
+			exit 110
 		}
 	}
 	
@@ -93,7 +94,8 @@ program generate_race_var
 	* cps ------------------------------------------------------------------
 
 	if "`dataset'" == "cps" {
-		generate `new_varname' = 1 if inlist(prdtrace, 3, 7, 10, 13, 14, 16, 19, 20, 22, 23)
+		generate `new_varname' = 1 		///
+				 if inlist(prdtrace, 3, 7, 10, 13, 14, 16, 19, 20, 22, 23)
 	}
 	
 	* create label ------------------------------------------------------------

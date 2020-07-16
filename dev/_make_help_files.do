@@ -1,6 +1,6 @@
 * make help files for cbppstatautils
 
-local pkg_dir "C:\Users\\`c(username)'\Documents\GitHub\cbpp-stata-utils\src"
+local pkg_dir "${ghpath}\cbpp-stata-utils\src"
 cd "`pkg_dir'"
 
 capture which markdoc
@@ -21,6 +21,7 @@ local files_list 	get_acs_pums.ado 				///
 					inspect_2.ado					///
 					labeller.ado					///
 					etotal.ado						///
+					generate_aian_var.ado			///
 					cbppstatautils.ado
 
 foreach f of local files_list {

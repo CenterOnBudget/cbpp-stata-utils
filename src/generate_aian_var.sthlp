@@ -13,7 +13,7 @@
 {bf:generate_aian_var} generates a categorial variable for American Indian/Alaska Native (AI/AN) identification. It can be used with CPS or ACS microdata.
 
 {p 4 4 2}
-This variable is the preferred universe for presenting Census data intended to represent the Native American population. For more information, see  {browse "www.cbpp.org":link to document}.
+This variable is the preferred universe for presenting Census data intended to represent the Native American population: AIAN alone or in combination, Latino or not Latino. For more information, see  {browse "www.cbpp.org":link to document}.
 
 
 
@@ -30,7 +30,7 @@ This variable is the preferred universe for presenting Census data intended to r
 	{synopt:{opt data:set(string)}}CPS or ACS (case insensitive).{p_end}
 	
 {syntab:Optional}
-    {synopt:{opt no_label}}{it:newvar} will not be labelled.{p_end}
+    {synopt:{opt nolab:el}}{it:newvar} will not be labelled.{p_end}
     {synopt:{opt replace}}{it:newvar} will be replaced if it exists.{p_end}
 
 	
