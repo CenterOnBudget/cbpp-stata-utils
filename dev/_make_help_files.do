@@ -22,6 +22,7 @@ local files_list 	get_acs_pums.ado 				///
 					labeller.ado					///
 					etotal.ado						///
 					generate_aian_var.ado			///
+					categorize.ado					///
 					cbppstatautils.ado
 
 foreach f of local files_list {

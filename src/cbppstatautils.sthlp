@@ -28,6 +28,11 @@ Run {bf:{stata cbppstatautils, update}} to update to the latest version.
 
 {p 8 8 2} {bf:{help generate_race_var}} : Generate categorical variable for race/ethnicity in CPS or ACS microdata.
 
+{p 8 8 2} {bf:{help generate_aian_var}} : Generate categorical AI/AN variable for CPS or ACS microdata.
+
+{p 4 4 2}
+< {bf:{help categorize}} : Generate a categorical variable.
+
 {p 8 8 2} {bf:{help label_state}} : Label a numeric state FIPS code variable with state names or postal abbreviations.
 
 {p 8 8 2} {bf:{help get_cpiu}} : Retrieve annual CPI-U or CPI-U-RS series as a dataset, variable, or matrix.

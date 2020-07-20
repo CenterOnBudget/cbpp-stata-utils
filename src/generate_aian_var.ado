@@ -8,9 +8,7 @@ __generate_aian_var__ {hline 2} Generate categorical AI/AN variable for CPS or A
 Description
 -----------
 
-__generate_aian_var__ generates a categorial variable for American Indian/Alaska Native (AI/AN) identification. It can be used with CPS or ACS microdata.
-
-This variable is the preferred universe for presenting Census data intended to represent the Native American population: AIAN alone or in combination, Latino or not Latino. For more information, see [link to document](www.cbpp.org).
+__generate_aian_var__ generates a categorial variable for American Indian/Alaska Native (AI/AN) identification, alone or in combination, regardless of Hispanic identification. It can be used with CPS or ACS microdata.
 
 
 Syntax

@@ -27,6 +27,10 @@ Contents
 
 > __{help generate_race_var}__ : Generate categorical variable for race/ethnicity in CPS or ACS microdata.
 
+> __{help generate_aian_var}__ : Generate categorical AI/AN variable for CPS or ACS microdata.
+
+< __{help categorize}__ : Generate a categorical variable.
+
 > __{help label_state}__ : Label a numeric state FIPS code variable with state names or postal abbreviations.
 
 > __{help get_cpiu}__ : Retrieve annual CPI-U or CPI-U-RS series as a dataset, variable, or matrix.

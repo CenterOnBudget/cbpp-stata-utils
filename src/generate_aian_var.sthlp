@@ -10,10 +10,7 @@
 {title:Description}
 
 {p 4 4 2}
-{bf:generate_aian_var} generates a categorial variable for American Indian/Alaska Native (AI/AN) identification. It can be used with CPS or ACS microdata.
-
-{p 4 4 2}
-This variable is the preferred universe for presenting Census data intended to represent the Native American population: AIAN alone or in combination, Latino or not Latino. For more information, see  {browse "www.cbpp.org":link to document}.
+{bf:generate_aian_var} generates a categorial variable for American Indian/Alaska Native (AI/AN) identification, alone or in combination, regardless of Hispanic identification. It can be used with CPS or ACS microdata.
 
 
 
