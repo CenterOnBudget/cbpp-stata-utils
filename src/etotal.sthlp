@@ -35,7 +35,8 @@ Total of expression
 {synoptset 27 tabbed}{...}
 {synopthdr}
 {synoptline}
-    {synopt:{opth over(varname)}}group over subpopulations defined by _varname_.{p_end}
+    {synopt:{opth over(varname)}}group over subpopulations defined by {it:varname}.{p_end}
+    {synopt:{opt level(#)}}set confidence level; default is {bf:level(95)}.{p_end}
 	{synopt:{opt mat:rix(string)}}save results in matrix named {it:string}.{p_end}
 {synoptline}
 
@@ -63,9 +64,6 @@ Total of expression
 
 
 {space 4}{hline}
-
-{p 4 4 2}
-This help file was dynamically produced by 
-{browse "http://www.haghish.com/markdoc/":MarkDoc Literate Programming package} 
+{it:This help file was dynamically produced by {browse "http://www.haghish.com/markdoc/":MarkDoc Literate Programming package}.}
 
 

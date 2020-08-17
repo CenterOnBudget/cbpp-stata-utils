@@ -11,26 +11,34 @@ Description
 
 __svyset_acs__ is a shortcut program to declare the survey design for ACS PUMS.
 
-In person-level data with the _rep_weights_ option, it is the equivalent to typing "svyset [iw=pwgtp], vce(sdr) sdrweight(pwgtp1 - pwgtp80) mse".
-	
-That command can be hard to remember and repeatedly copy-pasting can be troublesome; __svyset_acs__ provides a more convenient way.  
+When used with _record_type(person)_, it is the equivalent to typing:
+
+>	svyset [iw=pwgtp], vce(sdr) sdrweight(pwgtp1-pwgtp80) mse
 
 
 Syntax
 ------ 
 
-> __svyset_acs__, __{cmdab:rec:ord_type}(_string_)__ [_{cmdab:rep:_weights}_]
+> __svyset_acs__, __{cmdab:rec:ord_type}(_string_)__ [_options_]
 
-Users must pass the record type of the data in memory (person or household) to __record_type__. Abbreviations _h, hhld, hous, p,_ and _pers_ are also accepted.
-
-To specify that replicate weights be used in the survey design, use the __rep_weights__ option. 
+{synoptset 27 tabbed}{...}
+{synopthdr}
+{synoptline}
+{syntab:Required}
+	{synopt:{opt rec:ord_type(string)}}record type weight to use: person or household. Abbreviations h, hhld, hous, p, and pers are also accepted.{p_end}
+	
+{syntab:Optional}
+    {synopt:{opt nosdr:weights}}do not declare SDR replicate weights in the survey design.{p_end}
 
 
 Example(s)
 ----------
 
-    Survey set household-level ACS PUMS data using replicate weights.
-        {bf:. svyset_acs, record_type(hhld) rep_weights}
+	Survey set household-level ACS PUMS data.  
+		{bf:. svyset_acs, record_type(hhld)}
+
+	Survey set person-level ACS PUMS data without replicate weights.  
+		{bf:. svyset_acs, record_type(person) nosdrweights}
 
 
 Website
@@ -40,21 +48,19 @@ Website
 
 
 - - -
-This help file was dynamically produced by 
-[MarkDoc Literate Programming package](http://www.haghish.com/markdoc/) 
+{it:This help file was dynamically produced by {browse "http://www.haghish.com/markdoc/":MarkDoc Literate Programming package}.}
 ***/
 
 
 * capture program drop svyset_acs
-* capture program drop declare_acs_svy_design
 
 program svyset_acs
 
-	syntax , RECord_type(string) [REP_weights]
+	syntax , RECord_type(string) [NOSDRweights]
 	
 	if !inlist("`record_type'", "p", "pers", "person", "h", "hh", "hous", "hhld", "household") {
-		display as error "Record type must be person or household, or their respective supported abbreviations (see help file)."'
-		exit
+		display as error "{bf:record_type()} must be person, household, their respective supported abbreviations, or both"
+		exit 198
 	}
 	
 	local record_type = cond(inlist("`record_type'", "p", "pers", "person"), "p", "h")
@@ -62,30 +68,24 @@ program svyset_acs
 	
 	confirm variable `weight'
 	
-	if "`rep_weights'" != "" {
+	if "`nosdrweights'" == "" {
 		capture {
 			forvalues r = 1/80 {
-				display "`weight'`r'"
 				confirm variable `weight'`r'
 			}
 		}
 		if _rc != 0 {
-			display as error "One or more replicate weight variables (`weight'1-`weight'80) not found."
-			exit
+			display as error "one or more replicate weight variables (`weight'1-`weight'80) not found"
+			exit 111
 		}
 		svyset [iw=`weight'], vce(sdr) sdrweight(`weight'1-`weight'80) mse
 	}
 	
-	if "`rep_weights'" == "" {
+	if "`nosdrweights'" != "" {
 		svyset [iw=`weight']
 	}
 
 end
 
 
-// for compatibility: old program name
-program define declare_acs_svy_design
-	syntax , RECord_type(string) [REP_weights]
-	svyset_acs, record_type(`record_type') `rep_weights'
-end
 

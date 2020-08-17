@@ -9,15 +9,15 @@ __generate_acs_major_group__ {hline 2} Generate categorical variable for major i
 Description
 -----------
 
-__generate_acs_major_group__ generates a categorical variable for major industry and major occupation groups in American Community Survey [public use microdata](https://www.census.gov/programs-surveys/acs/technical-documentation/pums.html) by recoding _occp_ and _indp_. 
+__generate_acs_major_group__ generates a categorical variable for major industry and major occupation groups in American Community Survey [public use microdata](https://www.census.gov/programs-surveys/acs/technical-documentation/pums.html) by recoding 'occp' and 'indp'. 
 
-The program takes the value labels for _occp_ and _indp_ from the ACS PUMS [data dictionaries](https://www2.census.gov/programs-surveys/acs/tech_docs/pums/data_dict/) and uses them to recode these variables into major groups. For instance, _occp_ values 9370 through 9590 are recoded to 1 and labelled "ADM", values 0170 through 0290 are recoded to 2 and labelled "AGR", and so on. 
+The program takes the value labels for 'occp' and 'indp' from the ACS PUMS [data dictionaries](https://www2.census.gov/programs-surveys/acs/tech_docs/pums/data_dict/) and uses them to recode these variables into major groups. For instance, 'occp' values 9370 through 9590 are recoded to 1 and labelled "ADM", values 0170 through 0290 are recoded to 2 and labelled "AGR", and so on. 
 
-Generated major group variables are named as the original with the prefix "maj_" by default. Users may supply another prefix to the __prefix__ option.
+Generated major group variables are named as the original with the prefix "maj_" by default. Users may supply another prefix to the _prefix_ option.
 
-By default, the program will attempt to confirm and generate a major group variable for both _indp_ and _occp_. Users wishing to use only one the variables should pass its name to __varname__.
+By default, the program will attempt to confirm and generate a major group variable for both 'indp' and 'occp'. Users wishing to use only one the variables should pass its name to _varname_.
 
-The program automatically caches the ACS PUMS data dictionary. Users can load cached data by specifying the __use_cache__ option (recommended).
+The program automatically caches the ACS PUMS data dictionary. Users can load cached data by specifying the _use_cache_ option (recommended).
 
 More information on the Census Bureau's industry and occupation codes, including comparability over time and to NAICS and SOC codes, respectively, can be found in the Code List section of the [ACS PUMS technical documentation](https://www.census.gov/programs-surveys/acs/technical-documentation/pums.html) and on the [Guidance for Industry & Occupation Data Users](https://www.census.gov/topics/employment/industry-occupation/guidance.html) page on the Census Bureau website.
 
@@ -34,18 +34,20 @@ Syntax
 	{synopt:{opt year(integer)}}2013 to 2018.{p_end}
 	
 {syntab:Optional}
-    {synopt:{opt sample(integer)}}5 for the five-year sample or 1 for the one-year sample. Defaults to 1.{p_end}
-	{synopt:{opt pre:fix(string)}}prefix to prepend to the variable name. Defaults to "maj_", e.g. "maj_occp" and "maj_indp".{p_end}
+    {synopt:{opt sample(integer)}}5 for the five-year sample or 1 for the one-year sample; default is {bf:sample(1)}.{p_end}
+	{synopt:{opt pre:fix(string)}}prefix to prepend to the variable name; default is {bf:prefix(maj_)}.{p_end}
 	{synopt:{opt use_cache}}use cached data dictionary file (recommended).{p_end}
 
 
 Example(s)
 ----------
 
-    Generate categorical variables for major industry and occupation groups in the 2018 one-year sample.
+    Generate categorical variables for major industry and occupation groups 
+	in the 2018 one-year sample.
         {bf:. generate_acs_major_group, year(2018) use_cache}
 
-   Generate a categorical variable for major industry groups named "grouped_indp" in the 2016 five-yer sample.
+   Generate a categorical variable for major industry groups named 'grouped_indp' 
+   in the 2016 five-yer sample.
         {bf:. generate_acs_major_group indp, year(2016) sample(5) prefix(grouped_) use_cache}
 
 		
@@ -54,10 +56,9 @@ Website
 
 [github.com/CenterOnBudget/cbppstatautils](https://github.com/CenterOnBudget/cbppstatautils)
 
-- - -
 
-This help file was dynamically produced by 
-[MarkDoc Literate Programming package](http://www.haghish.com/markdoc/) 
+- - -
+{it:This help file was dynamically produced by {browse "http://www.haghish.com/markdoc/":MarkDoc Literate Programming package}.}
 ***/
 
 
@@ -72,11 +73,12 @@ program define generate_acs_major_group
 
 	syntax [varlist(default=none)], year(integer) [sample(integer 1) PREfix(string) use_cache]
 
+    
 	* prep --------------------------------------------------------------------
 	
 	if !inrange(`year', 2013, 2018){
-			display as error "year(`year') invalid or unsupported. Year must be between 2013 and 2018."
-			exit
+		display as error "{bf:year()} must be between 2013 and 2018 inclusive"
+		exit 198
 	}
 	if "`prefix'" == "" {
 		local prefix "maj_"
@@ -91,51 +93,49 @@ program define generate_acs_major_group
 	
 	confirm variable `varlist'
 
+    
 	* set up cache directory --------------------------------------------------
-	
-	local data_dict "acs_dict_`year'_`sample'yr.txt"
-	
+    
 	local cache_dir = cond("`c(os)'" == "Windows", 				///
 						   "~/AppData/Local/cbppstatautils",	///
 						   "~/Library/Application Support/cbppstatautils")
 	capture mkdir "`cache_dir'"		
-	local cache_path = "`cache_dir'//`data_dict'.txt"
 	
-	
+    
 	* decide whether to download file -----------------------------------------
 	
+    local data_dict "acs_pums_dict_`year'_`sample'yr.txt"
+    
 	// download if use_cache is not specified, 
 	// or if use_cache is specified but the file does not exist
+	capture confirm file "`cache_dir'/`data_dict'"
+	local download = (_rc != 0 ) | ("`use_cache'" == "")
 	
-	if "`use_cache'" != "" {
-		capture confirm file `"`cache_path'"'  // can't get fileexists to work...
-	}
-	
-	local download = cond(_rc != 0 | "`use_cache'" == "", 1, 0)
-	
+    
 	* download if needed ------------------------------------------------------
 	
 	if `download' {
 		if `sample' == 1 {
 			local yr = substr("`year'", 3, 4)
-			local dict_file_name = cond(`year' > 2016,						///
-										"PUMS_Data_Dictionary_`year'", 		///
-										"PUMSDataDict`yr'")
+			local dict_url_file = cond(`year' > 2016,						///
+									   "PUMS_Data_Dictionary_`year'", 		///
+									   "PUMSDataDict`yr'")
 		}
 		if `sample' == 5 {
 			local start_year = `year' - 4
-			local dict_file_name "PUMS_Data_Dictionary_`start_year'-`year'"
+			local dict_url_file "PUMS_Data_Dictionary_`start_year'-`year'"
 		}
-		copy "https://www2.census.gov/programs-surveys/acs/tech_docs/pums/data_dict/`dict_file_name'.txt"	///
-					 "`cache_path'", replace	
+		quietly copy "https://www2.census.gov/programs-surveys/acs/tech_docs/pums/data_dict/`dict_url_file'.txt"	///
+                     "`cache_dir'/`data_dict'", replace	
 	}
 	
+    
 	* import and parse data dictionary ----------------------------------------
 	
 	preserve
 	
 	quietly {
-		infix str500 input 1-500  using "`cache_path'", clear
+		infix str500 input 1-500  using "`cache_dir'/`data_dict'", clear
 		replace input = strtrim(stritrim(input))
 		split input, generate(value) parse(".")		// split by value definition (.)
 		split input, generate(token)				// split by word
@@ -165,6 +165,7 @@ program define generate_acs_major_group
 		compress
 	}
 	
+    
 	* make recode statement(s) ------------------------------------------------
 	
 	foreach var of local varlist {
@@ -186,14 +187,14 @@ program define generate_acs_major_group
 		local recode_`var' = `"`recode_var'"'
 	}
 	
+    
 	* run recode(s) -----------------------------------------------------------
 	
 	restore
 	foreach var of local varlist {
-		display as text "Recoding `var' to `prefix'`var' (this may take a few moments)..."
-		`recode_`var''
+		display as result "Recoding {bf:`var'} to {bf:`prefix'`var'} (this may take a few moments)..."
 	}
 	
-	
 end
+
 

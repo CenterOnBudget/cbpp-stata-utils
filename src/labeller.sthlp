@@ -23,6 +23,7 @@
 	{synopt:{opt remove}}remove variable and value labels from a variable.{p_end}
 
 
+
 {title:Example(s)}
 
     Using labeller
@@ -42,9 +43,6 @@
 
 
 {space 4}{hline}
-
-{p 4 4 2}
-This help file was dynamically produced by 
-{browse "http://www.haghish.com/markdoc/":MarkDoc Literate Programming package} 
+{it:This help file was dynamically produced by {browse "http://www.haghish.com/markdoc/":MarkDoc Literate Programming package}.}
 
 

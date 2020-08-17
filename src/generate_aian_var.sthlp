@@ -19,7 +19,6 @@
 {p 4 4 2}
 {bf:generate_aian_var} {it:{help newvar}}, [{it:options}]
 
-
 {synoptset 24 tabbed}{...}
 {synopthdr}
 {synoptline}
@@ -28,13 +27,12 @@
 	
 {syntab:Optional}
     {synopt:{opt nolab:el}}{it:newvar} will not be labelled.{p_end}
-    {synopt:{opt replace}}{it:newvar} will be replaced if it exists.{p_end}
 
 	
 
 {title:Example(s)}
 
-{space 3}Generate a variable named "aian" for ACS microdata.
+{space 3}Generate a variable named {c 39}aian{c 39} for ACS microdata.
         {bf:. generate_aian_var aian, dataset(acs)}
 		
 		
@@ -46,9 +44,6 @@
 
 
 {space 4}{hline}
-
-{p 4 4 2}
-This help file was dynamically produced by 
-{browse "http://www.haghish.com/markdoc/":MarkDoc Literate Programming package} 
+{it:This help file was dynamically produced by {browse "http://www.haghish.com/markdoc/":MarkDoc Literate Programming package}.}
 
 

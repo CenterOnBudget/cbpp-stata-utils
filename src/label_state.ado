@@ -9,26 +9,28 @@ __label_state__ {hline 2} Label state FIPS code variable with state names or pos
 Description
 -----------
 
-__label_state__ labels state [FIPS code](https://www.census.gov/geographies/reference-files/2018/demo/popest/2018-fips.html) variables with the full state name (the default) or postal abbreviation.  
-The 50 states, District of Columbia, Puerto Rico, and U.S. territories are supported.
+__label_state__ labels state [FIPS code](https://www.census.gov/geographies/reference-files/2018/demo/popest/2018-fips.html) variables with the full state name (the default) or postal abbreviation. The 50 states, District of Columbia, Puerto Rico, and U.S. territories are supported.
+
+If the state FIPS code variable _varname_ is a string, it will be destringed.    
+
+To label with two-character postal abbreviations (e.g. "VT") rather than the full state name, use the _abbrv_ option.
 
 
 Syntax
 ------ 
 
-> __label_state__ {it}{help varname}{sf}, [_abbrv_]
-
-If the state FIPS code variable __varname__ is a string, it will be destringed.    
-To label with two-character postal abbreviations (e.g. "VT") rather than the full state name, use the _abbrv_ option.
+> __label_state__ _{help varname}_, [_abbrv_]
 
 
 Example(s)
 ----------
 
-    Label 'gestfips', the variable for state FIPS code in the CPS, with state names.
-        {bf:. label_state gestfips}
-    Label 'st', the variable for state FIPS code in the ACS, with state abbreviations.
+	Label 'gestfips', the variable for state FIPS code in the CPS, with state names.  
+		{bf:. label_state gestfips}
+
+	Label 'st', the variable for state FIPS code in the ACS, with state abbreviations.  
 		{bf:. label_state st, abbrv}
+
 
 Website
 -------
@@ -37,9 +39,9 @@ Website
 
 
 - - -
-This help file was dynamically produced by 
-[MarkDoc Literate Programming package](http://www.haghish.com/markdoc/) 
+{it:This help file was dynamically produced by {browse "http://www.haghish.com/markdoc/":MarkDoc Literate Programming package}.}
 ***/
+
 
 * capture program drop label_state
 
@@ -71,3 +73,5 @@ program label_state
 	label values `varlist' state_lbl
 	
 end
+
+

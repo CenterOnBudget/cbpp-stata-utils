@@ -22,6 +22,7 @@ Syntax
         correspondences to existing value label created by {bf:labeller}.{p_end}
 	{synopt:{opt remove}}remove variable and value labels from a variable.{p_end}
 
+
 Example(s)
 ----------
 
@@ -41,9 +42,7 @@ Website
 
 
 - - -
-
-This help file was dynamically produced by 
-[MarkDoc Literate Programming package](http://www.haghish.com/markdoc/) 
+{it:This help file was dynamically produced by {browse "http://www.haghish.com/markdoc/":MarkDoc Literate Programming package}.}
 ***/
 
 
@@ -53,7 +52,7 @@ program define labeller
 
 	syntax varname, [VARiable(string) VALues(string asis)] [add modify remove]
 
-	display "Warning from cbppstatautils developers: command name likely to change"
+	display  as result "Warning from cbppstatautils developers: command name likely to change"
 	
 	if "`add'" == "" & "`modify'" == "" {
 		local replace "replace"
@@ -74,5 +73,6 @@ program define labeller
 	}
 	
 end
-	
+
+
 		
