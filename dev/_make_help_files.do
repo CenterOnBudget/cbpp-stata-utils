@@ -9,21 +9,23 @@ if _rc != 0 {
 	github install haghish/markdoc, stable
 }
 
-local files_list 	get_acs_pums.ado 				///
-					make_acs_pums_lbls.ado 			///
-					label_state.ado 				///
-					get_cpiu.ado					///
-					generate_race_var.ado			///
+local files_list 	categorize.ado					///
+					cbppstatautils.ado				///
+					etotal.ado						///
 					generate_acs_adj_vars.ado		///
 					generate_acs_major_group.ado	///
-					svyset_acs.ado					///
-					load_data.ado					///
-					inspect_2.ado					///
-					labeller.ado					///
-					etotal.ado						///
 					generate_aian_var.ado			///
-					categorize.ado					///
-					cbppstatautils.ado
+					generate_race_var.ado			///
+					get_acs_pums.ado 				///
+					get_cpiu.ado					///
+					inspect_2.ado					///
+					label_state.ado 				///
+					labeller.ado					///
+					label_acs_pums.ado 				///
+					load_data.ado					///
+					make_cbpp_profile.ado			///
+					svyset_acs.ado					
+
 
 foreach f of local files_list {
 	markdoc "`f'", export(sthlp) replace style("simple")

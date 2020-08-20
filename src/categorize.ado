@@ -9,26 +9,30 @@ __categorize__ {hline 2} Create a categorical variable.
 Description
 -----------
 
-__cagegorize__ is a shortcut and extension of {help egen}'s _cut_ function with the icodes option.
+__categorize__ is a shortcut and extension of {help egen}'s _cut_ function with the icodes option.
 
-Unlike egen cut, __categorize__ does not require the user to include the minumum and the maximum value of the continuous variable in the list of breaks. It creates more descriptive value labels for the generated categorical variable. Users can specify a variable label for the new variable. 
+Unlike egen cut:  
+__categorize__ does not require the user to include the minumum and the maximum value of the continuous variable in the list of breaks.  
+It creates more descriptive value labels for the generated categorical variable.  
+Users can specify a variable label for the new variable.
 
-Finally, users working with age or poverty ratio variables may choose "default" breaks. With default(age), breaks are 18 and 65. With default(povratio), breaks are 50, 100, 150, 200, and 250.
+Finally, users working with age or poverty ratio variables may choose "default" breaks. With _default(age)_, breaks are 18 and 65. With _default(povratio)_, breaks are 50, 100, 150, 200, and 250.
 
 
 Syntax
 ------ 
 
-> __categorize__ _{help newvar}_ =_{help varname}_, [_options_]
+> __categorize__ _{help varname}_, {cmdab:gen:erate}(_{help newvar}_) [_options_]
 
-where _{help newvar}_ is the name of the categorical variable to be generated and _{help varname}_ is the name of the continuous variable in memory.
-
-
-{synoptset 27 tabbed}{...}
+{synoptset 24 tabbed}{...}
 {synopthdr}
 {synoptline}
-    {synopt:{opth breaks(numlist)}}left-hand ends of the grouping intervals. Do not include the minimum or the maximum value of {it:varname}.{p_end}
-	{synopt:{opt default(age|povratio)}}use default breaks. Cannot be combined with the _breaks_ option.{p_end}
+{syntab:Required}
+    {synopt:{opth gen:erate(newvar)}}name of the categorical variable to be generated.{p_end}
+    
+{syntab:Optional}
+    {synopt:{opth breaks(numlist)}}left-hand ends of the grouping intervals. Do not include the minimum or the maximum value of {it:varname}. Either {it:breaks} or {it:default} must be specified.{p_end}
+	{synopt:{opt default(age|povratio)}}use default breaks; cannot be combined with _breaks_.{p_end}
 	{synopt:{opt nolab:el}}{it:newvar} will not be given value labels.{p_end}
 	{synopt:{opt varlab:el(string)}}variable label for _newvar_.{p_end}
 
@@ -36,11 +40,11 @@ where _{help newvar}_ is the name of the categorical variable to be generated an
 Example(s)
 ----------
 
-    Generate labelled categorical variable 'income_cat' based on 'pincp'.
-        {bf:. categorize inc_cat = pincp, breaks(15000 30000 50000 100000) varlabel("Income category")}
+    Generate categorical variable 'inc_cat' from 'pincp'.
+        {bf:. categorize pincp, generate(inc_cat) breaks(15000 30000 50000 100000)}
 
-    Generate 'agecat' based on 'agep' with default breaks.
-        {bf:. categorize age_cat = agep, default(age)}
+    Generate 'age_cat' from 'agep' using default breaks.
+        {bf:. categorize agep, generate(age_cat) default(age) varlabel("Age group")}
 
 
 Website
@@ -48,32 +52,43 @@ Website
 
 [github.com/CenterOnBudget/cbppstatautils](https://github.com/CenterOnBudget/cbppstatautils)
 
-
 - - -
-
-This help file was dynamically produced by 
-[MarkDoc Literate Programming package](http://www.haghish.com/markdoc/) 
+{it:This help file was dynamically produced by {browse "http://www.haghish.com/markdoc/":MarkDoc Literate Programming package}.}
 ***/
+
 
 * capture program drop categorize
 
 program define categorize
 
-	syntax newvarname =/exp, [breaks(numlist sort) default(string)]	///
-							 [NOLABel] [VARLABel(string)]
+	syntax varname(numeric), GENerate(name) [breaks(numlist sort)]          ///
+                             [default(string) NOLABel VARLABel(string)]
 	
-	// throw error if other than varname or string variable
-	confirm numeric variable `exp'
-	
+    
+    local varname `varlist'
+    
+    * check for errors --------------------------------------------------------
+    
+    // throw error if generate already exists
+    local newvar `generate'
+    capture confirm `newvar'
+    if _rc == 0 {
+        display as error "{bf:`newvar'} already defined"
+        exit 110
+    }
+    
+    
+    * define breaks -----------------------------------------------------------
+    
 	// find min and max so user doesn't need to specify
-	quietly summarize `exp'
+	quietly summarize `varname'
 	local max = `r(max)' + 1
 	local min = `r(min)'
 	
 	// validate user-specified breaks and expand
 	if "`breaks'" != "" {
 		if "`default'" != "" {
-			display as error "options breaks(`breaks') and default(`default') may not be combined"
+			display as error "{bf:breaks()} and {bf:default()} may not be combined"
 			exit 184
 		}
 		
@@ -84,31 +99,37 @@ program define categorize
 	// parse default breaks
 	if "`breaks'" == "" {
 		if "`default'" == "" {
-			display as error "The 'default' option must be specified if no breaks are specified."
+			display as error "{bf:default()} must be specified if {bf:default()} is not specified"
 			exit 198
 		}
 		if !inlist("`default'", "age", "povratio") {
-			display as error "option default(`default') incorrectly specified. Must be 'age' or 'povratio'."
+			display as error "{bf:default()} must be 'age' or 'povratio'"
 			exit 198
 		}
 		if "`default'" == "age" {
 			local at 0 18 65 `max'
-			display "Using default age breaks: `at'."
+			display as result "Using default age breaks: `at'."
 		}
 		if "`default'" == "povratio" {
 			local at 0 50 100 150 200 250 `max'
-			display "Using default poverty ratio breaks: `at'."
+			display as result "Using default poverty ratio breaks: `at'."
 		}
 	}
-		
-	local cuts = ustrregexra("`at'", " ", ", ")
-	egen `varlist' = cut(`exp'), at(`cuts') icodes
-	quietly replace `varlist' = `varlist' + 1
 	
+    
+	* generate new variable ---------------------------------------------------
+    
+	local cuts = ustrregexra("`at'", " ", ", ")
+	egen `newvar' = cut(`varname'), at(`cuts') icodes
+	quietly replace `newvar' = `newvar' + 1
+	
+    
+    * label new variable ------------------------------------------------------
+    
 	if "`nolabel'" == "" {
 		
 		local n_cuts : word count `at'
-		capture label drop `varlist'_lbl
+		capture label drop `newvar'_lbl
 		
 		forvalues c = 1/`n_cuts' {
 			
@@ -126,14 +147,16 @@ program define categorize
 				local end "and up"
 				local to ""
 			}
-			label define `varlist'_lbl `c' "`start'`to' `end'", add
+			label define `newvar'_lbl `c' "`start'`to' `end'", add
 		}
 		
-		label values `varlist' `varlist'_lbl
+		label values `newvar' `newvar'_lbl
 	}
 	
 	if "`varlabel'" != "" {
-	    label variable `varlist' "`varlabel'"
+	    label variable `newvar' "`varlabel'"
 	}
 	
 end
+
+

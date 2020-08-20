@@ -1,43 +1,47 @@
-v 0.1.3
+v 0.1.4
 d cbppstatautils: Stata utility programs for working with ACS and CPS microdata.
 d Authors: Claire Zippel and Matt Saenz, Center on Budget and Policy Priorities.
 d
-d Distribution-Date: 20200720
+d Distribution-Date: 20200820
 d
 d Support: github.com/CenterOnBudget/cbpp-stata-utils/issues
-
+d Changelog: github.com/CenterOnBudget/cbpp-stata-utils/blob/master/NEWS.md
 
 * programs and help files
-f label_state.ado
-f label_state.sthlp
-f get_acs_pums.ado
-f get_acs_pums.sthlp
-f make_acs_pums_lbls.ado
-f make_acs_pums_lbls.sthlp
-f get_cpiu.ado
-f get_cpiu.sthlp
-f generate_race_var.ado
-f generate_race_var.sthlp
-f generate_acs_major_group.ado
-f generate_acs_major_group.sthlp
-f generate_acs_adj_vars.ado
-f generate_acs_adj_vars.sthlp
-f svyset_acs.ado
-f svyset_acs.sthlp
-f load_data.ado
-f load_data.sthlp
-f labeller.ado
-f labeller.sthlp
-f inspect_2.ado
-f inspect_2.sthlp
-f etotal.ado
-f etotal.sthlp
-f generate_aian_var.ado
-f generate_aian_var.sthlp
 f categorize.ado
 f categorize.sthlp
 f cbppstatautils.ado
 f cbppstatautils.sthlp
+f etotal.ado
+f etotal.sthlp
+f generate_acs_adj_vars.ado
+f generate_acs_adj_vars.sthlp
+f generate_acs_major_group.ado
+f generate_acs_major_group.sthlp
+f generate_aian_var.ado
+f generate_aian_var.sthlp
+f generate_race_var.ado
+f generate_race_var.sthlp
+f get_acs_pums.ado
+f get_acs_pums.sthlp
+f get_cpiu.ado
+f get_cpiu.sthlp
+f inspect_2.ado
+f inspect_2.sthlp
+f label_acs_pums.ado
+f label_acs_pums.sthlp
+f label_state.ado
+f label_state.sthlp
+f labeller.ado
+f labeller.sthlp
+f load_data.ado
+f load_data.sthlp
+f make_cbpp_profile.ado
+f make_cbpp_profile.sthlp
+f svyset_acs.ado
+f svyset_acs.sthlp
+
 
 * data
 F state_fips.dta
+

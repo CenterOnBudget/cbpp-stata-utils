@@ -31,7 +31,8 @@ Total of expression
 {synoptset 27 tabbed}{...}
 {synopthdr}
 {synoptline}
-    {synopt:{opth over(varname)}}group over subpopulations defined by _varname_.{p_end}
+    {synopt:{opth over(varname)}}group over subpopulations defined by {it:varname}.{p_end}
+    {synopt:{opt level(#)}}set confidence level; default is {bf:level(95)}.{p_end}
 	{synopt:{opt mat:rix(string)}}save results in matrix named _string_.{p_end}
 {synoptline}
 
@@ -57,21 +58,19 @@ Website
 
 
 - - -
-
-This help file was dynamically produced by 
-[MarkDoc Literate Programming package](http://www.haghish.com/markdoc/) 
+{it:This help file was dynamically produced by {browse "http://www.haghish.com/markdoc/":MarkDoc Literate Programming package}.}
 ***/
 
 
-* capture program drop etotal
+capture program drop etotal
 
 program define etotal
 
-	syntax [anything] [if] [fweight pweight iweight], 	///
-		   [over(varname numeric)] [MATrix(name)]
-	
-	
-	// if over is specified, get value labels for results matrix --------------
+	syntax [anything] [if] [fweight pweight iweight], 	                   ///
+		   [level(cilevel)] [over(varname numeric)] [MATrix(name)]
+    
+    
+	* if over is specified, get value labels for results matrix ---------------
 	
 	if "`over'" != "" {
 	    local over_lbl_nm : value label `over'
@@ -87,16 +86,16 @@ program define etotal
 	}
 	
 	
-	// set up temporary matrices -----------------------------------------------
+	* define temporary matrices -----------------------------------------------
 	
 	tempname results tally_all tally_by
 	
 	
-	// 1. User wants a total of something: ------------------------------------
+	* 1. user wants a total of something: -------------------------------------
 	
 	if "`anything'" != "" {
 	    
-		// 1.1. An expression -> tally_var evaluates to that expression
+		* 1.1. an expression -> tally_var evaluates to that expression --------
 		
 		local rx_arithm "(\+)|(-)|(\*)|(/)|(\^)"
 		local rx_logic "(\&)|(\|)|(\!)|(~)"
@@ -106,7 +105,7 @@ program define etotal
 		local rxm_if = ustrregexm("`anything'", "`rx_logic'|`rx_rel'")
 		
 		if `rxm_if' == 1 {
-			display "Next time, put logical or relational expressions in [{bf:if}]."
+			display as yellow "Next time, put logical or relational expressions in [{bf:if}]."
 		}
 		
 		if `rxm_arithm' == 1 | `rxm_if' == 1 {
@@ -114,16 +113,16 @@ program define etotal
 			generate `tally_var' = `anything'
 		}
 		
-		// 1.2. A preexisting variable -> tally_var is that variable
+		* 1.2. a preexisting variable -> tally_var is that variable -----------
 		
 		capture confirm variable `anything'
 		if _rc == 0 {
 		    local tally_var `anything'
 		}
 		
-		// 1.3. Create results for totals
+		* 1.3. create results for totals --------------------------------------
 		
-	    quietly total `tally_var' `if' [`weight' `exp']
+	    quietly total `tally_var' `if' [`weight' `exp'], level(`level')
 		matrix `tally_all' = r(table)'
 		
 		if "`over'" == "" {
@@ -131,18 +130,19 @@ program define etotal
 		}
 		
 		if "`over'" != "" {
-		    quietly total `tally_var' `if' [`weight' `exp'], over(`over')
+		    quietly total `tally_var' `if' [`weight' `exp'],    ///
+                          over(`over') level(`level')
 			matrix `tally_by' = r(table)'
 			matrix `results' = `tally_by' \ `tally_all'
 		}
 	}
 	
 	
-	// 2. User wants a count: -------------------------------------------------
+	* 2. user wants a count: --------------------------------------------------
 	
 	if "`anything'" == "" {
 	    
-		// 2.1. An unweighted count -> use count 
+		* 2.1. an unweighted count -> use count -------------------------------
 		
 		if "`weight'" == ""  {
 			
@@ -157,13 +157,13 @@ program define etotal
 			}
 		}
 		
-		// 2.2. A weighted count -> tally_var is 1
+		// 2.2. a weighted count -> tally_var is 1 ----------------------------
 		
 		if "`weight'" != "" {
 		    
 			tempvar tally_var
 			quietly generate `tally_var' = 1
-			quietly total `tally_var' `if' [`weight' `exp']
+			quietly total `tally_var' `if' [`weight' `exp'], level(`level')
 			matrix `tally_all' = r(table)'
 			
 			if "`over'" == "" {
@@ -171,14 +171,15 @@ program define etotal
 			}
 			
 			if "`over'" != "" {
-			    quietly total i.`over' `if' [`weight' `exp']
+			    quietly total i.`over' `if' [`weight' `exp'], level(`level')
 				matrix `tally_by' = r(table)'
 				matrix `results' = `tally_by' \ `tally_all'
 			}
 		}
 	}
-		
-	// 3. Format results ------------------------------------------------------
+	
+    
+	* format results ----------------------------------------------------------
 	
 	if "`weight'" == "" {
 	    matrix `results' = `results'[1..., 1]
@@ -188,15 +189,15 @@ program define etotal
 	}
 	
 	if "`weight'" != "" {
-		local first_colname = cond("`anything'" == "", 			///
-								   "Weighted Count:", 			///
+		local first_colname = cond("`anything'" == "", 			        ///
+								   "Weighted Count:", 			        ///
 								   "Total:")
-		matrix `results' = `results'[1..., 1..2] , 				///
+		matrix `results' = `results'[1..., 1..2] , 				        ///
 						   `results'[1..., 5..6]
-		matrix colnames `results' = "`first_colname'" 			///
-									"Std. Err.:" 				///
-									"[95% Conf. Interval]:lb"  	///
-									"[95% Conf. Interval]:ub" 
+		matrix colnames `results' = "`first_colname'" 			        ///
+									"Std. Err.:" 				        ///
+									"[`level'% Conf. Interval]:lb"  	///
+									"[`level'% Conf. Interval]:ub" 
 		local cspec "& %14s | %15.0fc | %13.0fc | %13.0fc & %13.0fc &"
 	}
 	
@@ -221,7 +222,7 @@ program define etotal
 	}
 	
 	
-	// Display and save (if specified) ----------------------------------------
+	* display and save --------------------------------------------------------
 	
 	matlist `results', showcoleq(combined) coleqonly  		///
 					   rspec("`rspec'") cspec("`cspec'")
@@ -230,7 +231,6 @@ program define etotal
 	if "`matrix'" != "" {
 	    matrix `matrix' = `results'
 	}
-
 	
 end
 

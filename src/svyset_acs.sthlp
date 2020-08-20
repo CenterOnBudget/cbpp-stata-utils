@@ -13,29 +13,36 @@
 {bf:svyset_acs} is a shortcut program to declare the survey design for ACS PUMS.
 
 {p 4 4 2}
-In person-level data with the {it:rep_weights} option, it is the equivalent to typing "svyset [iw=pwgtp], vce(sdr) sdrweight(pwgtp1 - pwgtp80) mse".
-	
-{p 4 4 2}
-That command can be hard to remember and repeatedly copy-pasting can be troublesome; {bf:svyset_acs} provides a more convenient way.    {break}
+When used with {it:record_type(person)}, it is the equivalent to typing:
+
+{p 8 8 2}	svyset [iw=pwgtp], vce(sdr) sdrweight(pwgtp1-pwgtp80) mse
 
 
 
 {title:Syntax}
 
-{p 8 8 2} {bf:svyset_acs}, {bf:{cmdab:rec:ord_type}({it:string})} [{it:{cmdab:rep:_weights}}]
+{p 8 8 2} {bf:svyset_acs}, {bf:{cmdab:rec:ord_type}({it:string})} [{it:options}]
 
-{p 4 4 2}
-Users must pass the record type of the data in memory (person or household) to {bf:record_type}. Abbreviations {it:h, hhld, hous, p,} and {it:pers} are also accepted.
-
-{p 4 4 2}
-To specify that replicate weights be used in the survey design, use the {bf:rep_weights} option. 
+{synoptset 27 tabbed}{...}
+{synopthdr}
+{synoptline}
+{syntab:Required}
+	{synopt:{opt rec:ord_type(string)}}record type weight to use: person or household. Abbreviations h, hhld, hous, p, and pers are also accepted.{p_end}
+	
+{syntab:Optional}
+    {synopt:{opt nosdr:weights}}do not declare SDR replicate weights in the survey design.{p_end}
 
 
 
 {title:Example(s)}
 
-    Survey set household-level ACS PUMS data using replicate weights.
-        {bf:. svyset_acs, record_type(hhld) rep_weights}
+{p 4 4 2}
+	Survey set household-level ACS PUMS data.    {break}
+		{bf:. svyset_acs, record_type(hhld)}
+
+{p 4 4 2}
+	Survey set person-level ACS PUMS data without replicate weights.    {break}
+		{bf:. svyset_acs, record_type(person) nosdrweights}
 
 
 
@@ -46,7 +53,6 @@ To specify that replicate weights be used in the survey design, use the {bf:rep_
 
 
 {space 4}{hline}
-This help file was dynamically produced by 
-{browse "http://www.haghish.com/markdoc/":MarkDoc Literate Programming package} 
+{it:This help file was dynamically produced by {browse "http://www.haghish.com/markdoc/":MarkDoc Literate Programming package}.}
 
 

@@ -11,15 +11,15 @@ Description
 
 __load_data__ loads CPS or ACS microdata from the CBPP datasets library into memory. 
 
-This program will only work for Center staff who have synched these datasets from the SharePoint datasets library, and have set up the global 'spdatapath'.  
+This program will only work for Center staff who have synched these datasets from the SharePoint datasets library, and have set up the global _spdatapath_.  
 
 If _dataset_ is ACS, the program will load the one-year merged person-household ACS files. If _dataset_ is CPS, the program will load the merged person-family-household CPS ASEC files. Available years are 1980-2019 for CPS and 2000-2018 for ACS.  
 
-Users may specify a single year or multiple years to the __years__ option as a {help numlist}. If multiple years are specified, the datasets will be appended together before loading.  
+Users may specify a single year or multiple years to the _years_ option as a {help numlist}. If multiple years are specified, the datasets will be appended together before loading.  
 
-The default is to load all variables in the dataset. Users may specify a subset of variables to load in the __vars__ option.  
+The default is to load all variables in the dataset. Users may specify a subset of variables to load in the _vars_ option.  
 
-To save the loaded data as a new dataset, use the __saveas__ option. If the file passed to __saveas__ already exists, it will be replaced.  
+To save the loaded data as a new dataset, use the _saveas_ option. If the file passed to _saveas_ already exists, it will be replaced.  
 
 Note: When loading multiple years of ACS datasets including 2018 data, _serialno_ will be edited to facilitate appending (_serialno_ is string in 2018 and numeric in prior years): "00" and "01" will be substituted for "HU" and "GQ", respectively, and the variable will be destringed.  
 
@@ -36,8 +36,8 @@ Example(s)
 	Load CPS microdata for 2019.  
 		{bf:. load_data cps, year(2019)}
 		
-	Load a subset of variables from ACS microdata for 2017-2019.  
-		{bf:. load_data acs, years(2017/2019) vars(serialno sporder st agep povpip pwgtp)}
+	Load a subset of variables from ACS microdata for 2016-2018.  
+		{bf:. load_data acs, years(2016/2018) vars(serialno sporder st agep povpip pwgtp)}
 
 
 Website
@@ -47,9 +47,7 @@ Website
 
 
 - - -
-
-This help file was dynamically produced by 
-[MarkDoc Literate Programming package](http://www.haghish.com/markdoc/) 
+{it:This help file was dynamically produced by {browse "http://www.haghish.com/markdoc/":MarkDoc Literate Programming package}.}
 ***/
 
 
@@ -58,52 +56,53 @@ This help file was dynamically produced by
 
 program define load_data 
 
-	syntax namelist(name=dataset), Years(numlist sort) [Vars(namelist)] [saveas(string)] [clear]
+	syntax name(name=dataset), Years(numlist sort) [Vars(namelist)] [saveas(string)] [clear]
 	
-	if "${spdatapath}" == "" {
-		display as error "Global 'spdatapath' not found."
-		exit
-	}
-	
-	if "`clear'" == "" & _N != 0 & c(changed) != 0 {
+    
+    * error checking ----------------------------------------------------------
+    
+    if "`clear'" == "" & _N != 0 & c(changed) != 0 {
 		display as error "no; dataset in memory has changed since last saved"
 		exit 4
 	}
-
-	local dataset = upper("`dataset'")
-	
-	if !inlist("`dataset'", "CPS", "ACS"){
-		display as error "dataset(`dataset') invalid. Must be CPS or ACS."
-	}
-
-	local vars = cond("`vars'" == "", "*", "`vars'")
-	
-	// confirm dataset is synched
-	mata : st_numscalar("dir_exists", direxists("${spdatapath}`dataset'"))
-	if scalar(dir_exists) != 1 {
-		display as error "${spdatapath}`dataset' not found. Make sure it is synched and try again"
-		exit 
-	}
-	
-	// confirm requested years are available for dataset
+    
+    // check supported dataset
+    local dataset = upper("`dataset'")
+    if !inlist("`dataset'", "CPS", "ACS"){
+		display as error "{bf:dataset()} must be acs or cps (case insensitive)"
+        exit 198
+	}    
+    // check years-dataset combination
 	if "`dataset'" == "CPS" {
 		capture numlist "`years'", range(>= 1980 <=2019)
 		if _rc != 0 {
-			display as error "years(`years') invalid. Datasets library has CPS data for 1980-2019."
-			exit
+			display as error "{bf:years()} must be between 1980 and 2019 inclusive when {bf:dataset()} is cps"
+			exit 198
 		}
 	}
 	if "`dataset'" == "ACS" {
 		capture numlist "`years'", range(>= 2000 <=2018)
 		if _rc != 0 {
-			display as error "years(`years') invalid. Datasets library has ACS data for 2000-2018."
-			exit
+			display as error "{bf:years()} must be between 2000 and 2018 inclusive when {bf:dataset()} is acs"
+			exit 198
 		}
-		numlist "`years'"
-		local n_years : word count `r(numlist)'
 	}
-	
-	// confirm all files exist
+    
+    // check datasets library path global exists
+	if "${spdatapath}" == "" {
+		display as error "Global 'spdatapath' not found."
+		exit
+	}
+    
+    // check dataset library is synched
+	mata : st_numscalar("dir_exists", direxists("${spdatapath}`dataset'"))
+	if scalar(dir_exists) != 1 {
+		display as error "${spdatapath}`dataset' not found. Make sure it is synched and try again"
+		exit 
+	}
+     
+    
+    // check all needed files within dataset library are synched
 	capture noisily {
 		foreach y of local years {
 			if "`dataset'" == "CPS" {
@@ -118,31 +117,64 @@ program define load_data
 	if `rc' != 0 {
 		exit 601
 	}
-	
-	// load and append data
+
+
+	* find max year requested -------------------------------------------------
+    
+    // if multiple years, will use labels from max year
+    // see `nolabel' in next section
+    local n_years : word count `years'
+    if `n_years' > 1 {
+    	local years_list = ustrregexra("`years'", " ", ", ")
+    	local max_year = max(`years_list')
+    }
+    if `n_years' == 1 {
+    	local max_year = `years'
+    }
+    
+
+    * load and append data ----------------------------------------------------
+    
 	clear
-	tempfile temp 
+    
+    // default to all variables
+	local vars = cond("`vars'" == "", "*", strlower("`vars'"))
+	
+    tempfile temp 
 	quietly save `temp', emptyok
+    
 	foreach y of local years {
-		display "Loading `y' `dataset' data..."
+    	
+		display as result "Loading `y' `dataset' data..."
+        
 		if "`dataset'" == "CPS" {
 			quietly use `vars' using "${spdatapath}`dataset'/mar`y'/mar`y'.dta", clear	
 		}
+        
 		if "`dataset'" == "ACS" {
 			quietly use `vars' using "${spdatapath}`dataset'/`y'/`y'us.dta", clear
-			if `y' == 2018 & `n_years' > 1 {
+			if `y' == 2018 & `n_years' > 1 & 				///
+			   ("`vars'" == "*" | ustrregexm("`vars'", "serialno", 1)) {
 				quietly replace serialno = ustrregexra(serialno, "HU", "00")
 				quietly replace serialno = ustrregexra(serialno, "GQ", "01")
-				destring serialno, replace
-				display "serialno for 2018 sample edited and destringed to facilitate appending."
+				quietly destring serialno, replace
+				display as result "serialno for 2018 sample edited and destringed to facilitate appending."
 			}
 		}
-		quietly append using `temp' 
+        
+        local nolabel = cond(`y' == `max_year', "", "nolabel")
+		quietly append using `temp', `nolabel' 
 		quietly save `temp', replace
 	}
-	display "Done."
+    
+    local lbl_message = cond(`n_years' > 1, "Labels are from `max_year' dataset.", "")
+	display as result "Done. `lbl_message'"
+    
 	use `temp', clear
 	
+    
+    * save if requested -------------------------------------------------------
+    
 	if "`saveas'" != "" {
 		save "`saveas'", replace	
 	}
@@ -153,9 +185,10 @@ end
 
 program define load
 
-	syntax namelist(name=dataset), Years(numlist sort) [Vars(namelist)] [saveas(string)] [clear]
+	syntax name(name=dataset), Years(numlist sort) [Vars(namelist)] [saveas(string)] [clear]
 	
 	load_data `dataset', years(`years') vars(`vars') saveas(`saveas') `clear'
 	
 end
+
 

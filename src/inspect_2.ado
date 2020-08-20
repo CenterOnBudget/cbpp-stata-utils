@@ -11,23 +11,23 @@ Description
 
 A cross between {help summarize} and {help inspect}, __inspect_2__ gives the frequency of positive, zero, negative, and missing values in a variable, as well as the mean, minimum, and maximum value of a variable within those categories and overall.
 
-Users may specify the _save_ option to store the results in a matrix. The matrix (or matrices, if passing a {help varlist}) will be named _inspect_[varname]_.
+Results may be stored in a matrix (or matrices, if _varlist_ is multiple variables) by specifying matrix name(s) in the _matrix()_ option.
 
 
 Syntax
 ------ 
 
-> __inspect_2__ _{help varlist}_ [_{help if}_] [_{help weight}_], [__save__]
+> __inspect_2__ _{help varlist}_ [_{help if}_] [_{help weight}_], [__matrix(names)__]
 
-{bf:fweight}s, {bf:iweight}s, and {bf:pweight}s are allowed; see {help weight}.
+{bf:fweight}s and {bf:iweight}s are allowed; see {help weight}.
 
 
 Example(s)
 ----------
   
-		{bf:. inspect_2 pincp pearnp if agep >= 18 [fw=pwgtp]}
-		 
-		{bf:. inspect_2 thnetworth, save}
+		{bf:. inspect_2 thnetworth}
+		
+		{bf:. inspect_2 pincp pernp if agep >= 18 [fw=pwgtp], matrix(pincp_mat pernp_mat)}
 
 
 Website
@@ -37,9 +37,7 @@ Website
 
 
 - - -
-
-This help file was dynamically produced by 
-[MarkDoc Literate Programming package](http://www.haghish.com/markdoc/) 
+{it:This help file was dynamically produced by {browse "http://www.haghish.com/markdoc/":MarkDoc Literate Programming package}.}
 ***/
 
 
@@ -47,12 +45,33 @@ This help file was dynamically produced by
 
 program define inspect_2
 
-	syntax varlist [if] [fweight pweight iweight], [save]
+	syntax varlist(numeric) [if] [fweight iweight], 	///
+							[matrix(namelist)]
 	
-	display "Warning from cbppstatautils developers: command name likely to change"
+	
+	display as result "Warning from cbppstatautils developers: command name likely to change"
+		
+	local matnames "`matrix'"
+	
+
+	* checks ------------------------------------------------------------------
+	
+	if "`matnames'" != "" {
+		// check right number of matrix names for number of variables
+		local n_vars : word count `varlist'
+		local n_mats : word count `matnames'
+		if `n_vars' != `n_mats' {
+			display as error "{it:varlist} and {it:matrix} mismatch"
+			display as error "You specified or implied `n_vars' variables and `n_mats' matrix names"
+			exit 198
+		}
+	}
+	
+	local i 1	// counter to match with matnames
 		
 	foreach v of varlist `varlist' {
 		
+		// create a temporary categorical variable 
 		tempvar v_l
 		quietly {
 			generate `v_l' = .
@@ -62,85 +81,61 @@ program define inspect_2
 			replace `v_l' = 4 if missing(`v')	// missing
 		}
 		
-		local if_rev = cond("`if'" != "", 			///
-					"&" + substr("`if'", 3, .),		///
-					"")
+		// define temporary matrices
+		tempname percent overall level by_level results
 		
-		tempname percents overall compiled results
-		
-		quietly mean i.`v_l' `if' [`weight' `exp']
-		matrix `percents' = e(b)'
-		
+		// percent by temp cat
+		quietly mean i(1/4).`v_l' `if' [`weight' `exp']
+		matrix `percent' = e(b)'
+		local pct_nonmiss = 1 - `percent'[4, 1]
+		matrix `percent' = `percent' \ `pct_nonmiss'
+
+		// overall
 		quietly summarize `v' `if' [`weight' `exp']
-		matrix `overall' = `r(N)', `r(sum_w)', 1, `r(mean)', `r(min)', `r(max)'
+		local total_n = cond("`weight'" == "", `r(N)', `r(sum_w)')
+		matrix `overall' = `total_n', `r(mean)', `r(min)', `r(max)'
 		
-		quietly levelsof `v_l' `if', local(levels)
-		
-		foreach l of local levels {
-			
+		// count, total, min and max by temp cat
+		local if_rev = cond("`if'" != "", 					///
+							"&" + substr("`if'", 3, .),		///
+							"")
+		foreach l of numlist 1/4 {
+		    quietly summarize `v' if `v_l' == `l' `if_rev' [`weight' `exp']
 			if `l' != 4 {
-				quietly summarize `v' [`weight' `exp'] if `v_l' == `l' `if_rev'
-				matrix v_`l'_mat = `r(N)', `r(sum_w)', `r(mean)', `r(min)', `r(max)'
+				local total_n = cond("`weight'" == "", `r(N)', `r(sum_w)')
 			}
-			
-			if `l' == 4 {
-				quietly count if `v_l' == `l' `if_rev'
-				local n = `r(N)'
-				if "`weight'" != "" {
-					tempvar obs
-					capture generate `obs' = 1
-					quietly total `obs' [`weight' `exp'] if `v_l' == `l' `if_rev'
-					local n_w = e(b)[1, 1]
-				}
-				if "`weight'" == "" {
-					local n_w .
-				}
-				matrix v_`l'_mat = `n', `n_w', ., ., .
+		    if `l' == 4 {
+				quietly total i4.`v_l' `if' [`weight' `exp']
+				local total_n = e(b)[1, 1]
 			}
-			
-			matrix `compiled' = nullmat(`compiled') \ v_`l'_mat
-			
-			capture matrix drop v_`l'_mat
-		}
-
-		if "`weight'" != "" {
-			matrix `results' = `compiled'[1..., 2] , 		///
-							   `percents'[1..., 1] , 		///
-							   `compiled'[1..., 3...] \		///
-							   `overall'[1..., 2...]
-		}
-
-		if "`weight'" == "" {
-			matrix `results' = `compiled'[1..., 1] , 		///
-							   `percents'[1..., 1] , 		///
-							   `compiled'[1..., 3...] \		///
-							   `overall'[1..., 1], 			///
-							   `overall'[1..., 3...]
+			foreach s in mean min max {
+			    capture confirm scalar r(`s')
+				local `s' = cond(_rc == 0, r(`s'), .)
+			}
+			matrix `level' = `total_n', `mean', `min', `max'
+			matrix `by_level' = nullmat(`by_level') \ `level'
 		}
 		
-		matrix colnames `results' = Total Percent Mean Min Max
+		// compile results
 		
-		tempname temp_lbl
-		label define `temp_lbl' 1 "Negative" 2 "Zero" 3 "Positive" 4 "Missing", replace
-		local results_rownames ""
-		foreach l of local levels {
-			local l_lbl : label `temp_lbl' `l'
-			local results_rownames = "`results_rownames'" + " " + "`l_lbl'"
-		}
-		local results_rownames = "`results_rownames'" + " " + "Overall"
-		label drop `temp_lbl'
-		matrix rownames `results' = `results_rownames'
-
-		local rand = "&" * (rowsof(`results') - 2)
-		
+		matrix `results' =  `by_level' \ `overall'
+		matrix `results' = `results'[1..., 1] , `percent', `results'[1..., 2...]
+		matrix `results' = `results'[1..3, 1...] \ `results'[5, 1...] \ `results'[4, 1...]
+						   
+		// format and display
+		matrix colnames `results' = "Obs" "Percent" "Mean" "Min" "Max"
+		matrix rownames `results' = "Negative" "Zero" "Positive" "All Nonmissing" "Missing"
 		matlist `results', 	///
 				title(`v') 	///
-				cspec(& %14s | %13.0fc & %8.4f | %13.0fc & %13.0fc & %13.0fc &) ///
-				rspec(&|`rand'|&)
+				cspec(& %14s | %11.0fc & %8.4f | %11.0fc & %11.0fc & %11.0fc &) ///
+				rspec(&|&&||&)
 		display ""
 		
-		if "`save'" != "" {
-			matrix inspect_`v' = `results'
+		// save as matrix(ces) if specified
+		if "`matnames'" != "" {
+			local matname : word `i' of `matnames'
+			matrix `matname' = `results'
+			local i = `i' + 1
 		}		
 	}
 		
