@@ -12,7 +12,7 @@
 
 This repository is under active development and contents are subject to change. Programs are being developed with Stata version 16. None have yet been tested for compatibility with other Stata versions.
 
-Breaking changes will be noted in the [changelog]("https://github.com/CenterOnBudget/cbpp-stata-utils/blob/master/NEWS.md).
+Breaking changes will be noted in the [changelog](https://github.com/CenterOnBudget/cbpp-stata-utils/blob/master/NEWS.md).
 
 ## Installation
 
