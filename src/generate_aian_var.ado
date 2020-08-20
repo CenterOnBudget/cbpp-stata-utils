@@ -44,9 +44,9 @@ Website
 ***/
 
 
-* capture program drop generate_race_var
+* capture program drop generate_aian_var
 
-program generate_race_var
+program generate_aian_var
 
 	syntax newvarname, DATAset(string) [NOLABel]
 	

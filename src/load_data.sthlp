@@ -45,8 +45,8 @@ Note: When loading multiple years of ACS datasets including 2018 data, {it:seria
 		{bf:. load_data cps, year(2019)}
 		
 {p 4 4 2}
-	Load a subset of variables from ACS microdata for 2017-2019.    {break}
-		{bf:. load_data acs, years(2017/2019) vars(serialno sporder st agep povpip pwgtp)}
+	Load a subset of variables from ACS microdata for 2016-2018.    {break}
+		{bf:. load_data acs, years(2016/2018) vars(serialno sporder st agep povpip pwgtp)}
 
 
 

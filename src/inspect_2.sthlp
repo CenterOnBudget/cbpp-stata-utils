@@ -22,17 +22,17 @@ Results may be stored in a matrix (or matrices, if {it:varlist} is multiple vari
 {p 8 8 2} {bf:inspect_2} {it:{help varlist}} [{it:{help if}}] [{it:{help weight}}], [{bf:matrix(names)}]
 
 {p 4 4 2}
-{bf:fweight}s, {bf:iweight}s, and {bf:pweight}s are allowed; see {help weight}.
+{bf:fweight}s and {bf:iweight}s are allowed; see {help weight}.
 
 
 
 {title:Example(s)}
   
 {p 4 4 2}
-		{bf:. inspect_2 pincp pearnp if agep >= 18 [fw=pwgtp]}
-		 
+		{bf:. inspect_2 thnetworth}
+		
 {p 4 4 2}
-		{bf:. inspect_2 thnetworth, save}
+		{bf:. inspect_2 pincp pernp if agep >= 18 [fw=pwgtp], matrix(pincp_mat pernp_mat)}
 
 
 

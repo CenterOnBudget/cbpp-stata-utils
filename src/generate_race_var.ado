@@ -163,6 +163,7 @@ program generate_race_var
 			if `categories' > 2 {
 				replace `newvar' = 3 if hisp != 1
 			}
+			replace `newvar' = . if missing(rac1p) | missing(hisp)
 		}
     }
 
@@ -194,6 +195,7 @@ program generate_race_var
 			if `categories' > 2 {
 				replace `newvar' = 3 if pehspnon == 1
 			}
+			replace `newvar' = . if missing(prdtrace) | missing(pehspnon)
 		}
 	}
 	

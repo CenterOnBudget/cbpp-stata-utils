@@ -36,8 +36,8 @@ Example(s)
 	Load CPS microdata for 2019.  
 		{bf:. load_data cps, year(2019)}
 		
-	Load a subset of variables from ACS microdata for 2017-2019.  
-		{bf:. load_data acs, years(2017/2019) vars(serialno sporder st agep povpip pwgtp)}
+	Load a subset of variables from ACS microdata for 2016-2018.  
+		{bf:. load_data acs, years(2016/2018) vars(serialno sporder st agep povpip pwgtp)}
 
 
 Website
@@ -83,7 +83,7 @@ program define load_data
 	if "`dataset'" == "ACS" {
 		capture numlist "`years'", range(>= 2000 <=2018)
 		if _rc != 0 {
-			display as error "{bf:years()} must be between 200 and 2018 inclusive when {bf:dataset()} is acs"
+			display as error "{bf:years()} must be between 2000 and 2018 inclusive when {bf:dataset()} is acs"
 			exit 198
 		}
 	}

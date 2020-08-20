@@ -10,7 +10,7 @@
 {title:Description}
 
 {p 4 4 2}
-{bf:cagegorize} is a shortcut and extension of {help egen}{c 39}s {it:cut} function with the icodes option.
+{bf:categorize} is a shortcut and extension of {help egen}{c 39}s {it:cut} function with the icodes option.
 
 {p 4 4 2}
 Unlike egen cut:    {break}
@@ -47,7 +47,7 @@ Finally, users working with age or poverty ratio variables may choose "default" 
         {bf:. categorize pincp, generate(inc_cat) breaks(15000 30000 50000 100000)}
 
     Generate 'age_cat' from 'agep' using default breaks.
-        {bf:. categorize age, generate(age_cat) default(age) varlabel("Age group")}
+        {bf:. categorize agep, generate(age_cat) default(age) varlabel("Age group")}
 
 
 

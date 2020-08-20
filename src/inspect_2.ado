@@ -19,15 +19,15 @@ Syntax
 
 > __inspect_2__ _{help varlist}_ [_{help if}_] [_{help weight}_], [__matrix(names)__]
 
-{bf:fweight}s, {bf:iweight}s, and {bf:pweight}s are allowed; see {help weight}.
+{bf:fweight}s and {bf:iweight}s are allowed; see {help weight}.
 
 
 Example(s)
 ----------
   
-		{bf:. inspect_2 pincp pearnp if agep >= 18 [fw=pwgtp]}
-		 
-		{bf:. inspect_2 thnetworth, save}
+		{bf:. inspect_2 thnetworth}
+		
+		{bf:. inspect_2 pincp pernp if agep >= 18 [fw=pwgtp], matrix(pincp_mat pernp_mat)}
 
 
 Website
@@ -45,7 +45,7 @@ Website
 
 program define inspect_2
 
-	syntax varlist(numeric) [if] [fweight pweight iweight], 	///
+	syntax varlist(numeric) [if] [fweight iweight], 	///
 							[matrix(namelist)]
 	
 	
@@ -82,89 +82,53 @@ program define inspect_2
 		}
 		
 		// define temporary matrices
-		tempname percents overall compiled results
+		tempname percent overall level by_level results
 		
 		// percent by temp cat
-		quietly mean i.`v_l' `if' [`weight' `exp']
-		matrix `percents' = e(b)'
-		
+		quietly mean i(1/4).`v_l' `if' [`weight' `exp']
+		matrix `percent' = e(b)'
+		local pct_nonmiss = 1 - `percent'[4, 1]
+		matrix `percent' = `percent' \ `pct_nonmiss'
+
 		// overall
 		quietly summarize `v' `if' [`weight' `exp']
-		matrix `overall' = `r(N)', `r(sum_w)', 1, `r(mean)', `r(min)', `r(max)'
+		local total_n = cond("`weight'" == "", `r(N)', `r(sum_w)')
+		matrix `overall' = `total_n', `r(mean)', `r(min)', `r(max)'
 		
 		// count, total, min and max by temp cat
-		
-		quietly levelsof `v_l' `if', local(levels)
-
-		foreach l of local levels {
-			
-			local if_rev = cond("`if'" != "", 					///
-								"&" + substr("`if'", 3, .),		///
-								"")
-								
+		local if_rev = cond("`if'" != "", 					///
+							"&" + substr("`if'", 3, .),		///
+							"")
+		foreach l of numlist 1/4 {
+		    quietly summarize `v' if `v_l' == `l' `if_rev' [`weight' `exp']
 			if `l' != 4 {
-				quietly summarize `v' [`weight' `exp'] if `v_l' == `l' `if_rev'
-				matrix v_`l'_mat = `r(N)', `r(sum_w)', `r(mean)', `r(min)', `r(max)'
+				local total_n = cond("`weight'" == "", `r(N)', `r(sum_w)')
 			}
-			
-			if `l' == 4 {
-				quietly count if `v_l' == `l' `if_rev'
-				local n = `r(N)'
-				if "`weight'" != "" {
-					tempvar obs
-					capture generate `obs' = 1
-					quietly total `obs' [`weight' `exp'] if `v_l' == `l' `if_rev'
-					local n_w = e(b)[1, 1]
-				}
-				if "`weight'" == "" {
-					local n_w .
-				}
-				matrix v_`l'_mat = `n', `n_w', ., ., .
+		    if `l' == 4 {
+				quietly total i4.`v_l' `if' [`weight' `exp']
+				local total_n = e(b)[1, 1]
 			}
-			
-			matrix `compiled' = nullmat(`compiled') \ v_`l'_mat
-			
-			capture matrix drop v_`l'_mat
+			foreach s in mean min max {
+			    capture confirm scalar r(`s')
+				local `s' = cond(_rc == 0, r(`s'), .)
+			}
+			matrix `level' = `total_n', `mean', `min', `max'
+			matrix `by_level' = nullmat(`by_level') \ `level'
 		}
 		
 		// compile results
 		
-		if "`weight'" != "" {
-			matrix `results' = `compiled'[1..., 2] , 		///
-							   `percents'[1..., 1] , 		///
-							   `compiled'[1..., 3...] \		///
-							   `overall'[1..., 2...]
-		}
-
-		if "`weight'" == "" {
-			matrix `results' = `compiled'[1..., 1] , 		///
-							   `percents'[1..., 1] , 		///
-							   `compiled'[1..., 3...] \		///
-							   `overall'[1..., 1], 			///
-							   `overall'[1..., 3...]
-		}
-		
-		// display formatted results
-		
-		matrix colnames `results' = Total Percent Mean Min Max
-		
-		tempname temp_lbl
-		label define `temp_lbl' 1 "Negative" 2 "Zero" 3 "Positive" 4 "Missing", replace
-		local results_rownames ""
-		foreach l of local levels {
-			local l_lbl : label `temp_lbl' `l'
-			local results_rownames = "`results_rownames'" + " " + "`l_lbl'"
-		}
-		local results_rownames = "`results_rownames'" + " " + "Overall"
-		label drop `temp_lbl'
-		matrix rownames `results' = `results_rownames'
-
-		local rand = "&" * (rowsof(`results') - 2)
-		
+		matrix `results' =  `by_level' \ `overall'
+		matrix `results' = `results'[1..., 1] , `percent', `results'[1..., 2...]
+		matrix `results' = `results'[1..3, 1...] \ `results'[5, 1...] \ `results'[4, 1...]
+						   
+		// format and display
+		matrix colnames `results' = "Obs" "Percent" "Mean" "Min" "Max"
+		matrix rownames `results' = "Negative" "Zero" "Positive" "All Nonmissing" "Missing"
 		matlist `results', 	///
 				title(`v') 	///
 				cspec(& %14s | %11.0fc & %8.4f | %11.0fc & %11.0fc & %11.0fc &) ///
-				rspec(&|`rand'|&)
+				rspec(&|&&||&)
 		display ""
 		
 		// save as matrix(ces) if specified

@@ -9,7 +9,7 @@ __categorize__ {hline 2} Create a categorical variable.
 Description
 -----------
 
-__cagegorize__ is a shortcut and extension of {help egen}'s _cut_ function with the icodes option.
+__categorize__ is a shortcut and extension of {help egen}'s _cut_ function with the icodes option.
 
 Unlike egen cut:  
 __categorize__ does not require the user to include the minumum and the maximum value of the continuous variable in the list of breaks.  
@@ -44,7 +44,7 @@ Example(s)
         {bf:. categorize pincp, generate(inc_cat) breaks(15000 30000 50000 100000)}
 
     Generate 'age_cat' from 'agep' using default breaks.
-        {bf:. categorize age, generate(age_cat) default(age) varlabel("Age group")}
+        {bf:. categorize agep, generate(age_cat) default(age) varlabel("Age group")}
 
 
 Website

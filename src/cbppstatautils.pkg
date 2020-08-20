@@ -1,11 +1,11 @@
-v 0.1.3
+v 0.1.4
 d cbppstatautils: Stata utility programs for working with ACS and CPS microdata.
 d Authors: Claire Zippel and Matt Saenz, Center on Budget and Policy Priorities.
 d
-d Distribution-Date: 20200817
+d Distribution-Date: 20200820
 d
 d Support: github.com/CenterOnBudget/cbpp-stata-utils/issues
-
+d Changelog: github.com/CenterOnBudget/cbpp-stata-utils/blob/master/NEWS.md
 
 * programs and help files
 f categorize.ado

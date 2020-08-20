@@ -11,11 +11,11 @@ Description
 
 __get_acs_pums__ downloads American Community Survey [public use microdata](https://www.census.gov/programs-surveys/acs/technical-documentation/pums.html) files from the [Census Bureau FTP](https://www.census.gov/programs-surveys/acs/data/data-via-ftp.html) and creates {help dta} versions of the files.  
 
-Data are saved in 'acs_pums/[year]/[sample]_yr' within the current working directory (the default) or in another directory the user specifies with the __dest_dir__ option. For instance, the command __get_acs_pums, state(vt) year(2018) sample(5) record_type(h) dest_dir(my_data)__ would save files in 'my_data/acs_pums/2018/5_yr', creating directories as needed.
+Data are saved in "acs_pums/[year]/[sample]_yr" within the current working directory (the default) or in another directory the user specifies with the __dest_dir__ option. For instance, __get_acs_pums, state(vt) year(2018) sample(5) record_type(h) dest_dir(my_data)__ would save files in "my_data/acs_pums/2018/5_yr", creating directories as needed.
 
-If the option __state__ is not specified, the program will download the national PUMS files. Note that these files are very large and downloading them can take an hour or more. The national sample comes in several files (e.g. ss18husa, ss18husb). __get_acs_pums__ appends them together into a single .dta file.
+If _state_ is not specified, the program will download the national PUMS files. Note that these files are very large and downloading them can take an hour or more. The national sample comes in several files (e.g. "ss18husa", "ss18husb"). __get_acs_pums__ appends them together into a single .dta file.
 
-State PUMS .dta files will be named the same as the original .csv files: 'psam_[record_type][state_fips_code]' for 2017 and later, and 'ss[year][record_type][state]' for earlier years. In the example above, the filename would be 'psam_h50.dta' (50 is the state FIPS code for Vermont; if the user were retrieving data for 2016 instead of 2018, the file name would be 'ss16hvt.dta'. National PUMS .dta are named 'psam_[record_type]us' for 2017 and later, and 'ss[year][record_type]us' for earlier years.
+State PUMS .dta files will be named the same as the original .csv files: "psam_[record_type][state_fips_code]" for 2017 and later, and "ss[year][record_type][state]" for earlier years. In the example above, the filename would be "psam_h50.dta" (the state FIPS code for Vermont is 50). If the user were retrieving data for 2016 instead of 2018, the file name would be "ss16hvt.dta". National PUMS .dta are named "psam_[record_type]us.dta" for 2017 and later, and "ss[year][record_type]us.dta" for earlier years.
 
 Note that data for Puerto Rico is not available prior to 2005.
 
