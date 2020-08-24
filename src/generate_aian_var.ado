@@ -57,33 +57,36 @@ program generate_aian_var
 	* checks ------------------------------------------------------------------
 	
 	// check that dataset is valid
-	local dataset = lower("`dataset''")
-	if !(inlist("`dataset'", "acs", "cps")){
+	local dataset = lower("`dataset'")
+	if !inlist("`dataset'", "acs", "cps") {
 		display as error "{bf:dataset()} must be acs or cps (case insensitive)"
 		exit 198
 	}
 	
 	// check that needed variable exists
-	local needed_var = cond("`dataset'" == "acs", "racaian", "prdtrac")
+	local needed_var = cond("`dataset'" == "acs", "racaian", "prdtrace")
 	confirm variable `needed_var'
 	
 	
     * generate variables ------------------------------------------------------
 
 	if "`dataset'" == "acs" {
-		generate `newvar' = 1 if racaian == 1
+		generate `newvar' = racaian
 	}
 
 	if "`dataset'" == "cps" {
-		generate `newvar' = 1 		///
-				 if inlist(prdtrace, 3, 7, 10, 13, 14, 16, 19, 20, 22, 23)
+		generate `newvar' = ///
+			inlist(prdtrace, 3, 7, 10, 13, 14, 16, 19, 20, 22, 23, 24) ///
+			if !missing(prdtrace)
+
+		display as result "Definition valid for CPS ASEC files CY 2012 to present"
 	}
 	
 	* create label ------------------------------------------------------------
 	
 	if "`no_label'" == "" {
 		capture label drop `newvar'_lbl
-		label define `newvar'_lbl 	1 "AIAN" 0 "Not AIAN"
+		label define `newvar'_lbl 1 "AIAN AOIC" 0 "Not AIAN AOIC"
 		label values `newvar' `newvar'_lbl
 	}
 	
