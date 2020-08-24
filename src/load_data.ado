@@ -56,7 +56,7 @@ Website
 
 program define load_data 
 
-	syntax name(name=dataset), Years(numlist sort) [Vars(namelist)] [saveas(string)] [clear]
+	syntax name(name=dataset), Years(numlist sort) [Vars(string)] [saveas(string)] [clear]
 	
     
     * error checking ----------------------------------------------------------
@@ -185,7 +185,7 @@ end
 
 program define load
 
-	syntax name(name=dataset), Years(numlist sort) [Vars(namelist)] [saveas(string)] [clear]
+	syntax name(name=dataset), Years(numlist sort) [Vars(string)] [saveas(string)] [clear]
 	
 	load_data `dataset', years(`years') vars(`vars') saveas(`saveas') `clear'
 	
