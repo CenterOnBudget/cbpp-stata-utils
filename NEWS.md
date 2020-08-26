@@ -1,4 +1,9 @@
 
+## v 0.1.5
+
+Bug fixes to `load_data` and `generate_aian_var`.
+
+
 ## v 0.1.4
 
 This release includes breaking changes (*).
