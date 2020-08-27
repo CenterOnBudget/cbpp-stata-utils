@@ -55,12 +55,11 @@ Total of expression
     Total of existing variable  
         {bf:. etotal hincp [iw=wgtp]}
 	
-	Total of existing variable, data is svyset
+    Total of existing variable, data is svyset  
         {bf:. etotal hincp, svy}
 
     Total of expression, saving results in matrix  
         {bf:. etotal hincp / 1000 [iw=wgtp], matrix(tot_hh_inc_thous)}
-
 
 
 

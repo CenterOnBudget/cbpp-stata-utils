@@ -50,7 +50,7 @@ Example(s)
     Total of existing variable  
         {bf:. etotal hincp [iw=wgtp]}
 	
-	Total of existing variable, data is svyset  
+    Total of existing variable, data is svyset  
         {bf:. etotal hincp, svy}
 
     Total of expression, saving results in matrix  
@@ -100,6 +100,8 @@ program define etotal
 			local over_lbls ""
 			foreach l of local over_lvls {
 				local lbl : label `over_lbl_nm' `l'
+                local lbl = ustrregexra("`lbl'", "\.", "")
+                local lbl = usubstr("`lbl'", 1, 32)
 				local over_lbls = `"`over_lbls'"' + " " + `"""' + "`lbl'" + `"""'
 			}
 			local over_lbls = `"`over_lbls'"' + `""Overall""'
@@ -239,7 +241,7 @@ program define etotal
 	if "`over'" != "" {
 	    local rand = "&" * (rowsof(`results') - 2)
 		local rspec "&|`rand'|&"
-		if "`over_lbls'" != "" {
+		if `"`over_lbls'"' != "" {
 			matrix rownames `results' = `over_lbls'
 		}
 	}
