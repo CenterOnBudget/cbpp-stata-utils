@@ -36,7 +36,9 @@ Total of expression
 {synopthdr}
 {synoptline}
     {synopt:{opth over(varname)}}group over subpopulations defined by {it:varname}.{p_end}
+	{synopt:{opt svy}}adjust the results for survey settings identified by {bf:{help svyset}}.{p_end}
     {synopt:{opt level(#)}}set confidence level; default is {bf:level(95)}.{p_end}
+	{synopt:{opth cformat(%fmt)}}:specifies how to format estimates, standard errors, and confidence limits; deftault is {bf:cformat(%14.0fc)}.{p_end}
 	{synopt:{opt mat:rix(string)}}save results in matrix named {it:string}.{p_end}
 {synoptline}
 
@@ -52,9 +54,13 @@ Total of expression
 
     Total of existing variable  
         {bf:. etotal hincp [iw=wgtp]}
+	
+    Total of existing variable, data is svyset  
+        {bf:. etotal hincp, svy}
 
     Total of expression, saving results in matrix  
         {bf:. etotal hincp / 1000 [iw=wgtp], matrix(tot_hh_inc_thous)}
+
 
 
 {title:Website}
