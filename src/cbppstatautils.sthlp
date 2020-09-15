@@ -40,7 +40,7 @@ Run {bf:{stata cbppstatautils, update}} to update to the latest version.
 
 {p 8 8 2} {bf:{help labeller}} : Define and apply variable and value labels in one step.
 
-{p 8 8 2} {bf:{help load_data}} : Load CPS or ACS microdata from the CBPP datasets library into memory.
+{p 8 8 2} {bf:{help load_data}} : Load datasets from the CBPP datasets library into memory.
 
 {p 8 8 2} {bf:{help make_cbpp_profile}} : Set up CBPP{c 39}s standard profile.do.
 

@@ -3,17 +3,17 @@
 Title
 ====== 
 
-__load_data__ {hline 2} Load CPS or ACS microdata from the CBPP datasets library.
+__load_data__ {hline 2} Load datasets from the CBPP datasets library.
 
 
 Description
 -----------
 
-__load_data__ loads CPS or ACS microdata from the CBPP datasets library into memory. 
+__load_data__ loads CPS, ACS, or SNAP QC microdata from the CBPP datasets library into memory. 
 
 This program will only work for Center staff who have synched these datasets from the SharePoint datasets library, and have set up the global _spdatapath_.  
 
-If _dataset_ is ACS, the program will load the one-year merged person-household ACS files. If _dataset_ is CPS, the program will load the merged person-family-household CPS ASEC files. Available years are 1980-2019 for CPS and 2000-2018 for ACS.  
+If _dataset_ is ACS, the program will load the one-year merged person-household ACS files. If _dataset_ is CPS, the program will load the merged person-family-household CPS ASEC files. Available years are 1980-2019 for CPS, 2000-2018 for ACS, and 1980-2018 for QC.
 
 Users may specify a single year or multiple years to the _years_ option as a {help numlist}. If multiple years are specified, the datasets will be appended together before loading.  
 
@@ -35,9 +35,12 @@ Example(s)
 
 	Load CPS microdata for 2019.  
 		{bf:. load_data cps, year(2019)}
-		
+
 	Load a subset of variables from ACS microdata for 2016-2018.  
 		{bf:. load_data acs, years(2016/2018) vars(serialno sporder st agep povpip pwgtp)}
+
+	Load SNAP QC microdata for 2018.  
+		{bf:. load_data qc, years(2018)}
 
 
 Website
@@ -68,8 +71,8 @@ program define load_data
     
     // check supported dataset
     local dataset = upper("`dataset'")
-    if !inlist("`dataset'", "CPS", "ACS"){
-		display as error "{bf:dataset()} must be acs or cps (case insensitive)"
+    if !inlist("`dataset'", "CPS", "ACS", "QC"){
+		display as error "{bf:dataset()} must be acs, cps, or qc (case insensitive)"
         exit 198
 	}    
     // check years-dataset combination
@@ -84,6 +87,13 @@ program define load_data
 		capture numlist "`years'", range(>= 2000 <=2018)
 		if _rc != 0 {
 			display as error "{bf:years()} must be between 2000 and 2018 inclusive when {bf:dataset()} is acs"
+			exit 198
+		}
+	}
+	if "`dataset'" == "QC" {
+		capture numlist "`years'", range(>= 1980 <= 2018)
+		if _rc != 0 {
+			display as error "{bf:years()} must be between 1980 and 2018 inclusive when {bf:dataset()} is qc"
 			exit 198
 		}
 	}
@@ -110,6 +120,10 @@ program define load_data
 			}
 			if "`dataset'" == "ACS" {
 				capture noisily confirm file "${spdatapath}`dataset'/`y'/`y'us.dta"
+			}
+			if "`dataset'" == "QC" {
+				local suff = cond(`y' == 1980, "_aug", "")
+				capture noisily confirm file "${spdatapath}`dataset'/`y'/qc_pub_fy`y'`suff'.dta"
 			}
 			local rc = cond(_rc != 0, 1, 0)
 		}
@@ -160,6 +174,11 @@ program define load_data
 				quietly destring serialno, replace
 				display as result "serialno for 2018 sample edited and destringed to facilitate appending."
 			}
+		}
+		
+		if "`dataset'" == "QC" {
+			local suff = cond(`y' == 1980, "_aug", "")
+			quietly use `vars' using "${spdatapath}`dataset'/`y'/qc_pub_fy`y'`suff'.dta", clear
 		}
         
         local nolabel = cond(`y' == `max_year', "", "nolabel")

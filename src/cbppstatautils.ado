@@ -39,7 +39,7 @@ Contents
 
 > __{help labeller}__ : Define and apply variable and value labels in one step.
 
-> __{help load_data}__ : Load CPS or ACS microdata from the CBPP datasets library into memory.
+> __{help load_data}__ : Load datasets from the CBPP datasets library into memory.
 
 > __{help make_cbpp_profile}__ : Set up CBPP's standard profile.do.
 
