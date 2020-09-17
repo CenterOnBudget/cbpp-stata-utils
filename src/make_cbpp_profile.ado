@@ -51,7 +51,7 @@ program define make_cbpp_profile
 						   "~/Library/Application Support/cbppstatautils")
 	capture mkdir "`cache_dir'"	
 	
-	local remote_path "https://github.com/CenterOnBudget/cbpp-stata-utils/tree/master/ancillary"
+	local remote_path "https://raw.githubusercontent.com/CenterOnBudget/cbpp-stata-utils/master/ancillary"
 	local standard_do_path "`remote_path'/cbpp_profile.do"
 
 	local root = cond("`c(os)'" == "Windows", "C:", "")

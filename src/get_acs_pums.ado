@@ -68,7 +68,7 @@ Website
 ***/
 
 
-capture program drop get_acs_pums
+* capture program drop get_acs_pums
 
 program define get_acs_pums
 
@@ -100,9 +100,12 @@ program define get_acs_pums
 	}
 	
 	// check valid record type
-	if "`record_type'" != "" & !inlist("`record_type'", "p", "pers", "person", "h", "hh", "hous", "hhld", "household") {
+	if "`record_type'" != "" & !inlist("`record_type'", "p", "pers", "person", "h", "hh", "hous", "hhld", "household", "both") {
 		display as error "{bf:record_type()} must be person, household, their respective supported abbreviations, or both"
 		exit 198
+	}
+	if "`record_type'" == "" {
+		local record_type  "both"
 	}
 	
 	// check valid state
@@ -243,9 +246,13 @@ program define get_acs_pums
 		// import .csv files and save as .dta
 		display as result "Creating `rec_type_message' .dta file..."
 		foreach f of local csv_file {
-			quietly import delimited using "`f'", delimiter(comma) varnames(1) clear
-			local dta_file = subinstr("`f'", ".csv", "", .)
-			quietly save "`dta_file'", `replace'
+		    quietly {
+				import delimited using "`f'", delimiter(comma) varnames(1) clear
+				destring _all, replace
+				compress
+				local dta_file = subinstr("`f'", ".csv", "", .)
+				save "`dta_file'", `replace'
+			}
 		}
 		if "`keep_all'" == "" {
 			display as result "Deleting `rec_type_message' .csv file..."

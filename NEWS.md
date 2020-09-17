@@ -1,4 +1,9 @@
 
+## v 0.1.7
+
+Bug fixes to `get_acs_pums` and `make_cbpp_profile`.
+
+
 ## v 0.1.6
 
 Enhancement to `load_data`: Support SNAP QC datasets.
