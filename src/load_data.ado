@@ -13,7 +13,7 @@ __load_data__ loads CPS, ACS, or SNAP QC microdata from the CBPP datasets librar
 
 This program will only work for Center staff who have synched these datasets from the SharePoint datasets library, and have set up the global _spdatapath_.  
 
-If _dataset_ is ACS, the program will load the one-year merged person-household ACS files. If _dataset_ is CPS, the program will load the merged person-family-household CPS ASEC files. Available years are 1980-2019 for CPS, 2000-2018 for ACS, and 1980-2018 for QC.
+If _dataset_ is ACS, the program will load the one-year merged person-household ACS files. If _dataset_ is CPS, the program will load the merged person-family-household CPS ASEC files. Available years are 1980-2020 for CPS, 2000-2018 for ACS, and 1980-2018 for QC.
 
 Users may specify a single year or multiple years to the _years_ option as a {help numlist}. If multiple years are specified, the datasets will be appended together before loading.  
 
@@ -77,9 +77,9 @@ program define load_data
 	}    
     // check years-dataset combination
 	if "`dataset'" == "CPS" {
-		capture numlist "`years'", range(>= 1980 <=2019)
+		capture numlist "`years'", range(>= 1980 <=2020)
 		if _rc != 0 {
-			display as error "{bf:years()} must be between 1980 and 2019 inclusive when {bf:dataset()} is cps"
+			display as error "{bf:years()} must be between 1980 and 2020 inclusive when {bf:dataset()} is cps"
 			exit 198
 		}
 	}

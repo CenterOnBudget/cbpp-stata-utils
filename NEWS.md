@@ -1,3 +1,6 @@
+## v 0.1.8
+
+Support for 2020 March CPS in `load_data`.
 
 ## v 0.1.7
 
