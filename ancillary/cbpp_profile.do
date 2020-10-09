@@ -1,7 +1,6 @@
 
 // settings
 set more off, permanently
-set varabbrev off, permanently
 
 // paths
 local root = cond("`c(os)'" == "Windows", "C:", "")
