@@ -13,7 +13,7 @@ __load_data__ loads CPS, ACS, or SNAP QC microdata from the CBPP datasets librar
 
 This program will only work for Center staff who have synched these datasets from the SharePoint datasets library, and have set up the global _spdatapath_.  
 
-If _dataset_ is ACS, the program will load the one-year merged person-household ACS files. If _dataset_ is CPS, the program will load the merged person-family-household CPS ASEC files. Available years are 1980-2020 for CPS, 2000-2018 for ACS, and 1980-2018 for QC.
+If _dataset_ is ACS, the program will load the one-year merged person-household ACS files. If _dataset_ is CPS, the program will load the merged person-family-household CPS ASEC files. Available years are 1980-2020 for CPS, 2000-2019 for ACS, and 1980-2018 for QC.
 
 Users may specify a single year or multiple years to the _years_ option as a {help numlist}. If multiple years are specified, the datasets will be appended together before loading.  
 
@@ -21,7 +21,7 @@ The default is to load all variables in the dataset. Users may specify a subset 
 
 To save the loaded data as a new dataset, use the _saveas_ option. If the file passed to _saveas_ already exists, it will be replaced.  
 
-Note: When loading multiple years of ACS datasets including 2018 data, _serialno_ will be edited to facilitate appending (_serialno_ is string in 2018 and numeric in prior years): "00" and "01" will be substituted for "HU" and "GQ", respectively, and the variable will be destringed.  
+Note: When loading multiple years of ACS datasets including 2018 and later data, _serialno_ will be edited to facilitate appending (_serialno_ is string in 2018 and later and numeric in prior years): "00" and "01" will be substituted for "HU" and "GQ", respectively, and the variable will be destringed.  
 
 
 Syntax
@@ -84,9 +84,9 @@ program define load_data
 		}
 	}
 	if "`dataset'" == "ACS" {
-		capture numlist "`years'", range(>= 2000 <=2018)
+		capture numlist "`years'", range(>= 2000 <=2019)
 		if _rc != 0 {
-			display as error "{bf:years()} must be between 2000 and 2018 inclusive when {bf:dataset()} is acs"
+			display as error "{bf:years()} must be between 2000 and 2019 inclusive when {bf:dataset()} is acs"
 			exit 198
 		}
 	}
@@ -167,7 +167,7 @@ program define load_data
         
 		if "`dataset'" == "ACS" {
 			quietly use `vars' using "${spdatapath}`dataset'/`y'/`y'us.dta", clear
-			if `y' == 2018 & `n_years' > 1 & 				///
+			if `y' >= 2018 & `n_years' > 1 & 				///
 			   ("`vars'" == "*" | ustrregexm("`vars'", "serialno", 1)) {
 				quietly replace serialno = ustrregexra(serialno, "HU", "00")
 				quietly replace serialno = ustrregexra(serialno, "GQ", "01")

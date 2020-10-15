@@ -16,7 +16,7 @@
 This program will only work for Center staff who have synched these datasets from the SharePoint datasets library, and have set up the global {it:spdatapath}.    {break}
 
 {p 4 4 2}
-If {it:dataset} is ACS, the program will load the one-year merged person-household ACS files. If {it:dataset} is CPS, the program will load the merged person-family-household CPS ASEC files. Available years are 1980-2020 for CPS, 2000-2018 for ACS, and 1980-2018 for QC.
+If {it:dataset} is ACS, the program will load the one-year merged person-household ACS files. If {it:dataset} is CPS, the program will load the merged person-family-household CPS ASEC files. Available years are 1980-2020 for CPS, 2000-2019 for ACS, and 1980-2018 for QC.
 
 {p 4 4 2}
 Users may specify a single year or multiple years to the {it:years} option as a {help numlist}. If multiple years are specified, the datasets will be appended together before loading.    {break}
@@ -28,7 +28,7 @@ The default is to load all variables in the dataset. Users may specify a subset 
 To save the loaded data as a new dataset, use the {it:saveas} option. If the file passed to {it:saveas} already exists, it will be replaced.    {break}
 
 {p 4 4 2}
-Note: When loading multiple years of ACS datasets including 2018 data, {it:serialno} will be edited to facilitate appending ({it:serialno} is string in 2018 and numeric in prior years): "00" and "01" will be substituted for "HU" and "GQ", respectively, and the variable will be destringed.    {break}
+Note: When loading multiple years of ACS datasets including 2018 and later data, {it:serialno} will be edited to facilitate appending ({it:serialno} is string in 2018 and later and numeric in prior years): "00" and "01" will be substituted for "HU" and "GQ", respectively, and the variable will be destringed.    {break}
 
 
 
