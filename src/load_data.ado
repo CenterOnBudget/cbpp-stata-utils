@@ -13,7 +13,7 @@ __load_data__ loads CPS, ACS, or SNAP QC microdata from the CBPP datasets librar
 
 This program will only work for Center staff who have synched these datasets from the SharePoint datasets library, and have set up the global _spdatapath_.  
 
-If _dataset_ is ACS, the program will load the one-year merged person-household ACS files. If _dataset_ is CPS, the program will load the merged person-family-household CPS ASEC files. Available years are 1980-2020 for CPS, 2000-2019 for ACS, and 1980-2018 for QC.
+If _dataset_ is ACS, the program will load the one-year merged person-household ACS files. If _dataset_ is CPS, the program will load the merged person-family-household CPS ASEC files. Available years are 1980-2020 for CPS, 2000-2019 for ACS, and 1980-2019 for QC.
 
 Users may specify a single year or multiple years to the _years_ option as a {help numlist}. If multiple years are specified, the datasets will be appended together before loading.  
 
@@ -91,9 +91,9 @@ program define load_data
 		}
 	}
 	if "`dataset'" == "QC" {
-		capture numlist "`years'", range(>= 1980 <= 2018)
+		capture numlist "`years'", range(>= 1980 <= 2019)
 		if _rc != 0 {
-			display as error "{bf:years()} must be between 1980 and 2018 inclusive when {bf:dataset()} is qc"
+			display as error "{bf:years()} must be between 1980 and 2019 inclusive when {bf:dataset()} is qc"
 			exit 198
 		}
 	}
@@ -172,7 +172,7 @@ program define load_data
 				quietly replace serialno = ustrregexra(serialno, "HU", "00")
 				quietly replace serialno = ustrregexra(serialno, "GQ", "01")
 				quietly destring serialno, replace
-				display as result "serialno for 2018 sample edited and destringed to facilitate appending."
+				display as result "serialno for `y' sample edited and destringed to facilitate appending."
 			}
 		}
 		

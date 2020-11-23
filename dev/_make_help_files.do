@@ -9,23 +9,7 @@ if _rc != 0 {
 	github install haghish/markdoc, stable
 }
 
-local files_list 	categorize.ado					///
-					cbppstatautils.ado				///
-					etotal.ado						///
-					generate_acs_adj_vars.ado		///
-					generate_acs_major_group.ado	///
-					generate_aian_var.ado			///
-					generate_race_var.ado			///
-					get_acs_pums.ado 				///
-					get_cpiu.ado					///
-					inspect_2.ado					///
-					label_state.ado 				///
-					labeller.ado					///
-					label_acs_pums.ado 				///
-					load_data.ado					///
-					make_cbpp_profile.ado			///
-					svyset_acs.ado					
-
+local files_list : dir . files "*.ado"
 
 foreach f of local files_list {
 	markdoc "`f'", export(sthlp) replace style("simple")
