@@ -15,13 +15,13 @@ This program will only work for Center staff who have synched these datasets fro
 
 If _dataset_ is ACS, the program will load the one-year merged person-household ACS files. If _dataset_ is CPS, the program will load the merged person-family-household CPS ASEC files. Available years are 1980-2020 for CPS, 2000-2019 for ACS, and 1980-2019 for QC.
 
-Users may specify a single year or multiple years to the _years_ option as a {help numlist}. If multiple years are specified, the datasets will be appended together before loading.  
+Users may specify a single year or multiple years to the _years_ option as a {help numlist}. If multiple years are specified, the datasets will be appended together before loading and retain variable and value labels from the maximum year in _years_.  
 
 The default is to load all variables in the dataset. Users may specify a subset of variables to load in the _vars_ option.  
 
 To save the loaded data as a new dataset, use the _saveas_ option. If the file passed to _saveas_ already exists, it will be replaced.  
 
-Note: When loading multiple years of ACS datasets including 2018 and later data, _serialno_ will be edited to facilitate appending (_serialno_ is string in 2018 and later and numeric in prior years): "00" and "01" will be substituted for "HU" and "GQ", respectively, and the variable will be destringed.  
+Note: When loading multiple years of ACS samples, _serialno_ may be edited to facilitate appending. The program will display a message if this occurs. This is because the _serialno_ variable is string in 2018 and later ACS datasets, and numeric in prior years' ACS datasets. If _serialno_ is edited, "00" and "01" will be substituted for "HU" and "GQ", respectively, in 2018 and later observations, and the variable will be destringed.  
 
 
 Syntax
@@ -77,21 +77,21 @@ program define load_data
 	}    
     // check years-dataset combination
 	if "`dataset'" == "CPS" {
-		capture numlist "`years'", range(>= 1980 <=2020)
+		capture numlist "`years'", range(>=1980 <=2020)
 		if _rc != 0 {
 			display as error "{bf:years()} must be between 1980 and 2020 inclusive when {bf:dataset()} is cps"
 			exit 198
 		}
 	}
 	if "`dataset'" == "ACS" {
-		capture numlist "`years'", range(>= 2000 <=2019)
+		capture numlist "`years'", range(>=2000 <=2019)
 		if _rc != 0 {
 			display as error "{bf:years()} must be between 2000 and 2019 inclusive when {bf:dataset()} is acs"
 			exit 198
 		}
 	}
 	if "`dataset'" == "QC" {
-		capture numlist "`years'", range(>= 1980 <= 2019)
+		capture numlist "`years'", range(>=1980 <=2019)
 		if _rc != 0 {
 			display as error "{bf:years()} must be between 1980 and 2019 inclusive when {bf:dataset()} is qc"
 			exit 198
@@ -100,7 +100,7 @@ program define load_data
     
     // check datasets library path global exists
 	if "${spdatapath}" == "" {
-		display as error "Global 'spdatapath' not found."
+		display as error "global 'spdatapath' not found."
 		exit
 	}
     
@@ -110,7 +110,6 @@ program define load_data
 		display as error "${spdatapath}`dataset' not found. Make sure it is synched and try again"
 		exit 
 	}
-     
     
     // check all needed files within dataset library are synched
 	capture noisily {
@@ -146,6 +145,19 @@ program define load_data
     	local max_year = `years'
     }
     
+	if "`dataset'" == "ACS" {
+		if `n_years' > 1 {
+			capture numlist "`years'", range(<=2017)
+			local all_str = _rc == 0
+			capture numlist "`years'", range(>=2018)
+			local all_num = _rc == 0
+			local destring = cond(`all_num' == 0 & `all_str' == 0, 1, 0)
+		}
+		if `n_years' == 1 {
+		    local destring 0
+		}
+	}
+    
 
     * load and append data ----------------------------------------------------
     
@@ -165,14 +177,18 @@ program define load_data
 			quietly use `vars' using "${spdatapath}`dataset'/mar`y'/mar`y'.dta", clear	
 		}
         
-		if "`dataset'" == "ACS" {
-			quietly use `vars' using "${spdatapath}`dataset'/`y'/`y'us.dta", clear
-			if `y' >= 2018 & `n_years' > 1 & 				///
+	if "`dataset'" == "ACS" {
+			quietly use `vars' `if' using "${spdatapath}`dataset'/`y'/`y'us.dta", clear
+			if `y' >= 2018 & `destring' & 									///
 			   ("`vars'" == "*" | ustrregexm("`vars'", "serialno", 1)) {
-				quietly replace serialno = ustrregexra(serialno, "HU", "00")
-				quietly replace serialno = ustrregexra(serialno, "GQ", "01")
-				quietly destring serialno, replace
-				display as result "serialno for `y' sample edited and destringed to facilitate appending."
+			    quietly {
+					replace serialno = ustrregexra(serialno, "HU", "00")
+					replace serialno = ustrregexra(serialno, "GQ", "01")
+					generate double serialno_num = real(serialno)
+					drop serialno
+					rename serialno_num serialno
+				}
+				display as result "serialno of `y' sample edited and destringed to facilitate appending."
 			}
 		}
 		
