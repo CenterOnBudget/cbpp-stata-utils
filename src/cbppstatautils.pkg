@@ -16,10 +16,6 @@ f etotal.ado
 f etotal.sthlp
 f generate_acs_adj_vars.ado
 f generate_acs_adj_vars.sthlp
-f generate_acs_major_group.ado
-f generate_acs_major_group.sthlp
-f generate_aian_var.ado
-f generate_aian_var.sthlp
 f generate_race_var.ado
 f generate_race_var.sthlp
 f get_acs_pums.ado
