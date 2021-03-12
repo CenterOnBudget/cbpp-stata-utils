@@ -16,7 +16,7 @@ __categorize__ does not require the user to include the minumum and the maximum 
 It creates more descriptive value labels for the generated categorical variable.  
 Users can specify a variable label for the new variable.
 
-Finally, users working with age or poverty ratio variables may choose "default" breaks. With _default(age)_, breaks are 18 and 65. With _default(povratio)_, breaks are 50, 100, 150, 200, and 250.
+Finally, users working with age or poverty ratio variables may choose "default" breaks. With {opt default(age)}, breaks are 18 and 65. With {opt default(povratio)}, breaks are 50, 100, 150, 200, and 250.
 
 
 Syntax
@@ -31,9 +31,9 @@ Syntax
     {synopt:{opth gen:erate(newvar)}}name of the categorical variable to be generated.{p_end}
     
 {syntab:Optional}
-    {synopt:{opth breaks(numlist)}}left-hand ends of the grouping intervals. Do not include the minimum or the maximum value of {it:varname}. Either {it:breaks} or {it:default} must be specified.{p_end}
-	{synopt:{opt default(age|povratio)}}use default breaks; cannot be combined with _breaks_.{p_end}
-	{synopt:{opt nolab:el}}{it:newvar} will not be given value labels.{p_end}
+    {synopt:{opth breaks(numlist)}}left-hand ends of the grouping intervals. Do not include the minimum or the maximum value of {it:varname}. Either {opt breaks()} or {opt default()} must be specified.{p_end}
+	{synopt:{opt default(age|povratio)}}use default breaks; cannot be combined with __breaks()__.{p_end}
+	{synopt:{opt nolab:el}}do not give _newvar_ value labels.{p_end}
 	{synopt:{opt varlab:el(string)}}variable label for _newvar_.{p_end}
 
 

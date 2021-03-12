@@ -1,3 +1,19 @@
+## v 0.1.9
+
+This release includes breaking changes.
+
+__Enhancements__
+
+- `get_acs_pums` now uses `label_acs_pums` to label data by default. It also displays an error message to the user if unzipping the retrieved files fails.
+- `load_data` now supports `if` and `datasets(pulse)`. When `dataset(acs)`, _serialno_ is de-stringed only when loading data for a range of years that spans the variable type change. Previously, _serialno_ was de-stringed if any of the years in `years()` were 2018 and later. De-stringing is now faster; it is implemented with `real()` instead of `destring`.
+- `get_cpiu` labels variables (if `merge` or `replace` is specified).
+- `svyset_acs_pums` now supports multi-year average weights for use in a dataset of multiple 1-year ACS samples appended together.
+
+__Breaking changes__
+
+- `generate_acs_major_group` has been __removed__ from the package. 
+
+
 ## v 0.1.8
 
 Support for 2020 March CPS in `load_data`.

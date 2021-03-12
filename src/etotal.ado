@@ -33,8 +33,8 @@ Total of expression
 {synoptline}
     {synopt:{opth over(varname)}}group over subpopulations defined by {it:varname}.{p_end}
 	{synopt:{opt svy}}adjust the results for survey settings identified by {bf:{help svyset}}.{p_end}
-    {synopt:{opt level(#)}}set confidence level; default is {bf:level(95)}.{p_end}
-	{synopt:{opth cformat(%fmt)}}:specifies how to format estimates, standard errors, and confidence limits; deftault is {bf:cformat(%14.0fc)}.{p_end}
+    {synopt:{opt level(#)}}set confidence level; default is {opt level(95)}.{p_end}
+	{synopt:{opth cformat(%fmt)}}:specifies how to format estimates, standard errors, and confidence limits; deftault is {opt cformat(%14.0fc)}.{p_end}
 	{synopt:{opt mat:rix(string)}}save results in matrix named _string_.{p_end}
 {synoptline}
 
@@ -68,7 +68,7 @@ Website
 ***/
 
 
-capture program drop etotal
+* capture program drop etotal
 
 program define etotal
 

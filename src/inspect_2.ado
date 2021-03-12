@@ -11,13 +11,13 @@ Description
 
 A cross between {help summarize} and {help inspect}, __inspect_2__ gives the frequency of positive, zero, negative, and missing values in a variable, as well as the mean, minimum, and maximum value of a variable within those categories and overall.
 
-Results may be stored in a matrix (or matrices, if _varlist_ is multiple variables) by specifying matrix name(s) in the _matrix()_ option.
+Results may be stored in a matrix (or matrices, if _varlist_ is multiple variables) by specifying matrix name(s) to __matrix()__.
 
 
 Syntax
 ------ 
 
-> __inspect_2__ _{help varlist}_ [_{help if}_] [_{help weight}_], [__matrix(names)__]
+> __inspect_2__ _{help varlist}_ [_{help if}_] [_{help weight}_], [{opt matrix(names)}]
 
 {bf:fweight}s and {bf:iweight}s are allowed; see {help weight}.
 
