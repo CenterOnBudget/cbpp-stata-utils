@@ -141,28 +141,35 @@ program define load_data
 	}
     
     // check dataset library is synched
-	mata : st_numscalar("dir_exists", direxists("${spdatapath}`dataset'"))
+	local dir = "`dataset'"
+	if "`dataset'" == "HPS" {		// HPS could be synched as one of two names
+	    mata : st_numscalar("dir_exists", direxists("${spdatapath}`dir'"))
+		if scalar(dir_exists) != 1 {
+		    local dir = "Household Pulse Survey"
+		}
+	}
+	mata : st_numscalar("dir_exists", direxists("${spdatapath}`dir'"))
 	if scalar(dir_exists) != 1 {
-		display as error "${spdatapath}`dataset' not found. Make sure it is synched and try again"
-		exit 
+		display as error "${spdatapath}`dir' not found. Make sure it is synched and try again"
+		exit 601
 	}
   
     // check all needed files within dataset library are synched
 	capture noisily {
 		foreach y of local years {
 			if "`dataset'" == "CPS" {
-				capture noisily confirm file "${spdatapath}`dataset'/mar`y'/mar`y'.dta"		
+				capture noisily confirm file "${spdatapath}`dir'/mar`y'/mar`y'.dta"		
 			}
 			if "`dataset'" == "ACS" {
-				capture noisily confirm file "${spdatapath}`dataset'/`y'/`y'us.dta"
+				capture noisily confirm file "${spdatapath}`dir'/`y'/`y'us.dta"
 			}
 			if "`dataset'" == "QC" {
 				local suff = cond(`y' == 1980, "_aug", "")
-				capture noisily confirm file "${spdatapath}`dataset'/`y'/qc_pub_fy`y'`suff'.dta"
+				capture noisily confirm file "${spdatapath}`dir'/`y'/qc_pub_fy`y'`suff'.dta"
 			}
 			if "`dataset'" == "HPS" {
 				local y =  string(`y', "%02.0f")
-				capture noisily confirm file "${spdatapath}`dataset'/hps_wk_`y'.dta"
+				capture noisily confirm file "${spdatapath}`dir'/hps_wk_`y'.dta"
 			}
 			local rc = cond(_rc != 0, 1, 0)
 		}
@@ -219,13 +226,12 @@ program define load_data
 		}
         
 		if "`dataset'" == "CPS" {
-			quietly use `vars' `if' using "${spdatapath}`dataset'/mar`y'/mar`y'.dta", clear	
+			quietly use `vars' `if' using "${spdatapath}`dir'/mar`y'/mar`y'.dta", clear	
 		}
         
 		if "`dataset'" == "ACS" {
-			quietly use `vars' `if' using "${spdatapath}`dataset'/`y'/`y'us.dta", clear
+			quietly use `vars' `if' using "${spdatapath}`dir'/`y'/`y'us.dta", clear
 			if `y' >= 2018 & `destring' & 						///
-
 			   ("`vars'" == "*" | ustrregexm("`vars'", "serialno", 1)) {
 			    quietly {
 					replace serialno = ustrregexra(serialno, "HU", "00")
@@ -234,19 +240,18 @@ program define load_data
 					drop serialno
 					rename serialno_num serialno
 				}
-    display as result "serialno of `y' sample edited and destringed to facilitate appending."
-
+			display as result "serialno of `y' sample edited and destringed to facilitate appending."
 			}
 		}
 		
 		if "`dataset'" == "QC" {
 			local suff = cond(`y' == 1980, "_aug", "")
-			quietly use `vars' `if' using "${spdatapath}`dataset'/`y'/qc_pub_fy`y'`suff'.dta", clear
+			quietly use `vars' `if' using "${spdatapath}`dir'/`y'/qc_pub_fy`y'`suff'.dta", clear
 		}
 		
 		if "`dataset'" == "HPS" {
-			local y =  string(`y', "%02.0f")
-			quietly use `vars' `if' using "${spdatapath}`dataset'/hps_wk_`y'.dta", clear
+			local y = string(`y', "%02.0f")
+			quietly use `vars' `if' using "${spdatapath}`dir'/hps_wk_`y'.dta", clear
 		}
         
         local nolabel = cond(`y' == `max_year', "", "nolabel")

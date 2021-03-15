@@ -28,7 +28,8 @@ The default is to load all variables in the dataset. Users may specify a subset 
 To save the loaded data as a new dataset, use the {bf:saveas()} option. Also specify {bf:replace} to overwrite the dataset if it already exists.
 
 {p 4 4 2}
-Note: When loading multiple years of ACS datasets including 2018 and later samples, 'serialno' will be edited to facilitate appending ('serialno' is string in 2018 and later datasets, and numeric in prior years' datasets): "00" and "01" will be substituted for "HU" and "GQ", respectively, and the variable will be destringed.    {break}
+Note: When loading multiple years of ACS datasets including 2018 and later samples, 'serialno' will be edited to facilitate appending ('serialno' is string in 2018 and later datasets, and numeric in prior years' datasets): "00" and "01" will be substituted for "HU" and "GQ", respectively, and the variable will be destringed.
+
 
 
 {title:Syntax}
