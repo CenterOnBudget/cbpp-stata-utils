@@ -146,7 +146,7 @@ program define load_data
 		display as error "${spdatapath}`dataset' not found. Make sure it is synched and try again"
 		exit 
 	}
-     
+  
     // check all needed files within dataset library are synched
 	capture noisily {
 		foreach y of local years {
@@ -225,6 +225,7 @@ program define load_data
 		if "`dataset'" == "ACS" {
 			quietly use `vars' `if' using "${spdatapath}`dataset'/`y'/`y'us.dta", clear
 			if `y' >= 2018 & `destring' & 						///
+
 			   ("`vars'" == "*" | ustrregexm("`vars'", "serialno", 1)) {
 			    quietly {
 					replace serialno = ustrregexra(serialno, "HU", "00")
@@ -233,7 +234,8 @@ program define load_data
 					drop serialno
 					rename serialno_num serialno
 				}
-				display as result "serialno for `y' sample edited and destringed to facilitate appending."
+    display as result "serialno of `y' sample edited and destringed to facilitate appending."
+
 			}
 		}
 		
