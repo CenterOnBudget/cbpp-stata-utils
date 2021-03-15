@@ -13,7 +13,7 @@ __generate_acs_adj_vars__ generates adjusted versions of all of the income or ho
  
 Adjusted versions of variables are named as the original with the suffix "_adj" by default (e.g. "pincp_adj"), or users may supply a prefix or suffix. 
 
-See the [ACS PUMS data dictionary](https://www2.census.gov/programs-surveys/acs/tech_docs/pums/data_dict/PUMSDataDict16.pdf?#) for a list of variables to which 'adjinc' or 'adjhsg' are applied. In the 2005-2007 PUMS samples, a single adjustment factor, 'adjust', is used for both income and housing variables. If using PUMS samples from those years, use the _pre_2008_ option to specify that variables should be adjusted using 'adjust'.
+See the [ACS PUMS data dictionary](https://www2.census.gov/programs-surveys/acs/tech_docs/pums/data_dict/PUMSDataDict16.pdf?#) for a list of variables to which 'adjinc' or 'adjhsg' are applied. In the 2005-2007 PUMS samples, a single adjustment factor, 'adjust', is used for both income and housing variables. If using PUMS samples from those years, use the __pre_2008__ option to specify that variables should be adjusted using 'adjust'.
 
 
 Syntax
@@ -25,7 +25,7 @@ Syntax
 {synopthdr}
 {synoptline}
 {synopt:{opt pre:fix(string)}}prefix to prepend to the variable names.{p_end}
-{synopt:{opt suf:fix(string)}}suffix to append to the variable names; default is {bf:suffix("_adj")}.{p_end}
+{synopt:{opt suf:fix(string)}}suffix to append to the variable names; default is {bf:suffix(}{it:_adj}{bf:)}.{p_end}
 
 
 Example(s)
@@ -76,7 +76,7 @@ program define generate_acs_adj_vars
 	local adj_hsg = cond("`pre_2008'" == "", "adjhsg", "adjust")
 		
 	local inc_vars "pincp pernp wagp ssp ssip intp pap oip retp semp fincp hincp"
-	local hous_vars "conp elep fulp gasp grntp insp mhp mrgp smocp rntp smp watp"
+	local hous_vars "conp elep fulp gasp grntp insp mhp mrgp smocp rntp smp watp taxamt"
 	
     
     * generate adjusted variables ---------------------------------------------

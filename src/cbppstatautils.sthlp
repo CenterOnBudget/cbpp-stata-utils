@@ -22,8 +22,6 @@ Run {bf:{stata cbppstatautils, update}} to update to the latest version.
 
 {p 8 8 2} {bf:{help generate_acs_adj_vars}} : Generate adjusted versions of ACS PUMS income and housing variables using {c 39}adjinc{c 39} and {c 39}adjhsg{c 39}.
 
-{p 8 8 2} {bf:{help generate_acs_major_group}} : Generate categorical variable for major industry and/or occupation groups in ACS PUMS data.
-
 {p 8 8 2} {bf:{help generate_aian_var}} : Generate categorical AI/AN variable for CPS or ACS microdata.
 
 {p 8 8 2} {bf:{help generate_race_var}} : Generate categorical variable for race/ethnicity in CPS or ACS microdata.

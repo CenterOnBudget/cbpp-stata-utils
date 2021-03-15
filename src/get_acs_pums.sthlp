@@ -24,6 +24,9 @@ State PUMS .dta files will be named the same as the original .csv files: "psam_[
 {p 4 4 2}
 Note that data for Puerto Rico is not available prior to 2005.
 
+{p 4 4 2}
+Data will be labeled with information from the ACS PUMS data dictionary (implemented with {help label_acs_pums} and supported for 2013 and later years) unless {bf:nolabel} is specified.
+
 
 
 {title:Syntax}
@@ -37,10 +40,11 @@ Note that data for Puerto Rico is not available prior to 2005.
 	{synopt:{opt year(integer)}}2000 to 2019 for the one-year sample; 2007 to 2018 for the five-year sample.{p_end}
 	
 {syntab:Optional}
-    {synopt:{opt sample(integer)}}5 for the five-year sample or 1 for the one-year sample; default is {bf:sample(1)}.{p_end}
+    {synopt:{opt sample(integer)}}5 for the five-year sample or 1 for the one-year sample; default is {opt sample(1)}.{p_end}
 	{synopt:{opt st:ate(string)}}state postal appreviation (2 characters, case insensitive).{p_end}
     {synopt:{opt dest_dir(string)}}specifies the directory in which the data will be placed; default is current working directory.{p_end}
-	{synopt:{opt rec:ord_type(string)}}record type to retrieve: person, household, or both; default is {bf:record_type(both)}. Abbreviations h, hhld, hous, p, and pers are also accepted.{p_end}
+	{synopt:{opt rec:ord_type(string)}}record type to retrieve: person, household, or both; default is {opt record_type(both)}. Abbreviations h, hhld, hous, p, and pers are also accepted.{p_end}
+	{synopt:{opt nolab:el}}do not label data with information from the ACS PUMS data dictionary.{p_end}
 	{synopt:{opt keep_zip}}.zip files will not be deleted after unzipping.{p_end}
 	{synopt:{opt keep_all}}neither .zip nor .csv files will be deleted after .dta files are created.{p_end}
 	{synopt:{opt replace}}existing files will be replaced if they exist.{p_end}
@@ -58,7 +62,7 @@ Note that data for Puerto Rico is not available prior to 2005.
         {bf:. get_acs_pums, state(vt) year(2011) sample(5) record_type(hhld) keep_all}
 
     Retreive household records from the 2013 one-year national sample and save 
-	the file to my_datasets.    {break}
+	the file to my_datasets.
         {bf:. get_acs_pums, year(2013) record_type(h) dest_dir(my_datasets)}
 
 

@@ -21,8 +21,6 @@ Contents
 
 > __{help generate_acs_adj_vars}__ : Generate adjusted versions of ACS PUMS income and housing variables using 'adjinc' and 'adjhsg'.
 
-> __{help generate_acs_major_group}__ : Generate categorical variable for major industry and/or occupation groups in ACS PUMS data.
-
 > __{help generate_aian_var}__ : Generate categorical AI/AN variable for CPS or ACS microdata.
 
 > __{help generate_race_var}__ : Generate categorical variable for race/ethnicity in CPS or ACS microdata.

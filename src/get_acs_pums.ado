@@ -19,6 +19,8 @@ State PUMS .dta files will be named the same as the original .csv files: "psam_[
 
 Note that data for Puerto Rico is not available prior to 2005.
 
+Data will be labeled with information from the ACS PUMS data dictionary (implemented with {help label_acs_pums} and supported for 2013 and later years) unless __nolabel__ is specified.
+
 
 Syntax
 ------ 
@@ -32,10 +34,11 @@ Syntax
 	{synopt:{opt year(integer)}}2000 to 2019 for the one-year sample; 2007 to 2018 for the five-year sample.{p_end}
 	
 {syntab:Optional}
-    {synopt:{opt sample(integer)}}5 for the five-year sample or 1 for the one-year sample; default is {bf:sample(1)}.{p_end}
+    {synopt:{opt sample(integer)}}5 for the five-year sample or 1 for the one-year sample; default is {opt sample(1)}.{p_end}
 	{synopt:{opt st:ate(string)}}state postal appreviation (2 characters, case insensitive).{p_end}
     {synopt:{opt dest_dir(string)}}specifies the directory in which the data will be placed; default is current working directory.{p_end}
-	{synopt:{opt rec:ord_type(string)}}record type to retrieve: person, household, or both; default is {bf:record_type(both)}. Abbreviations h, hhld, hous, p, and pers are also accepted.{p_end}
+	{synopt:{opt rec:ord_type(string)}}record type to retrieve: person, household, or both; default is {opt record_type(both)}. Abbreviations h, hhld, hous, p, and pers are also accepted.{p_end}
+	{synopt:{opt nolab:el}}do not label data with information from the ACS PUMS data dictionary.{p_end}
 	{synopt:{opt keep_zip}}.zip files will not be deleted after unzipping.{p_end}
 	{synopt:{opt keep_all}}neither .zip nor .csv files will be deleted after .dta files are created.{p_end}
 	{synopt:{opt replace}}existing files will be replaced if they exist.{p_end}
@@ -53,7 +56,7 @@ Example(s)
         {bf:. get_acs_pums, state(vt) year(2011) sample(5) record_type(hhld) keep_all}
 
     Retreive household records from the 2013 one-year national sample and save 
-	the file to my_datasets.  
+	the file to my_datasets.
         {bf:. get_acs_pums, year(2013) record_type(h) dest_dir(my_datasets)}
 
 
@@ -73,7 +76,7 @@ Website
 program define get_acs_pums
 
 	syntax , year(integer) [STate(string) sample(integer 1) dest_dir(string) 	///
-			 RECord_type(string) keep_zip keep_all replace]
+			 RECord_type(string) NOLABel keep_zip keep_all replace]
 	
 	
 	if "`keep_all'" != "" & "`keep_zip'" == "" {
@@ -201,7 +204,12 @@ program define get_acs_pums
 		* unzip ---------------------------------------------------------------
 		
 		display as result "Unzipping `rec_type_message' files..."
-		quietly unzipfile "csv_`rt'`geo'.zip", `replace'
+		capture noisily unzipfile "csv_`rt'`geo'.zip", `replace'
+		if _rc != 0 {
+			display as error "The .zip file failed to unzip. This usually happens when your download was interrupted."
+			display as error "Please try again (omitting {bf:keep_zip})."
+			exit _rc
+		}
 		if "`keep_zip'" == "" {
 			display as result "Deleting `rec_type_message' .zip file..."
 			erase "csv_`rt'`geo'.zip"
@@ -251,6 +259,9 @@ program define get_acs_pums
 				destring _all, replace
 				compress
 				local dta_file = subinstr("`f'", ".csv", "", .)
+				if "`nolabel'" == "" & `year' >= 2013 {
+					label_acs_pums, year(`year') sample(`sample') use_cache
+				}
 				save "`dta_file'", `replace'
 			}
 		}
@@ -267,7 +278,7 @@ program define get_acs_pums
 			display as result "Appending `rec_type_message' .dta files..."
 			clear
 			foreach f of local chunked_files {
-			    append using "`f'"
+			    quietly append using "`f'"
 			}
 			local appended_file = "`prefix'" + ".dta"
 			quietly save "`appended_file'", replace
@@ -278,6 +289,7 @@ program define get_acs_pums
 		}
 	}
 	
+
 	* reset to original working directory -------------------------------------
 	
 	quietly cd "`start_dir'"  

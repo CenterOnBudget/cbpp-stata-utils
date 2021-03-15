@@ -19,7 +19,7 @@ It creates more descriptive value labels for the generated categorical variable.
 Users can specify a variable label for the new variable.
 
 {p 4 4 2}
-Finally, users working with age or poverty ratio variables may choose "default" breaks. With {it:default(age)}, breaks are 18 and 65. With {it:default(povratio)}, breaks are 50, 100, 150, 200, and 250.
+Finally, users working with age or poverty ratio variables may choose "default" breaks. With {opt default(age)}, breaks are 18 and 65. With {opt default(povratio)}, breaks are 50, 100, 150, 200, and 250.
 
 
 
@@ -34,9 +34,9 @@ Finally, users working with age or poverty ratio variables may choose "default" 
     {synopt:{opth gen:erate(newvar)}}name of the categorical variable to be generated.{p_end}
 
 {syntab:Optional}
-    {synopt:{opth breaks(numlist)}}left-hand ends of the grouping intervals. Do not include the minimum or the maximum value of {it:varname}. Either {it:breaks} or {it:default} must be specified.{p_end}
-	{synopt:{opt default(age|povratio)}}use default breaks; cannot be combined with {it:breaks}.{p_end}
-	{synopt:{opt nolab:el}}{it:newvar} will not be given value labels.{p_end}
+    {synopt:{opth breaks(numlist)}}left-hand ends of the grouping intervals. Do not include the minimum or the maximum value of {it:varname}. Either {opt breaks()} or {opt default()} must be specified.{p_end}
+	{synopt:{opt default(age|povratio)}}use default breaks; cannot be combined with {bf:breaks()}.{p_end}
+	{synopt:{opt nolab:el}}do not give {it:newvar} value labels.{p_end}
 	{synopt:{opt varlab:el(string)}}variable label for {it:newvar}.{p_end}
 
 

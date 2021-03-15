@@ -11,7 +11,7 @@ Description
 
 __make_cbpp_profile__ retreives CBPP's standard [profile.do](https://www.stata.com/support/faqs/programming/profile-do-file/) and places it in the user's home directory. This command is only useful for CBPP staff. 
 
-CBPP's standard profile.do defines global macros that serve as shortcuts to synched SharePoint and OneDrive folders and cloned GitHub repositories. It also defines a global macro named 'censuskey' that contains the user's Census Bureau API key. Users may specify their API key in the _censuskey()_ option to  insert it into the profile.do. If this option is not specified, the 'censuskey' global will contain placeholder text.
+CBPP's standard profile.do defines global macros that serve as shortcuts to synched SharePoint and OneDrive folders and cloned GitHub repositories. It also defines a global macro named 'censuskey' that contains the user's Census Bureau API key. Users may specify their API key to __censuskey()__ to insert it into the profile.do. If this option is not specified, the _censuskey_ global will contain placeholder text.
 
 
 Syntax
@@ -22,7 +22,7 @@ Syntax
 {synoptset 27 tabbed}{...}
 {synopthdr}
 {synoptline}
-	{synopt:{opt censuskey}}Census Bureau API key.{p_end}
+	{synopt:{opt censuskey(string)}}Census Bureau API key.{p_end}
 	{synopt:{opt replace}}replace existing profile.do with standard profile.do.{p_end}
 
 

@@ -9,11 +9,7 @@ __svyset_acs__ {hline 2} Declare the survey design for ACS PUMS.
 Description
 -----------
 
-__svyset_acs__ is a shortcut program to declare the survey design for ACS PUMS.
-
-When used with _record_type(person)_, it is the equivalent to typing:
-
->	svyset [iw=pwgtp], vce(sdr) sdrweight(pwgtp1-pwgtp80) mse
+__svyset_acs__ is a shortcut program to declare the survey design for ACS PUMS. For example, __svyset_acs, record_type(person)__ is equivalent to __svyset [iw=pwgtp], vce(sdr) sdrweight(pwgtp1-pwgtp80) mse__.
 
 
 Syntax
@@ -29,6 +25,7 @@ Syntax
 	
 {syntab:Optional}
     {synopt:{opt nosdr:weights}}do not declare SDR replicate weights in the survey design.{p_end}
+	{synopt:{opt multi:year(#)}}in a custom multi-year file containing # one-year samples, create and use multi-year average weights.{p_end}
 
 
 Example(s)
@@ -56,7 +53,7 @@ Website
 
 program svyset_acs
 
-	syntax , RECord_type(string) [NOSDRweights]
+	syntax , RECord_type(string) [NOSDRweights] [MULTIyear(integer)]
 	
 	if !inlist("`record_type'", "p", "pers", "person", "h", "hh", "hous", "hhld", "household") {
 		display as error "{bf:record_type()} must be person, household, their respective supported abbreviations, or both"
@@ -78,14 +75,31 @@ program svyset_acs
 			display as error "one or more replicate weight variables (`weight'1-`weight'80) not found"
 			exit 111
 		}
-		svyset [iw=`weight'], vce(sdr) sdrweight(`weight'1-`weight'80) mse
-	}
-	
-	if "`nosdrweights'" != "" {
-		svyset [iw=`weight']
+		
+		if "`multiyear'" == "" {
+			if "`nosdrweights'" == "" {
+				svyset [iw=`weight'], mse vce(sdr) sdrweight(`weight'1-`weight'80)
+			}
+			if "`nosdrweights'" != "" {
+				svyset [iw=`weight']
+			}
+		}
+		
+		if "`multiyear'" != "" {
+			display as result "using `multiyear'-year average weights"
+			foreach w of varlist `weight'* {
+				quietly generate `w'_`multiyear'yr = `w' / `multiyear'
+			}
+			if "`nosdrweights'" == "" {
+				svyset [iw=`weight'_`multiyear'yr], mse vce(sdr) 				///
+					   sdrweight(`weight'1_`multiyear'yr-`weight'80_`multiyear'yr)
+			}
+			if "`nosdrweights'" != "" {
+				svyset [iw=`weight'_`multiyear'yr]
+			}
+		}
 	}
 
 end
-
 
 

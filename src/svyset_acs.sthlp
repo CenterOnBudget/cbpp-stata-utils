@@ -10,12 +10,7 @@
 {title:Description}
 
 {p 4 4 2}
-{bf:svyset_acs} is a shortcut program to declare the survey design for ACS PUMS.
-
-{p 4 4 2}
-When used with {it:record_type(person)}, it is the equivalent to typing:
-
-{p 8 8 2}	svyset [iw=pwgtp], vce(sdr) sdrweight(pwgtp1-pwgtp80) mse
+{bf:svyset_acs} is a shortcut program to declare the survey design for ACS PUMS. For example, {bf:svyset_acs, record_type(person)} is equivalent to {bf:svyset [iw=pwgtp], vce(sdr) sdrweight(pwgtp1-pwgtp80) mse}.
 
 
 
@@ -31,6 +26,7 @@ When used with {it:record_type(person)}, it is the equivalent to typing:
 	
 {syntab:Optional}
     {synopt:{opt nosdr:weights}}do not declare SDR replicate weights in the survey design.{p_end}
+	{synopt:{opt multi:year(#)}}in a custom multi-year file containing # one-year samples, create and use multi-year average weights.{p_end}
 
 
 
