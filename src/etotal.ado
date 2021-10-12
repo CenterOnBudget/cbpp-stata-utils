@@ -1,3 +1,5 @@
+*! version 0.2.0
+
 
 /***
 Title
@@ -9,7 +11,9 @@ __etotal__ {hline 2} Flexible counts and totals.
 Description
 -----------
 
-An extension of {help total}, __etotal__ produces either totals or counts, depending on what the user has specified. If weights are specified, standard errors and confidence intervals are included.
+An extension of {help total}, __etotal__ produces either totals or counts, 
+depending on what the user has specified. If weights are specified, standard 
+errors and confidence intervals are included.
 
 
 Syntax
@@ -63,8 +67,6 @@ Website
 [github.com/CenterOnBudget/cbppstatautils](https://github.com/CenterOnBudget/cbppstatautils)
 
 
-- - -
-{it:This help file was dynamically produced by {browse "http://www.haghish.com/markdoc/":MarkDoc Literate Programming package}.}
 ***/
 
 
@@ -76,8 +78,7 @@ program define etotal
 		   [svy] [level(cilevel)] [over(varname numeric)] 				///
 		   [MATrix(name)] [cformat(string)]
 		   
-		   
-    
+
 	if "`svy'" != "" {
 	    local is_svyset = `"`r(settings)'"' != ", clear"
 		if !`is_svyset' {
@@ -228,14 +229,8 @@ program define etotal
 	
 	if "`over'" == "" {
 	    local rspec "&|&"
-		if "`anything'" != "" {
-		    if `rxm_arithm' == 1 | `rxm_if' == 1 {
-				matrix rownames `results' = "`anything'"
-			}
-		}
-		if "`anything'" == "" {
-		    matrix rownames `results' = "obs"
-		}
+		local names "columns"
+		local cspec = ustrregexra("`cspec'", "%14s \|", "")
 	}
 	
 	if "`over'" != "" {
@@ -249,12 +244,15 @@ program define etotal
 	
 	* display and save --------------------------------------------------------
 	
-	matlist `results', showcoleq(combined) coleqonly  		///
+	local title = cond("`anything'" != "", "{bf:`anything'}", "{bf:observations}")
+	local title = cond("`over'" != "", "`title'" + " over {bf:`over'}", "`title'")
+					  
+	matlist `results', title("`title'") tindent(3) names("`names'") 	///
+					   showcoleq(combined) coleqonly 					///
 					   rspec("`rspec'") cspec("`cspec'")
-	display ""
+					   
 	if "`e(vcetype)'" != "" {
-	    display as text "note: `e(vcetype)' variance estimation"
-		display ""
+	    display _newline _skip(3) "note: `e(vcetype)' variance estimation"
 	}
 		
 	if "`matrix'" != "" {

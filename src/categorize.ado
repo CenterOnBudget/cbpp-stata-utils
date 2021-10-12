@@ -1,3 +1,5 @@
+*! version 0.2.0
+
 
 /***
 Title
@@ -9,14 +11,18 @@ __categorize__ {hline 2} Create a categorical variable.
 Description
 -----------
 
-__categorize__ is a shortcut and extension of {help egen}'s _cut_ function with the icodes option.
+__categorize__ is a shortcut and extension of {help egen}'s _cut_ function with 
+the icodes option.
 
 Unlike egen cut:  
-__categorize__ does not require the user to include the minumum and the maximum value of the continuous variable in the list of breaks.  
+__categorize__ does not require the user to include the minumum and the maximum 
+value of the continuous variable in the list of breaks.  
 It creates more descriptive value labels for the generated categorical variable.  
 Users can specify a variable label for the new variable.
 
-Finally, users working with age or poverty ratio variables may choose "default" breaks. With {opt default(age)}, breaks are 18 and 65. With {opt default(povratio)}, breaks are 50, 100, 150, 200, and 250.
+Finally, users working with age or poverty ratio variables may choose "default" 
+breaks. With {opt default(age)}, breaks are 18 and 65. With 
+{opt default(povratio)}, breaks are 50, 100, 150, 200, and 250.
 
 
 Syntax
@@ -52,8 +58,7 @@ Website
 
 [github.com/CenterOnBudget/cbppstatautils](https://github.com/CenterOnBudget/cbppstatautils)
 
-- - -
-{it:This help file was dynamically produced by {browse "http://www.haghish.com/markdoc/":MarkDoc Literate Programming package}.}
+
 ***/
 
 

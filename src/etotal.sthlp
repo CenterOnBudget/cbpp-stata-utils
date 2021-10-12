@@ -10,7 +10,9 @@
 {title:Description}
 
 {p 4 4 2}
-An extension of {help total}, {bf:etotal} produces either totals or counts, depending on what the user has specified. If weights are specified, standard errors and confidence intervals are included.
+An extension of {help total}, {bf:etotal} produces either totals or counts, 
+depending on what the user has specified. If weights are specified, standard 
+errors and confidence intervals are included.
 
 
 
@@ -69,7 +71,5 @@ Total of expression
 {browse "https://github.com/CenterOnBudget/cbppstatautils":github.com/CenterOnBudget/cbppstatautils}
 
 
-{space 4}{hline}
-{it:This help file was dynamically produced by {browse "http://www.haghish.com/markdoc/":MarkDoc Literate Programming package}.}
 
 

@@ -10,16 +10,20 @@
 {title:Description}
 
 {p 4 4 2}
-{bf:categorize} is a shortcut and extension of {help egen}{c 39}s {it:cut} function with the icodes option.
+{bf:categorize} is a shortcut and extension of {help egen}{c 39}s {it:cut} function with 
+the icodes option.
 
 {p 4 4 2}
 Unlike egen cut:    {break}
-{bf:categorize} does not require the user to include the minumum and the maximum value of the continuous variable in the list of breaks.    {break}
+{bf:categorize} does not require the user to include the minumum and the maximum 
+value of the continuous variable in the list of breaks.    {break}
 It creates more descriptive value labels for the generated categorical variable.    {break}
 Users can specify a variable label for the new variable.
 
 {p 4 4 2}
-Finally, users working with age or poverty ratio variables may choose "default" breaks. With {opt default(age)}, breaks are 18 and 65. With {opt default(povratio)}, breaks are 50, 100, 150, 200, and 250.
+Finally, users working with age or poverty ratio variables may choose "default" 
+breaks. With {opt default(age)}, breaks are 18 and 65. With 
+{opt default(povratio)}, breaks are 50, 100, 150, 200, and 250.
 
 
 
@@ -56,7 +60,6 @@ Finally, users working with age or poverty ratio variables may choose "default" 
 {p 4 4 2}
 {browse "https://github.com/CenterOnBudget/cbppstatautils":github.com/CenterOnBudget/cbppstatautils}
 
-{space 4}{hline}
-{it:This help file was dynamically produced by {browse "http://www.haghish.com/markdoc/":MarkDoc Literate Programming package}.}
+
 
 
