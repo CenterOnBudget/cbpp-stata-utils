@@ -1,3 +1,9 @@
+## v 0.2.0
+
+- `load_data` supports loading the March 2021 CPS.
+- Bug fixes: [#9](https://github.com/CenterOnBudget/cbpp-stata-utils/issues/9), [#13](https://github.com/CenterOnBudget/cbpp-stata-utils/issues/13)
+
+
 ## v 0.1.9
 
 This release includes breaking changes.
