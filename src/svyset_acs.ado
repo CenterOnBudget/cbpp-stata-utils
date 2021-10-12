@@ -55,7 +55,7 @@ Website
 
 program svyset_acs
 
-	syntax , RECord_type(string) [NOSDRweights] [MULTIyear(integer)]
+	syntax , RECord_type(string) [NOSDRweights] [MULTIyear(integer 0)]
 	
 	if !inlist("`record_type'", "p", "pers", "person", "h", "hh", "hous", "hhld", "household") {
 		display as error "{bf:record_type()} must be person, household, their respective supported abbreviations, or both"
@@ -78,7 +78,7 @@ program svyset_acs
 			exit 111
 		}
 		
-		if "`multiyear'" == "" {
+		if `multiyear' == 0 {
 			if "`nosdrweights'" == "" {
 				svyset [iw=`weight'], mse vce(sdr) sdrweight(`weight'1-`weight'80)
 			}
@@ -87,7 +87,7 @@ program svyset_acs
 			}
 		}
 		
-		if "`multiyear'" != "" {
+		if `multiyear' != 0 {
 			display as result "using `multiyear'-year average weights"
 			foreach w of varlist `weight'* {
 				quietly generate `w'_`multiyear'yr = `w' / `multiyear'

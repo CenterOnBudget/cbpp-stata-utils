@@ -1,6 +1,6 @@
 * make help files for cbppstatautils
 
-local pkg_dir "${ghpath}\cbpp-stata-utils\src"
+local pkg_dir "${ghpath}/cbpp-stata-utils/src"
 cd "`pkg_dir'"
 
 capture which markdoc

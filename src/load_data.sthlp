@@ -44,7 +44,8 @@ Note: When loading multiple years of ACS datasets including 2018 and later
 samples, {c 39}serialno{c 39} will be edited to facilitate appending ({c 39}serialno{c 39} is string
 in 2018 and later datasets, and numeric in prior years{c 39} datasets): "00" and "01"
 will be substituted for "HU" and "GQ", respectively, and the variable will be 
-destringed.    {break}
+destringed.
+
 
 
 
