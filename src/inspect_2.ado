@@ -3,15 +3,20 @@
 Title
 ====== 
 
-__inspect_2__ {hline 2} Summary statistics for positive, zero, negative, and missing values. 
+__inspect_2__ {hline 2} Summary statistics for positive, zero, negative, and 
+missing values. 
 
 
 Description
 -----------
 
-A cross between {help summarize} and {help inspect}, __inspect_2__ gives the frequency of positive, zero, negative, and missing values in a variable, as well as the mean, minimum, and maximum value of a variable within those categories and overall.
+A cross between {help summarize} and {help inspect}, __inspect_2__ gives the 
+frequency of positive, zero, negative, and missing values in a variable, as well
+as the mean, minimum, and maximum value of a variable within those categories 
+and overall.
 
-Results may be stored in a matrix (or matrices, if _varlist_ is multiple variables) by specifying matrix name(s) to __matrix()__.
+Results may be stored in a matrix (or matrices, if _varlist_ is multiple 
+variables) by specifying matrix name(s) to __matrix()__.
 
 
 Syntax
@@ -36,8 +41,6 @@ Website
 [github.com/CenterOnBudget/cbppstatautils](https://github.com/CenterOnBudget/cbppstatautils)
 
 
-- - -
-{it:This help file was dynamically produced by {browse "http://www.haghish.com/markdoc/":MarkDoc Literate Programming package}.}
 ***/
 
 

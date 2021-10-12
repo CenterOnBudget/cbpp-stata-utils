@@ -10,7 +10,9 @@
 {title:Description}
 
 {p 4 4 2}
-{bf:svyset_acs} is a shortcut program to declare the survey design for ACS PUMS. For example, {bf:svyset_acs, record_type(person)} is equivalent to {bf:svyset [iw=pwgtp], vce(sdr) sdrweight(pwgtp1-pwgtp80) mse}.
+{bf:svyset_acs} is a shortcut program to declare the survey design for ACS PUMS. 
+For example, {bf:svyset_acs, record_type(person)} is equivalent to 
+{bf:svyset [iw=pwgtp], vce(sdr) sdrweight(pwgtp1-pwgtp80) mse}.
 
 
 
@@ -48,7 +50,5 @@
 {browse "https://github.com/CenterOnBudget/cbppstatautils":github.com/CenterOnBudget/cbppstatautils}
 
 
-{space 4}{hline}
-{it:This help file was dynamically produced by {browse "http://www.haghish.com/markdoc/":MarkDoc Literate Programming package}.}
 
 

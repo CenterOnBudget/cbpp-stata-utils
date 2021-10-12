@@ -9,7 +9,9 @@ __svyset_acs__ {hline 2} Declare the survey design for ACS PUMS.
 Description
 -----------
 
-__svyset_acs__ is a shortcut program to declare the survey design for ACS PUMS. For example, __svyset_acs, record_type(person)__ is equivalent to __svyset [iw=pwgtp], vce(sdr) sdrweight(pwgtp1-pwgtp80) mse__.
+__svyset_acs__ is a shortcut program to declare the survey design for ACS PUMS. 
+For example, __svyset_acs, record_type(person)__ is equivalent to 
+__svyset [iw=pwgtp], vce(sdr) sdrweight(pwgtp1-pwgtp80) mse__.
 
 
 Syntax
@@ -44,8 +46,6 @@ Website
 [github.com/CenterOnBudget/cbppstatautils](https://github.com/CenterOnBudget/cbppstatautils)
 
 
-- - -
-{it:This help file was dynamically produced by {browse "http://www.haghish.com/markdoc/":MarkDoc Literate Programming package}.}
 ***/
 
 

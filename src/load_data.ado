@@ -9,19 +9,35 @@ __load_data__ {hline 2} Load datasets from the CBPP datasets library.
 Description
 -----------
 
-__load_data__ loads CPS, ACS, SNAP QC, or Household Pulse Survey microdata from the CBPP datasets library into memory. This command is only useful for CBPP staff.
+__load_data__ loads CPS, ACS, SNAP QC, or Household Pulse Survey microdata from 
+the CBPP datasets library into memory. This command is only useful for CBPP 
+staff.
 
-This program will only work for Center staff who have synched these datasets from the SharePoint datasets library, and have set up the global _spdatapath_.  
+This program will only work for Center staff who have synched these datasets 
+from the SharePoint datasets library, and have set up the global _spdatapath_.  
 
-With {opt dataset(acs)}, the program will load the one-year merged person-household ACS files. With {opt dataset(cps)}, the program will load the merged person-family-household CPS ASEC files. Available years are 1980-2020 for CPS, 2000-2019 for ACS, and 1980-2019 for QC. 
+With {opt dataset(acs)}, the program will load the one-year merged 
+person-household ACS files. With {opt dataset(cps)}, the program will load the 
+merged person-family-household CPS ASEC files. Available years are 1980-2021 for
+CPS, 2000-2019 for ACS, and 1980-2019 for QC. 
 
-Users may specify a single year or multiple years to __years()__ as a {help numlist}. With {opt dataset(pulse)}, users can specify the weeks of data to retrieve in either __weeks()__ or __years()__. If multiple years are specified, the datasets will be appended together before loading and retain variable and value labels from the maximum year in __years()__. 
+Users may specify a single year or multiple years to __years()__ as a 
+{help numlist}. With {opt dataset(pulse)}, users can specify the weeks of data 
+to retrieve in either __weeks()__ or __years()__. If multiple years are 
+specified, the datasets will be appended together before loading and retain 
+variable and value labels from the maximum year in __years()__. 
 
-The default is to load all variables in the dataset. Users may specify a subset of variables to load in the __vars()__ option.
+The default is to load all variables in the dataset. Users may specify a subset 
+of variables to load in the __vars()__ option.
 
-To save the loaded data as a new dataset, use the __saveas()__ option. Also specify __replace__ to overwrite the dataset if it already exists.
+To save the loaded data as a new dataset, use the __saveas()__ option. Also 
+specify __replace__ to overwrite the dataset if it already exists.
 
-Note: When loading multiple years of ACS datasets including 2018 and later samples, 'serialno' will be edited to facilitate appending ('serialno' is string in 2018 and later datasets, and numeric in prior years' datasets): "00" and "01" will be substituted for "HU" and "GQ", respectively, and the variable will be destringed.  
+Note: When loading multiple years of ACS datasets including 2018 and later 
+samples, 'serialno' will be edited to facilitate appending ('serialno' is string
+in 2018 and later datasets, and numeric in prior years' datasets): "00" and "01"
+will be substituted for "HU" and "GQ", respectively, and the variable will be 
+destringed.  
 
 
 Syntax
@@ -52,8 +68,6 @@ Website
 [github.com/CenterOnBudget/cbppstatautils](https://github.com/CenterOnBudget/cbppstatautils)
 
 
-- - -
-{it:This help file was dynamically produced by {browse "http://www.haghish.com/markdoc/":MarkDoc Literate Programming package}.}
 ***/
 
 
@@ -113,9 +127,9 @@ program define load_data
 	
     // check years-dataset combination
 	if "`dataset'" == "CPS" {
-		capture numlist "`years'", range(>=1980 <=2020)
+		capture numlist "`years'", range(>=1980 <=2021)
 		if _rc != 0 {
-			display as error "{bf:years()} must be between 1980 and 2020 inclusive when {bf:dataset()} is cps"
+			display as error "{bf:years()} must be between 1980 and 2021 inclusive when {bf:dataset()} is cps"
 			exit 198
 		}
 	}

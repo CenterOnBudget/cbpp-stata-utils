@@ -2,13 +2,17 @@
 Title
 ====== 
 
-__generate_aian_var__ {hline 2} Generate categorical AI/AN variable for CPS or ACS microdata.
+__generate_aian_var__ {hline 2} Generate categorical AI/AN variable for CPS or 
+ACS microdata.
 
 
 Description
 -----------
 
-__generate_aian_var__ generates a categorial variable for American Indian/Alaska Native (AI/AN) identification, alone or in combination, regardless of Hispanic identification. It can be used with CPS (calendar year 2012 and later) or ACS microdata.
+__generate_aian_var__ generates a categorial variable for American 
+Indian/Alaska Native (AI/AN) identification, alone or in combination, regardless
+of Hispanic identification. It can be used with CPS (calendar year 2012 and 
+later) or ACS microdata.
 
 
 Syntax
@@ -39,8 +43,6 @@ Website
 [github.com/CenterOnBudget/cbppstatautils](https://github.com/CenterOnBudget/cbppstatautils)
 
 
-- - -
-{it:This help file was dynamically produced by {browse "http://www.haghish.com/markdoc/":MarkDoc Literate Programming package}.}
 ***/
 
 

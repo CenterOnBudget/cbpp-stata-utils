@@ -3,13 +3,16 @@
 Title
 ====== 
 
-__generate_race_var__ {hline 2} Generate categorical race-ethnicity variable for CPS or ACS microdata.
+__generate_race_var__ {hline 2} Generate categorical race-ethnicity variable for
+CPS or ACS microdata.
 
 
 Description
 -----------
 
-__generate_race_var__ generates a categorial variable for race-ethnicity. It can be used with CPS or ACS microdata. Users may specify the desired number of levels: 2, 4-7 for CPS and 2, 4-8 for ACS.
+__generate_race_var__ generates a categorial variable for race-ethnicity. It can
+be used with CPS or ACS microdata. Users may specify the desired number of 
+categories: 2, 4-7 for CPS and 2, 4-8 for ACS.
 
 
 Syntax
@@ -79,8 +82,7 @@ Example(s)
    Generate a 5-category race-ethnicity variable 'race_5' for ACS microdata.
         {bf:. generate_race_var race_5, categories(5) dataset(acs)}
 
-    Generate an unlabeled 2-category (person of color/white, not Latino) 
-	race-ethnicity variable for CPS microdata.
+    Generate an unlabeled 2-category (person of color/white, not Latino) race-ethnicity variable for CPS microdata.
         {bf:. generate_race_var person_of_color, categories(2) dataset(cps) nolabel}
 
 		
@@ -90,8 +92,6 @@ Website
 [github.com/CenterOnBudget/cbppstatautils](https://github.com/CenterOnBudget/cbppstatautils)
 
 
-- - -
-{it:This help file was dynamically produced by {browse "http://www.haghish.com/markdoc/":MarkDoc Literate Programming package}.}
 ***/
 
 

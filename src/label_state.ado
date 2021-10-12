@@ -9,11 +9,15 @@ __label_state__ {hline 2} Label state FIPS code variable with state names or pos
 Description
 -----------
 
-__label_state__ labels state [FIPS code](https://www.census.gov/geographies/reference-files/2018/demo/popest/2018-fips.html) variables with the full state name (the default) or postal abbreviation. The 50 states, District of Columbia, Puerto Rico, and U.S. territories are supported.
+__label_state__ labels state 
+[FIPS code](https://www.census.gov/geographies/reference-files/2018/demo/popest/2018-fips.html)
+variables with the full state name (the default) or postal abbreviation. The 50
+states, District of Columbia, Puerto Rico, and U.S. territories are supported.
 
 If the state FIPS code variable _varname_ is a string, it will be destringed.    
 
-To label with two-character postal abbreviations (e.g. "VT") rather than the full state name, use the _abbrv_ option.
+To label with two-character postal abbreviations (e.g. "VT") rather than the 
+full state name, use the _abbrv_ option.
 
 
 Syntax
@@ -38,8 +42,6 @@ Website
 [github.com/CenterOnBudget/cbppstatautils](https://github.com/CenterOnBudget/cbppstatautils)
 
 
-- - -
-{it:This help file was dynamically produced by {browse "http://www.haghish.com/markdoc/":MarkDoc Literate Programming package}.}
 ***/
 
 

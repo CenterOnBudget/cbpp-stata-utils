@@ -9,7 +9,9 @@ __etotal__ {hline 2} Flexible counts and totals.
 Description
 -----------
 
-An extension of {help total}, __etotal__ produces either totals or counts, depending on what the user has specified. If weights are specified, standard errors and confidence intervals are included.
+An extension of {help total}, __etotal__ produces either totals or counts, 
+depending on what the user has specified. If weights are specified, standard 
+errors and confidence intervals are included.
 
 
 Syntax
@@ -63,8 +65,6 @@ Website
 [github.com/CenterOnBudget/cbppstatautils](https://github.com/CenterOnBudget/cbppstatautils)
 
 
-- - -
-{it:This help file was dynamically produced by {browse "http://www.haghish.com/markdoc/":MarkDoc Literate Programming package}.}
 ***/
 
 
