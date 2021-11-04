@@ -50,6 +50,8 @@ memory.
 
 > __{help make_cbpp_profile}__ : Set up CBPP's standard profile.do.
 
+> __{help relshipp_to_relp}__ : Convert ACS microdata variable 'relshipp' to 'relp'.
+
 > __{help svyset_acs}__ : Declare the survey design for ACS PUMS.
 
 
