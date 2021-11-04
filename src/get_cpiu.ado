@@ -176,6 +176,7 @@ program define get_cpiu
             // labelling the data has the nice side effect of displaying the 
             // downloaded date when the user loads cached data
             label data "Inflation series `series' last downloaded `c(current_date)'."
+			note : Inflation series `series' last downloaded `c(current_date)'.
             save "`cache_dir'/`series'.dta", replace
         }
 	}	
@@ -197,6 +198,23 @@ program define get_cpiu
 		quietly generate `series'_`base_year'_adj =  val_of_base_year / `series'
 		drop val_*_base_year
 
+	}
+	
+	// label variables
+	if "`nolabel'" == "" {
+		local series_nm = cond("`rs'" == "", "CPI-U", "CPI-U-RS")
+		local lbl = 												///
+			cond("`merge'" != "",									///
+				 "`series_nm' for observation year '`yearvarname''",	///
+				 "`series_nm'")
+		label variable `series' "`lbl'"
+		if `base_year' != 0 {
+			local lbl = 														///
+				cond("`merge'" != "", 											///
+					 "`series_nm' inflator for observation year `yearvarname'' to `base_year'",	///
+					 "`series_nm' inflator to `base_year'")
+			label variable `series'_`base_year'_adj "`lbl'"
+		}
 	}
 	
 	// prep for next step
@@ -227,14 +245,6 @@ program define get_cpiu
         if "`yearvarname'" != "year" {
         	quietly drop year
         }
-		// label variables
-		if "`nolabel'" == "" {
-			local series_nm = cond("`rs'" == "", "CPI-U", "CPI-U-RS")
-			label variable `series' "`series_nm' for observation year `yearvarname'"
-			if `base_year' != 0 {
-				label variable `series'_`base_year'_adj "`series_nm' inflator for observation year `yearvarname' to `base_year'"
-			}
-		}
 	}
 	
 end

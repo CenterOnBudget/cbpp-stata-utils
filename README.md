@@ -38,7 +38,6 @@ View the [license](https://github.com/CenterOnBudget/cbpp-stata-utils/blob/maste
 | `categorize` | Generate a categorical variable. |
 | `etotal` | Flexible counts and totals. |
 | `generate_acs_adj_vars` | Generate adjusted versions of ACS PUMS income and housing variables using 'adjinc' and 'adjhsg'. |
-| `generate_acs_major_group` | Generate categorical variable for major industry and/or occupation groups in ACS PUMS data. |
 | `generate_aian_var` | Generate categorical AI/AN variable for CPS or ACS microdata. |
 | `generate_race_var` | Generate categorical variable for race/ethnicity in CPS or ACS microdata. |
 | `get_acs_pums` | Retrieve ACS PUMS files from the Census Bureau FTP. |
@@ -47,7 +46,7 @@ View the [license](https://github.com/CenterOnBudget/cbpp-stata-utils/blob/maste
 | `label_acs_pums` | Label American Community Survey PUMS data. |
 | `label_state` | Label a numeric state FIPS code variable with state names or postal abbreviations. |
 | `labeller` | Define and apply variable and value labels in one step. |
-| `load_data` | Load CPS or ACS microdata from the CBPP datasets library into memory. |
+| `load_data` | Load microdata from the CBPP datasets library into memory. |
 | `make_cbpp_profile` | Set up CBPP's standard profile.do. |
 | `svyset_acs` | Declare the survey design for ACS PUMS. |
 
