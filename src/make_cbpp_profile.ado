@@ -78,7 +78,7 @@ program define make_cbpp_profile
 			tempfile profile_do_path_with_key
 			preserve
 			infix str500 line 1-500  using "`cache_dir'/cbpp_profile.do", clear
-			replace line = `"global censuskey "`censuskey'""' in 14
+			replace line = `"global censuskey "`censuskey'""' in 13
 			outfile using `profile_do_path_with_key', noquote replace
 			restore
 			local standard_do_path "`profile_do_path_with_key'"
