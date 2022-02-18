@@ -18,7 +18,8 @@ Breaking changes will be noted in the [changelog](https://github.com/CenterOnBud
 
 To install the `cbppstatautils` package, run:
 ```
-net install cbppstatautils, from("https://raw.githubusercontent.com/CenterOnBudget/cbpp-stata-utils/master/src") replace
+net install cbppstatautils, from("https://centeronbudget.github.io/cbpp-stata-utils/src")
+
 ```
 To update your installation to the latest version, run:
 ```
