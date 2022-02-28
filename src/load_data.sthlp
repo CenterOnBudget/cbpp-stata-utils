@@ -20,8 +20,17 @@ from the SharePoint datasets library, and have set up the global {it:spdatapath}
 
 {p 4 4 2}
 With {opt dataset(acs)}, the program will load the one-year merged 
-person-household ACS files. With {opt dataset(cps)}, the program will load the 
-merged person-family-household CPS ASEC files. Available years are 1980-2021 for
+person-household ACS files. 
+
+{p 4 4 2}
+With {opt dataset(cps)}, the program will load the 
+merged person-family-household CPS ASEC files. With {opt dataset(cps)}, 
+{bf:years()} refers to the survey year, rather than the reference year. For 
+example, {bf:load_data cps, year(2019)} will load the March 2019 CPS ASEC, whose
+reference year is 2018.
+
+{p 4 4 2}
+Available years are 1980-2021 for
 CPS, 2000-2019 for ACS, and 1980-2019 for QC. 
 
 {p 4 4 2}
@@ -44,8 +53,7 @@ Note: When loading multiple years of ACS datasets including 2018 and later
 samples, {c 39}serialno{c 39} will be edited to facilitate appending ({c 39}serialno{c 39} is string
 in 2018 and later datasets, and numeric in prior years{c 39} datasets): "00" and "01"
 will be substituted for "HU" and "GQ", respectively, and the variable will be 
-destringed.
-
+destringed.    {break}
 
 
 

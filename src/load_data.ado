@@ -19,8 +19,15 @@ This program will only work for Center staff who have synched these datasets
 from the SharePoint datasets library, and have set up the global _spdatapath_.  
 
 With {opt dataset(acs)}, the program will load the one-year merged 
-person-household ACS files. With {opt dataset(cps)}, the program will load the 
-merged person-family-household CPS ASEC files. Available years are 1980-2021 for
+person-household ACS files. 
+
+With {opt dataset(cps)}, the program will load the 
+merged person-family-household CPS ASEC files. With {opt dataset(cps)}, 
+__years()__ refers to the survey year, rather than the reference year. For 
+example, __load_data cps, year(2019)__ will load the March 2019 CPS ASEC, whose
+reference year is 2018.
+
+Available years are 1980-2021 for
 CPS, 2000-2019 for ACS, and 1980-2019 for QC. 
 
 Users may specify a single year or multiple years to __years()__ as a 
@@ -229,13 +236,17 @@ program define load_data
     // default to all variables
 	local vars = cond("`vars'" == "", "*", strlower("`vars'"))
 	
+	// for messages if dataset is CPS
+	local mar = cond("`dataset'" == "CPS", "March ", "")
+	
     tempfile temp 
 	quietly save `temp', emptyok
     
 	foreach y of local years {
     	
 		if "`dataset'" != "HPS" {
-			display as result "Loading `y' `dataset' data..."
+
+			display as result "Loading `mar'`y' `dataset' data..."
 		}
 		if "`dataset'" == "HPS" {
 			display as result "Loading week `y' Pulse data..."
@@ -277,7 +288,7 @@ program define load_data
     
 	use `temp', clear
 	local lbl_tweak = cond("`dataset'" == "HPS", "week ", "")
-	local lbl_message = cond(`n_years' > 1, "Labels are from `lbl_tweak'`max_year' dataset.", "")
+	local lbl_message = cond(`n_years' > 1, "Labels are from `lbl_tweak'`mar'`max_year' dataset.", "")
 	display as result "Done. `lbl_message'"
     
 	
