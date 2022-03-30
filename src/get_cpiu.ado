@@ -154,9 +154,8 @@ program define get_cpiu
             
             if "`rs'" != "" {
                 // CPI-U RS 1978-latest available
-                copy "https://www.bls.gov/cpi/research-series/allitems.xlsx" `data'
-                // cell range will need to be updated each year when a new row is added
-                import excel using `data', cellrange(A6:N49) firstrow case(lower) clear
+                copy "https://www.bls.gov/cpi/research-series/r-cpi-u-rs-allitems.xlsx" `data'
+                import excel using `data', cellrange(A6) firstrow case(lower) clear
                 rename avg `series'
                 keep year `series'
                 drop if missing(`series')

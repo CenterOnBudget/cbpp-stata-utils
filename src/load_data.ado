@@ -253,7 +253,8 @@ program define load_data
 		}
         
 		if "`dataset'" == "CPS" {
-			quietly use `vars' `if' using "${spdatapath}`dir'/mar`y'/mar`y'.dta", clear	
+			quietly use `vars' `if' using "${spdatapath}`dir'/mar`y'/mar`y'.dta", clear
+			quietly destring _all, replace
 		}
         
 		if "`dataset'" == "ACS" {

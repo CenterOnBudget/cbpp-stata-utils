@@ -1,3 +1,14 @@
+
+## v 0.2.2
+
+- `load_data` messages and help file are clearer about the year for CPS ASEC files [#17](https://github.com/CenterOnBudget/cbpp-stata-utils/issues/17)
+- Bug fixes: [#18](https://github.com/CenterOnBudget/cbpp-stata-utils/issues/18), [#19](https://github.com/CenterOnBudget/cbpp-stata-utils/issues/19), 
+
+
+## v 0.2.1
+
+- Bug fixes: [#16](https://github.com/CenterOnBudget/cbpp-stata-utils/issues/16)
+
 ## v 0.2.0
 
 - `load_data` supports loading the March 2021 CPS.
