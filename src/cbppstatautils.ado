@@ -17,6 +17,8 @@ Run __{stata cbppstatautils, update}__ to update to the latest version.
 Contents
 -----------
 
+> __{help acs_relshipp_to_relp}__ : Recode ACS microdata variable 'relshipp' to 'relp'.
+
 > __{help categorize}__ : Generate a categorical variable.
 
 > __{help etotal}__ : Flexible counts and totals.
@@ -49,8 +51,6 @@ names or postal abbreviations.
 memory.
 
 > __{help make_cbpp_profile}__ : Set up CBPP's standard profile.do.
-
-> __{help relshipp_to_relp}__ : Convert ACS microdata variable 'relshipp' to 'relp'.
 
 > __{help svyset_acs}__ : Declare the survey design for ACS PUMS.
 

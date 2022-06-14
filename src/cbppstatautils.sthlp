@@ -16,6 +16,8 @@ Run {bf:{stata cbppstatautils, update}} to update to the latest version.
 
 {title:Contents}
 
+{p 8 8 2} {bf:{help acs_relshipp_to_relp}} : Recode ACS microdata variable {c 39}relshipp{c 39} to {c 39}relp{c 39}.
+
 {p 8 8 2} {bf:{help categorize}} : Generate a categorical variable.
 
 {p 8 8 2} {bf:{help etotal}} : Flexible counts and totals.
@@ -48,8 +50,6 @@ names or postal abbreviations.
 memory.
 
 {p 8 8 2} {bf:{help make_cbpp_profile}} : Set up CBPP{c 39}s standard profile.do.
-
-{p 8 8 2} {bf:{help relshipp_to_relp}} : Convert ACS microdata variable {c 39}relshipp{c 39} to {c 39}relp{c 39}.
 
 {p 8 8 2} {bf:{help svyset_acs}} : Declare the survey design for ACS PUMS.
 
