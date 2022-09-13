@@ -11,7 +11,7 @@ __load_data__ {hline 2} Load datasets from the CBPP datasets library.
 Description
 -----------
 
-__load_data__ loads CPS, ACS, SNAP QC, or Household Pulse Survey microdata from 
+__load_data__ loads CPS ASEC, ACS, SNAP QC, or Household Pulse Survey microdata from 
 the CBPP datasets library into memory. This command is only useful for CBPP 
 staff.
 
@@ -27,8 +27,8 @@ __years()__ refers to the survey year, rather than the reference year. For
 example, __load_data cps, year(2019)__ will load the March 2019 CPS ASEC, whose
 reference year is 2018.
 
-Available years are 1980-2021 for
-CPS, 2000-2019 for ACS, and 1980-2019 for QC. 
+Available years are 1980-2022 for
+CPS ASEC, 2000-2019 for ACS, and 1980-2019 for QC. 
 
 Users may specify a single year or multiple years to __years()__ as a 
 {help numlist}. With {opt dataset(pulse)}, users can specify the weeks of data 
@@ -136,9 +136,9 @@ program define load_data
 	
     // check years-dataset combination
 	if "`dataset'" == "CPS" {
-		capture numlist "`years'", range(>=1980 <=2021)
+		capture numlist "`years'", range(>=1980 <=2022)
 		if _rc != 0 {
-			display as error "{bf:years()} must be between 1980 and 2021 inclusive when {bf:dataset()} is cps"
+			display as error "{bf:years()} must be between 1980 and 2022 inclusive when {bf:dataset()} is cps"
 			exit 198
 		}
 	}

@@ -10,7 +10,7 @@
 {title:Description}
 
 {p 4 4 2}
-{bf:load_data} loads CPS, ACS, SNAP QC, or Household Pulse Survey microdata from 
+{bf:load_data} loads CPS ASEC, ACS, SNAP QC, or Household Pulse Survey microdata from 
 the CBPP datasets library into memory. This command is only useful for CBPP 
 staff.
 
@@ -30,8 +30,8 @@ example, {bf:load_data cps, year(2019)} will load the March 2019 CPS ASEC, whose
 reference year is 2018.
 
 {p 4 4 2}
-Available years are 1980-2021 for
-CPS, 2000-2019 for ACS, and 1980-2019 for QC. 
+Available years are 1980-2022 for
+CPS ASEC, 2000-2019 for ACS, and 1980-2019 for QC. 
 
 {p 4 4 2}
 Users may specify a single year or multiple years to {bf:years()} as a 
