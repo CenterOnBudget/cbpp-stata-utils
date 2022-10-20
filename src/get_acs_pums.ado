@@ -53,7 +53,7 @@ Syntax
 {synopthdr}
 {synoptline}
 {syntab:Required}
-	{synopt:{opt year(integer)}}2000 to 2019 for the one-year sample; 2007 to 2019 for the five-year sample.{p_end}
+	{synopt:{opt year(integer)}}2000 to 2021 for the one-year sample; 2007 to 2019 for the five-year sample.{p_end}
 	
 {syntab:Optional}
     {synopt:{opt sample(integer)}}5 for the five-year sample or 1 for the one-year sample; default is {opt sample(1)}.{p_end}
@@ -110,14 +110,23 @@ program define get_acs_pums
 		display as error "{bf:sample()} must be 1 or 5"
 		exit 198
 	}
-	if !inrange(`year', 2000, 2019){
-		display as error "{bf:year()} must be between 2000 and 2019 inclusive"
+	if !inrange(`year', 2000, 2021){
+		display as error "{bf:year()} must be between 2000 and 2021 inclusive"
 		exit 198
 	}
 	if `year' < 2009 & `sample' == 5 {
 		display as error "{bf:sample(`sample')} data unavailable for {bf:year(`year')}"
 		exit 198
 	}
+    if `year' == 2021 & `sample' == 5 {
+        display as error "2021 5-year ACS microdata have not yet been released"
+        exit
+    }
+    if `year' == 2020 & `sample' == 1 {
+        display as error "Standard 2020 1-year ACS microdata were not released"
+        display as error "Experimental 2020 1-year ACS microdata can be downloaded from the Census Bureau website"
+        exit
+    }
 	
 	// check valid record type
 	if "`record_type'" != "" & !inlist("`record_type'", "p", "pers", "person", "h", "hh", "hous", "hhld", "household", "both") {
