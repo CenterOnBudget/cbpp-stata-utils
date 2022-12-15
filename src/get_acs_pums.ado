@@ -110,7 +110,7 @@ program define get_acs_pums
 		display as error "{bf:sample()} must be 1 or 5"
 		exit 198
 	}
-	if !inrange(`year', 2000, 2021){
+	if !inrange(`year', 2000, 2021) {
 		display as error "{bf:year()} must be between 2000 and 2021 inclusive"
 		exit 198
 	}
@@ -118,10 +118,6 @@ program define get_acs_pums
 		display as error "{bf:sample(`sample')} data unavailable for {bf:year(`year')}"
 		exit 198
 	}
-    if `year' == 2021 & `sample' == 5 {
-        display as error "2021 5-year ACS microdata have not yet been released"
-        exit
-    }
     if `year' == 2020 & `sample' == 1 {
         display as error "Standard 2020 1-year ACS microdata were not released"
         display as error "Experimental 2020 1-year ACS microdata can be downloaded from the Census Bureau website"

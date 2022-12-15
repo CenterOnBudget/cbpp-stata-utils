@@ -79,10 +79,6 @@ program define label_acs_pums
     	display as error "{bf:sample()} must be 1 or 5"
         exit 198
     }
-    if `year' == 2021 & `sample' == 5 {
-        display as error "2021 5-year ACS microdata have not yet been released"
-        exit
-    }
     if `year' == 2020 & `sample' == 1 {
         display as error "Standard 2020 1-year ACS microdata were not released"
         exit
