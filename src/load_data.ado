@@ -15,7 +15,7 @@ __load_data__ loads CPS ASEC, ACS, SNAP QC, or Household Pulse Survey microdata 
 the CBPP datasets library into memory. This command is only useful for CBPP 
 staff.
 
-This program will only work for Center staff who have synched these datasets 
+This program will only work for Center staff who have synced these datasets 
 from the SharePoint datasets library, and have set up the global _spdatapath_.  
 
 With {opt dataset(acs)}, the program will load the one-year merged 
@@ -28,7 +28,7 @@ example, __load_data cps, year(2019)__ will load the March 2019 CPS ASEC, whose
 reference year is 2018.
 
 Available years are 1980-2022 for
-CPS ASEC, 2000-2019 and 2021 for ACS, and 1980-2019 for QC. 
+CPS ASEC, 2000-2019 and 2021 for ACS, and 1980-2020 for QC. 
 
 Users may specify a single year or multiple years to __years()__ as a 
 {help numlist}. With {opt dataset(pulse)}, users can specify the weeks of data 
@@ -68,7 +68,7 @@ Example(s)
 		{bf:. load_data qc, years(2018)}
 	
 	Load Household Pulse Survey microdata for weeks 22-24.  
-		{bf: . load_data pulse, weeks(22/24)}
+		{bf:. load_data pulse, weeks(22/24)}
 
 
 Website
@@ -80,13 +80,13 @@ Website
 ***/
 
 
-* capture program drop load_data
-* capture program drop load
+ capture program drop load_data
+ capture program drop load
 
 program define load_data 
 
 	syntax anything(everything), [Years(numlist sort)] [Vars(string)] 		///
-								 [saveas(string)] [Weeks(numlist sort)] 	///
+								 [saveas(string)] [Weeks(numlist sort)] [Period(integer 0)]	///
 								 [clear replace]
 	
 	
@@ -154,11 +154,15 @@ program define load_data
         }
 	}
 	if "`dataset'" == "QC" {
-		capture numlist "`years'", range(>=1980 <=2019)
+		capture numlist "`years'", range(>=1980 <=2020)
 		if _rc != 0 {
-			display as error "{bf:years()} must be between 1980 and 2019 inclusive when {bf:dataset()} is qc"
+			display as error "{bf:years()} must be between 1980 and 2020 inclusive when {bf:dataset()} is qc"
 			exit 198
 		}
+    if !inrange(`period', 0, 2) {
+      display as error "{bf:period()} must be 1 or 2 if specified"
+      exit 198
+    }
 	}
     
     // check datasets library path global exists
@@ -167,9 +171,9 @@ program define load_data
 		exit
 	}
     
-    // check dataset library is synched
+    // check dataset library is synced
 	local dir = "`dataset'"
-	if "`dataset'" == "HPS" {		// HPS could be synched as one of two names
+	if "`dataset'" == "HPS" {		// HPS could be synced as one of two names
 	    mata : st_numscalar("dir_exists", direxists("${spdatapath}`dir'"))
 		if scalar(dir_exists) != 1 {
 		    local dir = "Household Pulse Survey"
@@ -177,11 +181,11 @@ program define load_data
 	}
 	mata : st_numscalar("dir_exists", direxists("${spdatapath}`dir'"))
 	if scalar(dir_exists) != 1 {
-		display as error "${spdatapath}`dir' not found. Make sure it is synched and try again"
+		display as error "${spdatapath}`dir' not found. Make sure it is synced and try again"
 		exit 601
 	}
   
-    // check all needed files within dataset library are synched
+    // check all needed files within dataset library are synced
 	capture noisily {
 		foreach y of local years {
 			if "`dataset'" == "CPS" {
@@ -271,6 +275,7 @@ program define load_data
 					generate double serialno_num = real(serialno)
 					drop serialno
 					rename serialno_num serialno
+          order serialno
 				}
 			display as result "serialno of `y' sample edited and destringed to facilitate appending."
 			}
@@ -278,6 +283,7 @@ program define load_data
 		
 		if "`dataset'" == "QC" {
 			local suff = cond(`y' == 1980, "_aug", "")
+      local suff = cond(`y' == 2020 & `period' != 0, "_per`period'", "")
 			quietly use `vars' `if' using "${spdatapath}`dir'/`y'/qc_pub_fy`y'`suff'.dta", clear
 		}
 		
@@ -310,10 +316,10 @@ end
 program define load
 
 	syntax anything(everything), [Years(numlist sort)] [Vars(string)] 		///
-								 [Weeks(numlist sort)] [saveas(string)] 	///
+								 [Weeks(numlist sort)] [saveas(string)] [Period(integer 0)]	///
 								 [clear replace]
 	
-	load_data `anything', years(`years') vars(`vars') saveas(`saveas') `clear' `replace'
+	load_data `anything', years(`years') vars(`vars') saveas(`saveas') period(`period') `clear' `replace'
 	
 end
 
