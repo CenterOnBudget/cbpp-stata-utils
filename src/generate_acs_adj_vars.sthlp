@@ -18,6 +18,12 @@ Adjusted versions of variables are named as the original with the suffix "_adj"
 by default (e.g. "pincp_adj"), or users may supply a prefix or suffix. 
 
 {p 4 4 2}
+Variable labels will be copied from the original, excluding the phrase 
+referencing the need to apply the adjustment (e.g., "use ADJINC to adjust to 
+adjust to constant dollars"). Value labels will be copied from the original. 
+Specify the {bf:nolabel} option to skip copying variable and value labels.
+
+{p 4 4 2}
 See the 
 {browse "https://www2.census.gov/programs-surveys/acs/tech_docs/pums/data_dict/PUMSDataDict16.pdf":ACS PUMS data dictionary} 
 for a list of variables to which {c 39}adjinc{c 39} or {c 39}adjhsg{c 39} are applied. In the 2
@@ -36,6 +42,8 @@ income and housing variables. If using PUMS samples from those years, use the
 {synoptline}
 {synopt:{opt pre:fix(string)}}prefix to prepend to the variable names.{p_end}
 {synopt:{opt suf:fix(string)}}suffix to append to the variable names; default is {bf:suffix(}{it:_adj}{bf:)}.{p_end}
+{synopt:{opt nol:abel}}do not copy variable and value labels from the originals.{p_end}
+{synopt:{opt pre_2008}}data is from the 2005-2007 samples.{p_end}
 
 
 

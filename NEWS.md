@@ -1,4 +1,9 @@
 
+## v 0.2.6
+
+- `generate_acs_adj_vars` now copies variable and value labels from the original to the adjusted variables by default; specify **nolab** to skip this.
+
+
 ## v 0.2.2
 
 - `load_data` messages and help file are clearer about the year for CPS ASEC files [#17](https://github.com/CenterOnBudget/cbpp-stata-utils/issues/17)
