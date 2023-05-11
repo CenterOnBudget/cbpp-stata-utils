@@ -106,6 +106,7 @@ program define generate_acs_adj_vars
       `cmd' `newvar' = `var'
 			quietly replace `newvar' = `newvar' * `adj_inc' / 1000000 
       if "`nolabel'" == "" {
+        quietly notes drop `newvar'
         // remove "use ADJINC to adjust..." from variable label
         local lbl : variable label `newvar'
         local lbl = ustrregexra("`lbl'", "\(?use ADJINC(.*)$", "")
@@ -123,6 +124,7 @@ program define generate_acs_adj_vars
       `cmd' `newvar' = `var'
 			quietly replace `newvar' = `newvar' * `adj_hsg' / 1000000 
       if "`nolabel'" == "" {
+        quietly notes drop `newvar'
         // remove "use ADJHSG to adjust..." from variable label
         local lbl : variable label `newvar'
         local lbl = ustrregexra("`lbl'", "\(?use ADJHSG(.*)$", "")
