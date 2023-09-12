@@ -27,7 +27,7 @@ __years()__ refers to the survey year, rather than the reference year. For
 example, __load_data cps, year(2019)__ will load the March 2019 CPS ASEC, whose
 reference year is 2018.
 
-Available years are 1980-2022 for
+Available years are 1980-2023 for
 CPS ASEC, 2000-2019 and 2021 for ACS, and 1980-2020 for QC. 
 
 Users may specify a single year or multiple years to __years()__ as a 
@@ -136,9 +136,9 @@ program define load_data
 	
     // check years-dataset combination
 	if "`dataset'" == "CPS" {
-		capture numlist "`years'", range(>=1980 <=2022)
+		capture numlist "`years'", range(>=1980 <=2023)
 		if _rc != 0 {
-			display as error "{bf:years()} must be between 1980 and 2022 inclusive when {bf:dataset()} is cps"
+			display as error "{bf:years()} must be between 1980 and 2023 inclusive when {bf:dataset()} is cps"
 			exit 198
 		}
 	}

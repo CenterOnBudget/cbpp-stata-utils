@@ -30,7 +30,7 @@ example, {bf:load_data cps, year(2019)} will load the March 2019 CPS ASEC, whose
 reference year is 2018.
 
 {p 4 4 2}
-Available years are 1980-2022 for
+Available years are 1980-2023 for
 CPS ASEC, 2000-2019 and 2021 for ACS, and 1980-2020 for QC. 
 
 {p 4 4 2}
