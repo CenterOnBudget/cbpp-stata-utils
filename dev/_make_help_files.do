@@ -10,7 +10,8 @@ if _rc != 0 {
 }
 
 local files_list : dir . files "*.ado"
-
 foreach f of local files_list {
-	markdoc "`f'", export(sthlp) replace style("simple")
+  if "`f'" != "_cbpp_profile.ado" {
+	  markdoc "`f'", export(sthlp) replace style("simple")
+  }
 }

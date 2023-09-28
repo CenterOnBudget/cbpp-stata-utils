@@ -1,4 +1,4 @@
-*! version 0.2.0
+*! version 0.2.8
 
 
 /***
@@ -53,7 +53,7 @@ Syntax
 {synopthdr}
 {synoptline}
 {syntab:Required}
-	{synopt:{opt year(integer)}}2000 to 2021 for the one-year sample; 2007 to 2019 for the five-year sample.{p_end}
+	{synopt:{opt year(integer)}}Year of data to retrieve: 2005 to the most recent available for the 1-year sample and 2009 to the most recent available for the 5-year sample.{p_end}
 	
 {syntab:Optional}
     {synopt:{opt sample(integer)}}5 for the five-year sample or 1 for the one-year sample; default is {opt sample(1)}.{p_end}
@@ -108,10 +108,6 @@ program define get_acs_pums
 	// check year, sample, and combination
 	if !inlist(`sample', 1, 5) {
 		display as error "{bf:sample()} must be 1 or 5"
-		exit 198
-	}
-	if !inrange(`year', 2000, 2021) {
-		display as error "{bf:year()} must be between 2000 and 2021 inclusive"
 		exit 198
 	}
 	if `year' < 2009 & `sample' == 5 {
