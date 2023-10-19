@@ -28,7 +28,7 @@ example, __load_data cps, year(2019)__ will load the March 2019 CPS ASEC, whose
 reference year is 2018.
 
 Available years are 1980-2023 for
-CPS ASEC, 2000-2019 and 2021 for ACS, and 1980-2020 for QC. 
+CPS ASEC, 2000-2019 and 2022 for ACS, and 1980-2020 for QC. 
 
 Users may specify a single year or multiple years to __years()__ as a 
 {help numlist}. With {opt dataset(pulse)}, users can specify the weeks of data 
@@ -80,8 +80,8 @@ Website
 ***/
 
 
- capture program drop load_data
- capture program drop load
+* capture program drop load_data
+* capture program drop load
 
 program define load_data 
 
@@ -143,9 +143,9 @@ program define load_data
 		}
 	}
 	if "`dataset'" == "ACS" {
-		capture numlist "`years'", range(>=2000 <=2021)
+		capture numlist "`years'", range(>=2000 <=2022)
 		if _rc != 0 {
-			display as error "{bf:years()} must be between 2000 and 2021 inclusive  (excluding 2020) when {bf:dataset()} is acs"
+			display as error "{bf:years()} must be between 2000 and 2022 inclusive  (excluding 2020) when {bf:dataset()} is acs"
 			exit 198
 		}
         if ustrregexm("`r(numlist)'", "2020") {

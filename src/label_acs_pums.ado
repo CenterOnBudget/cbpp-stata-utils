@@ -36,7 +36,7 @@ Syntax
 {synopthdr}
 {synoptline}
 {syntab:Required}
-	{synopt:{opt year(integer)}}2013 to 2021.{p_end}
+	{synopt:{opt year(integer)}}2013 or later.{p_end}
     
 {syntab:Optional}
     {synopt:{opt sample(integer)}}5 for the five-year sample or 1 for the one-year sample; default is {opt sample(1)}.{p_end}
@@ -71,8 +71,8 @@ program define label_acs_pums
     
     * check for invalid year or sample ----------------------------------------
     
-	if !inrange(`year', 2013, 2021) {
-		display as error "{bf:year()} must be between 2013 and 2021 inclusive"
+	if `year' < 2013 {
+		display as error "{bf:year()} must be 2013 or later"
 		exit 198
 	}
     if !inlist(`sample', 1, 5) {

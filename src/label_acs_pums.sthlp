@@ -37,7 +37,7 @@ be excluded.
 {synopthdr}
 {synoptline}
 {syntab:Required}
-	{synopt:{opt year(integer)}}2013 to 2021.{p_end}
+	{synopt:{opt year(integer)}}2013 or later.{p_end}
 
 {syntab:Optional}
     {synopt:{opt sample(integer)}}5 for the five-year sample or 1 for the one-year sample; default is {opt sample(1)}.{p_end}
