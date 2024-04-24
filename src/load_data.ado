@@ -139,6 +139,7 @@ program define load_data
 		capture numlist "`years'", range(>=1980 <=2023)
 		if _rc != 0 {
 			display as error "{bf:years()} must be between 1980 and 2023 inclusive when {bf:dataset()} is cps"
+      display as error "to load a recently-released year, you may need to update cbppstatautils"
 			exit 198
 		}
 	}
@@ -146,6 +147,7 @@ program define load_data
 		capture numlist "`years'", range(>=2000 <=2022)
 		if _rc != 0 {
 			display as error "{bf:years()} must be between 2000 and 2022 inclusive  (excluding 2020) when {bf:dataset()} is acs"
+      display as error "to load a recently-released year, you may need to update cbppstatautils"
 			exit 198
 		}
         if ustrregexm("`r(numlist)'", "2020") {
