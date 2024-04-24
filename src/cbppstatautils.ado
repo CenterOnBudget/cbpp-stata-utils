@@ -1,4 +1,4 @@
-*! version 0.2.8
+*! version 0.2.9
 
 
 /***
@@ -31,6 +31,12 @@ ACS microdata.
 
 > __{help generate_race_var}__ : Generate categorical variable for 
 race/ethnicity in CPS or ACS microdata.
+
+> __{help generate_occ_grp_var}__ : Generate categorical occupation group 
+variable for CPS or ACS microdata.
+
+> __{help generate_ind_sect_var}__ : Generate categorical industry sector 
+variable for CPS or ACS microdata.
 
 > __{help get_acs_pums}__ : Retrieve ACS PUMS files from the Census Bureau FTP.
 
