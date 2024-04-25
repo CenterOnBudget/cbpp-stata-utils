@@ -10,7 +10,7 @@
 {title:Description}
 
 {p 4 4 2}
-{bf:load_data} loads CPS ASEC, ACS, SNAP QC, or Household Pulse Survey microdata from 
+{bf:load_data} loads CPS ASEC, ACS, ACS SPM, SNAP QC, or Household Pulse Survey microdata from 
 the CBPP datasets library into memory. This command is only useful for CBPP 
 staff.
 
@@ -31,7 +31,7 @@ reference year is 2018.
 
 {p 4 4 2}
 Available years are 1980-2023 for
-CPS ASEC, 2000-2019 and 2022 for ACS, and 1980-2020 for QC. 
+CPS ASEC, 2000-2022 (excluding 2020) for ACS, 2009-2022 (excluding 2020) for ACS SPM, and 1980-2020 for QC. 
 
 {p 4 4 2}
 Users may specify a single year or multiple years to {bf:years()} as a 
@@ -39,14 +39,6 @@ Users may specify a single year or multiple years to {bf:years()} as a
 to retrieve in either {bf:weeks()} or {bf:years()}. If multiple years are 
 specified, the datasets will be appended together before loading and retain 
 variable and value labels from the maximum year in {bf:years()}. 
-
-{p 4 4 2}
-The default is to load all variables in the dataset. Users may specify a subset 
-of variables to load in the {bf:vars()} option.
-
-{p 4 4 2}
-To save the loaded data as a new dataset, use the {bf:saveas()} option. Also 
-specify {bf:replace} to overwrite the dataset if it already exists.
 
 {p 4 4 2}
 Note: When loading multiple years of ACS datasets including 2018 and later 
@@ -60,6 +52,23 @@ destringed.    {break}
 {title:Syntax}
 
 {p 8 8 2} {bf:load_data} {it:dataset} [{it:{help if}}], {bf:{cmdab:y:ears}({it:{help numlist}})} [{bf:{cmdab:v:ars}({it:{help varlist}})} {bf:saveas({it:{help filename}})} {bf:replace} {bf:clear}]
+
+{p 4 4 2}
+where {it:dataset} is "cps", "acs", "acs-spm", "qc", or "pulse" (case insensitive)
+
+
+{synoptset 24 tabbed}{...}
+{synopthdr}
+{synoptline}
+{syntab :Required}
+	{synopt:{opth y:ears(numlist)}}years of data to load.{p_end}
+{space 2}{synopt:{opth w:eeks(numlist)}}with {opt dataset(pulse)}, weeks of data to load; alias for {it:years()}.{p_end}
+{space 2}{synopt:{opth v:ars(varlist)}}variables to load; default is all.{p_end}
+
+{syntab:Optional}
+    {synopt:{opth saveas(filename)}}save loaded data as a Stata dataset.{p_end}
+    {synopt:{opt replace}}if {opt saveas()} is specified, overwrite existing files.{p_end}
+    {synopt:{opt clear}}replace the data in memory, even if the current data have not been saved to disk.{p_end}
 
 
 

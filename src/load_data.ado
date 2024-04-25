@@ -11,7 +11,7 @@ __load_data__ {hline 2} Load datasets from the CBPP datasets library.
 Description
 -----------
 
-__load_data__ loads CPS ASEC, ACS, SNAP QC, or Household Pulse Survey microdata from 
+__load_data__ loads CPS ASEC, ACS, ACS SPM, SNAP QC, or Household Pulse Survey microdata from 
 the CBPP datasets library into memory. This command is only useful for CBPP 
 staff.
 
@@ -28,19 +28,13 @@ example, __load_data cps, year(2019)__ will load the March 2019 CPS ASEC, whose
 reference year is 2018.
 
 Available years are 1980-2023 for
-CPS ASEC, 2000-2019 and 2022 for ACS, and 1980-2020 for QC. 
+CPS ASEC, 2000-2022 (excluding 2020) for ACS, 2009-2022 (excluding 2020) for ACS SPM, and 1980-2020 for QC. 
 
 Users may specify a single year or multiple years to __years()__ as a 
 {help numlist}. With {opt dataset(pulse)}, users can specify the weeks of data 
 to retrieve in either __weeks()__ or __years()__. If multiple years are 
 specified, the datasets will be appended together before loading and retain 
 variable and value labels from the maximum year in __years()__. 
-
-The default is to load all variables in the dataset. Users may specify a subset 
-of variables to load in the __vars()__ option.
-
-To save the loaded data as a new dataset, use the __saveas()__ option. Also 
-specify __replace__ to overwrite the dataset if it already exists.
 
 Note: When loading multiple years of ACS datasets including 2018 and later 
 samples, 'serialno' will be edited to facilitate appending ('serialno' is string
@@ -53,6 +47,22 @@ Syntax
 ------ 
 
 > __load_data__ _dataset_ [_{help if}_], __{cmdab:y:ears}(_{help numlist}_)__ [__{cmdab:v:ars}(_{help varlist}_)__ __saveas(_{help filename}_)__ __replace__ __clear__]
+
+where _dataset_ is "cps", "acs", "acs-spm", "qc", or "pulse" (case insensitive)
+
+
+{synoptset 24 tabbed}{...}
+{synopthdr}
+{synoptline}
+{syntab :Required}
+	{synopt:{opth y:ears(numlist)}}years of data to load.{p_end}
+  {synopt:{opth w:eeks(numlist)}}with {opt dataset(pulse)}, weeks of data to load; alias for _years()_.{p_end}
+  {synopt:{opth v:ars(varlist)}}variables to load; default is all.{p_end}
+
+{syntab:Optional}
+    {synopt:{opth saveas(filename)}}save loaded data as a Stata dataset.{p_end}
+    {synopt:{opt replace}}if {opt saveas()} is specified, overwrite existing files.{p_end}
+    {synopt:{opt clear}}replace the data in memory, even if the current data have not been saved to disk.{p_end}
 
 
 Example(s)
@@ -117,8 +127,8 @@ program define load_data
     
     // check supported dataset
     local dataset = upper("`dataset'")
-    if !inlist("`dataset'", "CPS", "ACS", "QC", "PULSE") {
-		display as error "{bf:dataset()} must be acs, cps, qc, or pulse (case insensitive)"
+    if !inlist("`dataset'", "CPS", "ACS", "ACS-SPM", "QC", "PULSE") {
+		display as error `"{bf:dataset()} must be "acs", "acs-spm", "cps", "qc", or "pulse" (case insensitive)"'
         exit 198
 	}    
 	// check that years is specified unless dataset is pulse
@@ -155,6 +165,18 @@ program define load_data
             exit 198
         }
 	}
+  if "`dataset'" == "ACS-SPM" {
+    capture numlist "`years'", range(>=2009 <=2022)
+    if _rc != 0 {
+			display as error `"{bf:years()} must be between 2009 and 2022 inclusive  (excluding 2020) when {bf:dataset()} is "acs-spm""'
+      display as error "to load a recently-released year, you may need to update cbppstatautils"
+			exit 198
+    }
+    if ustrregexm("`r(numlist)'", "2020") {
+      display as error `"{bf:years()} must be between 2009 and 2022 inclusive (excluding 2020) when {bf:dataset()} is "acs-spm""'
+      exit 198
+    }
+  }
 	if "`dataset'" == "QC" {
 		capture numlist "`years'", range(>=1980 <=2020)
 		if _rc != 0 {
@@ -186,6 +208,7 @@ program define load_data
 		display as error "${spdatapath}`dir' not found. Make sure it is synced and try again"
 		exit 601
 	}
+  scalar drop dir_exists
   
     // check all needed files within dataset library are synced
 	capture noisily {
@@ -196,6 +219,9 @@ program define load_data
 			if "`dataset'" == "ACS" {
 				capture noisily confirm file "${spdatapath}`dir'/`y'/`y'us.dta"
 			}
+      if "`dataset'" == "ACS-SPM" {
+        capture noisily confirm file "${spdatapath}`dir'/acs_spm_`y'.dta"
+      }
 			if "`dataset'" == "QC" {
 				local suff = cond(`y' == 1980, "_aug", "")
 				capture noisily confirm file "${spdatapath}`dir'/`y'/qc_pub_fy`y'`suff'.dta"
@@ -282,6 +308,10 @@ program define load_data
 			display as result "serialno of `y' sample edited and destringed to facilitate appending."
 			}
 		}
+    
+    if "`dataset'" == "ACS-SPM" {
+      quietly use `vars' `if' using "${spdatapath}`dir'/acs_spm_`y'.dta", clear
+    }
 		
 		if "`dataset'" == "QC" {
 			local suff = cond(`y' == 1980, "_aug", "")
