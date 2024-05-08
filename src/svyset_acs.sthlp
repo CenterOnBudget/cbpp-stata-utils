@@ -3,14 +3,17 @@
 {title:Title}
 
 {p 4 4 2}
-{bf:svyset_acs} {hline 2} Declare the survey design for ACS PUMS.
+{bf:svyset_acs} {hline 2} Declare the survey design in ACS microdata.
 
 
 
 {title:Description}
 
 {p 4 4 2}
-{bf:svyset_acs} is a shortcut program to declare the survey design for ACS PUMS. 
+{bf:svyset_acs} is a shortcut program to declare the survey design in ACS 
+microdata.
+
+{p 4 4 2}
 For example, {bf:svyset_acs, record_type(person)} is equivalent to 
 {bf:svyset [iw=pwgtp], vce(sdr) sdrweight(pwgtp1-pwgtp80) mse}.
 
@@ -27,20 +30,19 @@ For example, {bf:svyset_acs, record_type(person)} is equivalent to
 	{synopt:{opt rec:ord_type(string)}}record type weight to use: person or household. Abbreviations h, hhld, hous, p, and pers are also accepted.{p_end}
 	
 {syntab:Optional}
-    {synopt:{opt nosdr:weights}}do not declare SDR replicate weights in the survey design.{p_end}
-	{synopt:{opt multi:year(#)}}in a custom multi-year file containing # one-year samples, create and use multi-year average weights.{p_end}
+	{synopt:{opt n_years(#)}}in a dataset comprised of # 1-year ACS microdata samples, create and use #-year average weights.{p_end}
 
 
 
 {title:Example(s)}
 
 {p 4 4 2}
-	Survey set household-level ACS PUMS data.    {break}
+	Survey set household-level ACS microdata.    {break}
 		{bf:. svyset_acs, record_type(hhld)}
 
 {p 4 4 2}
-	Survey set person-level ACS PUMS data without replicate weights.    {break}
-		{bf:. svyset_acs, record_type(person) nosdrweights}
+	Survey set a dataset comprised of 3 years of 1-year person-level ACS microdata.    {break}
+		{bf:. svyset_acs, record_type(person) n_years(3)}
 
 
 

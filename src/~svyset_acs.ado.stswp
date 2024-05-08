@@ -81,7 +81,7 @@ program svyset_acs
 			display as error "one or more replicate weight variables (`weight'1-`weight'80) not found"
 			exit 111
 		}
-  }  
+    
     if `multiyear' > 1  {
       
       display as result "{bf:multiyear()} is deprecated; please use {bf:n_years()}"
@@ -117,7 +117,7 @@ program svyset_acs
 				svyset [iw=`weight'_`n_years'yr]
 			}
 		}
-	
+	}
 
 end
 
