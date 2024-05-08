@@ -1,4 +1,13 @@
 
+## v 0.2.9
+
+- New program `generate_ind_sect_var` generates an industry sector variable in ACS or CPS microdata ([#22](https://github.com/CenterOnBudget/cbpp-stata-utils/issues/22)).
+- New program `generate_occ_grp_var` generates an occupation group variable in ACS or CPS microdata ([#22](https://github.com/CenterOnBudget/cbpp-stata-utils/issues/22)).
+- `load_data` now supports loading ACS SPM datasets ([#21](https://github.com/CenterOnBudget/cbpp-stata-utils/issues/21)).
+- `load_data` suggests updating cbppstatautils if an unsupported data year is specified ([#20](https://github.com/CenterOnBudget/cbpp-stata-utils/issues/20)).
+- `labeller` gains a `lblname()` option for users to specify the name of the value label to use; default is "_varname_lbl".
+- `svyset_acs` option `multiyear()` has been renamed `n_years()`. If `multiyear()` is specified, the contents will be copied into `n_years()`.
+
 ## v 0.2.6
 
 - `generate_acs_adj_vars` now copies variable and value labels from the original to the adjusted variables by default; specify **nolab** to skip this.
