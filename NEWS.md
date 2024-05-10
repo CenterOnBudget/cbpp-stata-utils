@@ -3,6 +3,8 @@
 
 - New program `generate_ind_sect_var` generates an industry sector variable in ACS or CPS microdata ([#22](https://github.com/CenterOnBudget/cbpp-stata-utils/issues/22)).
 - New program `generate_occ_grp_var` generates an occupation group variable in ACS or CPS microdata ([#22](https://github.com/CenterOnBudget/cbpp-stata-utils/issues/22)).
+- New program `copy_curl` downloads files from a URL using curl, optionally providing a user-specified user-agent in the HTTP header.
+- `get_cpiu` falls back to `copy_curl` if the BLS denies the file download and gains option `user_agent()` to pass to `copy_curl` ([#23](https://github.com/CenterOnBudget/cbpp-stata-utils/issues/23)). 
 - `load_data` now supports loading ACS SPM datasets ([#21](https://github.com/CenterOnBudget/cbpp-stata-utils/issues/21)).
 - `load_data` suggests updating cbppstatautils if an unsupported data year is specified ([#20](https://github.com/CenterOnBudget/cbpp-stata-utils/issues/20)).
 - `labeller` gains a `lblname()` option for users to specify the name of the value label to use; default is "_varname_lbl".

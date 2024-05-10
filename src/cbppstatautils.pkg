@@ -15,6 +15,8 @@ f categorize.ado
 f categorize.sthlp
 f cbppstatautils.ado
 f cbppstatautils.sthlp
+f copy_curl.ado
+f copy_curl.sthlp
 f etotal.ado
 f etotal.sthlp
 f generate_acs_adj_vars.ado

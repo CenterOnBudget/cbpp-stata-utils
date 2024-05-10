@@ -1,4 +1,4 @@
-*! version 0.2.0
+*! version 0.2.9
 
 
 /***
@@ -54,6 +54,7 @@ Syntax
 	{opt yearvar(year)}.{p_end}
 	{synopt:{opt nolab:el}}if __merge__ or __replace__ is specified, do not label inflation variables.{p_end}
 	{synopt:{opt use_cache}}load cached inflation series data.{p_end}
+  {synopt:{opt user_agent(string)}}email address to provide in the header of the HTTP request to the BLS website; passed to {help copy_curl}.{p_end} 
 
 
 Example(s)
@@ -87,7 +88,9 @@ Website
 
 program define get_cpiu
 
-	syntax , [merge clear MATrix(name) YEARVARname(string) Base_year(integer 0) rs use_cache NOLABel]
+  syntax , [rs] [merge clear MATrix(name)] ///
+    [YEARVARname(string) Base_year(integer 0)]  ///
+    [use_cache NOLABel user_agent(string)]
 
 	* checks ------------------------------------------------------------------
 	
@@ -153,8 +156,21 @@ program define get_cpiu
             tempfile data // tempfile for retrieved data
             
             if "`rs'" != "" {
-                // CPI-U RS 1978-latest available
-                copy "https://www.bls.gov/cpi/research-series/r-cpi-u-rs-allitems.xlsx" `data'
+              
+                local url "https://www.bls.gov/cpi/research-series/r-cpi-u-rs-allitems.xlsx"
+                
+                capture copy `url' `data'
+                if _rc == 679 {
+                  if "`user_agent'" != "" {
+                    copy_curl "`url'" `data', user_agent(`user_agent')
+                  }
+                  if "`user_agent'" == "" {
+                    display as error "BLS server refused to send file"
+                    display as error "please try again specifying your email to {bf:user_agent()}"
+                    exit 679
+                  }
+                }
+
                 import excel using `data', cellrange(A6) firstrow case(lower) clear
                 rename avg `series'
                 keep year `series'
@@ -162,8 +178,21 @@ program define get_cpiu
             }
             
             if "`rs'" == "" {
-                // CPI-U 
-                copy "https://download.bls.gov/pub/time.series/cu/cu.data.1.AllItems" `data'
+              
+                local url "https://download.bls.gov/pub/time.series/cu/cu.data.1.AllItems"
+                
+                capture copy `url' `data'
+                if _rc == 679 {
+                  if "`user_agent'" != "" {
+                    copy_curl "`url'" `data', user_agent(`user_agent')
+                  }
+                  if "`user_agent'" == "" {
+                    display as error "BLS server refused to send file"
+                    display as error "please try again specifying your email to {bf:user_agent()}"
+                    exit 679
+                  }
+                }
+
                 import delimited using `data', clear
                 keep if regexm(series_id, "CUUR0000SA0")
                 keep if year >= 1978 & period == "M13"

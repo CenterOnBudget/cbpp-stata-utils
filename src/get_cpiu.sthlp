@@ -56,6 +56,7 @@ to the latest available year.
 	{opt yearvar(year)}.{p_end}
 	{synopt:{opt nolab:el}}if {bf:merge} or {bf:replace} is specified, do not label inflation variables.{p_end}
 	{synopt:{opt use_cache}}load cached inflation series data.{p_end}
+{space 2}{synopt:{opt user_agent(string)}}email address to provide in the header of the HTTP request to the BLS website; passed to {help copy_curl}.{p_end} 
 
 
 

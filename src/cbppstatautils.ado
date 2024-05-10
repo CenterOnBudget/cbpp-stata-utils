@@ -21,6 +21,8 @@ Contents
 
 > __{help categorize}__ : Generate a categorical variable.
 
+> __{help copy_curl}__ : Copy file from URL with curl.
+
 > __{help etotal}__ : Flexible counts and totals.
 
 > __{help generate_acs_adj_vars}__ : Generate adjusted versions of ACS PUMS 

@@ -20,6 +20,8 @@ Run {bf:{stata cbppstatautils, update}} to update to the latest version.
 
 {p 8 8 2} {bf:{help categorize}} : Generate a categorical variable.
 
+{p 8 8 2} {bf:{help copy_curl}} : Copy file from URL with curl.
+
 {p 8 8 2} {bf:{help etotal}} : Flexible counts and totals.
 
 {p 8 8 2} {bf:{help generate_acs_adj_vars}} : Generate adjusted versions of ACS PUMS 
