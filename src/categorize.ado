@@ -1,4 +1,4 @@
-*! version 0.2.0
+*! version 0.2.9
 
 
 /***
@@ -39,6 +39,8 @@ Syntax
 {syntab:Optional}
     {synopt:{opth breaks(numlist)}}left-hand ends of the grouping intervals. Do not include the minimum or the maximum value of {it:varname}. Either {opt breaks()} or {opt default()} must be specified.{p_end}
 	{synopt:{opt default(age|povratio)}}use default breaks; cannot be combined with __breaks()__.{p_end}
+  {synopt:{opt lblname(string)}}Name of value label to create; default is "{it:varname}_lbl". Ignored if __nolabel__ is specified.{p_end}
+  {synopt: {opth nformat(%fmt)}}Numeric display format to use in value labels; default is {it:%13.0gc}. Ignored if __nolabel__ is specified.{p_end}
 	{synopt:{opt nolab:el}}do not give _newvar_ value labels.{p_end}
 	{synopt:{opt varlab:el(string)}}variable label for _newvar_.{p_end}
 
@@ -66,8 +68,10 @@ Website
 
 program define categorize
 
-	syntax varname(numeric), GENerate(name) [breaks(numlist sort)]          ///
-                             [default(string) NOLABel VARLABel(string)]
+  syntax varname(numeric),  ///
+    GENerate(name)  ///
+    [breaks(numlist sort) default(string)]  ///
+    [lblname(string) nformat(string) NOLABel VARLABel(string)]
 	
     
     local varname `varlist'
@@ -134,28 +138,36 @@ program define categorize
 	if "`nolabel'" == "" {
 		
 		local n_cuts : word count `at'
-		capture label drop `newvar'_lbl
+    
+    if "`lblname'" === "" {
+      local lblname "`newvar'_lbl"
+    }
+		capture label drop `lblname'
 		
+    if "`nformat'" == "" {
+      local nformat "%13.0gc"
+    }
+    
 		forvalues c = 1/`n_cuts' {
 			
 			local c_1 = `c' + 1
 			local start : word `c' of `at'
-			local start = strofreal(`start', "%13.0gc")
+			local start = strofreal(`start', "`nformat'")
 			local end : word `c_1' of `at'
 			
 			if `c' < (`n_cuts' - 1) {
 				local end = `end' - 1
-				local end = strofreal(`end', "%13.0gc")
+				local end = strofreal(`end', "`nformat'")
 				local to " to"
 			}
 			if `c' == (`n_cuts' - 1) {
 				local end "and up"
 				local to ""
 			}
-			label define `newvar'_lbl `c' "`start'`to' `end'", add
+			label define `lblname' `c' "`start'`to' `end'", add
 		}
 		
-		label values `newvar' `newvar'_lbl
+		label values `newvar' `lblname'
 	}
 	
 	if "`varlabel'" != "" {

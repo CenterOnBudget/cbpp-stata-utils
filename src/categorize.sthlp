@@ -40,6 +40,8 @@ breaks. With {opt default(age)}, breaks are 18 and 65. With
 {syntab:Optional}
     {synopt:{opth breaks(numlist)}}left-hand ends of the grouping intervals. Do not include the minimum or the maximum value of {it:varname}. Either {opt breaks()} or {opt default()} must be specified.{p_end}
 	{synopt:{opt default(age|povratio)}}use default breaks; cannot be combined with {bf:breaks()}.{p_end}
+{space 2}{synopt:{opt lblname(string)}}Name of value label to create; default is "{it:varname}_lbl". Ignored if {bf:nolabel} is specified.{p_end}
+{space 2}{synopt: {opth nformat(%fmt)}}Numeric display format to use in value labels; default is {it:%13.0gc}. Ignored if {bf:nolabel} is specified.{p_end}
 	{synopt:{opt nolab:el}}do not give {it:newvar} value labels.{p_end}
 	{synopt:{opt varlab:el(string)}}variable label for {it:newvar}.{p_end}
 

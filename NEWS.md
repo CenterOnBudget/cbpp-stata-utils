@@ -9,6 +9,8 @@
 - `load_data` suggests updating cbppstatautils if an unsupported data year is specified ([#20](https://github.com/CenterOnBudget/cbpp-stata-utils/issues/20)).
 - `labeller` gains a `lblname()` option for users to specify the name of the value label to use; default is "_varname_lbl".
 - `svyset_acs` option `multiyear()` has been renamed `n_years()`. If `multiyear()` is specified, the contents will be copied into `n_years()`.
+- `categorize` gains two new options for controlling value labels: `lblname()` specifies the name of the value label to create and `nformat()` specifies the numeric display format to use in value labels.
+
 
 ## v 0.2.6
 
