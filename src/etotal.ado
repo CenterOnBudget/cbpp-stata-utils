@@ -12,8 +12,10 @@ Description
 -----------
 
 An extension of {help total}, __etotal__ produces either totals or counts, 
-depending on what the user has specified. If weights are specified, standard 
-errors and confidence intervals are included.
+depending on what the user has specified.
+
+If weights are specified, or if data are {help svyset} and the __svy__ option 
+is specified, standard errors and confidence intervals are included.
 
 
 Syntax
@@ -21,26 +23,27 @@ Syntax
 
 Count of observations
 
-> __etotal__ [_{help if}_] [_{help weight}_], _options_
+> __etotal__ [_{help if}_] {weight} [, _options_]
 
 Total of existing variable
 
-> __etotal__ [_{help varname}_] [_{help if}_] [_{help weight}_], _options_
+> __etotal__ [_{varname}_] [_{help if}_] {weight} [, _options_]
 
 Total of expression
 
-> __etotal__ [_{help exp}_] [_{help if}_] [_{help weight}_], _options_
+> __etotal__ [_{help exp}_] [_{help if}_] {weight} [, _options_]
 
 
-{synoptset 27 tabbed}{...}
-{synopthdr}
+{synoptset 16}{...}
+{synopthdr:options}
 {synoptline}
-    {synopt:{opth over(varname)}}group over subpopulations defined by {it:varname}.{p_end}
-	{synopt:{opt svy}}adjust the results for survey settings identified by {bf:{help svyset}}.{p_end}
-    {synopt:{opt level(#)}}set confidence level; default is {opt level(95)}.{p_end}
-	{synopt:{opth cformat(%fmt)}}:specifies how to format estimates, standard errors, and confidence limits; deftault is {opt cformat(%14.0fc)}.{p_end}
-	{synopt:{opt mat:rix(string)}}save results in matrix named _string_.{p_end}
+  {synopt:{opth over(varname)}}Group over subpopulations defined by {it:varname}.{p_end}
+  {synopt:{opt svy}}Adjust the results for survey settings identified by {bf:{help svyset}}.{p_end}
+  {synopt:{opt level(#)}}Set confidence level; default is {opt level(95)}.{p_end}
+  {synopt:{opth cformat(%fmt)}}Specifies how to format estimates, standard errors, and confidence limits; deftault is {opt cformat(%14.0fc)}.{p_end}
+  {synopt:{opt mat:rix(matname)}}Save results in matrix _matname_.{p_end}
 {synoptline}
+
 
 {bf:fweight}s, {bf:iweight}s, and {bf:pweight}s are allowed; see {help weight}.
 
@@ -49,15 +52,19 @@ Example(s)
 ----------
 
     Weighted count of observations  
+    
         {bf:. etotal [iw=wgtp]}
 
     Total of existing variable  
-        {bf:. etotal hincp [iw=wgtp]}
-	
+    
+        {bf:. etotal hincp if relp == 0 [iw=wgtp]}
+  
     Total of existing variable, data is svyset  
+    
         {bf:. etotal hincp, svy}
 
     Total of expression, saving results in matrix  
+    
         {bf:. etotal hincp / 1000 [iw=wgtp], matrix(tot_hh_inc_thous)}
 
 

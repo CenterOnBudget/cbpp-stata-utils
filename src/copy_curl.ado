@@ -4,7 +4,7 @@
 Title
 ====== 
 
-__copy_curl__ {hline 2} Copy file from URL with curl
+__copy_curl__ {hline 2} Copy file from URL with curl.
 
 
 Description
@@ -31,11 +31,12 @@ _filename1_ may be a URL. _filename2_ may be a file.
 Note: Double quotes may be used to enclose the filenames, and the quotes must be
 used if the filename contains embedded blanks.
 
-{synoptset 27}{...}
+
+{synoptset 20}{...}
 {synopthdr}
 {synoptline}
-  {synopt :{opt user_agent(string)}}user agent to provide in the HTTP header{p_end}
-  {synopt :{opt replace}}may overwrite {it:filename2}{p_end}
+  {synopt:{opt user_agent(string)}}User agent to provide in the HTTP header.{p_end}
+  {synopt:{opt replace}}May overwrite {it:filename2}.{p_end}
 {synoptline}
 
 
@@ -43,6 +44,7 @@ Example(s)
 ----------
 
     Download a file from the BLS website.
+    
         {bf:. copy_curl "https://www.bls.gov/cpi/research-series/r-cpi-u-rs-allitems.xlsx"  ///}
         {bf:    "r-cpi-u-rs.xlsx", user_agent(username@cbpp.org)}
 

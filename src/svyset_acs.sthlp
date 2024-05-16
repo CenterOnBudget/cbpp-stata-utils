@@ -11,7 +11,7 @@
 
 {p 4 4 2}
 {bf:svyset_acs} is a shortcut program to declare the survey design in ACS 
-microdata.
+microdata with {help svyset}.
 
 {p 4 4 2}
 For example, {bf:svyset_acs, record_type(person)} is equivalent to 
@@ -21,28 +21,28 @@ For example, {bf:svyset_acs, record_type(person)} is equivalent to
 
 {title:Syntax}
 
-{p 8 8 2} {bf:svyset_acs}, {bf:{cmdab:rec:ord_type}({it:string})} [{it:options}]
+{p 4 4 2}
+{bf:svyset_acs}, {opt rec:ord_type(string)} [{it:options}]
 
-{synoptset 27 tabbed}{...}
-{synopthdr}
+
+{synoptset 20}{...}
+{synopthdr:options}
 {synoptline}
-{syntab:Required}
-	{synopt:{opt rec:ord_type(string)}}record type weight to use: person or household. Abbreviations h, hhld, hous, p, and pers are also accepted.{p_end}
-	
-{syntab:Optional}
-	{synopt:{opt n_years(#)}}in a dataset comprised of # 1-year ACS microdata samples, create and use #-year average weights.{p_end}
+{space 2}{synopt:{opt rec:ord_type(string)}}Record type of the dataset in memory; "person" or "household". Abbreviations "h", "hhld", "hous", "p", and "pers" are also accepted.{p_end}
+{space 2}{synopt:{opth n_years(integer)}}Specifies the number of years of ACS microdata in memory; default is 1. If {bf:n_years()} is greater than 1, {bf:svyset_acs} will generate copies of the weights variables divided by this number and use those weights in {bf:svyset}.{p_end}
+{synoptline}
 
 
 
 {title:Example(s)}
 
-{p 4 4 2}
-	Survey set household-level ACS microdata.    {break}
-		{bf:. svyset_acs, record_type(hhld)}
+    Survey set household-level ACS microdata.  
 
-{p 4 4 2}
-	Survey set a dataset comprised of 3 years of 1-year person-level ACS microdata.    {break}
-		{bf:. svyset_acs, record_type(person) n_years(3)}
+      {bf:. svyset_acs, record_type(hhld)}
+
+    Survey set a dataset comprised of 3 years of 1-year person-level ACS microdata.  
+
+      {bf:. svyset_acs, record_type(person) n_years(3)}
 
 
 

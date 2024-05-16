@@ -5,37 +5,30 @@
 Title
 ====== 
 
-__label_state__ {hline 2} Label state FIPS code variable with state names or postal abbreviations.
+__label_state__ {hline 2} Label a state FIPS code variable with state names or postal abbreviations.
 
 
 Description
 -----------
 
-__label_state__ labels state 
-[FIPS code](https://www.census.gov/geographies/reference-files/2018/demo/popest/2018-fips.html)
-variables with the full state name (the default) or postal abbreviation. The 50
-states, District of Columbia, Puerto Rico, and U.S. territories are supported.
+label_state attaches value labels to a variable containing 
+[state FIPS codes](https://www.census.gov/library/reference/code-lists/ansi/ansi-codes-for-states.html). Value labels are the full state name by default. The 50 states, the 
+District of Columbia, Puerto Rico, and U.S. territories are supported.
 
-If the state FIPS code variable _varname_ is a string, it will be destringed.    
-
-To label with two-character postal abbreviations (e.g. "VT") rather than the 
-full state name, use the _abbrv_ option.
+If the state FIPS code variable in _varname_ is a string, it will be destringed.
 
 
 Syntax
 ------ 
 
-> __label_state__ _{help varname}_, [_abbrv_]
+__label_state__ {varname} [, _options_]
 
 
-Example(s)
-----------
-
-	Label 'gestfips', the variable for state FIPS code in the CPS, with state names.  
-		{bf:. label_state gestfips}
-
-	Label 'st', the variable for state FIPS code in the ACS, with state abbreviations.  
-		{bf:. label_state st, abbrv}
+{synoptset 16}{...}
+{synopthdr:options}
+{synoptline}
+  {synopt:{opt abbrv}}Use state postal abbreviations rather than state names (the default) for value labels.{p_end}
+{synoptline}
 
 
 Website

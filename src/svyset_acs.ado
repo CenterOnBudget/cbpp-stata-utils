@@ -12,7 +12,7 @@ Description
 -----------
 
 __svyset_acs__ is a shortcut program to declare the survey design in ACS 
-microdata.
+microdata with {help svyset}.
 
 For example, __svyset_acs, record_type(person)__ is equivalent to 
 __svyset [iw=pwgtp], vce(sdr) sdrweight(pwgtp1-pwgtp80) mse__.
@@ -21,26 +21,27 @@ __svyset [iw=pwgtp], vce(sdr) sdrweight(pwgtp1-pwgtp80) mse__.
 Syntax
 ------ 
 
-> __svyset_acs__, __{cmdab:rec:ord_type}(_string_)__ [_options_]
+__svyset_acs__, {opt rec:ord_type(string)} [_options_]
 
-{synoptset 27 tabbed}{...}
-{synopthdr}
+
+{synoptset 20}{...}
+{synopthdr:options}
 {synoptline}
-{syntab:Required}
-	{synopt:{opt rec:ord_type(string)}}record type weight to use: person or household. Abbreviations h, hhld, hous, p, and pers are also accepted.{p_end}
-	
-{syntab:Optional}
-	{synopt:{opt n_years(#)}}in a dataset comprised of # 1-year ACS microdata samples, create and use #-year average weights.{p_end}
+  {synopt:{opt rec:ord_type(string)}}Record type of the dataset in memory; "person" or "household". Abbreviations "h", "hhld", "hous", "p", and "pers" are also accepted.{p_end}
+  {synopt:{opth n_years(integer)}}Specifies the number of years of ACS microdata in memory; default is 1. If __n_years()__ is greater than 1, __svyset_acs__ will generate copies of the weights variables divided by this number and use those weights in __svyset__.{p_end}
+{synoptline}
 
 
 Example(s)
 ----------
 
-	Survey set household-level ACS microdata.  
-		{bf:. svyset_acs, record_type(hhld)}
+    Survey set household-level ACS microdata.  
+    
+      {bf:. svyset_acs, record_type(hhld)}
 
-	Survey set a dataset comprised of 3 years of 1-year person-level ACS microdata.  
-		{bf:. svyset_acs, record_type(person) n_years(3)}
+    Survey set a dataset comprised of 3 years of 1-year person-level ACS microdata.  
+    
+      {bf:. svyset_acs, record_type(person) n_years(3)}
 
 
 Website

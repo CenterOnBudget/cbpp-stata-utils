@@ -3,7 +3,7 @@
 {title:Title}
 
 {p 4 4 2}
-{bf:copy_curl} {hline 2} Copy file from URL with curl
+{bf:copy_curl} {hline 2} Copy file from URL with curl.
 
 
 
@@ -36,11 +36,12 @@ programs without an email address in the user-agent, per its
 Note: Double quotes may be used to enclose the filenames, and the quotes must be
 used if the filename contains embedded blanks.
 
-{synoptset 27}{...}
+
+{synoptset 20}{...}
 {synopthdr}
 {synoptline}
-{space 2}{synopt :{opt user_agent(string)}}user agent to provide in the HTTP header{p_end}
-{space 2}{synopt :{opt replace}}may overwrite {it:filename2}{p_end}
+{space 2}{synopt:{opt user_agent(string)}}User agent to provide in the HTTP header.{p_end}
+{space 2}{synopt:{opt replace}}May overwrite {it:filename2}.{p_end}
 {synoptline}
 
 
@@ -48,6 +49,7 @@ used if the filename contains embedded blanks.
 {title:Example(s)}
 
     Download a file from the BLS website.
+
         {bf:. copy_curl "https://www.bls.gov/cpi/research-series/r-cpi-u-rs-allitems.xlsx"  ///}
         {bf:    "r-cpi-u-rs.xlsx", user_agent(username@cbpp.org)}
 

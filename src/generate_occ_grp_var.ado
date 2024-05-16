@@ -5,33 +5,35 @@
 Title
 ====== 
 
-__generate_occ_grp_var__ {hline 2} Generate categorical occupation group 
-variable for CPS or ACS microdata.
+__generate_occ_grp_var__ {hline 2} Generate an occupation group variable in ACS or CPS microdata.
 
 
 Description
 -----------
 
 __generate_occ_grp_var__ generates a categorial variable for major occupation
-groups representing 2-digit {browse "https://www.bls.gov/soc/2018/major_groups.htm":2018 Standard Occupational Classification System (SOC) codes}. It can be used with ACS or CPS microdata.
+groups representing 2-digit 
+{browse "https://www.bls.gov/soc/2018/major_groups.htm":2018 Standard Occupational Classification System (SOC) codes}.
 
-Note that not all ACS or CPS data years use the 2018 SOC. This command won't 
-work properly for data years that use other SOC versions.
+For ACS microdata, the variable __occp__ must exist. For CPS microdata, the 
+variable __peioocc__ must exist.
+
+Not all ACS or CPS data years use the 2018 SOC. This command will not work 
+properly for data years that use other SOC versions.
 
 
 Syntax
 ------ 
 
-__generate_occ_grp_var__ _{help newvar}_, __{cmdab:data:set}(_string_)__ [_options_]
+__generate_occ_grp_var__ {newvar}, {opt data:set(string)} [_options_]
 
-{synoptset 24 tabbed}{...}
-{synopthdr}
+
+{synoptset 16}{...}
+{synopthdr:options}
 {synoptline}
-{syntab :Required}
-  {synopt:{opt data:set(string)}}ACS or CPS (case insensitive).{p_end}
-  
-{syntab:Optional}
-  {synopt:{opt nolab:el}}{it:newvar} will not be labelled.{p_end}
+  {synopt:{opt data:set(string)}}The type of dataset in memory; ACS or CPS (case insensitive).{p_end}
+  {synopt:{opt nolab:el}}Do not assign value labels to {it:newvar}.{p_end}
+{synoptline}
 
 
 Website

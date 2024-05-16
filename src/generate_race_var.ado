@@ -5,89 +5,101 @@
 Title
 ====== 
 
-__generate_race_var__ {hline 2} Generate categorical race-ethnicity variable for
-CPS or ACS microdata.
+__generate_race_var__ {hline 2} Generate a race-ethnicity variable in ACS or CPS microdata.
 
 
 Description
 -----------
 
-__generate_race_var__ generates a categorial variable for race-ethnicity. It can
-be used with CPS or ACS microdata. Users may specify the desired number of 
-categories: 2, 4-7 for CPS and 2, 4-8 for ACS.
+__generate_race_var__ generates a categorical variable for race-ethnicity in ACS
+or CPS microdata.
+
+Users may specify the desired number of categories for the new variable; see 
+{help generate_race_var##categories:Categories and Labels}.
+
+In ACS microdata, the variables __rac1p__ and __hisp__ must exist. In CPS 
+microdata, the variables __prdtrace__ and __pehspnon__ must exist.
 
 
 Syntax
 ------ 
 
-__generate_race_var__ _{help newvar}_, __{cmdab:cat:egories}(_integer_)__ __{cmdab:data:set}(_string_)__ [_options_]
+__generate_race_var__ {newvar}, {opt data:set(acs|cps)} {opt cat:egories(integer)} [_options_]
 
-{synoptset 24 tabbed}{...}
-{synopthdr}
+
+{synoptset 22}{...}
+{synopthdr:options}
 {synoptline}
-{syntab :Required}
-	{synopt:{opt cat:egories(integer)}}number of values for the categorical variable to be generated.{p_end}
-	{synopt:{opt data:set(string)}}CPS or ACS (case insensitive).{p_end}
-	
-{syntab:Optional}
-    {synopt:{opt nolab:el}}{it:newvar} will not be labelled.{p_end}
+  {synopt:{opt data:set(string)}}The type of dataset in memory; ACS or CPS (case insensitive).{p_end}
+  {synopt:{opt cat:egories(integer)}}Number of categories for newvar. With {opt dataset(acs)}, up to 8. With {opt dataset(cps)}, up to 7. See {help generate_race_var##categories:Categories and Labels}.{p_end}
+  {synopt:{opt nolab:el}}Do not assign value labels to newvar {it:newvar}.{p_end}
+{synoptline}
 
 
-Category Definitions / Labels
+{marker categories}{...}
+Categories and Labels
 -----------------------------
 
 {p2colset 4 22 22 2}
-{p2col:{bf}categories({it:2}){sf}}1 	White, not Latino
-								  2 	Not White, not Latino{p_end}
+{p2col:{bf}categories({it:2}){sf}}
+  1   White, not Latino
+  2   Not White, not Latino{p_end}
 
-{p2col:{bf}categories({it:4}){sf}}1 	White, not Latino		
-								  2 	Black, not Latino
-								  3 	Latino (of any race)
-								  4 	Another Race or Mult. Races, not Latino{p_end}
+{p2col:{bf}categories({it:4}){sf}}
+  1   White, not Latino    
+  2   Black, not Latino
+  3   Latino (of any race)
+  4   Another Race or Mult. Races, not Latino{p_end}
 
-{p2col:{bf}categories({it:5}){sf}}1 	White, not Latino		
-								  2 	Black, not Latino
-								  3 	Latino (of any race)
-								  4		Asian, not Latino
-								  5 	Another Race or Mult. Races, not Latino{p_end}
+{p2col:{bf}categories({it:5}){sf}}
+  1   White, not Latino    
+  2   Black, not Latino
+  3   Latino (of any race)
+  4   Asian, not Latino
+  5   Another Race or Mult. Races, not Latino{p_end}
 
-{p2col:{bf}categories({it:6}){sf}}1 	White, not Latino		
-								  2 	Black, not Latino
-								  3 	Latino (of any race)
-								  4		Asian, not Latino
-								  5 	AIAN, not Latino
-								  6 	Another Race or Mult. Races, not Latino{p_end}
+{p2col:{bf}categories({it:6}){sf}}
+  1   White, not Latino    
+  2   Black, not Latino
+  3   Latino (of any race)
+  4   Asian, not Latino
+  5   AIAN, not Latino
+  6   Another Race or Mult. Races, not Latino{p_end}
 
-{p2col:{bf}categories({it:7}){sf}}1 	White, not Latino		
-								  2 	Black, not Latino
-								  3 	Latino (of any race)
-								  4		Asian, not Latino
-								  5 	AIAN, not Latino
-								  6 	NHOPI, not Latino
-								  7 	 __ACS:__ Another Race or Mult. Races, not Latino 
-								  7		 __CPS:__ Mult. Races, not Latino{p_end}
+{p2col:{bf}categories({it:7}){sf}}
+  1   White, not Latino    
+  2   Black, not Latino
+  3   Latino (of any race)
+  4   Asian, not Latino
+  5   AIAN, not Latino
+  6   NHOPI, not Latino
+  7   __ACS:__ Another Race or Mult. Races, not Latino 
+  7   __CPS:__ Mult. Races, not Latino{p_end}
 
-{p2col:{bf}categories({it:8}){sf}}1 	White, not Latino{p_end}
-{p2col:{it:ACS only}}2 	Black, not Latino
-								  3 	Latino (of any race)
-								  4		Asian, not Latino
-								  5 	AIAN, not Latino
-								  6 	NHOPI, not Latino
-								  7 	Some Other Race, not Latino 
-								  8		Mutliple Races{p_end}
+{p2col:{bf}categories({it:8}){sf}}{it:ACS only}
+  1   White, not Latino
+  2   Black, not Latino
+  3   Latino (of any race)
+  4   Asian, not Latino
+  5   AIAN, not Latino
+  6   NHOPI, not Latino
+  7   Some Other Race, not Latino 
+  8    Mutliple Races{p_end}
 {p2colreset}{...}
 
-	
+  
 Example(s)
 ----------
 
-   Generate a 5-category race-ethnicity variable 'race_5' for ACS microdata.
+   Generate a 5-category race-ethnicity variable in ACS microdata.
+   
         {bf:. generate_race_var race_5, categories(5) dataset(acs)}
 
-    Generate an unlabeled 2-category (person of color/white, not Latino) race-ethnicity variable for CPS microdata.
+    Generate an unlabeled 2-category race-ethnicity variable in CPS microdata.
+    
         {bf:. generate_race_var person_of_color, categories(2) dataset(cps) nolabel}
 
-		
+    
 Website
 -------
 

@@ -32,17 +32,20 @@ Using {bf:labeller}:
 
 {title:Syntax}
 
-{p 8 8 2} {bf:labeller} {it:{help varname}}, [{bf:{cmdab:var:iable}({it:string})}] [{bf:{cmdab:val:ues}({it:string})}] [{it:options}]
+{p 4 4 2}
+{bf:labeller} {varname}, [{opt var:iable(string)}] [{opt val:ues(string)}] [{it:options}]
 
-{synoptset 27 tabbed}{...}
-{synopthdr}
+
+{synoptset 16}{...}
+{synopthdr:options}
 {synoptline}
-{space 2}{synopt:{opt var:iable}}variable label following {help label variable}: {it:"label"}{p_end}
-{space 2}{synopt:{opt val:ues}}value labels following {help label define}: {it:# "label" [# "label" ...]}{p_end}
-{space 2}{synopt:{opt lblname(string)}}name of value label to use; default is {bf:lblname(}{it:varname}_lbl{bf:)}.{p_end}
-{space 2}{synopt:{opt add}}add new entries in {opt values()} to {it:varname}{c 39}s value label.{p_end}
-{space 2}{synopt:{opt modify}}modify or delete existing # to label correspondences and add new correspondences to {it:varname}{c 39}s value label.{p_end}
-{space 2}{synopt:{opt remove}}remove variable and value labels from {it:varname}.{p_end}
+{space 2}{synopt:{opt var:iable}}Variable label for {it:varname}.{p_end}
+{space 2}{synopt:{opt val:ues}}Value labels for {it:varname}, following the same syntax as {help label define}: {it:# "label" [# "label" ...]}{p_end}
+{space 2}{synopt:{opt lblname(string)}}Name of the value label to use. Default is "{it:varname}_lbl".{p_end}
+{space 2}{synopt:{opt add}}Add value labels in {bf:values()} to {it:varname}{c 39}s existing value label.{p_end}
+{space 2}{synopt:{opt modify}}Use value labels in {bf:values()} to modify or delete existing # to label correspondences or add new correspondences to {it:varname}{c 39}s existing value label.{p_end}
+{space 2}{synopt:{opt remove}}Remove variable labels and detach value labels from {it:varname}. Value labels will not be dropped from the dataset.{p_end}
+{synoptline}
 
 
 

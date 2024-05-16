@@ -3,8 +3,7 @@
 {title:Title}
 
 {p 4 4 2}
-{bf:generate_aian_var} {hline 2} Generate categorical AI/AN variable for CPS or 
-ACS microdata.
+{bf:generate_aian_var} {hline 2} Generate an AIAN AOIC variable in ACS or CPS microdata.
 
 
 
@@ -12,34 +11,33 @@ ACS microdata.
 
 {p 4 4 2}
 {bf:generate_aian_var} generates a categorial variable for American 
-Indian/Alaska Native (AI/AN) identification, alone or in combination, regardless
-of Hispanic identification. It can be used with CPS (calendar year 2012 and 
-later) or ACS microdata.
+Indian or Alaska Native (AIAN) identification, alone or in combination (AOIC),
+regardless of Hispanic or Latino identification. 
+
+{p 4 4 2}
+In ACS microdata, the variable {bf:rac1p} exist. In CPS microdata, the variable 
+{bf:prdtrace} must exist.
+
+{p 4 4 2}
+{bf:generate_aian_var} should not be used in CPS microdata for calendar years 
+before 2012.
 
 
 
 {title:Syntax}
 
 {p 4 4 2}
-{bf:generate_aian_var} {it:{help newvar}}, [{it:options}]
+{bf:generate_aian_var} {newvar}, {opt data:set(acs|cps)} [{it:options}]
 
-{synoptset 24 tabbed}{...}
-{synopthdr}
+
+{synoptset 16}{...}
+{synopthdr:options}
 {synoptline}
-{syntab :Required}
-	{synopt:{opt data:set(string)}}CPS or ACS (case insensitive).{p_end}
-	
-{syntab:Optional}
-    {synopt:{opt nolab:el}}{it:newvar} will not be labelled.{p_end}
+	{synopt:{opt data:set(string)}}The type of dataset in memory; ACS or CPS (case insensitive).{p_end}
+{space 2}{synopt:{opt nolab:el}}Do not assign value labels to {it:newvar}.{p_end}
+{synoptline}
 
-	
 
-{title:Example(s)}
-
-{space 3}Generate a variable named {c 39}aian{c 39} for ACS microdata.
-        {bf:. generate_aian_var aian, dataset(acs)}
-		
-		
 
 {title:Website}
 

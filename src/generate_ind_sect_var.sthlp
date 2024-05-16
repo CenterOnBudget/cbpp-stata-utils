@@ -3,36 +3,37 @@
 {title:Title}
 
 {p 4 4 2}
-{bf:generate_ind_sect_var} {hline 2} Generate categorical industry sector 
-variable for CPS or ACS microdata.
+{bf:generate_ind_sect_var} {hline 2} Generate an industry sector variable in ACS or CPS microdata.
 
 
 
 {title:Description}
 
 {p 4 4 2}
-{bf:generate_ind_sect_var} generates a categorial variable for industry sectors representing 2-digit {browse "https://www.census.gov/naics/?58967?yearbck=2017":2017 North American Industry Classification System (NAICS) sectors}. It can be used 
-with ACS or CPS microdata.
+{bf:generate_ind_sect_var} generates a categorial variable for industry sectors representing 2-digit 
+{browse "https://www.census.gov/naics/?58967?yearbck=2017":2017 North American Industry Classification System (NAICS) sectors}.
 
 {p 4 4 2}
-Note that not all ACS or CPS data years use the 2017 NAICS. This command won{c 39}t work properly for data years that use other NAICS versions.
+For ACS microdata, the variable {bf:indp} must exist. For CPS microdata, the 
+variable {bf:peioind} must exist.
+
+{p 4 4 2}
+Not all ACS or CPS data years use the 2017 NAICS. This command will not work properly for data years that use other NAICS versions.
 
 
 
 {title:Syntax}
 
 {p 4 4 2}
-{bf:generate_ind_sect_var} {it:{help newvar}}, {bf:{cmdab:data:set}({it:string})} [{it:options}]
+{bf:generate_ind_sect_var} {newvar}, {opt data:set(string)} [{it:options}]
 
 
-{synoptset 24 tabbed}{...}
-{synopthdr}
+{synoptset 16}{...}
+{synopthdr:options}
 {synoptline}
-{syntab :Required}
-{space 2}{synopt:{opt data:set(string)}}ACS or CPS (case insensitive).{p_end}
-
-{syntab:Optional}
-{space 2}{synopt:{opt nolab:el}}{it:newvar} will not be labelled.{p_end}
+{space 2}{synopt:{opt data:set(string)}}The type of dataset in memory; ACS or CPS (case insensitive).{p_end}
+{space 2}{synopt:{opt nolab:el}}Do not assign value labels to {it:newvar}.{p_end}
+{synoptline}
 
 
 

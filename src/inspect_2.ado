@@ -5,17 +5,16 @@
 Title
 ====== 
 
-__inspect_2__ {hline 2} Summary statistics for positive, zero, negative, and 
-missing values. 
+__inspect_2__ {hline 2} Summary statistics for positive, zero, negative, and missing values.
 
 
 Description
 -----------
 
-A cross between {help summarize} and {help inspect}, __inspect_2__ gives the 
-frequency of positive, zero, negative, and missing values in a variable, as well
-as the mean, minimum, and maximum value of a variable within those categories 
-and overall.
+A cross between {help summarize} and {help inspect}, {bf:inspect_2} gives the 
+frequency of positive, zero, negative, and missing values in a variable, as well 
+as the mean, minimum, and maximum value of a variable within those categories and 
+overall.
 
 Results may be stored in a matrix (or matrices, if _varlist_ is multiple 
 variables) by specifying matrix name(s) to __matrix()__.
@@ -24,17 +23,29 @@ variables) by specifying matrix name(s) to __matrix()__.
 Syntax
 ------ 
 
-> __inspect_2__ _{help varlist}_ [_{help if}_] [_{help weight}_], [{opt matrix(names)}]
+__inspect_2__ {varlist} [_{help if}_] {weight} [, _options_]
+
+
+{synoptset 16}{...}
+{synopthdr:options}
+{synoptline}
+  {synopt:{opt mat:rix(matname)}}Store results in matrix _matname_. If multiple variables are specified in _varlist_, a list of matrix names in which to store the results.{p_end}
+{synoptline}
+
 
 {bf:fweight}s and {bf:iweight}s are allowed; see {help weight}.
 
 
 Example(s)
 ----------
-  
-		{bf:. inspect_2 thnetworth}
-		
-		{bf:. inspect_2 pincp pernp if agep >= 18 [fw=pwgtp], matrix(pincp_mat pernp_mat)}
+
+    Inspect a single variable.
+    
+        {bf:. inspect_2 thnetworth}
+    
+    Inspect multiple variables, storing the results in matrices.
+    
+        {bf:. inspect_2 pincp_adj pernp_adj, matrix(pincp_mat pernp_mat)}
 
 
 Website

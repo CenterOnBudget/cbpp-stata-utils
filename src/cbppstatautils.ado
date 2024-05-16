@@ -17,50 +17,53 @@ Run __{stata cbppstatautils, update}__ to update to the latest version.
 Contents
 -----------
 
-> __{help acs_relshipp_to_relp}__ : Recode ACS microdata variable 'relshipp' to 'relp'.
+{dlgtab:Data exploration and transformation}
 
-> __{help categorize}__ : Generate a categorical variable.
+{phang}{help categorize} {hline 2} Create a categorical variable from a continuous one.{p_end}
 
-> __{help copy_curl}__ : Copy file from URL with curl.
+{phang}{help etotal}  {hline 2}  Flexible counts and totals.{p_end}
 
-> __{help etotal}__ : Flexible counts and totals.
+{phang}{help inspect_2} {hline 2} Summary statistics for positive, zero, negative, and missing values.{p_end}
 
-> __{help generate_acs_adj_vars}__ : Generate adjusted versions of ACS PUMS 
-income and housing variables using 'adjinc' and 'adjhsg'.
+{phang}{help label_state} {hline 2} Label a state FIPS code variable with state names or postal abbreviations.{p_end}
 
-> __{help generate_aian_var}__ : Generate categorical AI/AN variable for CPS or 
-ACS microdata.
+{phang}{help labeller} {hline 2}  Create and attach variable and value labels in one step.{p_end}
 
-> __{help generate_race_var}__ : Generate categorical variable for 
-race/ethnicity in CPS or ACS microdata.
 
-> __{help generate_occ_grp_var}__ : Generate categorical occupation group 
-variable for CPS or ACS microdata.
+{dlgtab:Data retrieval}
 
-> __{help generate_ind_sect_var}__ : Generate categorical industry sector 
-variable for CPS or ACS microdata.
+{phang}{help get_acs_pums} {hline 2} Download ACS microdata files from the Census Bureau FTP and convert them to .dta format.{p_end}
 
-> __{help get_acs_pums}__ : Retrieve ACS PUMS files from the Census Bureau FTP.
+{phang}{help get_cpiu} {hline 2} Load CPI-U or R-CPI-U-RS price index data series into memory or a matrix.{p_end}
 
-> __{help get_cpiu}__ : Retrieve annual CPI-U or CPI-U-RS series as a dataset, 
-variable, or matrix.
+{phang}{help load_data} {hline 2} Load data from CBPP's datasets library into memory.{p_end}
 
-> __{help inspect_2}__ : Summary statistics for positive, zero, negative, and 
-missing values. 
 
-> __{help label_acs_pums}__ : Label American Community Survey PUMS data.
+{dlgtab:ACS and CPS microdata utilities}
 
-> __{help label_state}__ : Label a numeric state FIPS code variable with state 
-names or postal abbreviations.
+{phang}{help acs_relshipp_to_relp} {hline 2} Recode relshipp to relp in ACS microdata.{p_end}
 
-> __{help labeller}__ : Define and apply variable and value labels in one step.
+{phang}{help generate_acs_adj_vars} {hline 2} Adjust income and housing dollar variables with __adjinc__ and __adjhsg__ in ACS microdata.{p_end}
 
-> __{help load_data}__ : Load datasets from the CBPP datasets library into 
-memory.
+{phang}{help generate_aian_var} {hline 2} Generate an AIAN AOIC variable in ACS or CPS microdata.{p_end}
 
-> __{help make_cbpp_profile}__ : Set up CBPP's standard profile.do.
+{phang}{help generate_ind_sect_var} {hline 2} Generate an industry sector variable in ACS or CPS microdata.{p_end}
 
-> __{help svyset_acs}__ : Declare the survey design for ACS PUMS.
+{phang}{help generate_occ_grp_var} {hline 2} generate an occupation group variable in ACS or CPS microdata.{p_end}
+
+{phang}{help generate_race_var} {hline 2} Generate a race-ethnicity variable in ACS or CPS microdata.{p_end}
+
+{phang}{help label_acs_pums} {hline 2} Label ACS microdata in memory.{p_end}
+
+{phang}{help svyset_acs} {hline 2} Declare the survey design in ACS microdata.{p_end}
+
+
+{dlgtab:For CBPP staff}
+
+{phang}{help load_data} {hline 2} Load data from CBPP's datasets library into memory.{p_end}
+
+{phang}{help make_cbpp_profile} {hline 2} Set up CBPP's standard profile.do.{p_end}
+
 
 
 Website
@@ -76,17 +79,17 @@ Website
 
 program define cbppstatautils
 
-	syntax, [update]
-	
-	if "`update'" == "" {
-	    help cbppstatautils
-	}
-	
-	if "`update'" != "" {
-	    ado update cbppstatautils, update
-		display `"{browse "https://github.com/CenterOnBudget/cbpp-stata-utils/blob/master/NEWS.md":View changelog}"'
-	}
-	
+  syntax, [update]
+  
+  if "`update'" == "" {
+    help cbppstatautils
+  }
+  
+  if "`update'" != "" {
+    ado update cbppstatautils, update
+    display `"{browse "https://github.com/CenterOnBudget/cbpp-stata-utils/blob/master/NEWS.md":View changelog}"'
+  }
+  
 end
 
 

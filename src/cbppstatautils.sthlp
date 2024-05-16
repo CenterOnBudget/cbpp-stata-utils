@@ -16,50 +16,53 @@ Run {bf:{stata cbppstatautils, update}} to update to the latest version.
 
 {title:Contents}
 
-{p 8 8 2} {bf:{help acs_relshipp_to_relp}} : Recode ACS microdata variable {c 39}relshipp{c 39} to {c 39}relp{c 39}.
+{dlgtab:Data exploration and transformation}
 
-{p 8 8 2} {bf:{help categorize}} : Generate a categorical variable.
+{phang}{help categorize} {hline 2} Create a categorical variable from a continuous one.{p_end}
 
-{p 8 8 2} {bf:{help copy_curl}} : Copy file from URL with curl.
+{phang}{help etotal}  {hline 2}  Flexible counts and totals.{p_end}
 
-{p 8 8 2} {bf:{help etotal}} : Flexible counts and totals.
+{phang}{help inspect_2} {hline 2} Summary statistics for positive, zero, negative, and missing values.{p_end}
 
-{p 8 8 2} {bf:{help generate_acs_adj_vars}} : Generate adjusted versions of ACS PUMS 
-income and housing variables using {c 39}adjinc{c 39} and {c 39}adjhsg{c 39}.
+{phang}{help label_state} {hline 2} Label a state FIPS code variable with state names or postal abbreviations.{p_end}
 
-{p 8 8 2} {bf:{help generate_aian_var}} : Generate categorical AI/AN variable for CPS or 
-ACS microdata.
+{phang}{help labeller} {hline 2}  Create and attach variable and value labels in one step.{p_end}
 
-{p 8 8 2} {bf:{help generate_race_var}} : Generate categorical variable for 
-race/ethnicity in CPS or ACS microdata.
 
-{p 8 8 2} {bf:{help generate_occ_grp_var}} : Generate categorical occupation group 
-variable for CPS or ACS microdata.
+{dlgtab:Data retrieval}
 
-{p 8 8 2} {bf:{help generate_ind_sect_var}} : Generate categorical industry sector 
-variable for CPS or ACS microdata.
+{phang}{help get_acs_pums} {hline 2} Download ACS microdata files from the Census Bureau FTP and convert them to .dta format.{p_end}
 
-{p 8 8 2} {bf:{help get_acs_pums}} : Retrieve ACS PUMS files from the Census Bureau FTP.
+{phang}{help get_cpiu} {hline 2} Load CPI-U or R-CPI-U-RS price index data series into memory or a matrix.{p_end}
 
-{p 8 8 2} {bf:{help get_cpiu}} : Retrieve annual CPI-U or CPI-U-RS series as a dataset, 
-variable, or matrix.
+{phang}{help load_data} {hline 2} Load data from CBPP{c 39}s datasets library into memory.{p_end}
 
-{p 8 8 2} {bf:{help inspect_2}} : Summary statistics for positive, zero, negative, and 
-missing values. 
 
-{p 8 8 2} {bf:{help label_acs_pums}} : Label American Community Survey PUMS data.
+{dlgtab:ACS and CPS microdata utilities}
 
-{p 8 8 2} {bf:{help label_state}} : Label a numeric state FIPS code variable with state 
-names or postal abbreviations.
+{phang}{help acs_relshipp_to_relp} {hline 2} Recode relshipp to relp in ACS microdata.{p_end}
 
-{p 8 8 2} {bf:{help labeller}} : Define and apply variable and value labels in one step.
+{phang}{help generate_acs_adj_vars} {hline 2} Adjust income and housing dollar variables with {bf:adjinc} and {bf:adjhsg} in ACS microdata.{p_end}
 
-{p 8 8 2} {bf:{help load_data}} : Load datasets from the CBPP datasets library into 
-memory.
+{phang}{help generate_aian_var} {hline 2} Generate an AIAN AOIC variable in ACS or CPS microdata.{p_end}
 
-{p 8 8 2} {bf:{help make_cbpp_profile}} : Set up CBPP{c 39}s standard profile.do.
+{phang}{help generate_ind_sect_var} {hline 2} Generate an industry sector variable in ACS or CPS microdata.{p_end}
 
-{p 8 8 2} {bf:{help svyset_acs}} : Declare the survey design for ACS PUMS.
+{phang}{help generate_occ_grp_var} {hline 2} generate an occupation group variable in ACS or CPS microdata.{p_end}
+
+{phang}{help generate_race_var} {hline 2} Generate a race-ethnicity variable in ACS or CPS microdata.{p_end}
+
+{phang}{help label_acs_pums} {hline 2} Label ACS microdata in memory.{p_end}
+
+{phang}{help svyset_acs} {hline 2} Declare the survey design in ACS microdata.{p_end}
+
+
+{dlgtab:For CBPP staff}
+
+{phang}{help load_data} {hline 2} Load data from CBPP{c 39}s datasets library into memory.{p_end}
+
+{phang}{help make_cbpp_profile} {hline 2} Set up CBPP{c 39}s standard profile.do.{p_end}
+
 
 
 
