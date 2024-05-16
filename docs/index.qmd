@@ -1,0 +1,27 @@
+---
+title: "Get started"
+---
+
+::: {layout="[60,40]"}
+cbppstatautils is a Stata package created by and for researchers at the [Center on Budget and Policy Priorities](https://www.cbpp.org).
+
+<img src="logo.png" align="middle" width="35%"/>
+:::
+
+## Installation
+
+To install cbppstatautils, run:
+
+``` stata
+net install cbppstatautils, from("https://centeronbudget.github.io/cbpp-stata-utils/src")
+```
+
+To update your installation to the latest version, run:
+
+``` stata
+cbppstatautils, update
+```
+
+## License
+
+View the [license](https://github.com/CenterOnBudget/cbpp-stata-utils/blob/master/LICENSE) on GitHub.

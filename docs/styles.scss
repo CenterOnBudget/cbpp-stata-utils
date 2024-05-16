@@ -1,0 +1,38 @@
+/*-- scss:defaults --*/
+
+
+$primary: #0c61a4;
+$code-color:  #003B4F;
+$body-bg: #ffffff;
+
+/*-- scss:rules --*/
+
+#title-block-header.quarto-title-block.default .description {
+  font-size: $h3-font-size;
+  margin-top: .25em;
+  margin-bottom: .5em;
+}
+
+// Get rid of syntax highlighting
+code span.kw {
+  color: inherit;
+  font-weight: inherit;
+}
+code span.st {
+  color: inherit;
+}
+code span.fu {
+  color: inherit;
+}
+
+// Reference page
+.indent {
+  margin-left: 1.5rem;
+}
+.no-spacing > p {
+  margin-bottom: 0.1rem;
+}
+.table.table-borderless {
+  border-top: none;
+  border-bottom: none;
+}

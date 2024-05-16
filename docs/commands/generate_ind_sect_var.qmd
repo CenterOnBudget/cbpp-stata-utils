@@ -1,0 +1,29 @@
+---
+title: generate_ind_sect_var
+description: |
+  Generate an industry sector variable in ACS or CPS microdata.
+categories: ["ACS and CPS microdata utilities"]
+---
+
+## Description
+
+`generate_ind_sect_var` generates a categorical variable for industry sectors representing 2-digit [2017 North American Industry Classification System (NAICS) sectors](https://www.census.gov/naics/?58967?yearbck=2017).
+
+For ACS microdata, the variable `indp` must exist. For CPS microdata, the variable `peioind` must exist.
+
+::: callout-caution
+Not all ACS or CPS data years use the 2017 NAICS. This command will not work properly for data years that use other NAICS versions.
+:::
+
+## Syntax
+
+``` stata
+generate_ind_sect_var newvar, dataset(acs|cps) [options]
+```
+
+| Options           | Description                                                   |
+|--------------------|----------------------------------------------------|
+| `dataset(string)` | The type of dataset in memory; ACS or CPS (case insensitive). |
+| `nolabel`         | Do not assign value labels to *newvar*.                       |
+
+: {tbl-colwidths="\[30,70\]"}

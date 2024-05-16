@@ -1,0 +1,70 @@
+---
+title: load_data
+description: |
+  Load data from CBPP's datasets library into memory.
+categories: ["Tools for CBPP staff"]
+---
+
+::: callout-note
+This command is only useful for CBPP staff.
+:::
+
+## Description
+
+`load_data` loads CPS, ACS, ACS SPM, SNAP QC, or Household Pulse Survey microdata from a CBPP datasets library into memory.
+
+To use `load_data`, first:
+
+-   Sync the datasets library to your laptop.
+
+-   Add CBPP's global macros to your `profile.do` with [`make_cbpp_profile`](make_cbpp_profile.qmd).
+
+Multiple years of data may be loaded at once by specifying a list of years to the `years()` option. Variable and value labels from the maximum year will be retained.
+
+When loading multiple years of ACS data, if the range of `years()` spans the introduction of string characters to `serialno` in 2018, `serialno` will be edited ("00" and "01" will be substituted for "HU" and "GQ", respectively) and destringed.
+
+## Syntax
+
+``` stata
+load_data dataset [if], years(numlist) [options]
+```
+
+where *dataset* is one of "cps", "acs", "acs-spm", "qc", or "pulse" (case insensitive).
+
+| Option             | Description                                                                                                             |
+|--------------------|----------------------------------------------------|
+| `years(numlist)`   | Year(s) of data to load. When *dataset* is "cps", `years()` refers to the survey (data release) year.                   |
+| `vars(varlist)`    | Variables to load; default is all.                                                                                      |
+| `weeks(numlist)`   | Alias for `years()`; for use when *dataset* is "pulse".                                                                 |
+| `period(integer)`  | With *dataset* "qc" and `year(2020)`, period of data to load: 1 for the pre-pandemic period or 2 for the waiver period. |
+| `saveas(filename)` | Save dataset to file.                                                                                                   |
+| `replace`          | When `saveas()` is specified, replace existing dataset.                                                                 |
+| `clear`            | Replace the data in memory, even if the current data have not been saved to disk.                                       |
+
+: {tbl-colwidths="\[30,70\]"}
+
+## Examples
+
+Load March 2023 CPS ASEC microdata.
+
+``` stata
+load_data cps, year(2023)
+```
+
+Load a subset of variables from ACS microdata for 2019, 2021, and 2022.
+
+``` stata
+load_data acs, years(2019 2021/2022) vars(serialno sporder st agep povpip pwgtp)
+```
+
+Load SNAP QC microdata for 2019.
+
+``` stata
+load_data qc, years(2019)
+```
+
+Load Household Pulse Survey microdata for weeks 61-63.
+
+``` stata
+load_data pulse, weeks(61/63)
+```

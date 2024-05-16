@@ -1,0 +1,29 @@
+---
+title: generate_aian_var
+description: |
+  Generate an AIAN AOIC variable in ACS or CPS microdata.
+categories: ["ACS and CPS microdata utilities"]
+---
+
+## Description
+
+`generate_aian_var` generates a categorial variable for American Indian or Alaska Native (AIAN) identification, alone or in combination (AOIC), regardless of Hispanic or Latino identification.
+
+In ACS microdata, the variable `rac1p` exist. In CPS microdata, the variable `prdtrace` must exist.
+
+::: callout-caution
+`generate_aian_var` should not be used in CPS microdata for calendar years before 2012.
+:::
+
+## Syntax
+
+``` stata
+generate_aian_var newvar, dataset(acs|cps) [options]
+```
+
+| Options           | Description                                                   |
+|------------------|------------------------------------------------------|
+| `dataset(string)` | The type of dataset in memory; ACS or CPS (case insensitive). |
+| `nolabel`         | Do not assign value labels to *newvar*.                       |
+
+: {tbl-colwidths="\[30,70\]"}

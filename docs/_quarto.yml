@@ -1,0 +1,33 @@
+project:
+  type: website
+
+website:
+  title: "cbppstatautils"
+  bread-crumbs: false
+  page-footer: "Copyright © 2024 Center on Budget and Policy Priorities." 
+  navbar:
+    search: true
+    logo: logo-grid-white.png
+    left: 
+      - index.qmd
+      - reference.qmd
+      - news.qmd
+    tools:
+      - icon: github
+        href: https://github.com/CenterOnBudget/cbpp-stata-utils
+  
+format:
+  html:
+    theme: 
+      - cosmo
+      - styles.scss
+    grid:
+      sidebar-width: 300px
+      body-width: 800px
+      margin-width: 200px
+    toc: true
+
+callout-appearance: simple
+
+
+

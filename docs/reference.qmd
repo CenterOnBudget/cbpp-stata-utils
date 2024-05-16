@@ -1,0 +1,184 @@
+---
+title: "Reference"
+
+listing:
+  id: commands
+  contents: commands
+  type: table
+  max-description-length: 300
+  fields: [title, description, categories]
+  sort-ui: false
+  
+---
+
+
+## Data exploration & transformation
+
+::: no-spacing
+[`categorize`](commands/categorize.qmd)
+:::
+
+::: indent
+Create a categorical variable from a continuous one.
+:::
+
+::: no-spacing
+[`etotal`](commands/etotal.qmd)
+:::
+
+::: indent
+Flexible counts and totals.
+:::
+
+::: no-spacing
+[`inspect_2`](commands/inspect_2.qmd)
+:::
+
+::: indent
+Summary statistics for positive, zero, negative, and missing values.
+:::
+
+::: no-spacing
+[`label_state`](commands/label_state.qmd)
+:::
+
+::: indent
+Label a state FIPS code variable with state names or postal abbreviations.
+:::
+
+::: no-spacing
+[`labeller`](commands/labeller.qmd)
+:::
+
+::: indent
+Create and attach variable and value labels in one step.
+:::
+
+## Data retrieval
+
+::: no-spacing
+[`copy_curl`](commands/copy_curl.qmd)
+:::
+
+::: indent
+Copy file from URL with curl.
+:::
+
+::: no-spacing
+[`get_acs_pums`](commands/get_acs_pums.qmd)
+:::
+
+::: indent
+Download ACS microdata files from the Census Bureau FTP and convert them to .dta format.
+:::
+
+::: no-spacing
+[`get_cpiu`](commands/get_cpiu.qmd)
+:::
+
+::: indent
+Load CPI-U or R-CPI-U-RS price index data series into memory or a matrix.
+:::
+
+::: no-spacing
+[`load_data`](commands/load_data.qmd)
+:::
+
+::: indent
+Load data from CBPP's datasets library into memory.
+:::
+
+## ACS and CPS microdata utilities 
+
+::: no-spacing
+[`acs_relshipp_to_relp`](commands/acs_relshipp_to_relp.qmd)
+:::
+
+::: indent
+Recode `relshipp` to `relp` in ACS microdata. 
+:::
+
+::: no-spacing
+[`generate_acs_adj_vars`](commands/generate_acs_adj_vars.qmd)
+:::
+
+::: indent
+Adjust income and housing dollar variables with `adjinc` and `adjhsg` in ACS microdata.
+:::
+
+::: no-spacing
+[`generate_aian_var`](commands/generate_aian_var.qmd)
+:::
+
+::: indent
+Generate an AIAN AOIC variable in ACS or CPS microdata.
+:::
+
+::: no-spacing
+[`generate_ind_sect_var`](commands/generate_ind_sect_var.qmd)
+:::
+
+:::indent
+Generate an industry sector variable in ACS or CPS microdata.
+:::
+
+::: no-spacing
+[`generate_occ_grp_var`](commands/generate_occ_grp_var.qmd)
+:::
+
+::: indent
+Generate an occupation group variable in ACS or CPS microdata.
+:::
+
+::: no-spacing
+[`generate_race_var`](commands/generate_race_var.qmd)
+:::
+
+::: indent
+Generate a race-ethnicity variable in ACS or CPS microdata.              
+:::
+
+::: no-spacing
+[`label_acs_pums`](commands/label_acs_pums.qmd)
+:::
+
+::: indent
+Label ACS microdata in memory.
+:::
+
+::: no-spacing
+[`svyset_acs`](commands/svyset_acs.qmd)
+:::
+
+::: indent
+Declare the survey design in ACS microdata.
+:::
+
+## Tools for CBPP staff
+
+:::callout-note
+These commands are only useful for CBPP staff.
+:::
+
+::: no-spacing
+[`load_data`](commands/load_data.qmd)
+:::
+
+::: indent
+Load data from CBPP's datasets library into memory.
+:::
+
+::: no-spacing
+[`make_cbpp_profile`](commands/make_cbpp_profile.qmd)
+:::
+
+::: indent
+Set up CBPP's standard profile.do.
+:::
+
+## All Commands
+
+::: {#commands}
+
+:::
+

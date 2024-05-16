@@ -1,0 +1,40 @@
+---
+title: inspect_2
+description: |
+  Summary statistics for positive, zero, negative, and missing values. 
+categories: ["Data exploration and transformation"]
+---
+
+## Description
+
+A cross between `summarize` and `inspect`, `inspect_2` gives the frequency of positive, zero, negative, and missing values in a variable, as well as the mean, minimum, and maximum value of a variable within those categories and overall.
+
+Results may be stored in a matrix (or matrices, if `varlist` is multiple variables) by specifying matrix name(s) to `matrix()`.
+
+## Syntax
+
+``` stata
+inspect_2 varlist [if] [weight], [options]
+```
+
+| Option            | Description                                                                                                                                |
+|--------------------|----------------------------------------------------|
+| `matrix(matname)` | Store results in matrix *matname*. If multiple variables are specified in *varlist*, a list of matrix names in which to store the results. |
+
+: {tbl-colwidths="\[30,70\]"}
+
+`fweight`s and `iweight`s are allowed.
+
+## Examples
+
+Inspect a single variable
+
+``` stata
+inspect_2 thnetworth
+```
+
+Inspect multiple variables, storing the results in matrices.
+
+``` stata
+inspect_2 pincp_adj pernp_adj, matrix(pincp_mat pernp_mat)
+```

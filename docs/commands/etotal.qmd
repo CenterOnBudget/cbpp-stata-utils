@@ -1,0 +1,70 @@
+---
+title: etotal
+description: |
+  Flexible counts and totals.
+categories: ["Data exploration and transformation"]
+---
+
+## Description
+
+An extension of `total`, `etotal` produces either totals or counts, depending on what the user has specified.
+
+If weights are specified, or if data are `svyset` and the `svy` option is specified, standard errors and confidence intervals are included.
+
+## Syntax
+
+Count of observations
+
+``` stata
+etotal [if] [weight] [, options]
+```
+
+Total of existing variable
+
+``` stata
+etotal varname [if] [weight] [, options]
+```
+
+Total of expression
+
+``` stata
+etotal exp [if] [weight] [, options]
+```
+
+| Option            | Description                                                                                               |
+|-------------------|-----------------------------------------------------|
+| `over(varname)`   | Group over subpopulations defined by *varname*.                                                           |
+| `svy`             | Adjust the results for survey settings identified by `svyset`.                                            |
+| `level(#)`        | Set confidence level; default is `level(95)`.                                                             |
+| `cformat(%fmt)`   | Specifies how to format estimates, standard errors, and confidence limits; default is `cformat(%14.0fc)`. |
+| `matrix(matname)` | Save results in matrix *matname*.                                                                         |
+
+: {tbl-colwidths="\[30,70\]"}
+
+`fweight`s, `iweight`s, and `pweight`s are allowed.
+
+## Examples
+
+Weighted count of observations
+
+``` stata
+etotal [iw=wgtp]
+```
+
+Total of existing variable
+
+``` stata
+etotal hincp if relp == 0 [iw=wgtp]
+```
+
+Total of existing variable, data is svyset
+
+``` stata
+etotal hincp, svy
+```
+
+Total of expression, saving results in matrix
+
+``` stata
+etotal hincp / 1000 [iw=wgtp], matrix(tot_hh_inc_thous)
+```

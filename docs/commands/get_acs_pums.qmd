@@ -1,0 +1,58 @@
+---
+title: get_acs_pums
+description: |
+  Download ACS microdata files from the Census Bureau FTP and convert them to .dta format.
+categories: ["Data retrieval"]
+---
+
+## Description
+
+`get_acs_pums` downloads [American Community Survey public use microdata](https://www.census.gov/programs-surveys/acs/microdata.html) CSV files from the Census Bureau FTP and converts them to Stata's .dta format.
+
+If `state()` is not specified, the program will retrieve the national dataset. Downloading the data for the entire U.S. can take several hours. The national dataset is split into several CSV files. `get_acs_pums` appends them into a single .dta file.
+
+Datasets will be saved in "acs_pums/\[year\]/\[sample\]\_yr" within the current working directory (the default) or in another directory the user specifies with the `dest_dir()` option. For example, `get_acs_pums, state(vt) year(2022) sample(5) record_type(h) dest_dir(my_data)` would save files in "my_data/acs_pums/2022/5_yr", creating intermediate directories as needed.
+
+State .dta files are named the same as the original CSV files: "psam\_\[record_type\]\[state_fips_code\]" for 2017 and later, and "ss\[year\]\[record_type\]\[state\]" for earlier years. National .dta files are named "psam\_\[record_type\]us.dta" for 2017 and later, and "ss\[year\]\[record_type\]us.dta" for earlier years.
+
+If `year()` is 2013 or later, datasets will be labeled with information from the ACS PUMS data dictionaries by default.
+
+## Syntax
+
+``` stata
+get_acs_pums, year(integer) [options]
+```
+
+| Option                | Description                                                                                                                                      |
+|------------------|------------------------------------------------------|
+| `year(integer)`       | Data year to retrieve. With `sample(1)`, 2005 to the most recent available, excluding 2020. With `sample(5)`, 2009 to the most recent available. |
+| `sample(integer)`     | Sample to retrieve; 1 for the 1-year sample (the default) or 5 for the 5-year sample.                                                            |
+| `state(string)`       | Postal abbreviation of the state to retrieve (case insensitive).                                                                                 |
+| `record_type(string)` | Record type to retrieve; "person", "household", or "both" (the default). Abbreviations "h", "hhld", "hous", "p", and "pers" are also accepted.   |
+| `nolabel`             | Do not attach variable or value labels to the dataset.                                                                                           |
+| `dest_dir()`          | Directory in which to save the retrieved data. Default is the current working directory.                                                         |
+| `keep_zip`            | Downloaded ZIP files will not be deleted after .dta files are created.                                                                           |
+| `keep_all`            | Downloaded ZIP files and unzipped CSV files will not be deleted after .dta files are created.                                                    |
+| `replace`             | Existing .dta, CSV, and ZIP files will be replaced.                                                                                              |
+
+: {tbl-colwidths="\[30,70\]"}
+
+## Examples
+
+Retrieve person and household records for the District of Columbia.
+
+``` stata
+get_acs_pums, state("dc") year(2022)
+```
+
+Retrieve household records from the 2022 5-year sample for Vermont, preserving the ZIP and CSV files.
+
+``` stata
+get_acs_pums, state("vt") year(2022) sample(5) record_type("household") keep_all
+```
+
+Retrieve person records from the 1-year national sample and save the files to "my_datasets"
+
+``` stata
+get_acs_pums, year(2022) record_type("p") dest_dir("my_datasets")
+```

@@ -1,0 +1,24 @@
+---
+title: label_state
+description: |
+  Label a state FIPS code variable with state names or postal abbreviations.
+categories: ["Data exploration and transformation"]
+---
+
+## Description
+
+`label_state` attaches value labels to a variable containing [state FIPS codes](https://www.census.gov/library/reference/code-lists/ansi/ansi-codes-for-states.html). Value labels are the full state name by default. The 50 states, the District of Columbia, Puerto Rico, and U.S. territories are supported.
+
+If the state FIPS code variable in *varname* is a string, it will be destringed.
+
+## Syntax
+
+``` stata
+label_state varname [, options]
+```
+
+| Option  | Description                                                                            |
+|------------------|------------------------------------------------------|
+| `abbrv` | Use state postal abbreviations rather than state names (the default) for value labels. |
+
+: {tbl-colwidths="\[30,70\]"}
