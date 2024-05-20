@@ -137,7 +137,7 @@ program define categorize
 		
 		local n_cuts : word count `at'
     
-    if "`lblname'" === "" {
+    if "`lblname'" == "" {
       local lblname "`newvar'_lbl"
     }
 		capture label drop `lblname'
