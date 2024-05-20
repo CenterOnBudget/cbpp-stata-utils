@@ -57,68 +57,65 @@ Website
 
 program svyset_acs
 
-	syntax ,  ///
+  syntax ,  ///
     RECord_type(string) ///
     [n_years(integer 1)]  ///
     [MULTIyear(integer 1)] [NOSDRweights] 
-	
-	if !inlist("`record_type'", "p", "pers", "person", "h", "hh", "hous", "hhld", "household") {
-		display as error "{bf:record_type()} must be person, household, their respective supported abbreviations, or both"
-		exit 198
-	}
-	
-	local record_type = cond(inlist("`record_type'", "p", "pers", "person"), "p", "h")
-	local weight = cond("`record_type'" == "p", "pwgtp", "wgtp")
-	
-	confirm variable `weight'
-	
-	if "`nosdrweights'" == "" {
-		capture {
-			forvalues r = 1/80 {
-				confirm variable `weight'`r'
-			}
-		}
-		if _rc != 0 {
-			display as error "one or more replicate weight variables (`weight'1-`weight'80) not found"
-			exit 111
-		}
-  }  
-    if `multiyear' > 1  {
-      
-      display as result "{bf:multiyear()} is deprecated; please use {bf:n_years()}"
-      
-      if `n_years' > 1 {
-        display as error "either {bf:n_years()} or {bf:multiyear()} may be specified, not both"
-        exit 198
+  
+  if !inlist("`record_type'", "p", "pers", "person", "h", "hh", "hous", "hhld", "household") {
+    display as error "{bf:record_type()} must be person, household, their respective supported abbreviations, or both"
+    exit 198
+  }
+  
+  local record_type = cond(inlist("`record_type'", "p", "pers", "person"), "p", "h")
+  local weight = cond("`record_type'" == "p", "pwgtp", "wgtp")
+  
+  confirm variable `weight'
+  
+  if "`nosdrweights'" == "" {
+    capture {
+      forvalues r = 1/80 {
+        confirm variable `weight'`r'
       }
-      
     }
+    if _rc != 0 {
+      display as error "one or more replicate weight variables (`weight'1-`weight'80) not found"
+      exit 111
+    }
+  }
+  
+  if `multiyear' > 1  {
+    display as result "{bf:multiyear()} is deprecated; please use {bf:n_years()}"
+    if `n_years' > 1 {
+      display as error "either {bf:n_years()} or {bf:multiyear()} may be specified, not both"
+      exit 198
+    }
+  }
+  
+  local n_years = max(`multiyear', `n_years')
+  
+  if `n_years' == 1 {
+    if "`nosdrweights'" == "" {
+      svyset [iw=`weight'], mse vce(sdr) sdrweight(`weight'1-`weight'80)
+    }
+    if "`nosdrweights'" != "" {
+      svyset [iw=`weight']
+    }
+  }
     
-    local n_years = max(`multiyear', `n_years')
-    
-		if `n_years' == 1 {
-			if "`nosdrweights'" == "" {
-				svyset [iw=`weight'], mse vce(sdr) sdrweight(`weight'1-`weight'80)
-			}
-			if "`nosdrweights'" != "" {
-				svyset [iw=`weight']
-			}
-		}
-		
-		if `n_years' > 1 {
-			display as result "using `n_years'-year average weights"
-			foreach w of varlist `weight'* {
-				quietly generate `w'_`n_years'yr = `w' / `n_years'
-			}
-			if "`nosdrweights'" == "" {
-				svyset [iw=`weight'_`n_years'yr], mse vce(sdr) 				///
-					   sdrweight(`weight'1_`n_years'yr-`weight'80_`n_years'yr)
-			}
-			if "`nosdrweights'" != "" {
-				svyset [iw=`weight'_`n_years'yr]
-			}
-		}
-	
+  if `n_years' > 1 {
+    display as result "using `n_years'-year average weights"
+    foreach w of varlist `weight'* {
+      quietly generate `w'_`n_years'yr = `w' / `n_years'
+    }
+    if "`nosdrweights'" == "" {
+      svyset [iw=`weight'_`n_years'yr], mse vce(sdr)  ///
+        sdrweight(`weight'1_`n_years'yr-`weight'80_`n_years'yr)
+    }
+    if "`nosdrweights'" != "" {
+      svyset [iw=`weight'_`n_years'yr]
+    }
+  }
 
 end
 

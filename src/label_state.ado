@@ -44,31 +44,33 @@ Website
 
 program label_state
 
-	syntax varname, [abbrv]
+  syntax varname, [abbrv]
 
-	// destring in case variable is string with leading zeros
-	capture confirm string `varlist' 
-	if _rc != 0 {
-		quietly destring `varlist', replace 
-	}
-	
-	// drop state_lbl if it exists
-	capture label drop state_lbl			
-	
-	// construct labels from state_fips.dta (comes with cbppstatautils package)
-	preserve
-	sysuse state_fips, clear
-	local lbl_content_var = cond("`abbrv'" == "", "state_name", "state_abbrv")
-	generate lbl = "label define state_lbl " + state_fips + " " + `"""' + `lbl_content_var' + `"""' + ", add "
-	quietly levelsof lbl, local(lbls)
-	
-	// define and apply label
-	restore
-	foreach l of local lbls {
-		`l'
-	}
-	label values `varlist' state_lbl
-	
+  * Destring varname
+  capture confirm string `varlist' 
+  if _rc != 0 {
+    quietly destring `varlist', replace 
+  }
+  
+  * Drop state_lbl if it exists
+  capture label drop state_lbl      
+  
+  * Construct value labels from state_fips dataset
+  preserve
+  sysuse state_fips, clear
+  local lbl_content_var = cond("`abbrv'" == "", "state_name", "state_abbrv")
+  generate lbl =  ///
+    "label define state_lbl " + state_fips + " " +  ///
+    `"""' + `lbl_content_var' + `"""' + ", add "
+  quietly levelsof lbl, local(lbls)
+  
+  * Define and apply value label
+  restore
+  foreach l of local lbls {
+    `l'
+  }
+  label values `varlist' state_lbl
+  
 end
 
 

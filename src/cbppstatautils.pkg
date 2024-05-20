@@ -46,6 +46,7 @@ f load_data.sthlp
 f make_cbpp_profile.ado
 f make_cbpp_profile.sthlp
 f _cbpp_profile.ado
+f _cbppstatautils_cache.ado
 f svyset_acs.ado
 f svyset_acs.sthlp
 

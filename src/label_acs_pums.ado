@@ -1,4 +1,4 @@
-*! version 0.2.0
+*! version 0.2.9
 
 
 /***
@@ -54,148 +54,160 @@ Website
 
 program define label_acs_pums
 
-	syntax , year(integer) [sample(integer 1) use_cache]
-	
+  syntax , year(integer) [sample(integer 1) use_cache]
+  
+  
+  **# Checks ------------------------------------------------------------------
+  
+  if `year' < 2013 {
+    display as error "{bf:year()} must be 2013 or later"
+    exit 198
+  }
+  if !inlist(`sample', 1, 5) {
+    display as error "{bf:sample()} must be 1 or 5"
+    exit 198
+  }
+  if `year' == 2020 & `sample' == 1 {
+    display as error "Standard 2020 1-year ACS microdata were not released"
+    exit
+  }
+  
+  
+  **# Set up ------------------------------------------------------------------
+  
+  * Cache directory
+  _cbppstatautils_cache  
+  local cache_dir = "`s(cache_dir)'"
+  
+  * File names
+  local data_dict "acs_pums_dict_`year'_`sample'yr.txt"
+  local lbl_do "lbl_acs_pums_`year'_`sample'yr.do"
+  
+  * Need to download data dictionary?
+  capture confirm file "`cache_dir'/`data_dict'"
+  local download_dict = (_rc != 0) | ("`use_cache'" == "")
+  
+  * Need to create label .do file?
+  capture confirm file "`cache_dir'/`lbl_do'"
+  local create_do = (_rc != 0) | ("`use_cache'" == "")
+  
+  
+  **# Download data dictionary from Census Bureau FTP -------------------------
+  
+  if `download_dict' {
     
-    * check for invalid year or sample ----------------------------------------
-    
-	if `year' < 2013 {
-		display as error "{bf:year()} must be 2013 or later"
-		exit 198
-	}
-    if !inlist(`sample', 1, 5) {
-    	display as error "{bf:sample()} must be 1 or 5"
-        exit 198
+    if `sample' == 1 {
+      local yr = substr("`year'", 3, 4)
+      local dict_url_file =   ///
+        cond(`year' > 2016, "PUMS_Data_Dictionary_`year'", "PUMSDataDict`yr'")
     }
-    if `year' == 2020 & `sample' == 1 {
-        display as error "Standard 2020 1-year ACS microdata were not released"
-        exit
-    }
-    
-    * set up cache directory --------------------------------------------------
-    
-	local cache_dir = cond("`c(os)'" == "Windows", 				///
-						   "~/AppData/Local/cbppstatautils",	///
-						   "~/Library/Application Support/cbppstatautils")
-	capture mkdir "`cache_dir'"		
-	
-    
-    * define file names -------------------------------------------------------
-    
-    local data_dict "acs_pums_dict_`year'_`sample'yr.txt"
-    local lbl_do "lbl_acs_pums_`year'_`sample'yr.do"
-    
-    
-	* decide whether to download/create file ----------------------------------
-    
-	// download if use_cache is not specified, 
-	// or if use_cache is specified but the file does not exist
-	
-    capture confirm file "`cache_dir'/`data_dict'"
-    local download_dict = (_rc != 0) | ("`use_cache'" == "")
-    
-    capture confirm file "`cache_dir'/`lbl_do'"
-    local create_do = (_rc != 0) | ("`use_cache'" == "")
-    
-	
-	* download data dictionary from Census Bureau FTP -------------------------
-    
-    if `download_dict' {
-
-        if `sample' == 1 {
-            local yr = substr("`year'", 3, 4)
-            local dict_url_file = cond(`year' > 2016,						///
-                                       "PUMS_Data_Dictionary_`year'", 		///
-                                       "PUMSDataDict`yr'")
-        }
-        if `sample' == 5 {
-            local start_year = `year' - 4
-            local dict_url_file "PUMS_Data_Dictionary_`start_year'-`year'"
-        }
-
-        quietly copy "https://www2.census.gov/programs-surveys/acs/tech_docs/pums/data_dict/`dict_url_file'.txt"	///
-                     "`cache_dir'/`data_dict'", replace	
+    if `sample' == 5 {
+      local start_year = `year' - 4
+      local dict_url_file "PUMS_Data_Dictionary_`start_year'-`year'"
     }
 
+    quietly copy "https://www2.census.gov/programs-surveys/acs/tech_docs/pums/data_dict/`dict_url_file'.txt"  ///
+      "`cache_dir'/`data_dict'", replace
+  }
+
+  
+  **# Create label .do file ---------------------------------------------------
+  
+  if `create_do' {
     
-	* generate label .do file -------------------------------------------------
-    
-    if `create_do' {
-    	
-        preserve
+    preserve
 
-        quietly {
-            infix str500 input 1-500  using "`cache_dir'/`data_dict'", clear
-            
-            generate str500 output = "", before(input)
-            replace input = strtrim(stritrim(input))
-            
-            split input, generate(value) parse(".")		// split by value definition (.)
-            split input, generate(token)				// split by word
+    quietly {
+      
+      infix str500 input 1-500  using "`cache_dir'/`data_dict'", clear
+      
+      generate str500 output = "", before(input)
+      replace input = strtrim(stritrim(input))
+      
+      split input, generate(value) parse(".") // Split by value definition
+      split input, generate(token) // Split by word
+      
+      
+      **## Variable names -----------------------------------------------------
 
-            // detect variable name rows
-            // after 2017, data type was added to the variable name line of the 
-            // data dictionary text file
-            local varname_row_wordcount = cond(`year' < 2017, 2, 3) 	
-            local varname_row_token = cond(`year' < 2017, "token3", "token4")
+      * Detect variable name rows
+      * After 2017, data type was added to the variable name line of the 
+      * data dictionary text file
+      local varname_row_wordcount = cond(`year' < 2017, 2, 3)   
+      local varname_row_token = cond(`year' < 2017, "token3", "token4")
+      generate is_varname =   ///
+        input[_n-1] == ""  &  ///    
+        wordcount(input) == `varname_row_wordcount' & ///
+        `varname_row_token' == "",  ///
+        after(input)
+      generate varname = lower(token1) if is_varname, after(is_varname)
 
-            generate is_varname = input[_n-1] == ""	&								///		
-                                  wordcount(input) == `varname_row_wordcount' & 	///
-                                  `varname_row_token' == "",						///
-                                  after(input)
-            generate varname = lower(token1) if is_varname, after(is_varname)
-                                  
-            // variable labels
-            generate var_lbl = input[_n+1] if is_varname, after(varname)	
-            replace output = "capture label variable " + varname + " " + 	///
-                             `"""' + var_lbl + `"""' 						///
-                             if is_varname & var_lbl != ""
-            // value labels
-            replace varname = varname[_n-1] if varname == ""	// fill down 
-            generate is_value_lbl = regexm(token2, "^\."), before(value1)
-            generate label = substr(input, strpos(input, "." ) + 1, .) if is_value_lbl,		///
-                             after(is_value_lbl)
-            replace output = "capture label define " + varname + "_lbl " + value1 + " " + 	///
-                             `"""' + label + `"""' + ", add" 								///
-                             if is_value_lbl & !strmatch(input, "*..*") & !regexm(value1, "^b")
-            egen var_has_value_lbls = max(regexm(output, "label define")), by(varname)				 
-            replace output = "capture label values " + varname + " " + varname + "_lbl"		///
-                             if var_has_value_lbls & is_varname[_n+1]				 
-            // notes
-            generate is_note = ustrregexm(token1, "Note:", 1)
-            replace is_note = is_note[_n-1] if !is_note & 					///
-                                               varname == varname[_n-1]  &	///
-                                               input != ""
-            replace is_note = 0 if missing(is_note)
-            generate note_clean = ustrregexrf(input, "note: ", "", 1) if is_note
-            replace output = "capture note " + varname + ": " + note_clean if is_note
-
-            // cleanup 
-            keep if output != "" | is_varname 
-            duplicates drop if output != ""
-            keep output is_varname varname
-            // add white space (while preserving order within a variable's lines)
-            expand 2 if is_varname, generate(new_obs)
-            replace output = "" if new_obs
-            sort varname, stable
-            // add header
-            insobs 3, before(1)
-            replace output = "* Generated $S_DATE'" in 1
-            keep output
-            compress
-        }
+      
+      **## Variable labels ----------------------------------------------------
+      
+      generate var_lbl = input[_n+1] if is_varname, after(varname)  
+      replace output =  ///
+        "capture label variable " + varname + " " + `"""' + var_lbl + `"""' ///
+        if is_varname & var_lbl != ""
         
-        quietly outfile using "`cache_dir'/`lbl_do'", noquote replace
-        
-        restore
+      
+      **## Value labels -------------------------------------------------------
+      
+      replace varname = varname[_n-1] if varname == ""  // Fill down 
+      generate is_value_lbl = regexm(token2, "^\."), before(value1)
+      generate label =  ///
+        substr(input, strpos(input, "." ) + 1, .)   ///
+        if is_value_lbl, after(is_value_lbl)
+      replace output =  ///
+        "capture label define " + varname + "_lbl " + value1 + " " +  ///
+        `"""' + label + `"""' + ", add" ///
+        if is_value_lbl & !strmatch(input, "*..*") & !regexm(value1, "^b")
+      egen var_has_value_lbls = max(regexm(output, "label define")), by(varname)         
+      replace output =  ///
+        "capture label values " + varname + " " + varname + "_lbl"  ///
+        if var_has_value_lbls & is_varname[_n+1]    
+      
+      
+      **## Variable notes -----------------------------------------------------
+      
+      generate is_note = ustrregexm(token1, "Note:", 1)
+      replace is_note =   ///
+        is_note[_n-1] if !is_note & varname == varname[_n-1] & input != ""
+      replace is_note = 0 if missing(is_note)
+      generate note_clean = ustrregexrf(input, "note: ", "", 1) if is_note
+      replace output = "capture note " + varname + ": " + note_clean if is_note
+
+      
+      **## Cleanup ------------------------------------------------------------
+      
+      keep if output != "" | is_varname 
+      duplicates drop if output != ""
+      keep output is_varname varname
+      
+      * Add white space (while preserving order within a variable's lines)
+      expand 2 if is_varname, generate(new_obs)
+      replace output = "" if new_obs
+      sort varname, stable
+      
+      * Add header
+      insobs 3, before(1)
+      replace output = "* Generated $S_DATE'" in 1
+      keep output
+      compress
+      
     }
     
+    quietly outfile using "`cache_dir'/`lbl_do'", noquote replace
     
-    * run label .do file ------------------------------------------------------
-    
-    quietly do "`cache_dir'/`lbl_do'"
-    display as result "Data labeled with dictionary for `year' `sample'-year sample."
-    
+    restore
+  }
+  
+  
+  **# Run label .do file ------------------------------------------------------
+  
+  quietly do "`cache_dir'/`lbl_do'"
+  display as result "Data labeled with dictionary for `year' `sample'-year sample."
+  
 end
 
 

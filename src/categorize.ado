@@ -70,108 +70,108 @@ program define categorize
     GENerate(name)  ///
     [breaks(numlist sort) default(string)]  ///
     [lblname(string) nformat(string) NOLABel VARLABel(string)]
-	
     
-    local varname `varlist'
-    
-    * check for errors --------------------------------------------------------
-    
-    // throw error if generate already exists
-    local newvar `generate'
-    capture confirm `newvar'
-    if _rc == 0 {
-        display as error "{bf:`newvar'} already defined"
-        exit 110
+  local varname `varlist'
+  
+  
+  **# Check if newvar already exists ------------------------------------------
+  
+  local newvar `generate'
+  capture confirm `newvar'
+  if _rc == 0 {
+    display as error "{bf:`newvar'} already defined"
+    exit 110
+  }
+  
+  
+  **# Define breaks -----------------------------------------------------------
+  
+  * Find minimum and maximum of varname
+  quietly summarize `varname'
+  local max = `r(max)' + 1
+  local min = `r(min)'
+  
+  * Validate and expand user-specified breaks
+  if "`breaks'" != "" {
+    if "`default'" != "" {
+      display as error "{bf:breaks()} and {bf:default()} may not be combined"
+      exit 184
     }
     
+    numlist "`breaks'", range(>`min' <`max')
+    local at = "`min' `r(numlist)' `max'"
+  }
+  
+  * Parse default breaks
+  if "`breaks'" == "" {
+    if "`default'" == "" {
+      display as error "{bf:default()} must be specified if {bf:default()} is not specified"
+      exit 198
+    }
+    if !inlist("`default'", "age", "povratio") {
+      display as error "{bf:default()} must be 'age' or 'povratio'"
+      exit 198
+    }
+    if "`default'" == "age" {
+      local at 0 18 65 `max'
+      display as result "Using default age breaks: `at'."
+    }
+    if "`default'" == "povratio" {
+      local at 0 50 100 150 200 250 `max'
+      display as result "Using default poverty ratio breaks: `at'."
+    }
+  }
+  
+  
+  **# Generate new variable ---------------------------------------------------
+  
+  local cuts = ustrregexra("`at'", " ", ", ")
+  egen `newvar' = cut(`varname'), at(`cuts') icodes
+  quietly replace `newvar' = `newvar' + 1
+  
+  
+  **# Label new variable ------------------------------------------------------
+  
+  if "`nolabel'" == "" {
     
-    * define breaks -----------------------------------------------------------
-    
-	// find min and max so user doesn't need to specify
-	quietly summarize `varname'
-	local max = `r(max)' + 1
-	local min = `r(min)'
-	
-	// validate user-specified breaks and expand
-	if "`breaks'" != "" {
-		if "`default'" != "" {
-			display as error "{bf:breaks()} and {bf:default()} may not be combined"
-			exit 184
-		}
-		
-		numlist "`breaks'", range(>`min' <`max')
-		local at = "`min' `r(numlist)' `max'"
-	}
-	
-	// parse default breaks
-	if "`breaks'" == "" {
-		if "`default'" == "" {
-			display as error "{bf:default()} must be specified if {bf:default()} is not specified"
-			exit 198
-		}
-		if !inlist("`default'", "age", "povratio") {
-			display as error "{bf:default()} must be 'age' or 'povratio'"
-			exit 198
-		}
-		if "`default'" == "age" {
-			local at 0 18 65 `max'
-			display as result "Using default age breaks: `at'."
-		}
-		if "`default'" == "povratio" {
-			local at 0 50 100 150 200 250 `max'
-			display as result "Using default poverty ratio breaks: `at'."
-		}
-	}
-	
-    
-	* generate new variable ---------------------------------------------------
-    
-	local cuts = ustrregexra("`at'", " ", ", ")
-	egen `newvar' = cut(`varname'), at(`cuts') icodes
-	quietly replace `newvar' = `newvar' + 1
-	
-    
-    * label new variable ------------------------------------------------------
-    
-	if "`nolabel'" == "" {
-		
-		local n_cuts : word count `at'
+    local n_cuts : word count `at'
     
     if "`lblname'" == "" {
       local lblname "`newvar'_lbl"
     }
-		capture label drop `lblname'
-		
+    capture label drop `lblname'
+    
     if "`nformat'" == "" {
       local nformat "%13.0gc"
     }
     
-		forvalues c = 1/`n_cuts' {
-			
-			local c_1 = `c' + 1
-			local start : word `c' of `at'
-			local start = strofreal(`start', "`nformat'")
-			local end : word `c_1' of `at'
-			
-			if `c' < (`n_cuts' - 1) {
-				local end = `end' - 1
-				local end = strofreal(`end', "`nformat'")
-				local to " to"
-			}
-			if `c' == (`n_cuts' - 1) {
-				local end "and up"
-				local to ""
-			}
-			label define `lblname' `c' "`start'`to' `end'", add
-		}
-		
-		label values `newvar' `lblname'
-	}
-	
-	if "`varlabel'" != "" {
-	    label variable `newvar' "`varlabel'"
-	}
-	
+    forvalues c = 1/`n_cuts' {
+      
+      local c_1 = `c' + 1
+      local start : word `c' of `at'
+      local start = strofreal(`start', "`nformat'")
+      local end : word `c_1' of `at'
+      
+      if `c' < (`n_cuts' - 1) {
+        local end = `end' - 1
+        local end = strofreal(`end', "`nformat'")
+        local to " to"
+      }
+      if `c' == (`n_cuts' - 1) {
+        local end "and up"
+        local to ""
+      }
+      label define `lblname' `c' "`start'`to' `end'", add
+    
+    }
+    
+    label values `newvar' `lblname'
+  }
+  
+  if "`varlabel'" != "" {
+    label variable `newvar' "`varlabel'"
+  }
+  
 end
 
 

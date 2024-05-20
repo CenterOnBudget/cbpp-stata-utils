@@ -80,201 +80,198 @@ Website
 
 
 /* for debugging:
-	sysuse uslifeexp2.dta, clear
-	replace year = year + 79
+  sysuse uslifeexp2.dta, clear
+  replace year = year + 79
 **/
 
 * capture program drop get_cpiu
 
 program define get_cpiu
 
-  syntax , [rs] [merge clear MATrix(name)] ///
+  syntax , [rs] [merge clear MATrix(name)]  ///
     [YEARVARname(string) Base_year(integer 0)]  ///
     [use_cache NOLABel user_agent(string)]
+  
+  
+  **# Checks ------------------------------------------------------------------
+  
+  if "`merge'" == "" & "`clear'" == "" & "`matrix'" == "" {
+    display as error "must specify one of {bf:merge}, {bf:clear}, or {bf:matrix()}"
+    exit 198
+  }
+  
+  if "`merge'" != "" & "`clear'" != "" {
+    display as error "{bf:merge} and {bf:clear} may not be combined"
+    exit 184
+  }
+  if "`merge'" == "" & "`yearvarname'" != "" {
+    display as error "{bf:yearvarname()} may only be specified with {bf:merge}"
+    exit 198
+  }
+    
+  if "`merge'" != "" {
+    if "`yearvarname'" != "" {
+      confirm variable `yearvarname'
+    }
+    if "`yearvarname'" == "" {
+      local yearvarname "year"
+    }
+  }
+  
+  local series = cond("`rs'" == "", "cpiu", "cpiu_rs")
+  
+  
+  **# Set up cache directory --------------------------------------------------
+  
+  _cbppstatautils_cache  
+  local cache_dir = "`s(cache_dir)'"
+  
+  
+  **# Download file (if needed) and clean data --------------------------------
+  
+  * Download if use_cache is not specified, or if use_cache is specified but 
+  * the file does not exist
+  capture confirm file "`cache_dir'/`series'.dta"
+  local download = (_rc != 0) | ("`use_cache'" == "")
 
-	* checks ------------------------------------------------------------------
-	
-	if "`merge'" == "" & "`clear'" == "" & "`matrix'" == "" {
-		display as error "must specify one of {bf:merge}, {bf:clear}, or {bf:matrix()}"
-		exit 198
-	}
-	
-	if "`merge'" != "" & "`clear'" != "" {
-		display as error "{bf:merge} and {bf:clear} may not be combined"
-		exit 184
-	}
-	if "`merge'" == "" & "`yearvarname'" != "" {
-    	display as error "{bf:yearvarname()} may only be specified with {bf:merge}"
-		exit 198
+  if "`clear'" == "" {
+    preserve
+  }
+  
+  if !`download' {
+    use "`cache_dir'/`series'.dta", clear
+  }
+  
+  if `download' {
+    
+    quietly {
+    
+      tempfile data
+      
+      if "`rs'" != "" {
+        
+        local url "https://www.bls.gov/cpi/research-series/r-cpi-u-rs-allitems.xlsx"
+        
+        capture copy `url' `data'
+        if _rc == 679 {
+          if "`user_agent'" != "" {
+            copy_curl "`url'" `data', user_agent(`user_agent')
+          }
+          if "`user_agent'" == "" {
+            display as error "BLS server refused to send file"
+            display as error "please try again specifying your email to {bf:user_agent()}"
+            exit 679
+          }
+        }
+  
+        import excel using `data', cellrange(A6) firstrow case(lower) clear
+        rename avg `series'
+        keep year `series'
+        drop if missing(`series')
+      
+      }
+      
+      if "`rs'" == "" {
+        
+        local url "https://download.bls.gov/pub/time.series/cu/cu.data.1.AllItems"
+        
+        capture copy `url' `data'
+        if _rc == 679 {
+          if "`user_agent'" != "" {
+            copy_curl "`url'" `data', user_agent(`user_agent')
+          }
+          if "`user_agent'" == "" {
+            display as error "BLS server refused to send file"
+            display as error "please try again specifying your email to {bf:user_agent()}"
+            exit 679
+          }
+        }
+  
+        import delimited using `data', clear
+        keep if regexm(series_id, "CUUR0000SA0")
+        keep if year >= 1978 & period == "M13"
+        label variable value  // Remove variable label of mysterious origin
+        rename value `series'
+        keep year `series'
+      
+      }
+      
+      * Labeling the dataset has the nice side-effect of displaying the 
+      * downloaded date when cached data is loaded
+      label data "Inflation series `series' last downloaded `c(current_date)'."
+      note : Inflation series `series' last downloaded `c(current_date)'.
+      save "`cache_dir'/`series'.dta", replace
+    
+    }
+  }  
+
+  
+  * Calculate inflation adjustment factor if requested ------------------------
+  
+  if `base_year' != 0 {
+  
+    * Check that the base year is present in the series
+    quietly levelsof year, local(years) separate("|")
+    if !ustrregexm("`base_year'", "`years'") {
+      display as error "{bf:base_year()} invalid or unavailable"
+      exit 198
     }
     
-	if "`merge'" != "" {
-    	if "`yearvarname'" != "" {
-		confirm variable `yearvarname'
-        }
-        if "`yearvarname'" == "" {
-        	local yearvarname "year"
-        }
-	}
-	
-	local series = cond("`rs'" == "", "cpiu", "cpiu_rs")
-	
-	
-	* set up cache directory --------------------------------------------------
-	
-	local cache_dir = cond("`c(os)'" == "Windows", 				///
-						   "~/AppData/Local/cbppstatautils",	///
-						   "~/Library/Application Support/cbppstatautils")
-	capture mkdir "`cache_dir'"	
-	
-	local cache_path = "`cache_dir'/`series'.dta"
-	
-	
-	* decide whether to download file -----------------------------------------
-	
-	// download if use_cache is not specified, 
-	// or if use_cache is specified but the file does not exist
-    
-    capture confirm file "`cache_dir'/`series'.dta"
-    local download = (_rc != 0) | ("`use_cache'" == "")
-	
-	
-	* download if needed, then load -------------------------------------------
+    * Create inflation adjustment factor variable
+    quietly generate val_if_base_year = `series' if year == `base_year'
+    egen val_of_base_year = max(val_if_base_year)
+    quietly generate `series'_`base_year'_adj =  val_of_base_year / `series'
+    drop val_*_base_year
 
-	if "`clear'" == "" {
-		preserve
-	}
-	
-	if !`download' {
-		use "`cache_dir'/`series'.dta", clear
-	}
-	
-	if `download' {
-    	
-    	quietly {
-		
-            tempfile data // tempfile for retrieved data
-            
-            if "`rs'" != "" {
-              
-                local url "https://www.bls.gov/cpi/research-series/r-cpi-u-rs-allitems.xlsx"
-                
-                capture copy `url' `data'
-                if _rc == 679 {
-                  if "`user_agent'" != "" {
-                    copy_curl "`url'" `data', user_agent(`user_agent')
-                  }
-                  if "`user_agent'" == "" {
-                    display as error "BLS server refused to send file"
-                    display as error "please try again specifying your email to {bf:user_agent()}"
-                    exit 679
-                  }
-                }
+  }
+  
+  **# Label variables ---------------------------------------------------------
+  
+  if "`nolabel'" == "" {
+  
+    local series_nm = cond("`rs'" == "", "CPI-U", "CPI-U-RS")
+    local lbl = ///
+      cond("`merge'" != "", ///
+        "`series_nm' for observation year '`yearvarname''", ///
+        "`series_nm'")
+    label variable `series' "`lbl'"
+    if `base_year' != 0 {
+      local lbl = ///
+        cond("`merge'" != "", ///
+          "`series_nm' inflator for observation year `yearvarname'' to `base_year'", ///
+          "`series_nm' inflator to `base_year'")
+      label variable `series'_`base_year'_adj "`lbl'"
+    }
+  
+  }
 
-                import excel using `data', cellrange(A6) firstrow case(lower) clear
-                rename avg `series'
-                keep year `series'
-                drop if missing(`series')
-            }
-            
-            if "`rs'" == "" {
-              
-                local url "https://download.bls.gov/pub/time.series/cu/cu.data.1.AllItems"
-                
-                capture copy `url' `data'
-                if _rc == 679 {
-                  if "`user_agent'" != "" {
-                    copy_curl "`url'" `data', user_agent(`user_agent')
-                  }
-                  if "`user_agent'" == "" {
-                    display as error "BLS server refused to send file"
-                    display as error "please try again specifying your email to {bf:user_agent()}"
-                    exit 679
-                  }
-                }
-
-                import delimited using `data', clear
-                keep if regexm(series_id, "CUUR0000SA0")
-                keep if year >= 1978 & period == "M13"
-                label variable value  // remove variable label of mysterious origin
-                rename value `series'
-                keep year `series'
-            }
-            
-            // labelling the data has the nice side effect of displaying the 
-            // downloaded date when the user loads cached data
-            label data "Inflation series `series' last downloaded `c(current_date)'."
-			note : Inflation series `series' last downloaded `c(current_date)'.
-            save "`cache_dir'/`series'.dta", replace
-        }
-	}	
-
-	
-	* if base year provided, calculate adjustment factor ----------------------
-	
-	if `base_year' != 0 {
-	
-		// check that base year is present in series
-		quietly levelsof year, local(years) separate("|")
-		if !ustrregexm("`base_year'", "`years'") {
-			display as error "{bf:base_year()} invalid or unavailable"
-			exit 198
-		}
-		// create adj fact variable
-		quietly generate val_if_base_year = `series' if year == `base_year'
-		egen val_of_base_year = max(val_if_base_year)
-		quietly generate `series'_`base_year'_adj =  val_of_base_year / `series'
-		drop val_*_base_year
-
-	}
-	
-	// label variables
-	if "`nolabel'" == "" {
-		local series_nm = cond("`rs'" == "", "CPI-U", "CPI-U-RS")
-		local lbl = 												///
-			cond("`merge'" != "",									///
-				 "`series_nm' for observation year '`yearvarname''",	///
-				 "`series_nm'")
-		label variable `series' "`lbl'"
-		if `base_year' != 0 {
-			local lbl = 														///
-				cond("`merge'" != "", 											///
-					 "`series_nm' inflator for observation year `yearvarname'' to `base_year'",	///
-					 "`series_nm' inflator to `base_year'")
-			label variable `series'_`base_year'_adj "`lbl'"
-		}
-	}
-	
-	// prep for next step
-	tempfile temp
-	quietly save `temp'
-	
-
-	* create matrix and restore if matrix() specified -------------------------
-	
-	if "`matrix'" != "" {
-		local mat_vars = cond(`base_year' != 0, 						///
-							  `"`series' `series'_`base_year'_adj"', 	///
-							  "`series'")
-		mkmat `mat_vars', matrix("`matrix'") rownames(year)
-		restore
-	}
-	
-	* restore and merge if merge specified ----------------------------------
-	
-	if "`merge'" != "" {
-		if "`matrix'" == "" {
-			restore
-		}
-        if "`yearvarname'" != "year" {
-        	quietly generate year = `yearvarname'
-        }
-		merge m:1 year using `temp', nogenerate keep(master match) nolabel noreport
-        if "`yearvarname'" != "year" {
-        	quietly drop year
-        }
-	}
-	
+  **# Create matrix and restore if matrix() specified -------------------------
+  
+  tempfile temp
+  quietly save `temp'
+  
+  if "`matrix'" != "" {
+    local mat_vars =  ///
+      cond(`base_year' != 0, `"`series' `series'_`base_year'_adj"', "`series'")
+    mkmat `mat_vars', matrix("`matrix'") rownames(year)
+    restore
+  }
+  
+  **# Restore and merge if merge specified ------------------------------------
+  
+  if "`merge'" != "" {
+    if "`matrix'" == "" {
+      restore
+    }
+    if "`yearvarname'" != "year" {
+      quietly generate year = `yearvarname'
+    }
+    merge m:1 year using `temp', nogenerate keep(master match) nolabel noreport
+    if "`yearvarname'" != "year" {
+      quietly drop year
+    }
+  }
+  
 end
 
 

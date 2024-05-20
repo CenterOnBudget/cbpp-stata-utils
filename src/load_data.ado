@@ -1,4 +1,4 @@
-*! version 0.2.0
+*! version 0.2.9
 
 
 /***
@@ -86,251 +86,236 @@ Website
 
 program define load_data 
 
-	syntax anything(everything), [Years(numlist sort)] [Vars(string)] 		///
-								 [saveas(string)] [Weeks(numlist sort)] [Period(integer 0)]	///
-								 [clear replace]
-	
-	
-	* parse dataset and if ----------------------------------------------------
-	
-    local n_words : word count `anything'
-	if `n_words' == 1 {
-	    local dataset "`anything'"
-		local if ""
-	}
-	if `n_words' > 1 {
-	    local dataset : word 1 of `anything'
-		local has_if = word("`anything'", 2) == "if"
-		if `has_if' != 1 {
-		    display as error "could not parse input. syntax is {bf:load_data dataset [if], years() [options]}"
-			exit 198
-		}
-		local if : subinstr local anything "`dataset'" "", word
-	}
-	
-	
-    * error checking ----------------------------------------------------------
+  syntax anything(everything name=dataset id=dataset),  ///
+    [Years(numlist sort)] [Vars(string)]  ///
+    [Weeks(numlist sort)] [Period(integer 0)] ///
+    [saveas(string) clear replace]
+  
+  
+  gettoken dataset if : dataset
+  
+  
+  *# Checks -------------------------------------------------------------------
     
-    if "`clear'" == "" & _N != 0 & c(changed) != 0 {
-		display as error "no; dataset in memory has changed since last saved"
-		exit 4
-	}
-    
-    // check supported dataset
-    local dataset = upper("`dataset'")
-    if !inlist("`dataset'", "CPS", "ACS", "ACS-SPM", "QC", "PULSE") {
-		display as error `"{bf:dataset()} must be "acs", "acs-spm", "cps", "qc", or "pulse" (case insensitive)"'
-        exit 198
-	}    
-	// check that years is specified unless dataset is pulse
-	if "`dataset'" != "PULSE" & "`years'" == "" {
-		display as error "option {bf:years()} required"
-		exit 198
-	}
-	// if dataset is pulse use weeks for years, and rename
-	if "`dataset'" == "PULSE" {
-		local dataset "HPS"
-		if "`weeks'" != "" {
-			local years "`weeks'"
-		}
-	}
-	
-    // check years-dataset combination
-	if "`dataset'" == "CPS" {
-		capture numlist "`years'", range(>=1980 <=2023)
-		if _rc != 0 {
-			display as error "{bf:years()} must be between 1980 and 2023 inclusive when {bf:dataset()} is cps"
+  if "`clear'" == "" & _N != 0 & c(changed) != 0 {
+    display as error "no; dataset in memory has changed since last saved"
+    exit 4
+  }
+
+  local dataset = upper("`dataset'")
+  if !inlist("`dataset'", "CPS", "ACS", "ACS-SPM", "QC", "PULSE") {
+    display as error `"{bf:dataset()} must be "acs", "acs-spm", "cps", "qc", or "pulse" (case insensitive)"'
+    exit 198
+  }    
+  
+  * Years is required unless dataset is PULSE
+  if "`years'" == "" & "`dataset'" != "PULSE" {
+    display as error "option {bf:years()} required"
+    exit 198
+  }
+  
+  * If dataset is PULSE, either weeks or years is required
+  if "`dataset'" == "PULSE" {
+    if "`weeks'" == "" & "`years'" == "" {
+      display as error "option {bf:weeks()} required"
+      exit 198
+    }
+    if "`weeks'" != "" & "`years'" != "" {
+      display as result "using {bf:weeks()} and ignoring {bf:years()}"
+    }
+    if "`weeks'" != "" {
+      local years "`weeks'"
+    }
+  }
+
+  
+  **## Check dataset is available for requested years -------------------------
+  
+  if "`dataset'" == "CPS" {
+    capture numlist "`years'", range(>=1980 <=2023)
+    if _rc != 0 {
+      display as error "{bf:years()} must be between 1980 and 2023 inclusive when {bf:dataset()} is cps"
       display as error "to load a recently-released year, you may need to update cbppstatautils"
-			exit 198
-		}
-	}
-	if "`dataset'" == "ACS" {
-		capture numlist "`years'", range(>=2000 <=2022)
-		if _rc != 0 {
-			display as error "{bf:years()} must be between 2000 and 2022 inclusive  (excluding 2020) when {bf:dataset()} is acs"
+      exit 198
+    }
+  }
+  
+  if "`dataset'" == "ACS" {
+    capture numlist "`years'", range(>=2000 <=2022)
+    if _rc != 0 {
+      display as error "{bf:years()} must be between 2000 and 2022 inclusive  (excluding 2020) when {bf:dataset()} is acs"
       display as error "to load a recently-released year, you may need to update cbppstatautils"
-			exit 198
-		}
-        if ustrregexm("`r(numlist)'", "2020") {
-            display as error "{bf:years()} must be between 2000 and 2019 inclusive (excluding 2020) when {bf:dataset()} is acs"
-            exit 198
-        }
-	}
+      exit 198
+    }
+    if ustrregexm("`r(numlist)'", "2020") {
+      display as error "{bf:years()} must be between 2000 and 2019 inclusive (excluding 2020) when {bf:dataset()} is acs"
+      exit 198
+    }
+  }
+  
   if "`dataset'" == "ACS-SPM" {
     capture numlist "`years'", range(>=2009 <=2022)
     if _rc != 0 {
-			display as error `"{bf:years()} must be between 2009 and 2022 inclusive  (excluding 2020) when {bf:dataset()} is "acs-spm""'
+      display as error `"{bf:years()} must be between 2009 and 2022 inclusive  (excluding 2020) when {bf:dataset()} is "acs-spm""'
       display as error "to load a recently-released year, you may need to update cbppstatautils"
-			exit 198
+      exit 198
     }
     if ustrregexm("`r(numlist)'", "2020") {
       display as error `"{bf:years()} must be between 2009 and 2022 inclusive (excluding 2020) when {bf:dataset()} is "acs-spm""'
       exit 198
     }
   }
-	if "`dataset'" == "QC" {
-		capture numlist "`years'", range(>=1980 <=2020)
-		if _rc != 0 {
-			display as error "{bf:years()} must be between 1980 and 2020 inclusive when {bf:dataset()} is qc"
-			exit 198
-		}
+  
+  if "`dataset'" == "QC" {
+    capture numlist "`years'", range(>=1980 <=2020)
+    if _rc != 0 {
+      display as error "{bf:years()} must be between 1980 and 2020 inclusive when {bf:dataset()} is qc"
+      exit 198
+    }
     if !inrange(`period', 0, 2) {
       display as error "{bf:period()} must be 1 or 2 if specified"
       exit 198
     }
-	}
-    
-    // check datasets library path global exists
-	if "${spdatapath}" == "" {
-		display as error "global 'spdatapath' not found."
-		exit
-	}
-    
-    // check dataset library is synced
-	local dir = "`dataset'"
-	if "`dataset'" == "HPS" {		// HPS could be synced as one of two names
-	    mata : st_numscalar("dir_exists", direxists("${spdatapath}`dir'"))
-		if scalar(dir_exists) != 1 {
-		    local dir = "Household Pulse Survey"
-		}
-	}
-	mata : st_numscalar("dir_exists", direxists("${spdatapath}`dir'"))
-	if scalar(dir_exists) != 1 {
-		display as error "${spdatapath}`dir' not found. Make sure it is synced and try again"
-		exit 601
-	}
+  }
+  
+  **## Confirm dataset library is synced --------------------------------------
+  
+  * Datasets library global macro
+  if "${spdatapath}" == "" {
+    display as error "global 'spdatapath' not found."
+    exit
+  }
+ 
+  local dir = "`dataset'"
+  
+  * Pulse could be synced as one of two names (neither of which are Pulse)
+  if "`dataset'" == "PULSE" {
+    local dir "HPS"
+    mata : st_numscalar("dir_exists", direxists("${spdatapath}`dir'"))
+    if scalar(dir_exists) != 1 {
+      local dir = "Household Pulse Survey"
+    }
+  }
+  
+  mata : st_numscalar("dir_exists", direxists("${spdatapath}`dir'"))
+  if scalar(dir_exists) != 1 {
+    display as error "${spdatapath}`dir' not found. Make sure it is synced and try again"
+    exit 601
+  }
   scalar drop dir_exists
   
-    // check all needed files within dataset library are synced
-	capture noisily {
-		foreach y of local years {
-			if "`dataset'" == "CPS" {
-				capture noisily confirm file "${spdatapath}`dir'/mar`y'/mar`y'.dta"		
-			}
-			if "`dataset'" == "ACS" {
-				capture noisily confirm file "${spdatapath}`dir'/`y'/`y'us.dta"
-			}
-      if "`dataset'" == "ACS-SPM" {
-        capture noisily confirm file "${spdatapath}`dir'/acs_spm_`y'.dta"
-      }
-			if "`dataset'" == "QC" {
-				local suff = cond(`y' == 1980, "_aug", "")
-				capture noisily confirm file "${spdatapath}`dir'/`y'/qc_pub_fy`y'`suff'.dta"
-			}
-			if "`dataset'" == "HPS" {
-				local y =  string(`y', "%02.0f")
-				capture noisily confirm file "${spdatapath}`dir'/hps_wk_`y'.dta"
-			}
-			local rc = cond(_rc != 0, 1, 0)
-		}
-	}
-	if `rc' != 0 {
-		exit 601
-	}
-
-
-	* find max year requested -------------------------------------------------
-    
-    // if multiple years, will use labels from max year
-    // see `nolabel' in next section
-    local n_years : word count `years'
+  
+  **# Setup -------------------------------------------------------------------
+  
+  **## Find max year requested ------------------------------------------------
+  
+  * If multiple years are requested, will keep labels from maximum year
+  local n_years : word count `years'
+  if `n_years' > 1 {
+    local years_list = ustrregexra("`years'", " ", ", ")
+    local max_year = max(`years_list')
+  }
+  if `n_years' == 1 {
+    local max_year = `years'
+  }
+  
+  **## Flag if ACS serialno will need to be destringed ------------------------
+  
+  * If ACS data years span the introduction of string characters to serialno in 
+  * 2018, serialno will need to be destringed before appending
+  if "`dataset'" == "ACS" {
     if `n_years' > 1 {
-    	local years_list = ustrregexra("`years'", " ", ", ")
-    	local max_year = max(`years_list')
+      capture numlist "`years'", range(<=2017)
+      local all_str = _rc == 0
+      capture numlist "`years'", range(>=2018)
+      local all_num = _rc == 0
+      local destring = cond(`all_num' == 0 & `all_str' == 0, 1, 0)
     }
     if `n_years' == 1 {
-    	local max_year = `years'
+      local destring 0
+    }
+  }
+
+
+  **# Load data ---------------------------------------------------------------
+  
+  clear
+  
+  * Default to all variables
+  local vars = cond("`vars'" == "", "*", "`vars'")
+
+  tempfile temp 
+  quietly save `temp', emptyok
+  
+  foreach y of local years {
+    
+    if "`dataset'" == "PULSE" {
+      display as result "Loading week `y' Pulse data..."
+      local y = string(`y', "%02.0f")
+      quietly use `vars' `if' using "${spdatapath}`dir'/hps_wk_`y'.dta", clear
     }
     
-	if "`dataset'" == "ACS" {
-		if `n_years' > 1 {
-			capture numlist "`years'", range(<=2017)
-			local all_str = _rc == 0
-			capture numlist "`years'", range(>=2018)
-			local all_num = _rc == 0
-			local destring = cond(`all_num' == 0 & `all_str' == 0, 1, 0)
-		}
-		if `n_years' == 1 {
-		    local destring 0
-		}
-	}
-
-
-    * load and append data ----------------------------------------------------
+    if "`dataset'" == "CPS" {
+      display as result "Loading March `y' CPS data..."
+      quietly use `vars' `if' using "${spdatapath}`dir'/mar`y'/mar`y'.dta", clear
+      quietly destring _all, replace
+    }
     
-	clear
-    
-    // default to all variables
-	local vars = cond("`vars'" == "", "*", strlower("`vars'"))
-	
-	// for messages if dataset is CPS
-	local mar = cond("`dataset'" == "CPS", "March ", "")
-	
-    tempfile temp 
-	quietly save `temp', emptyok
-    
-	foreach y of local years {
-    	
-		if "`dataset'" != "HPS" {
-
-			display as result "Loading `mar'`y' `dataset' data..."
-		}
-		if "`dataset'" == "HPS" {
-			display as result "Loading week `y' Pulse data..."
-		}
-        
-		if "`dataset'" == "CPS" {
-			quietly use `vars' `if' using "${spdatapath}`dir'/mar`y'/mar`y'.dta", clear
-			quietly destring _all, replace
-		}
-        
-		if "`dataset'" == "ACS" {
-			quietly use `vars' `if' using "${spdatapath}`dir'/`y'/`y'us.dta", clear
-			if `y' >= 2018 & `destring' & 						///
-			   ("`vars'" == "*" | ustrregexm("`vars'", "serialno", 1)) {
-			    quietly {
-					replace serialno = ustrregexra(serialno, "HU", "00")
-					replace serialno = ustrregexra(serialno, "GQ", "01")
-					generate double serialno_num = real(serialno)
-					drop serialno
-					rename serialno_num serialno
+    if "`dataset'" == "ACS" {
+      
+      display as result "Loading `y' ACS data..."
+      quietly use `vars' `if' using "${spdatapath}`dir'/`y'/`y'us.dta", clear
+      
+      * If ACS data years span the introduction of string characters to serialno
+      * in 2018, sub them out and destring
+      if `y' >= 2018 & `destring' & ///
+        ("`vars'" == "*" | ustrregexm("`vars'", "serialno", 1)) {
+        quietly {
+          replace serialno = ustrregexra(serialno, "HU", "00")
+          replace serialno = ustrregexra(serialno, "GQ", "01")
+          generate double serialno_num = real(serialno)
+          drop serialno
+          rename serialno_num serialno
           order serialno
-				}
-			display as result "serialno of `y' sample edited and destringed to facilitate appending."
-			}
-		}
+        }
+        display as result "serialno of `y' sample edited and destringed to facilitate appending."
+      }
+      
+    }
     
     if "`dataset'" == "ACS-SPM" {
+      display as result "Loading `y' ACS SPM data..."
       quietly use `vars' `if' using "${spdatapath}`dir'/acs_spm_`y'.dta", clear
     }
-		
-		if "`dataset'" == "QC" {
-			local suff = cond(`y' == 1980, "_aug", "")
+    
+    if "`dataset'" == "QC" {
+      display as result "Loading `y' QC data..."
+      local suff = cond(`y' == 1980, "_aug", "")
       local suff = cond(`y' == 2020 & `period' != 0, "_per`period'", "")
-			quietly use `vars' `if' using "${spdatapath}`dir'/`y'/qc_pub_fy`y'`suff'.dta", clear
-		}
-		
-		if "`dataset'" == "HPS" {
-			local y = string(`y', "%02.0f")
-			quietly use `vars' `if' using "${spdatapath}`dir'/hps_wk_`y'.dta", clear
-		}
-        
-        local nolabel = cond(`y' == `max_year', "", "nolabel")
-		quietly append using `temp', `nolabel' 
-		quietly save `temp', replace
-	}
+      quietly use `vars' `if' using "${spdatapath}`dir'/`y'/qc_pub_fy`y'`suff'.dta", clear
+    }
     
-	use `temp', clear
-	local lbl_tweak = cond("`dataset'" == "HPS", "week ", "")
-	local lbl_message = cond(`n_years' > 1, "Labels are from `lbl_tweak'`mar'`max_year' dataset.", "")
-	display as result "Done. `lbl_message'"
+    * Keep labels only if year is the maximum year requested
+    local nolabel = cond(`y' == `max_year', "", "nolabel")
+    quietly append using `temp', `nolabel'
+    quietly save `temp', replace
     
-	
-    * save if requested -------------------------------------------------------
-    
-	if "`saveas'" != "" {
-		save "`saveas'", `replace'	
-	}
+  }
+  
+  use `temp', clear
+  
+  local max_year_prefix =   ///
+    cond("`dataset'" == "CPS", "March ", cond("`dataset'" == "PULSE", "week ", ""))
+  local lbl_message =   ///
+    cond(`n_years' > 1, "Labels are from `max_year_prefix'`max_year' dataset.", "")
+  display as result "Done. `lbl_message'"
+  
+  
+  **# Save if requested -------------------------------------------------------
+
+  if "`saveas'" != "" {
+    save "`saveas'", `replace'  
+  }
  
 end
 
@@ -338,12 +323,15 @@ end
 
 program define load
 
-	syntax anything(everything), [Years(numlist sort)] [Vars(string)] 		///
-								 [Weeks(numlist sort)] [saveas(string)] [Period(integer 0)]	///
-								 [clear replace]
-	
-	load_data `anything', years(`years') vars(`vars') saveas(`saveas') period(`period') `clear' `replace'
-	
+  syntax anything(everything name=dataset id=dataset),  ///
+    [Years(numlist sort)] [Vars(string)]  ///
+    [Weeks(numlist sort)] [Period(integer 0)] ///
+    [saveas(string) clear replace]
+  
+  load_data `dataset',  ///
+    years(`years') vars(`vars')   ///
+    weeks(`weeks') period(`period') saveas(`saveas') `clear' `replace'
+
 end
 
 

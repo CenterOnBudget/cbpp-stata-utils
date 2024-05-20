@@ -10,6 +10,7 @@
 - `labeller` gains a `lblname()` option for users to specify the name of the value label to use; default is "_varname_lbl".
 - `svyset_acs` option `multiyear()` has been renamed `n_years()`. If `multiyear()` is specified, the contents will be copied into `n_years()`.
 - `categorize` gains two new options for controlling value labels: `lblname()` specifies the name of the value label to create and `nformat()` specifies the numeric display format to use in value labels.
+- Some small under-the-hood changes and formatting fixes have been made.
 
 
 ## v 0.2.6
