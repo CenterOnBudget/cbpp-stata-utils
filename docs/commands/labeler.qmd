@@ -1,5 +1,5 @@
 ---
-title: labeller
+title: labeler
 description: |
   Create and attach variable and value labels in one step.
 categories: ["Data exploration and transformation"]
@@ -7,7 +7,7 @@ categories: ["Data exploration and transformation"]
 
 ## Description
 
-`labeller` is a shortcut command to label a variable and define and attach value labels in one go.
+`labeler` is a shortcut command to label a variable and define and attach value labels in one go.
 
 Labeling a variable and its values with built-in commands involves several steps:
 
@@ -17,22 +17,22 @@ label define sex_lbl 1 "Male" 2 "Female"
 label values sex sex_lbl
 ```
 
-Using `labeller`:
+Using `labeler`:
 
 ``` stata
-labeller sex, variable("Sex assigned at birth") values(1 "Male" 2 "Female")
+labeler sex, variable("Sex assigned at birth") values(1 "Male" 2 "Female")
 ```
 
-`labeller` can also be used to "zap" variable and value labels from a variable, by specifying the `remove` option.
+`labeler` can also be used to "zap" variable and value labels from a variable, by specifying the `remove` option.
 
 ## Syntax
 
 ``` stata
-labeller varname, [variable(string)] [values(string)] [options]
+labeler varname, [variable(string)] [values(string)] [options]
 ```
 
 | Option             | Description                                                                                                                                             |
-|------------------|------------------------------------------------------|
+|-------------------|-----------------------------------------------------|
 | `variable(string)` | Variable label for *varname*.                                                                                                                           |
 | `values(string)`   | Value labels for *varname*, following the same syntax as `label define`: *\# "label" \[# "label" ...\]*                                                 |
 | `lblname(string)`  | Name of the value label to use. Default is "*varname*\_lbl".                                                                                            |

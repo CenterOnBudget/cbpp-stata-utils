@@ -47,7 +47,7 @@ Label a state FIPS code variable with state names or postal abbreviations.
 :::
 
 ::: no-spacing
-[`labeller`](commands/labeller.qmd)
+[`labeler`](commands/labeler.qmd)
 :::
 
 ::: indent
