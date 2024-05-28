@@ -37,7 +37,7 @@ Not all ACS or CPS data years use the 2017 NAICS. This command will not work pro
 {synopthdr:options}
 {synoptline}
 {space 2}{synopt:{opt data:set(string)}}The type of dataset in memory; ACS or CPS (case insensitive).{p_end}
-{space 2}{synopt: {opt job(string)}}With {opt dataset(cps)}, which job to use: "week" for the primary job last week or "year" for the primary job last year. Default is "week".{p_end}
+{space 2}{synopt: {opt job(string)}}With {opt dataset(cps)}, which job to use: "week" for the primary job last week (the default) or "year" for the primary job last year.{p_end}
 {space 2}{synopt:{opt nolab:el}}Do not assign value labels to {it:newvar}.{p_end}
 {synoptline}
 

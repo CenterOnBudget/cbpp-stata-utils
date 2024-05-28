@@ -23,10 +23,10 @@ Not all ACS or CPS data years use the 2017 NAICS. This command will not work pro
 generate_ind_sector_var newvar, dataset(acs|cps) [options]
 ```
 
-| Options           | Description                                                                                                                             |
+| Options           | Description                                                                                                                         |
 |---------------------|---------------------------------------------------|
-| `dataset(string)` | The type of dataset in memory; ACS or CPS (case insensitive).                                                                           |
-| `job(string)`     | With `dataset(cps)`, which job to use: "week" for the primary job last week or "year" for the primary job last year. Default is "week". |
-| `nolabel`         | Do not assign value labels to *newvar*.                                                                                                 |
+| `dataset(string)` | The type of dataset in memory; ACS or CPS (case insensitive).                                                                       |
+| `job(string)`     | With `dataset(cps)`, which job to use: "week" for the primary job last week (the default) or "year" for the primary job last year.  |
+| `nolabel`         | Do not assign value labels to *newvar*.                                                                                             |
 
 : {tbl-colwidths="\[30,70\]"}
