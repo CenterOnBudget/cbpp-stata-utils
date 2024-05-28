@@ -1,5 +1,5 @@
 ---
-title: generate_occ_grp_var
+title: generate_occ_group_var
 description: |
   Generate an occupation group variable in ACS or CPS microdata.
 categories: ["ACS and CPS microdata utilities"]
@@ -7,7 +7,7 @@ categories: ["ACS and CPS microdata utilities"]
 
 ## Description
 
-`generate_occ_grp_var` generates a categorical variable for major occupation groups representing 2-digit [2018 Standard Occupational Classification System (SOC) codes](https://www.bls.gov/soc/2018/major_groups.htm).
+`generate_occ_group_var` generates a categorical variable for major occupation groups representing 2-digit [2018 Standard Occupational Classification System (SOC) codes](https://www.bls.gov/soc/2018/major_groups.htm).
 
 For ACS microdata, the variable `occp` must exist. For CPS microdata, the variable `peioocc` must exist.
 
@@ -18,7 +18,7 @@ Not all ACS or CPS data years use the 2018 SOC. This command will not work prope
 ## Syntax
 
 ``` stata
-generate_occ_grp_var newvar, dataset(acs|cps) [options]
+generate_occ_group_var newvar, dataset(acs|cps) [options]
 ```
 
 | Options           | Description                                                   |

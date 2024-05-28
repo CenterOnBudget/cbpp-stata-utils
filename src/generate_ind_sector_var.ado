@@ -5,13 +5,13 @@
 Title
 ====== 
 
-__generate_ind_sect_var__ {hline 2} Generate an industry sector variable in ACS or CPS microdata.
+__generate_ind_sector_var__ {hline 2} Generate an industry sector variable in ACS or CPS microdata.
 
 
 Description
 -----------
 
-__generate_ind_sect_var__ generates a categorial variable for industry sectors representing 2-digit 
+__generate_ind_sector_var__ generates a categorial variable for industry sectors representing 2-digit 
 {browse "https://www.census.gov/naics/?58967?yearbck=2017":2017 North American Industry Classification System (NAICS) sectors}.
 
 For ACS microdata, the variable __indp__ must exist. For CPS microdata, the 
@@ -23,13 +23,14 @@ Not all ACS or CPS data years use the 2017 NAICS. This command will not work pro
 Syntax
 ------ 
 
-__generate_ind_sect_var__ {newvar}, {opt data:set(string)} [_options_]
+__generate_ind_sector_var__ {newvar}, {opt data:set(string)} [_options_]
 
 
 {synoptset 16}{...}
 {synopthdr:options}
 {synoptline}
   {synopt:{opt data:set(string)}}The type of dataset in memory; ACS or CPS (case insensitive).{p_end}
+  {synopt:{opt }}
   {synopt:{opt nolab:el}}Do not assign value labels to {it:newvar}.{p_end}
 {synoptline}
 
@@ -43,9 +44,9 @@ Website
 ***/    
 
 
-* capture program drop generate_ind_sect_var
+* capture program drop generate_ind_sector_var
 
-program define generate_ind_sect_var 
+program define generate_ind_sector_var 
 
   syntax newvarname, DATAset(string) [NOLabel]
   

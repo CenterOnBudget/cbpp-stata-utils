@@ -115,7 +115,7 @@ Generate an AIAN AOIC variable in ACS or CPS microdata.
 :::
 
 ::: no-spacing
-[`generate_ind_sect_var`](commands/generate_ind_sect_var.qmd)
+[`generate_ind_sector_var`](commands/generate_ind_sector_var.qmd)
 :::
 
 :::indent
@@ -123,7 +123,7 @@ Generate an industry sector variable in ACS or CPS microdata.
 :::
 
 ::: no-spacing
-[`generate_occ_grp_var`](commands/generate_occ_grp_var.qmd)
+[`generate_occ_group_var`](commands/generate_occ_group_var.qmd)
 :::
 
 ::: indent

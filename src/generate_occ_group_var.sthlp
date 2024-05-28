@@ -3,14 +3,14 @@
 {title:Title}
 
 {p 4 4 2}
-{bf:generate_occ_grp_var} {hline 2} Generate an occupation group variable in ACS or CPS microdata.
+{bf:generate_occ_group_var} {hline 2} Generate an occupation group variable in ACS or CPS microdata.
 
 
 
 {title:Description}
 
 {p 4 4 2}
-{bf:generate_occ_grp_var} generates a categorial variable for major occupation
+{bf:generate_occ_group_var} generates a categorial variable for major occupation
 groups representing 2-digit 
 {browse "https://www.bls.gov/soc/2018/major_groups.htm":2018 Standard Occupational Classification System (SOC) codes}.
 
@@ -27,7 +27,7 @@ properly for data years that use other SOC versions.
 {title:Syntax}
 
 {p 4 4 2}
-{bf:generate_occ_grp_var} {newvar}, {opt data:set(string)} [{it:options}]
+{bf:generate_occ_group_var} {newvar}, {opt data:set(string)} [{it:options}]
 
 
 {synoptset 16}{...}

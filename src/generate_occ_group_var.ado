@@ -5,13 +5,13 @@
 Title
 ====== 
 
-__generate_occ_grp_var__ {hline 2} Generate an occupation group variable in ACS or CPS microdata.
+__generate_occ_group_var__ {hline 2} Generate an occupation group variable in ACS or CPS microdata.
 
 
 Description
 -----------
 
-__generate_occ_grp_var__ generates a categorial variable for major occupation
+__generate_occ_group_var__ generates a categorial variable for major occupation
 groups representing 2-digit 
 {browse "https://www.bls.gov/soc/2018/major_groups.htm":2018 Standard Occupational Classification System (SOC) codes}.
 
@@ -25,7 +25,7 @@ properly for data years that use other SOC versions.
 Syntax
 ------ 
 
-__generate_occ_grp_var__ {newvar}, {opt data:set(string)} [_options_]
+__generate_occ_group_var__ {newvar}, {opt data:set(string)} [_options_]
 
 
 {synoptset 16}{...}
@@ -45,9 +45,9 @@ Website
 ***/    
 
 
-* capture program drop generate_occ_grp_var
+* capture program drop generate_occ_group_var
 
-program define generate_occ_grp_var 
+program define generate_occ_group_var 
 
   syntax newvarname, DATAset(string) [NOLabel]
   

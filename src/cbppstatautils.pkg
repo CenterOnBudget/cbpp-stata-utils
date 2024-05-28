@@ -25,10 +25,10 @@ f generate_aian_var.ado
 f generate_aian_var.sthlp
 f generate_race_var.ado
 f generate_race_var.sthlp
-f generate_occ_grp_var.ado
-f generate_occ_grp_var.sthlp
-f generate_ind_sect_var.ado
-f generate_ind_sect_var.sthlp
+f generate_occ_group_var.ado
+f generate_occ_group_var.sthlp
+f generate_ind_sector_var.ado
+f generate_ind_sector_var.sthlp
 f get_acs_pums.ado
 f get_acs_pums.sthlp
 f get_cpiu.ado
