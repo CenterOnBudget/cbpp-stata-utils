@@ -7,10 +7,11 @@
 - `get_cpiu` falls back to `copy_curl` if the BLS denies the file download and gains option `user_agent()` to pass to `copy_curl` ([#23](https://github.com/CenterOnBudget/cbpp-stata-utils/issues/23)). 
 - `load_data` now supports loading ACS SPM datasets ([#21](https://github.com/CenterOnBudget/cbpp-stata-utils/issues/21)).
 - `load_data` suggests updating cbppstatautils if an unsupported data year is specified ([#20](https://github.com/CenterOnBudget/cbpp-stata-utils/issues/20)).
-- `labeller` gains a `lblname()` option for users to specify the name of the value label to use; default is "_varname_lbl".
+- `labeller` has been renamed `labeler`; `labeller` is now an acceptable alias for `labeler`. The command gains a `lblname()` option for users to specify the name of the value label to use; default is "*varname*_lbl".
 - `svyset_acs` option `multiyear()` has been renamed `n_years()`. If `multiyear()` is specified, the contents will be copied into `n_years()`.
 - `categorize` gains two new options for controlling value labels: `lblname()` specifies the name of the value label to create and `nformat()` specifies the numeric display format to use in value labels.
 - Some small under-the-hood changes and formatting fixes have been made.
+- Value labels of variables created by `generate_race_var` are now more readable. Acronymns and abbreviations have been replaced with full words (for example, "Native Hawaiian or Pacific Islander" replacing "NHOPI") and capitalization has been changed to sentence case.
 
 
 ## v 0.2.6

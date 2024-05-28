@@ -41,6 +41,7 @@ f label_state.ado
 f label_state.sthlp
 f labeller.ado
 f labeller.sthlp
+f labeler.sthlp
 f load_data.ado
 f load_data.sthlp
 f make_cbpp_profile.ado

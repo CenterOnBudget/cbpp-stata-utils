@@ -3,14 +3,14 @@
 {title:Title}
 
 {p 4 4 2}
-{bf:labeller} {hline 2} Create and attach variable and value labels in one step.
+{bf:labeler} {hline 2} Create and attach variable and value labels in one step.
 
 
 
 {title:Description}
 
 {p 4 4 2}
-{bf:labeller} is a shortcut command to label a variable and define and attach 
+{bf:labeler} is a shortcut command to label a variable and define and attach 
 value labels in one go.
 
 {p 4 4 2}
@@ -22,18 +22,18 @@ steps:
       {bf:. label values sex sex_lbl}
 
 {p 4 4 2}
-Using {bf:labeller}:
+Using {bf:labeler}:
 
-      {bf:. labeller sex, variable("Sex assigned at birth") values(1 "Male" 2 "Female")}
+      {bf:. labeler sex, variable("Sex assigned at birth") values(1 "Male" 2 "Female")}
 
 {p 4 4 2}
-{bf:labeller} can also be used to "zap" variable and value labels from a variable, by specifying the {bf:remove} option.      {break}
+{bf:labeler} can also be used to "zap" variable and value labels from a variable, by specifying the {bf:remove} option.      {break}
 
 
 {title:Syntax}
 
 {p 4 4 2}
-{bf:labeller} {varname}, [{opt var:iable(string)}] [{opt val:ues(string)}] [{it:options}]
+{bf:labeler} {varname}, [{opt var:iable(string)}] [{opt val:ues(string)}] [{it:options}]
 
 
 {synoptset 16}{...}

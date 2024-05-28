@@ -5,13 +5,13 @@
 Title
 ====== 
 
-__labeller__ {hline 2} Create and attach variable and value labels in one step.
+__labeler__ {hline 2} Create and attach variable and value labels in one step.
 
 
 Description
 -----------
 
-__labeller__ is a shortcut command to label a variable and define and attach 
+__labeler__ is a shortcut command to label a variable and define and attach 
 value labels in one go.
 
 Labeling a variable and its values with built-in commands involves several 
@@ -21,16 +21,16 @@ steps:
       {bf:. label define sex_lbl 1 "Male" 2 "Female"}
       {bf:. label values sex sex_lbl}
 
-Using __labeller__:
+Using __labeler__:
 
-      {bf:. labeller sex, variable("Sex assigned at birth") values(1 "Male" 2 "Female")}
+      {bf:. labeler sex, variable("Sex assigned at birth") values(1 "Male" 2 "Female")}
     
-__labeller__ can also be used to "zap" variable and value labels from a variable, by specifying the __remove__ option.    
+__labeler__ can also be used to "zap" variable and value labels from a variable, by specifying the __remove__ option.    
   
 Syntax
 ------ 
 
-__labeller__ {varname}, [{opt var:iable(string)}] [{opt val:ues(string)}] [_options_]
+__labeler__ {varname}, [{opt var:iable(string)}] [{opt val:ues(string)}] [_options_]
 
 
 {synoptset 16}{...}
@@ -55,6 +55,7 @@ Website
 
 
 * capture program drop labeller
+* capture program drop labeler
 
 program define labeller
 
@@ -89,4 +90,15 @@ program define labeller
 end
 
 
+program define labeler
+
+  syntax varname,   ///
+    [VARiable(string) VALues(string asis)]  ///
+    [lblname(string)] [add modify remove]
+	
+  labeller `varlist', 	///
+	variable(`variable') values(`values') 	///
+	lblname(`lblname') `add' `modify' `remove'
+  
+end
     
