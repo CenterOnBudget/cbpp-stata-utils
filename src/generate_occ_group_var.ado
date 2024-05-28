@@ -15,8 +15,12 @@ __generate_occ_group_var__ generates a categorial variable for major occupation
 groups representing 2-digit 
 {browse "https://www.bls.gov/soc/2018/major_groups.htm":2018 Standard Occupational Classification System (SOC) codes}.
 
-For ACS microdata, the variable __occp__ must exist. For CPS microdata, the 
-variable __peioocc__ must exist.
+In ACS microdata, the variable __occp__ must exist. 
+
+In CPS microdata, by default, the variable __peioocc__ must exist and the new 
+variable will reflect the primary job worked last week. Users may specify 
+{opt job(year)} to indicate the new variable should reflect the longest job 
+held last year, in which case __occup__ must exist. 
 
 Not all ACS or CPS data years use the 2018 SOC. This command will not work 
 properly for data years that use other SOC versions.
@@ -32,6 +36,7 @@ __generate_occ_group_var__ {newvar}, {opt data:set(string)} [_options_]
 {synopthdr:options}
 {synoptline}
   {synopt:{opt data:set(string)}}The type of dataset in memory; ACS or CPS (case insensitive).{p_end}
+  {synopt: {opt job(string)}}With {opt dataset(cps)}, which job to use: "week" for the primary job last week (the default) or "year" for the primary job last year. Default is "week".{p_end}
   {synopt:{opt nolab:el}}Do not assign value labels to {it:newvar}.{p_end}
 {synoptline}
 
@@ -49,7 +54,7 @@ Website
 
 program define generate_occ_group_var 
 
-  syntax newvarname, DATAset(string) [NOLabel]
+  syntax newvarname, DATAset(string) [job(string)] [NOLabel]
   
   local newvar `varlist'
   
@@ -59,7 +64,14 @@ program define generate_occ_group_var
     exit 198
   }
   
-  local occ_var = cond("`dataset'" == "acs", "occp", "peioocc")
+  local job = lower(cond("`job'" == "", "week", "`job'"))
+  if !inlist("`job'", "week", "year") {
+    display as error "{bf:job() must be week or year}"
+    exit 198
+  }
+  
+  local occ_var = ///
+    cond("`dataset'" == "acs", "occp", cond("`job'" == "week", "peioocc", "occup"))
   confirm variable `occ_var'
   
   recode `occ_var' ///

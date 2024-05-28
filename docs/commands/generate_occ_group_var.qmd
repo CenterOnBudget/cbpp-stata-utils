@@ -9,7 +9,9 @@ categories: ["ACS and CPS microdata utilities"]
 
 `generate_occ_group_var` generates a categorical variable for major occupation groups representing 2-digit [2018 Standard Occupational Classification System (SOC) codes](https://www.bls.gov/soc/2018/major_groups.htm).
 
-For ACS microdata, the variable `occp` must exist. For CPS microdata, the variable `peioocc` must exist.
+In ACS microdata, the variable `occp` must exist.
+
+In CPS microdata, by default, the variable `peioocc` must exist and the new variable will reflect the primary job worked last week. Users may specify `job(year)` to indicate the new variable should reflect the longest job held last year, in which case `occup` must exist.
 
 ::: callout-caution
 Not all ACS or CPS data years use the 2018 SOC. This command will not work properly for data years that use other SOC versions.
@@ -21,9 +23,10 @@ Not all ACS or CPS data years use the 2018 SOC. This command will not work prope
 generate_occ_group_var newvar, dataset(acs|cps) [options]
 ```
 
-| Options           | Description                                                   |
-|--------------------|----------------------------------------------------|
-| `dataset(string)` | The type of dataset in memory; ACS or CPS (case insensitive). |
-| `nolabel`         | Do not assign value labels to *newvar*.                       |
+| Options           | Description                                                                                                                             |
+|---------------------|---------------------------------------------------|
+| `dataset(string)` | The type of dataset in memory; ACS or CPS (case insensitive).                                                                           |
+| `job(string)`     | With `dataset(cps)`, which job to use: "week" for the primary job last week or "year" for the primary job last year. Default is "week". |
+| `nolabel`         | Do not assign value labels to *newvar*.                                                                                                 |
 
 : {tbl-colwidths="\[30,70\]"}
