@@ -46,56 +46,56 @@ microdata, the variables {bf:prdtrace} and {bf:pehspnon} must exist.
 {p2col:{bf:Categories}}{bf:Values and Labels}{p_end}
 {p2line}
 {p2coldent:2}1{space 4}White, not Latino
-{break}      2{space 4}Not White, not Latino
+{break}      2{space 4}Another race or multiracial
 {p_end}
 {p2line}
 {p2coldent:4}1{space 4}White, not Latino      {break}
 {break}      2{space 4}Black, not Latino
 {break}      3{space 4}Latino (of any race)
-{break}      4{space 4}Another Race or Mult. Races, not Latino
+{break}      4{space 4}Another race or multiracial, not Latino
 {p_end}
 {p2line}
 {p2coldent:6}1{space 4}White, not Latino      {break}
 {break}      2{space 4}Black, not Latino
 {break}      3{space 4}Latino (of any race)
 {break}      4{space 4}Asian, not Latino
-{break}      5{space 4}Another Race or Mult. Races, not Latino
+{break}      5{space 4}Another race or multiracial, not Latino
 {p_end}
 {p2line}
 {p2coldent:6}1{space 4}White, not Latino      {break}
 {break}      2{space 4}Black, not Latino
 {break}      3{space 4}Latino (of any race)
 {break}      4{space 4}Asian, not Latino
-{break}      5{space 4}AIAN, not Latino
-{break}      6{space 4}Another Race or Mult. Races, not Latino
+{break}      5{space 4}American Indian or Alaska Native, not Latino
+{break}      6{space 4}Another race or multiracial, not Latino
 {p_end}
 {p2line}
 {p2coldent:7 (ACS)}1{space 4}White, not Latino      {break}
 {break}      2{space 4}Black, not Latino
 {break}      3{space 4}Latino (of any race)
 {break}      4{space 4}Asian, not Latino
-{break}      5{space 4}AIAN, not Latino
-{break}      6{space 4}NHOPI, not Latino
-{break}      7{space 4}Another Race or Mult. Races, not Latino
+{break}      5{space 4}American Indian or Alaska Native, not Latino
+{break}      6{space 4}Native Hawaiian or Pacific Islander, not Latino
+{break}      7{space 4}Another race or multiracial, not Latino
 {p_end}
 {p2line}
 {p2coldent:7 (CPS)}1{space 4}White, not Latino      {break}
 {break}      2{space 4}Black, not Latino
 {break}      3{space 4}Latino (of any race)
 {break}      4{space 4}Asian, not Latino
-{break}      5{space 4}AIAN, not Latino
-{break}      6{space 4}NHOPI, not Latino
-{break}      7{space 4}Multiple Races, not Latino
+{break}      5{space 4}American Indian or Alaska Native, not Latino
+{break}      6{space 4}Native Hawaiian or Pacific Islander, not Latino
+{break}      7{space 4}Multiracial, not Latino
 {p_end}
 {p2line}
 {p2coldent:8 (ACS only)}1{space 4}White, not Latino
 {break}      2{space 4}Black, not Latino
 {break}      3{space 4}Latino (of any race)
 {break}      4{space 4}Asian, not Latino
-{break}      5{space 4}AIAN, not Latino
-{break}      6{space 4}NHOPI, not Latino
-{break}      7{space 4}Some Other Race, not Latino 
-{break}      8{space 4}Mutliple Races, not Latino
+{break}      5{space 4}American Indian or Alaska Native, not Latino
+{break}      6{space 4}Native Hawaiian or Pacific Islander, not Latino
+{break}      7{space 4}Another race, not Latino 
+{break}      8{space 4}Multiracial, not Latino
 {p_end}
 {p2line}
 

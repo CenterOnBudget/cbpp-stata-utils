@@ -44,56 +44,56 @@ Categories and Labels
 {p2col:{bf:Categories}}{bf:Values and Labels}{p_end}
 {p2line}
 {p2coldent:2}1{space 4}White, not Latino
-  2{space 4}Not White, not Latino
+  2{space 4}Another race or multiracial
 {p_end}
 {p2line}
 {p2coldent:4}1{space 4}White, not Latino    
   2{space 4}Black, not Latino
   3{space 4}Latino (of any race)
-  4{space 4}Another Race or Mult. Races, not Latino
+  4{space 4}Another race or multiracial, not Latino
 {p_end}
 {p2line}
 {p2coldent:6}1{space 4}White, not Latino    
   2{space 4}Black, not Latino
   3{space 4}Latino (of any race)
   4{space 4}Asian, not Latino
-  5{space 4}Another Race or Mult. Races, not Latino
+  5{space 4}Another race or multiracial, not Latino
 {p_end}
 {p2line}
 {p2coldent:6}1{space 4}White, not Latino    
   2{space 4}Black, not Latino
   3{space 4}Latino (of any race)
   4{space 4}Asian, not Latino
-  5{space 4}AIAN, not Latino
-  6{space 4}Another Race or Mult. Races, not Latino
+  5{space 4}American Indian or Alaska Native, not Latino
+  6{space 4}Another race or multiracial, not Latino
 {p_end}
 {p2line}
 {p2coldent:7 (ACS)}1{space 4}White, not Latino    
   2{space 4}Black, not Latino
   3{space 4}Latino (of any race)
   4{space 4}Asian, not Latino
-  5{space 4}AIAN, not Latino
-  6{space 4}NHOPI, not Latino
-  7{space 4}Another Race or Mult. Races, not Latino
+  5{space 4}American Indian or Alaska Native, not Latino
+  6{space 4}Native Hawaiian or Pacific Islander, not Latino
+  7{space 4}Another race or multiracial, not Latino
 {p_end}
 {p2line}
 {p2coldent:7 (CPS)}1{space 4}White, not Latino    
   2{space 4}Black, not Latino
   3{space 4}Latino (of any race)
   4{space 4}Asian, not Latino
-  5{space 4}AIAN, not Latino
-  6{space 4}NHOPI, not Latino
-  7{space 4}Multiple Races, not Latino
+  5{space 4}American Indian or Alaska Native, not Latino
+  6{space 4}Native Hawaiian or Pacific Islander, not Latino
+  7{space 4}Multiracial, not Latino
 {p_end}
 {p2line}
 {p2coldent:8 (ACS only)}1{space 4}White, not Latino
   2{space 4}Black, not Latino
   3{space 4}Latino (of any race)
   4{space 4}Asian, not Latino
-  5{space 4}AIAN, not Latino
-  6{space 4}NHOPI, not Latino
-  7{space 4}Some Other Race, not Latino 
-  8{space 4}Mutliple Races, not Latino
+  5{space 4}American Indian or Alaska Native, not Latino
+  6{space 4}Native Hawaiian or Pacific Islander, not Latino
+  7{space 4}Another race, not Latino 
+  8{space 4}Multiracial, not Latino
 {p_end}
 {p2line}
   
@@ -231,7 +231,7 @@ program generate_race_var
     label define `newvar'_lbl   1 "White, not Latino"
     
     if `categories' == 2 {
-      label define `newvar'_lbl 2 "Not White, not Latino", add
+      label define `newvar'_lbl 2 "Another race or multiracial", add
     }
     
     if `categories' >= 4 {
@@ -243,29 +243,29 @@ program generate_race_var
     }
     
     if `categories' >= 6 {
-      label define `newvar'_lbl 5 "AIAN, not Latino", add
+      label define `newvar'_lbl 5 "American Indian or Alaska Native, not Latino", add
     }
     
     if `categories' >= 7 {
-      label define `newvar'_lbl 6 "NHOPI, not Latino", add
+      label define `newvar'_lbl 6 "Native Hawaiian or Pacific Islander, not Latino", add
     }
     
     if inrange(`categories', 3, 6) {
-      label define `newvar'_lbl `categories' "Another Race or Mult. Races, not Latino", add
+      label define `newvar'_lbl `categories' "Another race or multiracial, not Latino", add
     }
     
     if `categories' == 7 {
       if "`dataset'" == "acs" {
-        label define `newvar'_lbl 7 "Another Race or Mult. Races, not Latino", add
+        label define `newvar'_lbl 7 "Another race or multiracial, not Latino", add
       }
       if "`dataset'" == "cps" {
-        label define `newvar'_lbl 7 "Multiple Races, not Latino", add
+        label define `newvar'_lbl 7 "Multiracial, not Latino", add
       }
     }
     
     if `categories' == 8 & "`dataset'" == "acs" {
-      label define `newvar'_lbl 7 "Some Other Race, not Latino", add
-      label define `newvar'_lbl 8 "Multiple Races, not Latino", add
+      label define `newvar'_lbl 7 "Another race, not Latino", add
+      label define `newvar'_lbl 8 "Multiracial, not Latino", add
     }
     
     if `categories' > 2 {

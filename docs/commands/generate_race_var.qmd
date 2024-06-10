@@ -33,55 +33,55 @@ generate_race_var newvar, dataset(acs|cps) categories(integer) [options]
 
 ## Categories and labels
 
-+---------------+------------------------------------------------+
-| Categories    | Values and Labels                              |
-+===============+================================================+
-| 2             | 1.  White, not Latino                          |
-|               | 2.  Not White, not Latino                      |
-+---------------+------------------------------------------------+
-| 4             | 1.  White, not Latino                          |
-|               | 2.  Black, not Latino                          |
-|               | 3.  Latino (of any race)                       |
-|               | 4.  Another race or multiple races, not Latino |
-+---------------+------------------------------------------------+
-| 5             | 1.  White, not Latino                          |
-|               | 2.  Black, not Latino                          |
-|               | 3.  Latino (of any race)                       |
-|               | 4.  Asian, not Latino                          |
-|               | 5.  Another race or multiple races, not Latino |
-+---------------+------------------------------------------------+
-| 6             | 1.  White, not Latino                          |
-|               | 2.  Black, not Latino                          |
-|               | 3.  Latino (of any race)                       |
-|               | 4.  Asian, not Latino                          |
-|               | 5.  AIAN, not Latino                           |
-|               | 6.  Another race or multiple races, not Latino |
-+---------------+------------------------------------------------+
-| 7 (ACS)       | 1.  White, not Latino                          |
-|               | 2.  Black, not Latino                          |
-|               | 3.  Latino (of any race)                       |
-|               | 4.  Asian, not Latino                          |
-|               | 5.  AIAN, not Latino                           |
-|               | 6.  NHPI, not Latino                           |
-|               | 7.  Another race or multiple races, not Latino |
-+---------------+------------------------------------------------+
-| 7 (CPS)       | 1.  White, not Latino                          |
-|               | 2.  Black, not Latino                          |
-|               | 3.  Latino (of any race)                       |
-|               | 4.  Asian, not Latino                          |
-|               | 5.  AIAN, not Latino                           |
-|               | 6.  NHPI, not Latino                           |
-|               | 7.  Multiple races, not Latino                 |
-+---------------+------------------------------------------------+
-| 8 (ACS only)  | 1.  White, not Latino                          |
-|               | 2.  Black, not Latino                          |
-|               | 3.  Latino (of any race)                       |
-|               | 4.  Asian, not Latino                          |
-|               | 5.  AIAN, not Latino                           |
-|               | 6.  NHPI, not Latino                           |
-|               | 7.  Another race, not Latino                   |
-|               | 8.  Multiple races, not Latino                 |
-+---------------+------------------------------------------------+
++---------------+-----------------------------------------------------+
+| Categories    | Values and Labels                                   |
++===============+=====================================================+
+| 2             | 1.  White, not Latino                               |
+|               | 2.  Another race or multiracial                     |
++---------------+-----------------------------------------------------+
+| 4             | 1.  White, not Latino                               |
+|               | 2.  Black, not Latino                               |
+|               | 3.  Latino (of any race)                            |
+|               | 4.  Another race or multiracial, not Latino         |
++---------------+-----------------------------------------------------+
+| 5             | 1.  White, not Latino                               |
+|               | 2.  Black, not Latino                               |
+|               | 3.  Latino (of any race)                            |
+|               | 4.  Asian, not Latino                               |
+|               | 5.  Another race or multiracial, not Latino         |
++---------------+-----------------------------------------------------+
+| 6             | 1.  White, not Latino                               |
+|               | 2.  Black, not Latino                               |
+|               | 3.  Latino (of any race)                            |
+|               | 4.  Asian, not Latino                               |
+|               | 5.  American Indian or Alaska Native, not Latino    |
+|               | 6.  Another race or multiracial, not Latino         |
++---------------+-----------------------------------------------------+
+| 7 (ACS)       | 1.  White, not Latino                               |
+|               | 2.  Black, not Latino                               |
+|               | 3.  Latino (of any race)                            |
+|               | 4.  Asian, not Latino                               |
+|               | 5.  American Indian or Alaska Native, not Latino    |
+|               | 6.  Native Hawaiian or Pacific Islander, not Latino |
+|               | 7.  Another race or multiracial, not Latino         |
++---------------+-----------------------------------------------------+
+| 7 (CPS)       | 1.  White, not Latino                               |
+|               | 2.  Black, not Latino                               |
+|               | 3.  Latino (of any race)                            |
+|               | 4.  Asian, not Latino                               |
+|               | 5.  American Indian or Alaska Native, not Latino    |
+|               | 6.  Native Hawaiian or Pacific Islander, not Latino |
+|               | 7.  Multiracial, not Latino                         |
++---------------+-----------------------------------------------------+
+| 8 (ACS only)  | 1.  White, not Latino                               |
+|               | 2.  Black, not Latino                               |
+|               | 3.  Latino (of any race)                            |
+|               | 4.  Asian, not Latino                               |
+|               | 5.  American Indian or Alaska Native, not Latino    |
+|               | 6.  Native Hawaiian or Pacific Islander, not Latino |
+|               | 7.  Another race, not Latino                        |
+|               | 8.  Multiracial, not Latino                         |
++---------------+-----------------------------------------------------+
 
 ## Examples
 
