@@ -1,18 +1,27 @@
 ---
 title: "Reference"
 
+toc-expand: 3
+
 listing:
   id: commands
   contents: commands
   type: table
   max-description-length: 300
   fields: [title, description, categories]
-  sort-ui: false
+  sort-ui: [title, description, categories]
   
 ---
 
+## All commands
 
-## Data exploration & transformation
+::: {#commands}
+
+:::
+
+## Commands by category
+
+### Data exploration & transformation
 
 ::: no-spacing
 [`categorize`](commands/categorize.qmd)
@@ -54,7 +63,7 @@ Label a state FIPS code variable with state names or postal abbreviations.
 Create and attach variable and value labels in one step.
 :::
 
-## Data retrieval
+### Data retrieval
 
 ::: no-spacing
 [`copy_curl`](commands/copy_curl.qmd)
@@ -88,7 +97,7 @@ Load CPI-U or R-CPI-U-RS price index data series into memory or a matrix.
 Load data from CBPP's datasets library into memory.
 :::
 
-## ACS and CPS microdata utilities 
+### ACS and CPS microdata utilities 
 
 ::: no-spacing
 [`acs_relshipp_to_relp`](commands/acs_relshipp_to_relp.qmd)
@@ -154,7 +163,7 @@ Label ACS microdata in memory.
 Declare the survey design in ACS microdata.
 :::
 
-## Tools for CBPP staff
+### Tools for CBPP staff
 
 :::callout-note
 These commands are only useful for CBPP staff.
@@ -176,9 +185,5 @@ Load data from CBPP's datasets library into memory.
 Set up CBPP's standard profile.do.
 :::
 
-## All Commands
 
-::: {#commands}
-
-:::
 
