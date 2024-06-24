@@ -64,7 +64,7 @@ where {it:dataset} is "cps", "acs", "acs-spm", "qc", or "pulse" (case insensitiv
 
       {bf:. load_data cps, year(2023)}
 
-    Load a subset of variables from ACS microdata for 2016-2018.  
+    Load a subset of variables from ACS microdata for 2019, 2021, and 2022.  
 
       {bf:. load_data acs, years(2019 2021/2022) vars(serialno sporder st agep povpip pwgtp)}
 
@@ -72,7 +72,7 @@ where {it:dataset} is "cps", "acs", "acs-spm", "qc", or "pulse" (case insensitiv
 
       {bf:. load_data qc, years(2019)}
 
-    Load Household Pulse Survey microdata for weeks 61-23. 
+    Load Household Pulse Survey microdata for weeks 61-63. 
 
       {bf:. load_data pulse, weeks(61/63)}
 
