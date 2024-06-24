@@ -8,6 +8,7 @@ website:
   navbar:
     search: true
     logo: logo-grid-white.png
+    logo-alt: ""
     left: 
       - index.qmd
       - reference.qmd
@@ -15,6 +16,7 @@ website:
     tools:
       - icon: github
         href: https://github.com/CenterOnBudget/cbpp-stata-utils
+        aria-label: GitHub
   
 format:
   html:
