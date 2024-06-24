@@ -87,7 +87,7 @@ program define cbppstatautils
   
   if "`update'" != "" {
     ado update cbppstatautils, update
-    display `"{browse "https://github.com/CenterOnBudget/cbpp-stata-utils/blob/master/NEWS.md":View changelog}"'
+    display `"{browse "https://github.com/CenterOnBudget/cbpp-stata-utils/blob/main/NEWS.md":View changelog}"'
   }
   
 end
