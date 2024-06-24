@@ -7,7 +7,7 @@ categories: ["ACS and CPS microdata utilities"]
 
 ## Description
 
-`generate_occ_group_var` generates a categorical variable for major occupation groups representing 2-digit [2018 Standard Occupational Classification System (SOC) codes](https://www.bls.gov/soc/2018/major_groups.htm).
+`generate_occ_group_var` generates a categorical variable for 23 major occupation groups representing 2-digit [2018 Standard Occupational Classification System (SOC) codes](https://www.bls.gov/soc/2018/major_groups.htm).
 
 In ACS microdata, the variable `occp` must exist.
 
@@ -17,16 +17,46 @@ In CPS microdata, by default, the variable `peioocc` must exist and the new vari
 Not all ACS or CPS data years use the 2018 SOC. This command will not work properly for data years that use other SOC versions.
 :::
 
+The 2-digit SOC codes define 23 major occupation groups. The CPS's occupation recode variables `a_dtocc` and `wemocg` define the same 23 groups. In the ACS, 25 occupation groups are represented by three-letter abbreviations at the beginning of the occupation variable `occp`'s value labels.
+
 ## Syntax
 
 ``` stata
 generate_occ_group_var newvar, dataset(acs|cps) [options]
 ```
 
-| Options           | Description                                                                                                                         |
-|---------------------|---------------------------------------------------|
-| `dataset(string)` | The type of dataset in memory; ACS or CPS (case insensitive).                                                                       |
-| `job(string)`     | With `dataset(cps)`, which job to use: "week" for the primary job last week (the default) or "year" for the primary job last year.  |
-| `nolabel`         | Do not assign value labels to *newvar*.                                                                                             |
+| Options           | Description                                                                                                                        |
+|-------------------------|-----------------------------------------------|
+| `dataset(string)` | The type of dataset in memory; ACS or CPS (case insensitive).                                                                      |
+| `job(string)`     | With `dataset(cps)`, which job to use: "week" for the primary job last week (the default) or "year" for the primary job last year. |
+| `nolabel`         | Do not assign value labels to *newvar*.                                                                                            |
 
 : {tbl-colwidths="\[30,70\]"}
+
+## Values and labels
+
+| Value | Label                                                      |
+|-------|------------------------------------------------------------|
+| 11    | Management occupations                                     |
+| 13    | Business and financial operations occupations              |
+| 15    | Computer and mathematical occupations                      |
+| 17    | Architecture and engineering occupations                   |
+| 19    | Life, physical, and social science occupations             |
+| 21    | Community and social service occupations                   |
+| 23    | Legal occupations                                          |
+| 25    | Educational instruction and library occupations            |
+| 27    | Arts, design, entertainment, sports, and media occupations |
+| 29    | Healthcare practitioners and technical occupations         |
+| 31    | Healthcare support occupations                             |
+| 33    | Protective service occupations                             |
+| 35    | Food preparation and serving related occupations           |
+| 37    | Building and grounds cleaning and maintenance occupations  |
+| 39    | Personal care and service occupations                      |
+| 41    | Sales and related occupations                              |
+| 43    | Office and administrative support occupations              |
+| 45    | Farming, fishing, and forestry occupations                 |
+| 47    | Construction and extraction occupations                    |
+| 49    | Installation, maintenance, and repair occupations          |
+| 51    | Production occupations                                     |
+| 53    | Transportation and material moving occupations             |
+| 55    | Military specific occupations                              |

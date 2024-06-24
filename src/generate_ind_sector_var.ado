@@ -11,8 +11,8 @@ __generate_ind_sector_var__ {hline 2} Generate an industry sector variable in AC
 Description
 -----------
 
-__generate_ind_sector_var__ generates a categorial variable for industry sectors representing 2-digit 
-{browse "https://www.census.gov/naics/?58967?yearbck=2017":2017 North American Industry Classification System (NAICS) sectors}.
+__generate_ind_sector_var__ generates a categorial variable for 22 industry sectors representing 2-digit 
+{browse "https://www.census.gov/naics/?58967?yearbck=2017":2017 North American Industry Classification System (NAICS) codes}.
 
 In ACS microdata, the variable __indp__ must exist. 
 
@@ -21,7 +21,13 @@ variable will reflect the primary job worked last week. Users may specify
 {opt job(year)} to indicate the new variable should reflect the longest job 
 held last year, in which case __industry__ must exist. 
 
-Not all ACS or CPS data years use the 2017 NAICS. This command will not work properly for data years that use other NAICS versions.
+Not all ACS or CPS data years use the 2017 NAICS. This command will not work 
+properly for data years that use other NAICS versions.
+
+The 2-digit NAICS codes define 22 industry sectors. The CPS's major industry 
+recode variables __a_mjind__ and __wemind__ define 14 industry groups. In the 
+ACS, 18 industry groups are represented by three-letter abbreviations at the 
+beginning of the industry variable {bf:indp}'s value labels. 
 
 
 Syntax
@@ -37,6 +43,34 @@ __generate_ind_sector_var__ {newvar}, {opt data:set(string)} [_options_]
   {synopt: {opt job(string)}}With {opt dataset(cps)}, which job to use: "week" for the primary job last week (the default) or "year" for the primary job last year.{p_end}
   {synopt:{opt nolab:el}}Do not assign value labels to {it:newvar}.{p_end}
 {synoptline}
+
+
+Values and Labels
+-----------------
+
+| Value           | Label                                                                              |
+|-----------------|------------------------------------------------------------------------------------|
+| 11              | Agriculture, forestry, fishing, and hunting                                        |
+| 21              | Mining, quarrying, and oil and gas extraction                                      |
+| 22              | Utilities                                                                          |
+| 23              | Construction                                                                       |
+| 31              | Manufacturing                                                                      |
+| 42              | Wholesale trade                                                                    |
+| 44              | Retail trade                                                                       |
+| 48              | Transportation and warehousing                                                     |
+| 51              | Information                                                                        |
+| 52              | Finance and insurance                                                              |
+| 53              | Real estate and rental and leasing                                                 |
+| 54              | Professional, scientific, and technical services                                   |
+| 55              | Management of companies and enterprises                                            |
+| 56              | Administrative and support and waste management services                           |
+| 61              | Educational services                                                               |
+| 62              | Health care and social assistance                                                  |
+| 71              | Arts, entertainment, and recreation                                                |
+| 72              | Accommodation and food services                                                    |
+| 81              | Other services, except public administration                                       |
+| 92              | Public administration                                                              |
+| 928110          | Military                                                                           |
 
 
 Website
@@ -93,15 +127,11 @@ program define generate_ind_sector_var
     (8660/8690 = 72 "Accommodation and food services")  ///
     (8770/9290 = 81 "Other services, except public administration") ///
     (9370/9590 = 92 "Public administration")  ///
-    (9670/9890 = 928110 "Military"),  ///
+    (9670/9890 = 928110 "Military")   ///
+    (else = .),  ///
     generate(`newvar') label(`newvar'_lbl)
     
-  if "`dataset'" == "acs" {
-    label define `newvar'_lbl 9920 "Unemployed, with no work experience in the last 5 years or earlier or never worked", add
-  }
-  if "`dataset'" == "cps" {
-    label define `newvar'_lbl 0 "Not in universe or children", add
-  }
+  label variable `newvar'
   
   if "`nolabel'" != "" {
     label drop `newvar'_lbl
