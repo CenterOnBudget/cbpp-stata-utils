@@ -13,6 +13,8 @@
 
 - `load_data` suggests updating cbppstatautils if an unsupported data year is specified ([#20](https://github.com/CenterOnBudget/cbpp-stata-utils/issues/20)).
 
+- `load_data` now supports loading 2021 and 2022 SNAP QC data.
+
 - `labeller` has been renamed `labeler`; `labeller` is now an acceptable alias for `labeler`. The command gains a `lblname()` option for users to specify the name of the value label to use; default is "*varname*_lbl".
 
 - `svyset_acs` option `multiyear()` has been renamed `n_years()`. If `multiyear()` is specified, the contents will be copied into `n_years()`.
