@@ -9,7 +9,7 @@ Please visit the online documentation at <https://centeronbudget.github.io/cbpp-
 To install cbppstatautils, run:
 
 ``` stata
-net install cbppstatautils, from("https://raw.githubusercontent.com/CenterOnBudget/cbpp-stata-utils/main/src"
+net install cbppstatautils, from("https://raw.githubusercontent.com/CenterOnBudget/cbpp-stata-utils/main/src") replace
 ```
 
 To update your installation to the latest version, run:
