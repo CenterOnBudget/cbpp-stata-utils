@@ -1,71 +1,72 @@
-*! version 0.2.0
+*! version 0.2.9
 
 
 /***
 Title
 ====== 
 
-__get_cpiu__ {hline 2} Retrieve annual inflation data series.
+__get_cpiu__ {hline 2} Load CPI-U or R-CPI-U-RS price index data series into memory or a matrix.
 
 
 Description
 -----------
 
-__get_cpiu__ retreives annual CPI-U (the default) or CPI-U-RS data series from 
-the [Bureau of Labor Statistics](https://www.bls.gov/cpi/home.htm). The series 
-may be loaded as a variable joined to existing data in memory, as a matrix, or 
-as a new dataset replacing data in memory. 
+get_cpiu retrieves annual average CPI-U (the default) or
+[R-CPI-U-RS](https://www.bls.gov/cpi/research-series/r-cpi-u-rs-home.htm) 
+(formerly CPI-U-RS) data series from the Bureau of Labor Statistics. The series 
+may be loaded as a variable joined to existing data in memory, as a matrix, or as 
+a new dataset replacing data in memory.
 
-Optionally, users can request inflation adjustment factors {hline 1} used to 
-adjust nominal dollars to real dollars {hline 1} pegged to a given base year. 
-For instance, __get_cpiu, base_year(2018) clear__ loads the CPI-U data series as
-variable 'cpiu' and also creates another variable, 'cpiu_2018_adj'. Multiplying 
-nominal dollar amounts by 'cpiu_2018_adj' will yield 2018 inflation-adjusted 
-dollar amounts. 
+Users may request inflation adjustment factors based on the retrieved price index 
+be generated. Inflation adjustment factors are used to convert current (nominal) 
+dollars into constant (real) dollars. The __base_year()__ option specifies which 
+year to use as the base year for the inflation adjustment factor. For example, 
+__get_cpiu, base_year(2022)__ clear will load into memory the CPI-U data series 
+as variable __cpiu__ and generate __cpiu_2022_adj__. Users may then multiply a 
+variable containing nominal dollar values by __cpiu_2022_adj__ to obtain the 
+values in 2022 constant dollars.
 
-The program automatically caches the retreived data series. Users can load 
-cached data by specifying __use_cache__; __get_cpiu__ will display the date when
-cached data was originally downloaded. To refresh the cached data with the 
-latest available from the BLS, run __get_cpiu__ without __use_cache__ (you must
-be connected to the internet). 
-
-__get_cpiu__ supports annual (calendar year) average inflation series from 1978
-to the latest available year.
+Data series are automatically cached. Users can load the cached data rather than 
+re-downloading it by specifying __use_cache__. Note that price indices are 
+occasionally back-revised. When loading cached data, __get_cpiu__ will display 
+the date when the was originally downloaded. To refresh the cached data with the 
+latest available data, run __get_cpiu__ without the __use_cache__ option.
 
 
 Syntax
 ------ 
 
-> __get_cpiu__, [__merge__ __clear__ __{cmdab:mat:rix}(_matname_)__] [_options_]
+__get_cpiu__, { {bf:merge} | {opt mat:rix(matname)} | {bf:clear} } [_options_]
 
-{synoptset 27 tabbed}{...}
-{synopthdr}
+
+{synoptset 20}{...}
+{synopthdr:options}
 {synoptline}
-{syntab:Required: At least one of the following options must be specified}
-	
-	{synopt:{opt merge}}merge the inflations series into data in memory.{p_end}
-	{synopt:{opt clear}}replace data in memory with the inflation series; cannot be combined with {bf:merge}.{p_end}
-	{synopt:{opt mat:rix(matname)}}load the inflation series into a matrix.{p_end}
-	
-{syntab:Optional}
-    {synopt:{opt rs}}load the CPI-U-RS, the preferred series for inflation-adjusting Census data.{p_end}
-    {synopt:{opt b:ase_year(integer)}}requests that inflation-adjustment factors be included, and specifies the base year.{p_end}
-	{synopt:{opt yearvar:name}}if __merge__ is specified, the variable on which to merge the inflation data into data in memory; default is 
-	{opt yearvar(year)}.{p_end}
-	{synopt:{opt nolab:el}}if __merge__ or __replace__ is specified, do not label inflation variables.{p_end}
-	{synopt:{opt use_cache}}load cached inflation series data.{p_end}
+  {synopt:{opt merge}}Merge the data into the dataset in memory.{p_end}
+  {synopt:{opt mat:rix(matname)}}Load data into matrix _matname_.{p_end}
+  {synopt:{opt clear}}Load the data into memory, replacing the dataset currently in memory. Cannot be combined with __merge__.{p_end}
+  {synopt:{opt rs}}Retrieve the R-CPI-U-RS. If unspecified, the CPI-U will be retrieved.{p_end}
+  {synopt:{opt b:ase_year(integer)}}Create inflation-adjustment factors from nominal dollars to real dollars, using the specified base year.{p_end}
+  {synopt:{opt yearvar}}If __merge__ is specified, the key variable on which to merge the data into the dataset in memory. Default is {opt yearvar(year)}.{p_end}
+  {synopt:{opt nolab:el}}Do not attach variable labels to the retrieved data. May only be specified with __merge__ or __clear__.{p_end}
+  {synopt:{opt use_cache}}Use data from the cache if it exists. An internet connection is required to retrieve data when __use_cache__ is not specified or cached data does not exist.{p_end}
+  {synopt:{opt user_agent(string)}}Email address to provide in the header of the HTTP request to the BLS website; passed to {help copy_curl}.{p_end} 
+{synoptline}
 
 
 Example(s)
 ----------
 
-    Merge CPI-U data series into data in memory.
+    Merge the CPI-U into the dataset in memory.
+    
         {bf:. get_cpiu, merge}
 
-    Load CPI-U-RS and inflation-adjustment factors for 2018 dollars into memory, clearing existing data in memory.
-        {bf:. get_cpiu, rs base_year(2018) clear}
+    Load CPI-U-RS and inflation-adjustment factors to 2022 constant dollars into memory, replacing the dataset currently in memory.
+    
+        {bf:. get_cpiu, rs base_year(2022) clear}
 
-    Load cached CPI-U data series into a matrix named 'inflation'.
+    Load cached CPI-U data series into matrix {bf:inflation}.
+    
         {bf:. get_cpiu, matrix(inflation) use_cache}
 
 
@@ -79,173 +80,198 @@ Website
 
 
 /* for debugging:
-	sysuse uslifeexp2.dta, clear
-	replace year = year + 79
+  sysuse uslifeexp2.dta, clear
+  replace year = year + 79
 **/
 
 * capture program drop get_cpiu
 
 program define get_cpiu
 
-	syntax , [merge clear MATrix(name) YEARVARname(string) Base_year(integer 0) rs use_cache NOLABel]
+  syntax , [rs] [merge clear MATrix(name)]  ///
+    [YEARVARname(string) Base_year(integer 0)]  ///
+    [use_cache NOLABel user_agent(string)]
+  
+  
+  **# Checks ------------------------------------------------------------------
+  
+  if "`merge'" == "" & "`clear'" == "" & "`matrix'" == "" {
+    display as error "must specify one of {bf:merge}, {bf:clear}, or {bf:matrix()}"
+    exit 198
+  }
+  
+  if "`merge'" != "" & "`clear'" != "" {
+    display as error "{bf:merge} and {bf:clear} may not be combined"
+    exit 184
+  }
+  if "`merge'" == "" & "`yearvarname'" != "" {
+    display as error "{bf:yearvarname()} may only be specified with {bf:merge}"
+    exit 198
+  }
+    
+  if "`merge'" != "" {
+    if "`yearvarname'" != "" {
+      confirm variable `yearvarname'
+    }
+    if "`yearvarname'" == "" {
+      local yearvarname "year"
+    }
+  }
+  
+  local series = cond("`rs'" == "", "cpiu", "cpiu_rs")
+  
+  
+  **# Set up cache directory --------------------------------------------------
+  
+  _cbppstatautils_cache  
+  local cache_dir = "`s(cache_dir)'"
+  
+  
+  **# Download file (if needed) and clean data --------------------------------
+  
+  * Download if use_cache is not specified, or if use_cache is specified but 
+  * the file does not exist
+  capture confirm file "`cache_dir'/`series'.dta"
+  local download = (_rc != 0) | ("`use_cache'" == "")
 
-	* checks ------------------------------------------------------------------
-	
-	if "`merge'" == "" & "`clear'" == "" & "`matrix'" == "" {
-		display as error "must specify one of {bf:merge}, {bf:clear}, or {bf:matrix()}"
-		exit 198
-	}
-	
-	if "`merge'" != "" & "`clear'" != "" {
-		display as error "{bf:merge} and {bf:clear} may not be combined"
-		exit 184
-	}
-	if "`merge'" == "" & "`yearvarname'" != "" {
-    	display as error "{bf:yearvarname()} may only be specified with {bf:merge}"
-		exit 198
+  if "`clear'" == "" {
+    preserve
+  }
+  
+  if !`download' {
+    use "`cache_dir'/`series'.dta", clear
+  }
+  
+  if `download' {
+    
+    quietly {
+    
+      tempfile data
+      
+      if "`rs'" != "" {
+        
+        local url "https://www.bls.gov/cpi/research-series/r-cpi-u-rs-allitems.xlsx"
+        
+        capture copy `url' `data'
+        if _rc == 679 {
+          if "`user_agent'" != "" {
+            copy_curl "`url'" `data', user_agent(`user_agent')
+          }
+          if "`user_agent'" == "" {
+            display as error "BLS server refused to send file"
+            display as error "please try again specifying your email to {bf:user_agent()}"
+            exit 679
+          }
+        }
+  
+        import excel using `data', cellrange(A6) firstrow case(lower) clear
+        rename avg `series'
+        keep year `series'
+        drop if missing(`series')
+      
+      }
+      
+      if "`rs'" == "" {
+        
+        local url "https://download.bls.gov/pub/time.series/cu/cu.data.1.AllItems"
+        
+        capture copy `url' `data'
+        if _rc == 679 {
+          if "`user_agent'" != "" {
+            copy_curl "`url'" `data', user_agent(`user_agent')
+          }
+          if "`user_agent'" == "" {
+            display as error "BLS server refused to send file"
+            display as error "please try again specifying your email to {bf:user_agent()}"
+            exit 679
+          }
+        }
+  
+        import delimited using `data', clear
+        keep if regexm(series_id, "CUUR0000SA0")
+        keep if year >= 1978 & period == "M13"
+        label variable value  // Remove variable label of mysterious origin
+        rename value `series'
+        keep year `series'
+      
+      }
+      
+      * Labeling the dataset has the nice side-effect of displaying the 
+      * downloaded date when cached data is loaded
+      label data "Inflation series `series' last downloaded `c(current_date)'."
+      note : Inflation series `series' last downloaded `c(current_date)'.
+      save "`cache_dir'/`series'.dta", replace
+    
+    }
+  }  
+
+  
+  * Calculate inflation adjustment factor if requested ------------------------
+  
+  if `base_year' != 0 {
+  
+    * Check that the base year is present in the series
+    quietly levelsof year, local(years) separate("|")
+    if !ustrregexm("`base_year'", "`years'") {
+      display as error "{bf:base_year()} invalid or unavailable"
+      exit 198
     }
     
-	if "`merge'" != "" {
-    	if "`yearvarname'" != "" {
-		confirm variable `yearvarname'
-        }
-        if "`yearvarname'" == "" {
-        	local yearvarname "year"
-        }
-	}
-	
-	local series = cond("`rs'" == "", "cpiu", "cpiu_rs")
-	
-	
-	* set up cache directory --------------------------------------------------
-	
-	local cache_dir = cond("`c(os)'" == "Windows", 				///
-						   "~/AppData/Local/cbppstatautils",	///
-						   "~/Library/Application Support/cbppstatautils")
-	capture mkdir "`cache_dir'"	
-	
-	local cache_path = "`cache_dir'/`series'.dta"
-	
-	
-	* decide whether to download file -----------------------------------------
-	
-	// download if use_cache is not specified, 
-	// or if use_cache is specified but the file does not exist
-    
-    capture confirm file "`cache_dir'/`series'.dta"
-    local download = (_rc != 0) | ("`use_cache'" == "")
-	
-	
-	* download if needed, then load -------------------------------------------
+    * Create inflation adjustment factor variable
+    quietly generate val_if_base_year = `series' if year == `base_year'
+    egen val_of_base_year = max(val_if_base_year)
+    quietly generate `series'_`base_year'_adj =  val_of_base_year / `series'
+    drop val_*_base_year
 
-	if "`clear'" == "" {
-		preserve
-	}
-	
-	if !`download' {
-		use "`cache_dir'/`series'.dta", clear
-	}
-	
-	if `download' {
-    	
-    	quietly {
-		
-            tempfile data // tempfile for retrieved data
-            
-            if "`rs'" != "" {
-                // CPI-U RS 1978-latest available
-                copy "https://www.bls.gov/cpi/research-series/r-cpi-u-rs-allitems.xlsx" `data'
-                import excel using `data', cellrange(A6) firstrow case(lower) clear
-                rename avg `series'
-                keep year `series'
-                drop if missing(`series')
-            }
-            
-            if "`rs'" == "" {
-                // CPI-U 
-                copy "https://download.bls.gov/pub/time.series/cu/cu.data.1.AllItems" `data'
-                import delimited using `data', clear
-                keep if regexm(series_id, "CUUR0000SA0")
-                keep if year >= 1978 & period == "M13"
-                label variable value  // remove variable label of mysterious origin
-                rename value `series'
-                keep year `series'
-            }
-            
-            // labelling the data has the nice side effect of displaying the 
-            // downloaded date when the user loads cached data
-            label data "Inflation series `series' last downloaded `c(current_date)'."
-			note : Inflation series `series' last downloaded `c(current_date)'.
-            save "`cache_dir'/`series'.dta", replace
-        }
-	}	
+  }
+  
+  **# Label variables ---------------------------------------------------------
+  
+  if "`nolabel'" == "" {
+  
+    local series_nm = cond("`rs'" == "", "CPI-U", "CPI-U-RS")
+    local lbl = ///
+      cond("`merge'" != "", ///
+        "`series_nm' for observation year '`yearvarname''", ///
+        "`series_nm'")
+    label variable `series' "`lbl'"
+    if `base_year' != 0 {
+      local lbl = ///
+        cond("`merge'" != "", ///
+          "`series_nm' inflator for observation year `yearvarname'' to `base_year'", ///
+          "`series_nm' inflator to `base_year'")
+      label variable `series'_`base_year'_adj "`lbl'"
+    }
+  
+  }
 
-	
-	* if base year provided, calculate adjustment factor ----------------------
-	
-	if `base_year' != 0 {
-	
-		// check that base year is present in series
-		quietly levelsof year, local(years) separate("|")
-		if !ustrregexm("`base_year'", "`years'") {
-			display as error "{bf:base_year()} invalid or unavailable"
-			exit 198
-		}
-		// create adj fact variable
-		quietly generate val_if_base_year = `series' if year == `base_year'
-		egen val_of_base_year = max(val_if_base_year)
-		quietly generate `series'_`base_year'_adj =  val_of_base_year / `series'
-		drop val_*_base_year
-
-	}
-	
-	// label variables
-	if "`nolabel'" == "" {
-		local series_nm = cond("`rs'" == "", "CPI-U", "CPI-U-RS")
-		local lbl = 												///
-			cond("`merge'" != "",									///
-				 "`series_nm' for observation year '`yearvarname''",	///
-				 "`series_nm'")
-		label variable `series' "`lbl'"
-		if `base_year' != 0 {
-			local lbl = 														///
-				cond("`merge'" != "", 											///
-					 "`series_nm' inflator for observation year `yearvarname'' to `base_year'",	///
-					 "`series_nm' inflator to `base_year'")
-			label variable `series'_`base_year'_adj "`lbl'"
-		}
-	}
-	
-	// prep for next step
-	tempfile temp
-	quietly save `temp'
-	
-
-	* create matrix and restore if matrix() specified -------------------------
-	
-	if "`matrix'" != "" {
-		local mat_vars = cond(`base_year' != 0, 						///
-							  `"`series' `series'_`base_year'_adj"', 	///
-							  "`series'")
-		mkmat `mat_vars', matrix("`matrix'") rownames(year)
-		restore
-	}
-	
-	* restore and merge if merge specified ----------------------------------
-	
-	if "`merge'" != "" {
-		if "`matrix'" == "" {
-			restore
-		}
-        if "`yearvarname'" != "year" {
-        	quietly generate year = `yearvarname'
-        }
-		merge m:1 year using `temp', nogenerate keep(master match) nolabel noreport
-        if "`yearvarname'" != "year" {
-        	quietly drop year
-        }
-	}
-	
+  **# Create matrix and restore if matrix() specified -------------------------
+  
+  tempfile temp
+  quietly save `temp'
+  
+  if "`matrix'" != "" {
+    local mat_vars =  ///
+      cond(`base_year' != 0, `"`series' `series'_`base_year'_adj"', "`series'")
+    mkmat `mat_vars', matrix("`matrix'") rownames(year)
+    restore
+  }
+  
+  **# Restore and merge if merge specified ------------------------------------
+  
+  if "`merge'" != "" {
+    if "`matrix'" == "" {
+      restore
+    }
+    if "`yearvarname'" != "year" {
+      quietly generate year = `yearvarname'
+    }
+    merge m:1 year using `temp', nogenerate keep(master match) nolabel noreport
+    if "`yearvarname'" != "year" {
+      quietly drop year
+    }
+  }
+  
 end
 
 

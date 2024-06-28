@@ -1,0 +1,40 @@
+---
+title: copy_curl
+description: |
+  Copy file from URL with curl.
+categories: ["Data retrieval"]
+---
+
+## Description
+
+`copy_curl` copies file from a URL with [curl](https://curl.se/).
+
+Users may optionally specify the [user-agent](https://everything.curl.dev/http/modify/user-agent.html) to include in the HTTP header.
+
+Some websites block automated retrieval programs that do not provide a user-agent. For example, the Bureau of Labor Statistics website may block programs without an email address in the user-agent, per its [usage policy](https://www.bls.gov/bls/pss.htm).
+
+## Syntax
+
+``` stata
+copy_curl filename1 filename2 [, options]
+```
+
+*filename1* may be a URL. *filename2* may be a file.
+
+Double quotes may be used to enclose the filenames, and the quotes must be used if the filename contains embedded blanks.
+
+| Options              | Description                               |
+|----------------------|-------------------------------------------|
+| `user_agent(string)` | User agent to provide in the HTTP header. |
+| `replace`            | May overwrite *filename2*.                |
+
+: {tbl-colwidths="\[30,70\]"}
+
+## Examples
+
+Download a file from the BLS website.
+
+``` stata
+copy_curl "https://www.bls.gov/cpi/research-series/r-cpi-u-rs-allitems.xlsx"  ///
+  "r-cpi-u-rs.xlsx", user_agent(username@cbpp.org)
+```

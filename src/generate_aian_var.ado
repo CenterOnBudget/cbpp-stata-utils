@@ -5,41 +5,37 @@
 Title
 ====== 
 
-__generate_aian_var__ {hline 2} Generate categorical AI/AN variable for CPS or 
-ACS microdata.
+__generate_aian_var__ {hline 2} Generate an AIAN AOIC variable in ACS or CPS microdata.
 
 
 Description
 -----------
 
 __generate_aian_var__ generates a categorial variable for American 
-Indian/Alaska Native (AI/AN) identification, alone or in combination, regardless
-of Hispanic identification. It can be used with CPS (calendar year 2012 and 
-later) or ACS microdata.
+Indian or Alaska Native (AIAN) identification, alone or in combination (AOIC),
+regardless of Hispanic or Latino identification. 
+
+In ACS microdata, the variable __rac1p__ exist. In CPS microdata, the variable 
+__prdtrace__ must exist.
+
+__generate_aian_var__ should not be used in CPS microdata for calendar years 
+before 2012.
 
 
 Syntax
 ------ 
 
-__generate_aian_var__ _{help newvar}_, [_options_]
+__generate_aian_var__ {newvar}, {opt data:set(acs|cps)} [_options_]
 
-{synoptset 24 tabbed}{...}
-{synopthdr}
+
+{synoptset 16}{...}
+{synopthdr:options}
 {synoptline}
-{syntab :Required}
-	{synopt:{opt data:set(string)}}CPS or ACS (case insensitive).{p_end}
-	
-{syntab:Optional}
-    {synopt:{opt nolab:el}}{it:newvar} will not be labelled.{p_end}
+	{synopt:{opt data:set(string)}}The type of dataset in memory; ACS or CPS (case insensitive).{p_end}
+  {synopt:{opt nolab:el}}Do not assign value labels to {it:newvar}.{p_end}
+{synoptline}
 
-	
-Example(s)
-----------
 
-   Generate a variable named 'aian' for ACS microdata.
-        {bf:. generate_aian_var aian, dataset(acs)}
-		
-		
 Website
 -------
 
@@ -54,11 +50,11 @@ Website
 program generate_aian_var
 
 	syntax newvarname, DATAset(string) [NOLABel]
-	
-    
-    local newvar `varlist'
-    
-    
+
+  
+  local newvar `varlist'
+  
+  
 	* checks ------------------------------------------------------------------
 	
 	// check that dataset is valid
@@ -73,7 +69,7 @@ program generate_aian_var
 	confirm variable `needed_var'
 	
 	
-    * generate variables ------------------------------------------------------
+  * generate variables ------------------------------------------------------
 
 	if "`dataset'" == "acs" {
 		generate `newvar' = racaian
@@ -83,18 +79,18 @@ program generate_aian_var
 		generate `newvar' = 											///
 			inlist(prdtrace, 3, 7, 10, 13, 14, 16, 19, 20, 22, 23, 24) ///
 			if !missing(prdtrace)
-
+    
 		display as result "Definition valid for CPS ASEC files CY 2012 to present"
 	}
 	
-	* create label ------------------------------------------------------------
-	
-	if "`no_label'" == "" {
-		capture label drop `newvar'_lbl
-		label define `newvar'_lbl 1 "AIAN AOIC" 0 "Not AIAN AOIC"
-		label values `newvar' `newvar'_lbl
-	}
-	
+  * create label ------------------------------------------------------------
+  
+  if "`no_label'" == "" {
+    capture label drop `newvar'_lbl
+    label define `newvar'_lbl 1 "AIAN AOIC" 0 "Not AIAN AOIC"
+    label values `newvar' `newvar'_lbl
+  }
+  
 end
 
 

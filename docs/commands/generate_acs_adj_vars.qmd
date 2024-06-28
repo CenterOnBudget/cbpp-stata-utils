@@ -1,0 +1,45 @@
+---
+title: generate_acs_adj_vars
+description: |
+  Adjust income and housing dollar variables with `adjinc` and `adjhsg` in ACS microdata.
+categories: ["ACS and CPS microdata utilities"]
+---
+
+## Description
+
+`generate_acs_adj_vars` generates adjusted versions of any ACS microdata income or housing dollar variables needing adjustment that are found in the dataset in memory.
+
+If income variables are present, the income and earnings inflation factor variable `adjinc` must exist. If dollar-denominated housing variables are present, the housing dollar inflation factor variable `adjhsg` must exist. For 2007 and earlier ACS microdata samples, `adjust` must exist and the `pre_2008` option must be specified.
+
+By default, names of the new variables are the original variable names suffixed "\_adj". Users may supply an alternative variable prefix or suffix.
+
+By default, variable labels will be copied from the original, deleting the phrase referencing the need to apply the adjustment (e.g., "use ADJINC to adjust to constant dollars"), and value labels will be copied from the original.
+
+## Syntax
+
+``` stata
+generate_acs_adj_vars [, options]
+```
+
+| Option           | Description                                                              |
+|-------------------|-----------------------------------------------------|
+| `prefix(string)` | Prefix to prepend to the new variable names.                             |
+| `suffix(string)` | Suffix to append to the new variable names; default is `suffix("_adj")`. |
+| `nolabel`        | Do not copy variable or value labels to the new variables.               |
+| `pre_2008`       | Indicate that data in memory is pre-2008 ACS microdata.                  |
+
+: {tbl-colwidths="\[30,70\]"}
+
+## Examples
+
+Create adjusted versions of all relevant ACS microdata variables.
+
+``` stata
+generate_acs_adj_vars
+```
+
+Create adjusted versions of all relevant ACS variables, prefixed with "adj\_", in pre-2008 ACS microdata.
+
+``` stata
+generate_acs_adj_vars, prefix("adj_") pre_2008
+```

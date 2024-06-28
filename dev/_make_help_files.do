@@ -11,7 +11,7 @@ if _rc != 0 {
 
 local files_list : dir . files "*.ado"
 foreach f of local files_list {
-  if "`f'" != "_cbpp_profile.ado" {
+  if !inlist("`f'", "_cbpp_profile.ado", "_cbppstatautils_cache.ado") {
 	  markdoc "`f'", export(sthlp) replace style("simple")
   }
 }

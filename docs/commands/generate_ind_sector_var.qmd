@@ -1,0 +1,60 @@
+---
+title: generate_ind_sector_var
+description: |
+  Generate an industry sector variable in ACS or CPS microdata.
+categories: ["ACS and CPS microdata utilities"]
+---
+
+## Description
+
+`generate_ind_sector_var` generates a categorical variable for 22 industry sectors representing 2-digit [2017 North American Industry Classification System (NAICS) codes](https://www.census.gov/naics/?58967?yearbck=2017).
+
+In ACS microdata, the variable `indp` must exist.
+
+In CPS microdata, by default, the variable `peioind` must exist and the new variable will reflect the primary job worked last week. Users may specify `job(year)` to indicate the new variable should reflect the longest job held last year, in which case `industry` must exist.
+
+::: callout-caution
+Not all ACS or CPS data years use the 2017 NAICS. This command will not work properly for data years that use other NAICS versions.
+:::
+
+The 2-digit NAICS codes define 22 industry sectors. The CPS's major industry recode variables `a_mjind` and `wemind` define 14 industry groups. In the ACS, 18 industry groups are represented by three-letter abbreviations at the beginning of the industry variable `indp`'s value labels.
+
+## Syntax
+
+``` stata
+generate_ind_sector_var newvar, dataset(acs|cps) [options]
+```
+
+| Options           | Description                                                                                                                        |
+|-------------------------|-----------------------------------------------|
+| `dataset(string)` | The type of dataset in memory; ACS or CPS (case insensitive).                                                                      |
+| `job(string)`     | With `dataset(cps)`, which job to use: "week" for the primary job last week (the default) or "year" for the primary job last year. |
+| `nolabel`         | Do not assign value labels to *newvar*.                                                                                            |
+
+: {tbl-colwidths="\[30,70\]"}
+
+## Values and labels
+
+| Value  | Label                                                    |
+|--------|----------------------------------------------------------|
+| 11     | Agriculture, forestry, fishing, and hunting              |
+| 21     | Mining, quarrying, and oil and gas extraction            |
+| 22     | Utilities                                                |
+| 23     | Construction                                             |
+| 31     | Manufacturing                                            |
+| 42     | Wholesale trade                                          |
+| 44     | Retail trade                                             |
+| 48     | Transportation and warehousing                           |
+| 51     | Information                                              |
+| 52     | Finance and insurance                                    |
+| 53     | Real estate and rental and leasing                       |
+| 54     | Professional, scientific, and technical services         |
+| 55     | Management of companies and enterprises                  |
+| 56     | Administrative and support and waste management services |
+| 61     | Educational services                                     |
+| 62     | Health care and social assistance                        |
+| 71     | Arts, entertainment, and recreation                      |
+| 72     | Accommodation and food services                          |
+| 81     | Other services, except public administration             |
+| 92     | Public administration                                    |
+| 928110 | Military                                                 |

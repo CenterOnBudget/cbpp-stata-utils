@@ -1,0 +1,43 @@
+---
+title: labeler
+description: |
+  Create and attach variable and value labels in one step.
+categories: ["Data exploration and transformation"]
+---
+
+## Description
+
+`labeler` is a shortcut command to label a variable and define and attach value labels in one go.
+
+Labeling a variable and its values with built-in commands involves several steps:
+
+``` stata
+label variable sex "Sex assigned at birth" 
+label define sex_lbl 1 "Male" 2 "Female"
+label values sex sex_lbl
+```
+
+Using `labeler`:
+
+``` stata
+labeler sex, variable("Sex assigned at birth") values(1 "Male" 2 "Female")
+```
+
+`labeler` can also be used to "zap" variable and value labels from a variable, by specifying the `remove` option.
+
+## Syntax
+
+``` stata
+labeler varname, [variable(string)] [values(string)] [options]
+```
+
+| Option             | Description                                                                                                                                             |
+|-------------------|-----------------------------------------------------|
+| `variable(string)` | Variable label for *varname*.                                                                                                                           |
+| `values(string)`   | Value labels for *varname*, following the same syntax as `label define`: *\# "label" \[# "label" ...\]*                                                 |
+| `lblname(string)`  | Name of the value label to use. Default is "*varname*\_lbl".                                                                                            |
+| `add`              | Add value labels in `values()` to *varname*'s existing value label.                                                                                     |
+| `modify`           | Use value labels in `values()` to modify or delete existing \# to label correspondences or add new correspondences to *varname*'s existing value label. |
+| `remove`           | Remove variable labels and detach value labels from *varname*. Value labels will not be dropped from the dataset.                                       |
+
+: {tbl-colwidths="\[30,70\]"}

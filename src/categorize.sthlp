@@ -3,55 +3,55 @@
 {title:Title}
 
 {p 4 4 2}
-{bf:categorize} {hline 2} Create a categorical variable.
+{bf:categorize} {hline 2} Create a categorical variable from a continuous one.
 
 
 
 {title:Description}
 
 {p 4 4 2}
-{bf:categorize} is a shortcut and extension of {help egen}{c 39}s {it:cut} function with 
-the icodes option.
+{bf:categorize} is a shortcut and extension of {bf:{help egen} newvar = cut(args) [...], icodes}.
 
 {p 4 4 2}
-Unlike egen cut:    {break}
-{bf:categorize} does not require the user to include the minumum and the maximum 
-value of the continuous variable in the list of breaks.    {break}
-It creates more descriptive value labels for the generated categorical variable.    {break}
-Users can specify a variable label for the new variable.
+Unlike {help egen} with the {bf:cut()} function, {bf:categorize}:
 
-{p 4 4 2}
-Finally, users working with age or poverty ratio variables may choose "default" 
-breaks. With {opt default(age)}, breaks are 18 and 65. With 
-{opt default(povratio)}, breaks are 50, 100, 150, 200, and 250.
+{p 8 10 2}{c 149} Does not require the user to include the minimum and the maximum value of the continuous variable in the list of breaks.
+
+{p 8 10 2}{c 149} Creates more descriptive value labels for the generated categorical variable. Users can specify a variable label for the new variable.
+
+{p 8 10 2}{c 149} Allows users working with age or poverty ratio variables to use "default" breaks.
 
 
 
 {title:Syntax}
 
-{p 8 8 2} {bf:categorize} {it:{help varname}}, {cmdab:gen:erate}({it:{help newvar}}) [{it:options}]
+{p 4 4 2}
+{bf:categorize} {it:{varname}}, {opth gen:erate(newvar)} {{opth breaks(numlist)}|{opt default(string)}} [{it:options}]
 
-{synoptset 24 tabbed}{...}
-{synopthdr}
+
+{synoptset 16}{...}
+{synopthdr:options}
 {synoptline}
-{syntab:Required}
-    {synopt:{opth gen:erate(newvar)}}name of the categorical variable to be generated.{p_end}
-
-{syntab:Optional}
-    {synopt:{opth breaks(numlist)}}left-hand ends of the grouping intervals. Do not include the minimum or the maximum value of {it:varname}. Either {opt breaks()} or {opt default()} must be specified.{p_end}
-	{synopt:{opt default(age|povratio)}}use default breaks; cannot be combined with {bf:breaks()}.{p_end}
-	{synopt:{opt nolab:el}}do not give {it:newvar} value labels.{p_end}
-	{synopt:{opt varlab:el(string)}}variable label for {it:newvar}.{p_end}
+{space 2}{synopt:{opth gen:erate(newvar)}}Name of the categorical variable to be generated.{p_end}
+{space 2}{synopt:{opth breaks(numlist)}}Left-hand ends of the grouping intervals. Do not include the minimum or the maximum value of {it:varname}. Either {bf:breaks()} or {bf:default()} must be specified.{p_end}
+{space 2}{synopt:{opt default(string)}}Use default breaks; "age" or "povratio". For {opt default("age")}, these are 18 and 65. For {opt default("povratio")}, these are 50, 100, 150, 200, and 250. Cannot be combined with {bf:breaks()}.{p_end}
+{space 2}{synopt:{opt lblname(string)}}Name of value label to create; default is "{it:varname}_lbl". Ignored if {bf:nolabel} is specified.{p_end}
+{space 2}{synopt:{opt nformat(string)}}Numeric format to use in value labels; default is nformat(13.0gc). Ignored if nolabel is specified.{p_end}
+{space 2}{synopt:{opt nol:abel}}Do not assign value labels to {it:newvar}.{p_end}
+{space 2}{synopt:{opt varlab:el(string)}}Variable label for {it:newvar}.{p_end}
+{synoptline}
 
 
 
 {title:Example(s)}
 
-    Generate categorical variable 'inc_cat' from 'pincp'.
-        {bf:. categorize pincp, generate(inc_cat) breaks(15000 30000 50000 100000)}
+    Using user-specified breaks.
 
-    Generate 'age_cat' from 'agep' using default breaks.
-        {bf:. categorize agep, generate(age_cat) default(age) varlabel("Age group")}
+        {bf:. categorize pincp_adj, generate(pincp_cat) breaks(25000 50000 100000)}
+
+    Using default breaks.
+
+        {bf:. categorize agep, generate(age_cat) default("age") varlabel("Age group")}
 
 
 

@@ -1,0 +1,28 @@
+---
+title: "acs_relshipp_to_relp" 
+description: |
+  Recode `relshipp` to `relp` in ACS microdata.
+categories: ["ACS and CPS microdata utilities"]
+---
+
+## Description
+
+`acs_relshipp_to_relp` converts `relshipp`, the household relationship variable in ACS microdata from 2019 to present, to `relp`, the relationship variable in earlier samples.
+
+In a dataset containing only `relshipp`, `acs_relshipp_to_relp` will recode `relshipp` to generate `relp`.
+
+In a dataset containing both `relshipp` and `relp` (for example, a dataset formed by appending 2019 or later and 2018 or earlier samples), `acs_relshipp_to_relp` will, for observations where `relp` is missing and `relshipp` is not, populate `relp` with recoded values of `relshipp`.
+
+By default, `acs_relshipp_to_relp` will create a value label for `relp` if one does not already exist.
+
+## Syntax
+
+``` stata
+acs_relshipp_to_relp [, options]
+```
+
+| Option    | Description                           |
+|-----------|---------------------------------------|
+| `nolabel` | Do not assign value labels to `relp`. |
+
+: {tbl-colwidths="\[30,70\]"}

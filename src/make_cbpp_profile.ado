@@ -11,31 +11,44 @@ __make_cbpp_profile__ {hline 2} Set up CBPP's standard profile.do.
 Description
 -----------
 
-__make_cbpp_profile__ creates CBPP's standard
-[profile.do](https://www.stata.com/support/faqs/programming/profile-do-file/)
-in the user's home directory. This command is only useful for CBPP staff. 
+make_cbpp_profile creates CBPP's standard [profile.do](https://www.stata.com/support/faqs/programming/profile-do-file/) 
+in the user's home directory.
+
+This command is only useful for CBPP staff.
 
 CBPP's standard profile.do defines global macros that serve as shortcuts to 
-synched SharePoint and OneDrive folders and cloned GitHub repositories. 
+synced cloud folders and cloned GitHub repositories:
 
-Users may also add the following to the standard profile.do:
+{p 8 10 2}{c 149} __odpath__ – Path to the user's OneDrive, "C:/Users/{username}/OneDrive - Center on Budget and Policy Priorities".
 
-{p 8 8 2}{c 149}  Census Bureau API key to for use by the [getcensus](https://centeronbudget.github.io/getcensus/) package, stored as a global macro named 'censuskey'{p_end}
-  
-{p 8 8 2}{c 149}  Path to the user's Rscript excutable for use by the [rscript](https://github.com/reifjulian/rscript) package, stored as a global macro named 'RSCRIPT_PATH'{p_end}
+{p 8 10 2}{c 149} __sppath__ – Path to the directory for synced SharePoint folders, "C:/Users/{username}/Center on Budget and Policy Priorities".
+
+{p 8 10 2}{c 149} __spdatapath__ – Start of path to a synced datasets libraries, "C:/Users/{username}/Center on Budget and Policy Priorities/Datasets - ".
+
+{p 8 10 2}{c 149} __ghpath__ – Path to cloned GitHub repositories, "C:/Users/{username}/Documents/GitHub".
+
+Users may optionally add the following to the standard profile.do:
+
+{p 8 10 2}{c 149} Census Bureau API key to for use by the [getcensus](https://centeronbudget.github.io/getcensus/) package, to be stored global macro __censuskey__.
+
+{p 8 10 2}{c 149} Path to the user's Rscript excutable for use by the [rscript](https://github.com/reifjulian/rscript) package, to be stored as global macro __RSCRIPT_PATH__.
+
+The standard profile.do includes __set more off, permanently__.
 
 
 Syntax
 ------ 
 
-> __make_cbpp_profile__, [_options_]
+__make_cbpp_profile__ [, _options_]
 
-{synoptset 27 tabbed}{...}
-{synopthdr}
+
+{synoptset 16}{...}
+{synopthdr:options}
 {synoptline}
-	{synopt:{opt censuskey(string)}}Census Bureau API key.{p_end}
-  {synopt:{opt rscript(string)}}Path to the user's Rscript executable.{p_end}
-	{synopt:{opt replace}}replace existing profile.do.{p_end}
+  {synopt:{opt censuskey(string)}}Census Bureau API key.{p_end}
+  {synopt:{opt rscript(string)}}Path to the Rscript executable; typically "C:/Users/{username}/AppData/Local/Programs/R/R-{version}/bin/Rscript.exe".{p_end}
+  {synopt:{opt replace}}Replace existing profile.do.{p_end}
+{synoptline}
 
 
 Website
@@ -51,7 +64,7 @@ Website
 
 program define make_cbpp_profile
 
-	syntax, [censuskey(string)] [rscript(string)] [replace]
+  syntax, [censuskey(string)] [rscript(string)] [replace]
   
   preserve
   
@@ -69,11 +82,11 @@ program define make_cbpp_profile
   }
   
   local root = cond("`c(os)'" == "Windows", "C:", "")
-	local profile_do_path "`root'/Users/`c(username)'/profile.do"
+  local profile_do_path "`root'/Users/`c(username)'/profile.do"
   * local profile_do_path "`c(pwd)'/profile.do" // for debugging
   
   outfile using `profile_do_path', noquote `replace'
-	display as result `"created {bf:{browse "`profile_do_path'"}}"'
+  display as result `"created {bf:{browse "`profile_do_path'"}}"'
   
   restore
 

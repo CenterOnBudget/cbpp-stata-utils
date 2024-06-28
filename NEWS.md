@@ -1,7 +1,49 @@
 
-## v 0.2.6
+## v 0.2.9
 
-- `generate_acs_adj_vars` now copies variable and value labels from the original to the adjusted variables by default; specify **nolab** to skip this.
+### New installation URL
+
+cbppstatautils is now hosted at "https://raw.githubusercontent.com/CenterOnBudget/cbpp-stata-utils/main/src".
+
+To install cbppstatautils, or to update to version 0.2.9, run:
+
+``` stata
+net install cbppstatautils, from("https://raw.githubusercontent.com/CenterOnBudget/cbpp-stata-utils/main/src") replace
+```
+
+After installing version 0.2.9, future updates can be installed with:
+
+``` stata
+cbppstatautils, update
+```
+
+### New documentation website
+
+<https://centeronbudget.github.io/cbpp-stata-utils/>
+
+### New commands
+
+-   `generate_ind_sector_var` generates an industry sector variable in ACS or CPS microdata ([#22](https://github.com/CenterOnBudget/cbpp-stata-utils/issues/22)).
+
+-   `generate_occ_group_var` generates an occupation group variable in ACS or CPS microdata ([#22](https://github.com/CenterOnBudget/cbpp-stata-utils/issues/22)).
+
+-   `copy_curl` downloads files from a URL using curl, optionally providing a user-specified user-agent in the HTTP header.
+
+-   `labeler` replaces `labeller`. `labeller` is still available as an alias for `labeler`. The command gains a `lblname()` option for users to specify the name of the value label to use; default is "*varname*\_lbl".
+
+### Changes
+
+-   `get_cpiu` falls back to `copy_curl` if the BLS denies the file download and gains option `user_agent()` to pass to `copy_curl` ([#23](https://github.com/CenterOnBudget/cbpp-stata-utils/issues/23)).
+
+-   `load_data` now supports loading ACS SPM datasets ([#21](https://github.com/CenterOnBudget/cbpp-stata-utils/issues/21)) and 2021-2022 SNAP QC datasets. `load_data` now suggests updating cbppstatautils if an unsupported data year is specified ([#20](https://github.com/CenterOnBudget/cbpp-stata-utils/issues/20)).
+
+-   `svyset_acs` option `multiyear()` has been renamed `n_years()`. `multiyear()` is still available as an alias for `n_years()`.
+
+-   `categorize` gains two new options for controlling value labels. `lblname()` specifies the name of the value label to create and `nformat()` specifies the numeric display format to use in value labels.
+
+-   `generate_race_var` produces more readable value labels. Acronyms and abbreviations have been replaced with full words (for example, "Native Hawaiian or Pacific Islander" replacing "NHOPI") and capitalization has been changed to sentence case.
+
+-   Some small under-the-hood changes and formatting fixes have been made.
 
 
 ## v 0.2.2

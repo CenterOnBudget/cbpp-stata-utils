@@ -1,0 +1,46 @@
+---
+title: make_cbpp_profile
+description: |
+  Set up CBPP's standard profile.do
+categories: ["Tools for CBPP staff"]
+---
+
+::: callout-note
+This command is only useful for CBPP staff.
+:::
+
+## Description
+
+`make_cbpp_profile` creates CBPP's standard [profile.do](https://www.stata.com/support/faqs/programming/profile-do-file/) in the user's home directory.
+
+CBPP's standard profile.do defines global macros that serve as shortcuts to synced cloud folders and cloned GitHub repositories:
+
+-   `odpath` – Path to the user's OneDrive, "C:/Users/{username}/OneDrive - Center on Budget and Policy Priorities".
+
+-   `sppath` – Path to the directory for synced SharePoint folders, "C:/Users/{username}/Center on Budget and Policy Priorities".
+
+-   `spdatapath` – Start of path to a synced datasets libraries, "C:/Users/{username}/Center on Budget and Policy Priorities/Datasets - ".
+
+-   `ghpath` – Path to cloned GitHub repositories, "C:/Users/{username}/Documents/GitHub".
+
+Users may optionally add the following to the standard profile.do:
+
+-   Census Bureau API key to for use by the [getcensus](https://centeronbudget.github.io/getcensus/) package, to be stored global macro `censuskey`.
+
+-   Path to the user's Rscript excutable for use by the [rscript](https://github.com/reifjulian/rscript) package, to be stored as global macro `RSCRIPT_PATH`.
+
+The standard profile.do includes `set more off, permanently`.
+
+## Syntax
+
+``` stata
+make_cbpp_profile [, options]
+```
+
+| Option              | Description                                                                                                           |
+|---------------|---------------------------------------------------------|
+| `censuskey(string)` | Census Bureau API key.                                                                                                |
+| `rscript(string)`   | Path to the Rscript executable; typically "C:/Users/{username}/AppData/Local/Programs/R/R-{version}/bin/Rscript.exe". |
+| `replace`           | Replace existing profile.do.                                                                                          |
+
+: {tbl-colwidths="\[30,70\]"}

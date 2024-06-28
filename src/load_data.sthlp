@@ -3,83 +3,78 @@
 {title:Title}
 
 {p 4 4 2}
-{bf:load_data} {hline 2} Load datasets from the CBPP datasets library.
+{bf:load_data} {hline 2} Load data from CBPP{c 39}s datasets library into memory.
 
 
 
 {title:Description}
 
 {p 4 4 2}
-{bf:load_data} loads CPS ASEC, ACS, SNAP QC, or Household Pulse Survey microdata from 
-the CBPP datasets library into memory. This command is only useful for CBPP 
-staff.
+{bf:load_data} loads CPS, ACS, ACS SPM, SNAP QC, or Household Pulse Survey microdata from a CBPP datasets library into memory.
 
 {p 4 4 2}
-This program will only work for Center staff who have synced these datasets 
-from the SharePoint datasets library, and have set up the global {it:spdatapath}.    {break}
+This command is only useful for CBPP staff.
 
 {p 4 4 2}
-With {opt dataset(acs)}, the program will load the one-year merged 
-person-household ACS files. 
+To use load_data, first:
+
+{p 8 10 2}{c 149} Sync the datasets library to your laptop.
+
+{p 8 10 2}{c 149} Add CBPP{c 39}s global macros to your profile.do with {help make_cbpp_profile}.
 
 {p 4 4 2}
-With {opt dataset(cps)}, the program will load the 
-merged person-family-household CPS ASEC files. With {opt dataset(cps)}, 
-{bf:years()} refers to the survey year, rather than the reference year. For 
-example, {bf:load_data cps, year(2019)} will load the March 2019 CPS ASEC, whose
-reference year is 2018.
+Multiple years of data may be loaded at once by specifying a list of years to 
+the {bf:years()} option. Variable and value labels from the maximum year will be 
+retained.
 
 {p 4 4 2}
-Available years are 1980-2023 for
-CPS ASEC, 2000-2019 and 2022 for ACS, and 1980-2020 for QC. 
-
-{p 4 4 2}
-Users may specify a single year or multiple years to {bf:years()} as a 
-{help numlist}. With {opt dataset(pulse)}, users can specify the weeks of data 
-to retrieve in either {bf:weeks()} or {bf:years()}. If multiple years are 
-specified, the datasets will be appended together before loading and retain 
-variable and value labels from the maximum year in {bf:years()}. 
-
-{p 4 4 2}
-The default is to load all variables in the dataset. Users may specify a subset 
-of variables to load in the {bf:vars()} option.
-
-{p 4 4 2}
-To save the loaded data as a new dataset, use the {bf:saveas()} option. Also 
-specify {bf:replace} to overwrite the dataset if it already exists.
-
-{p 4 4 2}
-Note: When loading multiple years of ACS datasets including 2018 and later 
-samples, {c 39}serialno{c 39} will be edited to facilitate appending ({c 39}serialno{c 39} is string
-in 2018 and later datasets, and numeric in prior years{c 39} datasets): "00" and "01"
-will be substituted for "HU" and "GQ", respectively, and the variable will be 
-destringed.    {break}
+When loading multiple years of ACS data, if the range of {bf:years()} spans the 
+introduction of string characters to serialno in 2018, serialno will be edited 
+("00" and "01" will be substituted for "HU" and "GQ", respectively) and 
+destringed. 
 
 
 
 {title:Syntax}
 
-{p 8 8 2} {bf:load_data} {it:dataset} [{it:{help if}}], {bf:{cmdab:y:ears}({it:{help numlist}})} [{bf:{cmdab:v:ars}({it:{help varlist}})} {bf:saveas({it:{help filename}})} {bf:replace} {bf:clear}]
+{p 4 4 2}
+{bf:load_data} {it:dataset} [{it:{help if}}], {opt y:ears(numlist)} [{it:options}]
+
+{p 4 4 2}
+where {it:dataset} is "cps", "acs", "acs-spm", "qc", or "pulse" (case insensitive).
+
+
+{synoptset 16}{...}
+{synopthdr:options}
+{synoptline}
+{space 2}{synopt:{opth y:ears(numlist)}}Year(s) of data to load. When {it:dataset} is "cps", {bf:years()} refers to the survey (data release) year.{p_end}
+{space 2}{synopt:{opth v:ars(varlist)}}Variables to load; default is all.{p_end}
+{space 2}{synopt:{opth w:eeks(numlist)}}Alias for {bf:years()}; for use when {it:dataset} is "pulse".{p_end}
+{space 2}{synopt:{opth p:eriod(integer)}}With {it:dataset} "qc" and {opt year(2020)}, period of data to load: 1 for the pre-pandemic period or 2 for the waiver period.{p_end}
+{space 2}{synopt:{opth saveas(filename)}}Save dataset to file.{p_end}
+{space 2}{synopt:{opt replace}}When {bf:saveas()} is specified, replace existing dataset.{p_end}
+{space 2}{synopt:{opt clear}}Replace the data in memory, even if the current data have not been saved to disk.{p_end}
+{synoptline}
 
 
 
 {title:Example(s)}
 
-{p 4 4 2}
-	Load March 2019 CPS ASEC microdata.    {break}
-		{bf:. load_data cps, year(2019)}
+    Load March 2023 CPS ASEC microdata.  
 
-{p 4 4 2}
-	Load a subset of variables from ACS microdata for 2016-2018.    {break}
-		{bf:. load_data acs, years(2016/2018) vars(serialno sporder st agep povpip pwgtp)}
+      {bf:. load_data cps, year(2023)}
 
-{p 4 4 2}
-	Load SNAP QC microdata for 2018.    {break}
-		{bf:. load_data qc, years(2018)}
-	
-{p 4 4 2}
-	Load Household Pulse Survey microdata for weeks 22-24.    {break}
-		{bf:. load_data pulse, weeks(22/24)}
+    Load a subset of variables from ACS microdata for 2019, 2021, and 2022.  
+
+      {bf:. load_data acs, years(2019 2021/2022) vars(serialno sporder st agep povpip pwgtp)}
+
+    Load SNAP QC microdata for 2019.  
+
+      {bf:. load_data qc, years(2019)}
+
+    Load Household Pulse Survey microdata for weeks 61-63. 
+
+      {bf:. load_data pulse, weeks(61/63)}
 
 
 
