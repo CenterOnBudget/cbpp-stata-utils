@@ -86,7 +86,9 @@ program define cbppstatautils
   }
   
   if "`update'" != "" {
-    ado update cbppstatautils, update
+    capture ado uninstall cbppstatautils
+    net install cbppstatautils,   ///
+      from("https://raw.githubusercontent.com/CenterOnBudget/cbpp-stata-utils/main/src") replace
     display `"{browse "https://github.com/CenterOnBudget/cbpp-stata-utils/blob/main/NEWS.md":View changelog}"'
   }
   
