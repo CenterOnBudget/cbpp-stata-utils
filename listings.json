@@ -1,0 +1,25 @@
+[
+  {
+    "listing": "/reference.html",
+    "items": [
+      "/commands/acs_relshipp_to_relp.html",
+      "/commands/categorize.html",
+      "/commands/copy_curl.html",
+      "/commands/etotal.html",
+      "/commands/generate_acs_adj_vars.html",
+      "/commands/generate_aian_var.html",
+      "/commands/generate_ind_sector_var.html",
+      "/commands/generate_occ_group_var.html",
+      "/commands/generate_race_var.html",
+      "/commands/get_acs_pums.html",
+      "/commands/get_cpiu.html",
+      "/commands/inspect_2.html",
+      "/commands/label_acs_pums.html",
+      "/commands/label_state.html",
+      "/commands/labeler.html",
+      "/commands/load_data.html",
+      "/commands/make_cbpp_profile.html",
+      "/commands/svyset_acs.html"
+    ]
+  }
+]

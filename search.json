@@ -1,0 +1,583 @@
+[
+  {
+    "objectID": "reference.html",
+    "href": "reference.html",
+    "title": "Reference",
+    "section": "",
+    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Description\n        \n         \n          Categories\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\nTitle\n\n\nDescription\n\n\nCategories\n\n\n\n\n\n\nacs_relshipp_to_relp\n\n\nRecode relshipp to relp in ACS microdata. \n\n\nACS and CPS microdata utilities\n\n\n\n\ncategorize\n\n\nCreate a categorical variable from a continuous one. \n\n\nData exploration and transformation\n\n\n\n\ncopy_curl\n\n\nCopy file from URL with curl. \n\n\nData retrieval\n\n\n\n\netotal\n\n\nFlexible counts and totals. \n\n\nData exploration and transformation\n\n\n\n\ngenerate_acs_adj_vars\n\n\nAdjust income and housing dollar variables with adjinc and adjhsg in ACS microdata. \n\n\nACS and CPS microdata utilities\n\n\n\n\ngenerate_aian_var\n\n\nGenerate an AIAN AOIC variable in ACS or CPS microdata. \n\n\nACS and CPS microdata utilities\n\n\n\n\ngenerate_ind_sector_var\n\n\nGenerate an industry sector variable in ACS or CPS microdata. \n\n\nACS and CPS microdata utilities\n\n\n\n\ngenerate_occ_group_var\n\n\nGenerate an occupation group variable in ACS or CPS microdata. \n\n\nACS and CPS microdata utilities\n\n\n\n\ngenerate_race_var\n\n\nGenerate a race-ethnicity variable in ACS or CPS microdata. \n\n\nACS and CPS microdata utilities\n\n\n\n\nget_acs_pums\n\n\nDownload ACS microdata files from the Census Bureau FTP and convert them to .dta format. \n\n\nData retrieval\n\n\n\n\nget_cpiu\n\n\nLoad CPI-U or R-CPI-U-RS price index data series into memory or a matrix. \n\n\nData retrieval\n\n\n\n\ninspect_2\n\n\nSummary statistics for positive, zero, negative, and missing values. \n\n\nData exploration and transformation\n\n\n\n\nlabel_acs_pums\n\n\nLabel ACS microdata in memory. \n\n\nACS and CPS microdata utilities\n\n\n\n\nlabel_state\n\n\nLabel a state FIPS code variable with state names or postal abbreviations. \n\n\nData exploration and transformation\n\n\n\n\nlabeler\n\n\nCreate and attach variable and value labels in one step. \n\n\nData exploration and transformation\n\n\n\n\nload_data\n\n\nLoad data from CBPP’s datasets library into memory. \n\n\nTools for CBPP staff\n\n\n\n\nmake_cbpp_profile\n\n\nSet up CBPP’s standard profile.do \n\n\nTools for CBPP staff\n\n\n\n\nsvyset_acs\n\n\nDeclare the survey design in ACS microdata. \n\n\nACS and CPS microdata utilities\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "reference.html#all-commands",
+    "href": "reference.html#all-commands",
+    "title": "Reference",
+    "section": "",
+    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Description\n        \n         \n          Categories\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\nTitle\n\n\nDescription\n\n\nCategories\n\n\n\n\n\n\nacs_relshipp_to_relp\n\n\nRecode relshipp to relp in ACS microdata. \n\n\nACS and CPS microdata utilities\n\n\n\n\ncategorize\n\n\nCreate a categorical variable from a continuous one. \n\n\nData exploration and transformation\n\n\n\n\ncopy_curl\n\n\nCopy file from URL with curl. \n\n\nData retrieval\n\n\n\n\netotal\n\n\nFlexible counts and totals. \n\n\nData exploration and transformation\n\n\n\n\ngenerate_acs_adj_vars\n\n\nAdjust income and housing dollar variables with adjinc and adjhsg in ACS microdata. \n\n\nACS and CPS microdata utilities\n\n\n\n\ngenerate_aian_var\n\n\nGenerate an AIAN AOIC variable in ACS or CPS microdata. \n\n\nACS and CPS microdata utilities\n\n\n\n\ngenerate_ind_sector_var\n\n\nGenerate an industry sector variable in ACS or CPS microdata. \n\n\nACS and CPS microdata utilities\n\n\n\n\ngenerate_occ_group_var\n\n\nGenerate an occupation group variable in ACS or CPS microdata. \n\n\nACS and CPS microdata utilities\n\n\n\n\ngenerate_race_var\n\n\nGenerate a race-ethnicity variable in ACS or CPS microdata. \n\n\nACS and CPS microdata utilities\n\n\n\n\nget_acs_pums\n\n\nDownload ACS microdata files from the Census Bureau FTP and convert them to .dta format. \n\n\nData retrieval\n\n\n\n\nget_cpiu\n\n\nLoad CPI-U or R-CPI-U-RS price index data series into memory or a matrix. \n\n\nData retrieval\n\n\n\n\ninspect_2\n\n\nSummary statistics for positive, zero, negative, and missing values. \n\n\nData exploration and transformation\n\n\n\n\nlabel_acs_pums\n\n\nLabel ACS microdata in memory. \n\n\nACS and CPS microdata utilities\n\n\n\n\nlabel_state\n\n\nLabel a state FIPS code variable with state names or postal abbreviations. \n\n\nData exploration and transformation\n\n\n\n\nlabeler\n\n\nCreate and attach variable and value labels in one step. \n\n\nData exploration and transformation\n\n\n\n\nload_data\n\n\nLoad data from CBPP’s datasets library into memory. \n\n\nTools for CBPP staff\n\n\n\n\nmake_cbpp_profile\n\n\nSet up CBPP’s standard profile.do \n\n\nTools for CBPP staff\n\n\n\n\nsvyset_acs\n\n\nDeclare the survey design in ACS microdata. \n\n\nACS and CPS microdata utilities\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "reference.html#commands-by-category",
+    "href": "reference.html#commands-by-category",
+    "title": "Reference",
+    "section": "Commands by category",
+    "text": "Commands by category\n\nData exploration & transformation\n\ncategorize\n\n\nCreate a categorical variable from a continuous one.\n\n\netotal\n\n\nFlexible counts and totals.\n\n\ninspect_2\n\n\nSummary statistics for positive, zero, negative, and missing values.\n\n\nlabel_state\n\n\nLabel a state FIPS code variable with state names or postal abbreviations.\n\n\nlabeler\n\n\nCreate and attach variable and value labels in one step.\n\n\n\nData retrieval\n\ncopy_curl\n\n\nCopy file from URL with curl.\n\n\nget_acs_pums\n\n\nDownload ACS microdata files from the Census Bureau FTP and convert them to .dta format.\n\n\nget_cpiu\n\n\nLoad CPI-U or R-CPI-U-RS price index data series into memory or a matrix.\n\n\nload_data\n\n\nLoad data from CBPP’s datasets library into memory.\n\n\n\nACS and CPS microdata utilities\n\nacs_relshipp_to_relp\n\n\nRecode relshipp to relp in ACS microdata.\n\n\ngenerate_acs_adj_vars\n\n\nAdjust income and housing dollar variables with adjinc and adjhsg in ACS microdata.\n\n\ngenerate_aian_var\n\n\nGenerate an AIAN AOIC variable in ACS or CPS microdata.\n\n\ngenerate_ind_sector_var\n\n\nGenerate an industry sector variable in ACS or CPS microdata.\n\n\ngenerate_occ_group_var\n\n\nGenerate an occupation group variable in ACS or CPS microdata.\n\n\ngenerate_race_var\n\n\nGenerate a race-ethnicity variable in ACS or CPS microdata.\n\n\nlabel_acs_pums\n\n\nLabel ACS microdata in memory.\n\n\nsvyset_acs\n\n\nDeclare the survey design in ACS microdata.\n\n\n\nTools for CBPP staff\n\n\n\n\n\n\nThese commands are only useful for CBPP staff.\n\n\n\n\nload_data\n\n\nLoad data from CBPP’s datasets library into memory.\n\n\nmake_cbpp_profile\n\n\nSet up CBPP’s standard profile.do."
+  },
+  {
+    "objectID": "index.html#installation",
+    "href": "index.html#installation",
+    "title": "Get started",
+    "section": "Installation",
+    "text": "Installation\nTo install cbppstatautils, run:\nnet install cbppstatautils, from(\"https://raw.githubusercontent.com/CenterOnBudget/cbpp-stata-utils/main/src\") replace\nTo update your installation to the latest version, run:\ncbppstatautils, update"
+  },
+  {
+    "objectID": "index.html#license",
+    "href": "index.html#license",
+    "title": "Get started",
+    "section": "License",
+    "text": "License\nView the license on GitHub."
+  },
+  {
+    "objectID": "commands/make_cbpp_profile.html",
+    "href": "commands/make_cbpp_profile.html",
+    "title": "make_cbpp_profile",
+    "section": "",
+    "text": "This command is only useful for CBPP staff."
+  },
+  {
+    "objectID": "commands/make_cbpp_profile.html#description",
+    "href": "commands/make_cbpp_profile.html#description",
+    "title": "make_cbpp_profile",
+    "section": "Description",
+    "text": "Description\nmake_cbpp_profile creates CBPP’s standard profile.do in the user’s home directory.\nCBPP’s standard profile.do defines global macros that serve as shortcuts to synced cloud folders and cloned GitHub repositories:\n\nodpath – Path to the user’s OneDrive, “C:/Users/{username}/OneDrive - Center on Budget and Policy Priorities”.\nsppath – Path to the directory for synced SharePoint folders, “C:/Users/{username}/Center on Budget and Policy Priorities”.\nspdatapath – Start of path to a synced datasets libraries, “C:/Users/{username}/Center on Budget and Policy Priorities/Datasets - ”.\nghpath – Path to cloned GitHub repositories, “C:/Users/{username}/Documents/GitHub”.\n\nUsers may optionally add the following to the standard profile.do:\n\nCensus Bureau API key to for use by the getcensus package, to be stored global macro censuskey.\nPath to the user’s Rscript excutable for use by the rscript package, to be stored as global macro RSCRIPT_PATH.\n\nThe standard profile.do includes set more off, permanently."
+  },
+  {
+    "objectID": "commands/make_cbpp_profile.html#syntax",
+    "href": "commands/make_cbpp_profile.html#syntax",
+    "title": "make_cbpp_profile",
+    "section": "Syntax",
+    "text": "Syntax\nmake_cbpp_profile [, options]\n\n\n\n\n\n\n\nOption\nDescription\n\n\n\n\ncensuskey(string)\nCensus Bureau API key.\n\n\nrscript(string)\nPath to the Rscript executable; typically “C:/Users/{username}/AppData/Local/Programs/R/R-{version}/bin/Rscript.exe”.\n\n\nreplace\nReplace existing profile.do."
+  },
+  {
+    "objectID": "commands/label_state.html",
+    "href": "commands/label_state.html",
+    "title": "label_state",
+    "section": "",
+    "text": "label_state attaches value labels to a variable containing state FIPS codes. Value labels are the full state name by default. The 50 states, the District of Columbia, Puerto Rico, and U.S. territories are supported.\nIf the state FIPS code variable in varname is a string, it will be destringed."
+  },
+  {
+    "objectID": "commands/label_state.html#description",
+    "href": "commands/label_state.html#description",
+    "title": "label_state",
+    "section": "",
+    "text": "label_state attaches value labels to a variable containing state FIPS codes. Value labels are the full state name by default. The 50 states, the District of Columbia, Puerto Rico, and U.S. territories are supported.\nIf the state FIPS code variable in varname is a string, it will be destringed."
+  },
+  {
+    "objectID": "commands/label_state.html#syntax",
+    "href": "commands/label_state.html#syntax",
+    "title": "label_state",
+    "section": "Syntax",
+    "text": "Syntax\nlabel_state varname [, options]\n\n\n\n\n\n\n\nOption\nDescription\n\n\n\n\nabbrv\nUse state postal abbreviations rather than state names (the default) for value labels."
+  },
+  {
+    "objectID": "commands/labeler.html",
+    "href": "commands/labeler.html",
+    "title": "labeler",
+    "section": "",
+    "text": "labeler is a shortcut command to label a variable and define and attach value labels in one go.\nLabeling a variable and its values with built-in commands involves several steps:\nlabel variable sex \"Sex assigned at birth\" \nlabel define sex_lbl 1 \"Male\" 2 \"Female\"\nlabel values sex sex_lbl\nUsing labeler:\nlabeler sex, variable(\"Sex assigned at birth\") values(1 \"Male\" 2 \"Female\")\nlabeler can also be used to “zap” variable and value labels from a variable, by specifying the remove option."
+  },
+  {
+    "objectID": "commands/labeler.html#description",
+    "href": "commands/labeler.html#description",
+    "title": "labeler",
+    "section": "",
+    "text": "labeler is a shortcut command to label a variable and define and attach value labels in one go.\nLabeling a variable and its values with built-in commands involves several steps:\nlabel variable sex \"Sex assigned at birth\" \nlabel define sex_lbl 1 \"Male\" 2 \"Female\"\nlabel values sex sex_lbl\nUsing labeler:\nlabeler sex, variable(\"Sex assigned at birth\") values(1 \"Male\" 2 \"Female\")\nlabeler can also be used to “zap” variable and value labels from a variable, by specifying the remove option."
+  },
+  {
+    "objectID": "commands/labeler.html#syntax",
+    "href": "commands/labeler.html#syntax",
+    "title": "labeler",
+    "section": "Syntax",
+    "text": "Syntax\nlabeler varname, [variable(string)] [values(string)] [options]\n\n\n\n\n\n\n\nOption\nDescription\n\n\n\n\nvariable(string)\nVariable label for varname.\n\n\nvalues(string)\nValue labels for varname, following the same syntax as label define: # “label” [# “label” …]\n\n\nlblname(string)\nName of the value label to use. Default is “varname_lbl”.\n\n\nadd\nAdd value labels in values() to varname’s existing value label.\n\n\nmodify\nUse value labels in values() to modify or delete existing # to label correspondences or add new correspondences to varname’s existing value label.\n\n\nremove\nRemove variable labels and detach value labels from varname. Value labels will not be dropped from the dataset."
+  },
+  {
+    "objectID": "commands/get_cpiu.html",
+    "href": "commands/get_cpiu.html",
+    "title": "get_cpiu",
+    "section": "",
+    "text": "get_cpiu retrieves annual average CPI-U (the default) or R-CPI-U-RS (formerly CPI-U-RS) data series from the Bureau of Labor Statistics. The series may be loaded as a variable joined to existing data in memory, as a matrix, or as a new dataset replacing data in memory.\nUsers may request inflation adjustment factors based on the retrieved price index be generated. Inflation adjustment factors are used to convert current (nominal) dollars into constant (real) dollars. The base_year() option specifies which year to use as the base year for the inflation adjustment factor. For example, get_cpiu, base_year(2022) clear will load into memory the CPI-U data series as variable cpiu and generate cpiu_2022_adj. Users may then multiply a variable containing nominal dollar values by cpiu_2022_adj to obtain the values in 2022 constant dollars.\nData series are automatically cached. Users can load the cached data rather than re-downloading it by specifying use_cache. Note that price indices are occasionally back-revised. When loading cached data, get_cpiu will display the date when the was originally downloaded. To refresh the cached data with the latest available data, run get_cpiu without the use_cache option."
+  },
+  {
+    "objectID": "commands/get_cpiu.html#description",
+    "href": "commands/get_cpiu.html#description",
+    "title": "get_cpiu",
+    "section": "",
+    "text": "get_cpiu retrieves annual average CPI-U (the default) or R-CPI-U-RS (formerly CPI-U-RS) data series from the Bureau of Labor Statistics. The series may be loaded as a variable joined to existing data in memory, as a matrix, or as a new dataset replacing data in memory.\nUsers may request inflation adjustment factors based on the retrieved price index be generated. Inflation adjustment factors are used to convert current (nominal) dollars into constant (real) dollars. The base_year() option specifies which year to use as the base year for the inflation adjustment factor. For example, get_cpiu, base_year(2022) clear will load into memory the CPI-U data series as variable cpiu and generate cpiu_2022_adj. Users may then multiply a variable containing nominal dollar values by cpiu_2022_adj to obtain the values in 2022 constant dollars.\nData series are automatically cached. Users can load the cached data rather than re-downloading it by specifying use_cache. Note that price indices are occasionally back-revised. When loading cached data, get_cpiu will display the date when the was originally downloaded. To refresh the cached data with the latest available data, run get_cpiu without the use_cache option."
+  },
+  {
+    "objectID": "commands/get_cpiu.html#syntax",
+    "href": "commands/get_cpiu.html#syntax",
+    "title": "get_cpiu",
+    "section": "Syntax",
+    "text": "Syntax\nget_cpiu, { merge | matrix(matname) | clear } [options]\n\n\n\n\n\n\n\nOption\nDescription\n\n\n\n\nmerge\nMerge the data into the dataset in memory.\n\n\nmatrix(matname)\nLoad data into matrix matname.\n\n\nclear\nLoad the data into memory, replacing the dataset currently in memory. Cannot be combined with merge.\n\n\nrs\nRetrieve the R-CPI-U-RS. If unspecified, the CPI-U will be retrieved.\n\n\nbase_year(integer)\nCreate inflation-adjustment factors from nominal dollars to real dollars, using the specified base year.\n\n\nyearvar(varname)\nIf merge is specified, the key variable on which to merge the data into the dataset in memory. Default is yearvar(year).\n\n\nnolabel\nDo not attach variable labels to the retrieved data. May only be specified with merge or clear.\n\n\nuse_cache\nUse data from the cache if it exists. An internet connection is required to retrieve data when use_cache is not specified or cached data does not exist.\n\n\nuser_agent(string)\nEmail address to provide in the header of the HTTP request to the BLS website; passed to copy_curl."
+  },
+  {
+    "objectID": "commands/get_cpiu.html#examples",
+    "href": "commands/get_cpiu.html#examples",
+    "title": "get_cpiu",
+    "section": "Examples",
+    "text": "Examples\nMerge the CPI-U into the dataset in memory.\nget_cpiu, merge\nLoad CPI-U-RS and inflation-adjustment factors to 2022 constant dollars into memory, replacing the dataset currently in memory.\nget_cpiu, rs base_year(2022) clear\nLoad cached CPI-U data series into matrix inflation.\nget_cpiu, matrix(inflation) use_cache"
+  },
+  {
+    "objectID": "commands/generate_race_var.html",
+    "href": "commands/generate_race_var.html",
+    "title": "generate_race_var",
+    "section": "",
+    "text": "generate_race_var generates a categorical variable for race-ethnicity in ACS or CPS microdata.\nUsers may specify the desired number of categories for the new variable; see Categories and labels.\nIn ACS microdata, the variables rac1p and hisp must exist. In CPS microdata, the variables prdtrace and pehspnon must exist."
+  },
+  {
+    "objectID": "commands/generate_race_var.html#description",
+    "href": "commands/generate_race_var.html#description",
+    "title": "generate_race_var",
+    "section": "",
+    "text": "generate_race_var generates a categorical variable for race-ethnicity in ACS or CPS microdata.\nUsers may specify the desired number of categories for the new variable; see Categories and labels.\nIn ACS microdata, the variables rac1p and hisp must exist. In CPS microdata, the variables prdtrace and pehspnon must exist."
+  },
+  {
+    "objectID": "commands/generate_race_var.html#syntax",
+    "href": "commands/generate_race_var.html#syntax",
+    "title": "generate_race_var",
+    "section": "Syntax",
+    "text": "Syntax\ngenerate_race_var newvar, dataset(acs|cps) categories(integer) [options]\n\n\n\n\n\n\n\nOption\nDescription\n\n\n\n\ndataset(string)\nThe type of dataset in memory; ACS or CPS (case insensitive).\n\n\ncategories(integer)\nNumber of categories for newvar. With dataset(acs), up to 8. With dataset(cps), up to 7. See Categories and Labels.\n\n\nnolabel\nDo not assign value labels to newvar."
+  },
+  {
+    "objectID": "commands/generate_race_var.html#categories-and-labels",
+    "href": "commands/generate_race_var.html#categories-and-labels",
+    "title": "generate_race_var",
+    "section": "Categories and labels",
+    "text": "Categories and labels\n\n\n\n\n\n\n\nCategories\nValues and Labels\n\n\n\n\n2\n\nWhite, not Latino\nAnother race or multiracial\n\n\n\n4\n\nWhite, not Latino\nBlack, not Latino\nLatino (of any race)\nAnother race or multiracial, not Latino\n\n\n\n5\n\nWhite, not Latino\nBlack, not Latino\nLatino (of any race)\nAsian, not Latino\nAnother race or multiracial, not Latino\n\n\n\n6\n\nWhite, not Latino\nBlack, not Latino\nLatino (of any race)\nAsian, not Latino\nAmerican Indian or Alaska Native, not Latino\nAnother race or multiracial, not Latino\n\n\n\n7 (ACS)\n\nWhite, not Latino\nBlack, not Latino\nLatino (of any race)\nAsian, not Latino\nAmerican Indian or Alaska Native, not Latino\nNative Hawaiian or Pacific Islander, not Latino\nAnother race or multiracial, not Latino\n\n\n\n7 (CPS)\n\nWhite, not Latino\nBlack, not Latino\nLatino (of any race)\nAsian, not Latino\nAmerican Indian or Alaska Native, not Latino\nNative Hawaiian or Pacific Islander, not Latino\nMultiracial, not Latino\n\n\n\n8 (ACS only)\n\nWhite, not Latino\nBlack, not Latino\nLatino (of any race)\nAsian, not Latino\nAmerican Indian or Alaska Native, not Latino\nNative Hawaiian or Pacific Islander, not Latino\nAnother race, not Latino\nMultiracial, not Latino"
+  },
+  {
+    "objectID": "commands/generate_race_var.html#examples",
+    "href": "commands/generate_race_var.html#examples",
+    "title": "generate_race_var",
+    "section": "Examples",
+    "text": "Examples\nGenerate a 5-category race-ethnicity variable in ACS microdata.\ngenerate_race_var race_cat, dataset(\"acs\") categories(5) \nGenerate an unlabeled 2-category race-ethnicity variable in CPS microdata.\ngenerate_race_var person_of_color, categories(2) dataset(\"cps\") nolabel"
+  },
+  {
+    "objectID": "commands/generate_ind_sector_var.html",
+    "href": "commands/generate_ind_sector_var.html",
+    "title": "generate_ind_sector_var",
+    "section": "",
+    "text": "generate_ind_sector_var generates a categorical variable for 22 industry sectors representing 2-digit 2017 North American Industry Classification System (NAICS) codes.\nIn ACS microdata, the variable indp must exist.\nIn CPS microdata, by default, the variable peioind must exist and the new variable will reflect the primary job worked last week. Users may specify job(year) to indicate the new variable should reflect the longest job held last year, in which case industry must exist.\n\n\n\n\n\n\nNot all ACS or CPS data years use the 2017 NAICS. This command will not work properly for data years that use other NAICS versions.\n\n\n\nThe 2-digit NAICS codes define 22 industry sectors. The CPS’s major industry recode variables a_mjind and wemind define 14 industry groups. In the ACS, 18 industry groups are represented by three-letter abbreviations at the beginning of the industry variable indp’s value labels."
+  },
+  {
+    "objectID": "commands/generate_ind_sector_var.html#description",
+    "href": "commands/generate_ind_sector_var.html#description",
+    "title": "generate_ind_sector_var",
+    "section": "",
+    "text": "generate_ind_sector_var generates a categorical variable for 22 industry sectors representing 2-digit 2017 North American Industry Classification System (NAICS) codes.\nIn ACS microdata, the variable indp must exist.\nIn CPS microdata, by default, the variable peioind must exist and the new variable will reflect the primary job worked last week. Users may specify job(year) to indicate the new variable should reflect the longest job held last year, in which case industry must exist.\n\n\n\n\n\n\nNot all ACS or CPS data years use the 2017 NAICS. This command will not work properly for data years that use other NAICS versions.\n\n\n\nThe 2-digit NAICS codes define 22 industry sectors. The CPS’s major industry recode variables a_mjind and wemind define 14 industry groups. In the ACS, 18 industry groups are represented by three-letter abbreviations at the beginning of the industry variable indp’s value labels."
+  },
+  {
+    "objectID": "commands/generate_ind_sector_var.html#syntax",
+    "href": "commands/generate_ind_sector_var.html#syntax",
+    "title": "generate_ind_sector_var",
+    "section": "Syntax",
+    "text": "Syntax\ngenerate_ind_sector_var newvar, dataset(acs|cps) [options]\n\n\n\n\n\n\n\nOptions\nDescription\n\n\n\n\ndataset(string)\nThe type of dataset in memory; ACS or CPS (case insensitive).\n\n\njob(string)\nWith dataset(cps), which job to use: “week” for the primary job last week (the default) or “year” for the primary job last year.\n\n\nnolabel\nDo not assign value labels to newvar."
+  },
+  {
+    "objectID": "commands/generate_ind_sector_var.html#values-and-labels",
+    "href": "commands/generate_ind_sector_var.html#values-and-labels",
+    "title": "generate_ind_sector_var",
+    "section": "Values and labels",
+    "text": "Values and labels\n\n\n\nValue\nLabel\n\n\n\n\n11\nAgriculture, forestry, fishing, and hunting\n\n\n21\nMining, quarrying, and oil and gas extraction\n\n\n22\nUtilities\n\n\n23\nConstruction\n\n\n31\nManufacturing\n\n\n42\nWholesale trade\n\n\n44\nRetail trade\n\n\n48\nTransportation and warehousing\n\n\n51\nInformation\n\n\n52\nFinance and insurance\n\n\n53\nReal estate and rental and leasing\n\n\n54\nProfessional, scientific, and technical services\n\n\n55\nManagement of companies and enterprises\n\n\n56\nAdministrative and support and waste management services\n\n\n61\nEducational services\n\n\n62\nHealth care and social assistance\n\n\n71\nArts, entertainment, and recreation\n\n\n72\nAccommodation and food services\n\n\n81\nOther services, except public administration\n\n\n92\nPublic administration\n\n\n928110\nMilitary"
+  },
+  {
+    "objectID": "commands/generate_acs_adj_vars.html",
+    "href": "commands/generate_acs_adj_vars.html",
+    "title": "generate_acs_adj_vars",
+    "section": "",
+    "text": "generate_acs_adj_vars generates adjusted versions of any ACS microdata income or housing dollar variables needing adjustment that are found in the dataset in memory.\nIf income variables are present, the income and earnings inflation factor variable adjinc must exist. If dollar-denominated housing variables are present, the housing dollar inflation factor variable adjhsg must exist. For 2007 and earlier ACS microdata samples, adjust must exist and the pre_2008 option must be specified.\nBy default, names of the new variables are the original variable names suffixed “_adj”. Users may supply an alternative variable prefix or suffix.\nBy default, variable labels will be copied from the original, deleting the phrase referencing the need to apply the adjustment (e.g., “use ADJINC to adjust to constant dollars”), and value labels will be copied from the original."
+  },
+  {
+    "objectID": "commands/generate_acs_adj_vars.html#description",
+    "href": "commands/generate_acs_adj_vars.html#description",
+    "title": "generate_acs_adj_vars",
+    "section": "",
+    "text": "generate_acs_adj_vars generates adjusted versions of any ACS microdata income or housing dollar variables needing adjustment that are found in the dataset in memory.\nIf income variables are present, the income and earnings inflation factor variable adjinc must exist. If dollar-denominated housing variables are present, the housing dollar inflation factor variable adjhsg must exist. For 2007 and earlier ACS microdata samples, adjust must exist and the pre_2008 option must be specified.\nBy default, names of the new variables are the original variable names suffixed “_adj”. Users may supply an alternative variable prefix or suffix.\nBy default, variable labels will be copied from the original, deleting the phrase referencing the need to apply the adjustment (e.g., “use ADJINC to adjust to constant dollars”), and value labels will be copied from the original."
+  },
+  {
+    "objectID": "commands/generate_acs_adj_vars.html#syntax",
+    "href": "commands/generate_acs_adj_vars.html#syntax",
+    "title": "generate_acs_adj_vars",
+    "section": "Syntax",
+    "text": "Syntax\ngenerate_acs_adj_vars [, options]\n\n\n\n\n\n\n\nOption\nDescription\n\n\n\n\nprefix(string)\nPrefix to prepend to the new variable names.\n\n\nsuffix(string)\nSuffix to append to the new variable names; default is suffix(\"_adj\").\n\n\nnolabel\nDo not copy variable or value labels to the new variables.\n\n\npre_2008\nIndicate that data in memory is pre-2008 ACS microdata."
+  },
+  {
+    "objectID": "commands/generate_acs_adj_vars.html#examples",
+    "href": "commands/generate_acs_adj_vars.html#examples",
+    "title": "generate_acs_adj_vars",
+    "section": "Examples",
+    "text": "Examples\nCreate adjusted versions of all relevant ACS microdata variables.\ngenerate_acs_adj_vars\nCreate adjusted versions of all relevant ACS variables, prefixed with “adj_”, in pre-2008 ACS microdata.\ngenerate_acs_adj_vars, prefix(\"adj_\") pre_2008"
+  },
+  {
+    "objectID": "commands/copy_curl.html",
+    "href": "commands/copy_curl.html",
+    "title": "copy_curl",
+    "section": "",
+    "text": "copy_curl copies file from a URL with curl.\nUsers may optionally specify the user-agent to include in the HTTP header.\nSome websites block automated retrieval programs that do not provide a user-agent. For example, the Bureau of Labor Statistics website may block programs without an email address in the user-agent, per its usage policy."
+  },
+  {
+    "objectID": "commands/copy_curl.html#description",
+    "href": "commands/copy_curl.html#description",
+    "title": "copy_curl",
+    "section": "",
+    "text": "copy_curl copies file from a URL with curl.\nUsers may optionally specify the user-agent to include in the HTTP header.\nSome websites block automated retrieval programs that do not provide a user-agent. For example, the Bureau of Labor Statistics website may block programs without an email address in the user-agent, per its usage policy."
+  },
+  {
+    "objectID": "commands/copy_curl.html#syntax",
+    "href": "commands/copy_curl.html#syntax",
+    "title": "copy_curl",
+    "section": "Syntax",
+    "text": "Syntax\ncopy_curl filename1 filename2 [, options]\nfilename1 may be a URL. filename2 may be a file.\nDouble quotes may be used to enclose the filenames, and the quotes must be used if the filename contains embedded blanks.\n\n\n\n\n\n\n\nOptions\nDescription\n\n\n\n\nuser_agent(string)\nUser agent to provide in the HTTP header.\n\n\nreplace\nMay overwrite filename2."
+  },
+  {
+    "objectID": "commands/copy_curl.html#examples",
+    "href": "commands/copy_curl.html#examples",
+    "title": "copy_curl",
+    "section": "Examples",
+    "text": "Examples\nDownload a file from the BLS website.\ncopy_curl \"https://www.bls.gov/cpi/research-series/r-cpi-u-rs-allitems.xlsx\"  ///\n  \"r-cpi-u-rs.xlsx\", user_agent(username@cbpp.org)"
+  },
+  {
+    "objectID": "commands/acs_relshipp_to_relp.html",
+    "href": "commands/acs_relshipp_to_relp.html",
+    "title": "acs_relshipp_to_relp",
+    "section": "",
+    "text": "acs_relshipp_to_relp converts relshipp, the household relationship variable in ACS microdata from 2019 to present, to relp, the relationship variable in earlier samples.\nIn a dataset containing only relshipp, acs_relshipp_to_relp will recode relshipp to generate relp.\nIn a dataset containing both relshipp and relp (for example, a dataset formed by appending 2019 or later and 2018 or earlier samples), acs_relshipp_to_relp will, for observations where relp is missing and relshipp is not, populate relp with recoded values of relshipp.\nBy default, acs_relshipp_to_relp will create a value label for relp if one does not already exist."
+  },
+  {
+    "objectID": "commands/acs_relshipp_to_relp.html#description",
+    "href": "commands/acs_relshipp_to_relp.html#description",
+    "title": "acs_relshipp_to_relp",
+    "section": "",
+    "text": "acs_relshipp_to_relp converts relshipp, the household relationship variable in ACS microdata from 2019 to present, to relp, the relationship variable in earlier samples.\nIn a dataset containing only relshipp, acs_relshipp_to_relp will recode relshipp to generate relp.\nIn a dataset containing both relshipp and relp (for example, a dataset formed by appending 2019 or later and 2018 or earlier samples), acs_relshipp_to_relp will, for observations where relp is missing and relshipp is not, populate relp with recoded values of relshipp.\nBy default, acs_relshipp_to_relp will create a value label for relp if one does not already exist."
+  },
+  {
+    "objectID": "commands/acs_relshipp_to_relp.html#syntax",
+    "href": "commands/acs_relshipp_to_relp.html#syntax",
+    "title": "acs_relshipp_to_relp",
+    "section": "Syntax",
+    "text": "Syntax\nacs_relshipp_to_relp [, options]\n\n\n\n\n\n\n\nOption\nDescription\n\n\n\n\nnolabel\nDo not assign value labels to relp."
+  },
+  {
+    "objectID": "commands/categorize.html",
+    "href": "commands/categorize.html",
+    "title": "categorize",
+    "section": "",
+    "text": "categorize is a shortcut and extension of egen newvar = cut(args) [...], icodes.\nUnlike egen with the cut() function, categorize:\n\nDoes not require the user to include the minimum and the maximum value of the continuous variable in the list of breaks.\nCreates more descriptive value labels for the generated categorical variable. Users can specify a variable label for the new variable.\nAllows users working with age or poverty ratio variables to use “default” breaks."
+  },
+  {
+    "objectID": "commands/categorize.html#description",
+    "href": "commands/categorize.html#description",
+    "title": "categorize",
+    "section": "",
+    "text": "categorize is a shortcut and extension of egen newvar = cut(args) [...], icodes.\nUnlike egen with the cut() function, categorize:\n\nDoes not require the user to include the minimum and the maximum value of the continuous variable in the list of breaks.\nCreates more descriptive value labels for the generated categorical variable. Users can specify a variable label for the new variable.\nAllows users working with age or poverty ratio variables to use “default” breaks."
+  },
+  {
+    "objectID": "commands/categorize.html#syntax",
+    "href": "commands/categorize.html#syntax",
+    "title": "categorize",
+    "section": "Syntax",
+    "text": "Syntax\ncategorize varname, generate(newvar) {breaks(numlist)|default(string)} [options]\n\n\n\n\n\n\n\nOption\nDescription\n\n\n\n\ngenerate(newvar)\nName of the categorical variable to be generated.\n\n\nbreaks(numlist)\nLeft-hand ends of the grouping intervals. Do not include the minimum or the maximum value of varname. Either breaks() or default() must be specified.\n\n\ndefault(string)\nUse default breaks; “age” or “povratio”. For default(\"age\"), these are 18 and 65. For default(\"povratio\"), these are 50, 100, 150, 200, and 250. Cannot be combined with breaks().\n\n\nlblname(string)\nName of value label to create; default is “varname_lbl”. Ignored if nolabel is specified.\n\n\nnformat(%fmt)\nNumeric format to use in value labels; default is %13.0gc. Ignored if nolabel is specified.\n\n\nnolabel\nDo not assign value labels to newvar.\n\n\nvarlabel(string)\nVariable label for newvar."
+  },
+  {
+    "objectID": "commands/categorize.html#examples",
+    "href": "commands/categorize.html#examples",
+    "title": "categorize",
+    "section": "Examples",
+    "text": "Examples\nUsing user-specified breaks.\ncategorize pincp_adj, generate(pincp_cat) breaks(25000 50000 100000)\nUsing default breaks.\ncategorize agep, generate(age_cat) default(\"age\") varlabel(\"Age group\")"
+  },
+  {
+    "objectID": "commands/etotal.html",
+    "href": "commands/etotal.html",
+    "title": "etotal",
+    "section": "",
+    "text": "An extension of total, etotal produces either totals or counts, depending on what the user has specified.\nIf weights are specified, or if data are svyset and the svy option is specified, standard errors and confidence intervals are included."
+  },
+  {
+    "objectID": "commands/etotal.html#description",
+    "href": "commands/etotal.html#description",
+    "title": "etotal",
+    "section": "",
+    "text": "An extension of total, etotal produces either totals or counts, depending on what the user has specified.\nIf weights are specified, or if data are svyset and the svy option is specified, standard errors and confidence intervals are included."
+  },
+  {
+    "objectID": "commands/etotal.html#syntax",
+    "href": "commands/etotal.html#syntax",
+    "title": "etotal",
+    "section": "Syntax",
+    "text": "Syntax\nCount of observations\netotal [if] [weight] [, options]\nTotal of existing variable\netotal varname [if] [weight] [, options]\nTotal of expression\netotal exp [if] [weight] [, options]\n\n\n\n\n\n\n\nOption\nDescription\n\n\n\n\nover(varname)\nGroup over subpopulations defined by varname.\n\n\nsvy\nAdjust the results for survey settings identified by svyset.\n\n\nlevel(#)\nSet confidence level; default is level(95).\n\n\ncformat(%fmt)\nSpecifies how to format estimates, standard errors, and confidence limits; default is cformat(%14.0fc).\n\n\nmatrix(matname)\nSave results in matrix matname.\n\n\n\nfweights, iweights, and pweights are allowed."
+  },
+  {
+    "objectID": "commands/etotal.html#examples",
+    "href": "commands/etotal.html#examples",
+    "title": "etotal",
+    "section": "Examples",
+    "text": "Examples\nWeighted count of observations\netotal [iw=wgtp]\nTotal of existing variable\netotal hincp if relp == 0 [iw=wgtp]\nTotal of existing variable, data is svyset\netotal hincp, svy\nTotal of expression, saving results in matrix\netotal hincp / 1000 [iw=wgtp], matrix(tot_hh_inc_thous)"
+  },
+  {
+    "objectID": "commands/generate_aian_var.html",
+    "href": "commands/generate_aian_var.html",
+    "title": "generate_aian_var",
+    "section": "",
+    "text": "generate_aian_var generates a categorial variable for American Indian or Alaska Native (AIAN) identification, alone or in combination (AOIC), regardless of Hispanic or Latino identification.\nIn ACS microdata, the variable rac1p exist. In CPS microdata, the variable prdtrace must exist.\n\n\n\n\n\n\ngenerate_aian_var should not be used in CPS microdata for calendar years before 2012."
+  },
+  {
+    "objectID": "commands/generate_aian_var.html#description",
+    "href": "commands/generate_aian_var.html#description",
+    "title": "generate_aian_var",
+    "section": "",
+    "text": "generate_aian_var generates a categorial variable for American Indian or Alaska Native (AIAN) identification, alone or in combination (AOIC), regardless of Hispanic or Latino identification.\nIn ACS microdata, the variable rac1p exist. In CPS microdata, the variable prdtrace must exist.\n\n\n\n\n\n\ngenerate_aian_var should not be used in CPS microdata for calendar years before 2012."
+  },
+  {
+    "objectID": "commands/generate_aian_var.html#syntax",
+    "href": "commands/generate_aian_var.html#syntax",
+    "title": "generate_aian_var",
+    "section": "Syntax",
+    "text": "Syntax\ngenerate_aian_var newvar, dataset(acs|cps) [options]\n\n\n\n\n\n\n\nOptions\nDescription\n\n\n\n\ndataset(string)\nThe type of dataset in memory; ACS or CPS (case insensitive).\n\n\nnolabel\nDo not assign value labels to newvar."
+  },
+  {
+    "objectID": "commands/generate_occ_group_var.html",
+    "href": "commands/generate_occ_group_var.html",
+    "title": "generate_occ_group_var",
+    "section": "",
+    "text": "generate_occ_group_var generates a categorical variable for 23 major occupation groups representing 2-digit 2018 Standard Occupational Classification System (SOC) codes.\nIn ACS microdata, the variable occp must exist.\nIn CPS microdata, by default, the variable peioocc must exist and the new variable will reflect the primary job worked last week. Users may specify job(year) to indicate the new variable should reflect the longest job held last year, in which case occup must exist.\n\n\n\n\n\n\nNot all ACS or CPS data years use the 2018 SOC. This command will not work properly for data years that use other SOC versions.\n\n\n\nThe 2-digit SOC codes define 23 major occupation groups. The CPS’s occupation recode variables a_dtocc and wemocg define the same 23 groups. In the ACS, 25 occupation groups are represented by three-letter abbreviations at the beginning of the occupation variable occp’s value labels."
+  },
+  {
+    "objectID": "commands/generate_occ_group_var.html#description",
+    "href": "commands/generate_occ_group_var.html#description",
+    "title": "generate_occ_group_var",
+    "section": "",
+    "text": "generate_occ_group_var generates a categorical variable for 23 major occupation groups representing 2-digit 2018 Standard Occupational Classification System (SOC) codes.\nIn ACS microdata, the variable occp must exist.\nIn CPS microdata, by default, the variable peioocc must exist and the new variable will reflect the primary job worked last week. Users may specify job(year) to indicate the new variable should reflect the longest job held last year, in which case occup must exist.\n\n\n\n\n\n\nNot all ACS or CPS data years use the 2018 SOC. This command will not work properly for data years that use other SOC versions.\n\n\n\nThe 2-digit SOC codes define 23 major occupation groups. The CPS’s occupation recode variables a_dtocc and wemocg define the same 23 groups. In the ACS, 25 occupation groups are represented by three-letter abbreviations at the beginning of the occupation variable occp’s value labels."
+  },
+  {
+    "objectID": "commands/generate_occ_group_var.html#syntax",
+    "href": "commands/generate_occ_group_var.html#syntax",
+    "title": "generate_occ_group_var",
+    "section": "Syntax",
+    "text": "Syntax\ngenerate_occ_group_var newvar, dataset(acs|cps) [options]\n\n\n\n\n\n\n\nOptions\nDescription\n\n\n\n\ndataset(string)\nThe type of dataset in memory; ACS or CPS (case insensitive).\n\n\njob(string)\nWith dataset(cps), which job to use: “week” for the primary job last week (the default) or “year” for the primary job last year.\n\n\nnolabel\nDo not assign value labels to newvar."
+  },
+  {
+    "objectID": "commands/generate_occ_group_var.html#values-and-labels",
+    "href": "commands/generate_occ_group_var.html#values-and-labels",
+    "title": "generate_occ_group_var",
+    "section": "Values and labels",
+    "text": "Values and labels\n\n\n\nValue\nLabel\n\n\n\n\n11\nManagement occupations\n\n\n13\nBusiness and financial operations occupations\n\n\n15\nComputer and mathematical occupations\n\n\n17\nArchitecture and engineering occupations\n\n\n19\nLife, physical, and social science occupations\n\n\n21\nCommunity and social service occupations\n\n\n23\nLegal occupations\n\n\n25\nEducational instruction and library occupations\n\n\n27\nArts, design, entertainment, sports, and media occupations\n\n\n29\nHealthcare practitioners and technical occupations\n\n\n31\nHealthcare support occupations\n\n\n33\nProtective service occupations\n\n\n35\nFood preparation and serving related occupations\n\n\n37\nBuilding and grounds cleaning and maintenance occupations\n\n\n39\nPersonal care and service occupations\n\n\n41\nSales and related occupations\n\n\n43\nOffice and administrative support occupations\n\n\n45\nFarming, fishing, and forestry occupations\n\n\n47\nConstruction and extraction occupations\n\n\n49\nInstallation, maintenance, and repair occupations\n\n\n51\nProduction occupations\n\n\n53\nTransportation and material moving occupations\n\n\n55\nMilitary specific occupations"
+  },
+  {
+    "objectID": "commands/get_acs_pums.html",
+    "href": "commands/get_acs_pums.html",
+    "title": "get_acs_pums",
+    "section": "",
+    "text": "get_acs_pums downloads American Community Survey public use microdata CSV files from the Census Bureau FTP and converts them to Stata’s .dta format.\nIf state() is not specified, the program will retrieve the national dataset. Downloading the data for the entire U.S. can take several hours. The national dataset is split into several CSV files. get_acs_pums appends them into a single .dta file.\nDatasets will be saved in “acs_pums/[year]/[sample]_yr” within the current working directory (the default) or in another directory the user specifies with the dest_dir() option. For example, get_acs_pums, state(vt) year(2022) sample(5) record_type(h) dest_dir(my_data) would save files in “my_data/acs_pums/2022/5_yr”, creating intermediate directories as needed.\nState .dta files are named the same as the original CSV files: “psam_[record_type][state_fips_code]” for 2017 and later, and “ss[year][record_type][state]” for earlier years. National .dta files are named “psam_[record_type]us.dta” for 2017 and later, and “ss[year][record_type]us.dta” for earlier years.\nIf year() is 2013 or later, datasets will be labeled with information from the ACS PUMS data dictionaries by default."
+  },
+  {
+    "objectID": "commands/get_acs_pums.html#description",
+    "href": "commands/get_acs_pums.html#description",
+    "title": "get_acs_pums",
+    "section": "",
+    "text": "get_acs_pums downloads American Community Survey public use microdata CSV files from the Census Bureau FTP and converts them to Stata’s .dta format.\nIf state() is not specified, the program will retrieve the national dataset. Downloading the data for the entire U.S. can take several hours. The national dataset is split into several CSV files. get_acs_pums appends them into a single .dta file.\nDatasets will be saved in “acs_pums/[year]/[sample]_yr” within the current working directory (the default) or in another directory the user specifies with the dest_dir() option. For example, get_acs_pums, state(vt) year(2022) sample(5) record_type(h) dest_dir(my_data) would save files in “my_data/acs_pums/2022/5_yr”, creating intermediate directories as needed.\nState .dta files are named the same as the original CSV files: “psam_[record_type][state_fips_code]” for 2017 and later, and “ss[year][record_type][state]” for earlier years. National .dta files are named “psam_[record_type]us.dta” for 2017 and later, and “ss[year][record_type]us.dta” for earlier years.\nIf year() is 2013 or later, datasets will be labeled with information from the ACS PUMS data dictionaries by default."
+  },
+  {
+    "objectID": "commands/get_acs_pums.html#syntax",
+    "href": "commands/get_acs_pums.html#syntax",
+    "title": "get_acs_pums",
+    "section": "Syntax",
+    "text": "Syntax\nget_acs_pums, year(integer) [options]\n\n\n\n\n\n\n\nOption\nDescription\n\n\n\n\nyear(integer)\nData year to retrieve. With sample(1), 2005 to the most recent available, excluding 2020. With sample(5), 2009 to the most recent available.\n\n\nsample(integer)\nSample to retrieve; 1 for the 1-year sample (the default) or 5 for the 5-year sample.\n\n\nstate(string)\nPostal abbreviation of the state to retrieve (case insensitive).\n\n\nrecord_type(string)\nRecord type to retrieve; “person”, “household”, or “both” (the default). Abbreviations “h”, “hhld”, “hous”, “p”, and “pers” are also accepted.\n\n\nnolabel\nDo not attach variable or value labels to the dataset.\n\n\ndest_dir()\nDirectory in which to save the retrieved data. Default is the current working directory.\n\n\nkeep_zip\nDownloaded ZIP files will not be deleted after .dta files are created.\n\n\nkeep_all\nDownloaded ZIP files and unzipped CSV files will not be deleted after .dta files are created.\n\n\nreplace\nExisting .dta, CSV, and ZIP files will be replaced."
+  },
+  {
+    "objectID": "commands/get_acs_pums.html#examples",
+    "href": "commands/get_acs_pums.html#examples",
+    "title": "get_acs_pums",
+    "section": "Examples",
+    "text": "Examples\nRetrieve person and household records for the District of Columbia.\nget_acs_pums, state(\"dc\") year(2022)\nRetrieve household records from the 2022 5-year sample for Vermont, preserving the ZIP and CSV files.\nget_acs_pums, state(\"vt\") year(2022) sample(5) record_type(\"household\") keep_all\nRetrieve person records from the 1-year national sample and save the files to “my_datasets”\nget_acs_pums, year(2022) record_type(\"p\") dest_dir(\"my_datasets\")"
+  },
+  {
+    "objectID": "commands/inspect_2.html",
+    "href": "commands/inspect_2.html",
+    "title": "inspect_2",
+    "section": "",
+    "text": "A cross between summarize and inspect, inspect_2 gives the frequency of positive, zero, negative, and missing values in a variable, as well as the mean, minimum, and maximum value of a variable within those categories and overall.\nResults may be stored in a matrix (or matrices, if varlist is multiple variables) by specifying matrix name(s) to matrix()."
+  },
+  {
+    "objectID": "commands/inspect_2.html#description",
+    "href": "commands/inspect_2.html#description",
+    "title": "inspect_2",
+    "section": "",
+    "text": "A cross between summarize and inspect, inspect_2 gives the frequency of positive, zero, negative, and missing values in a variable, as well as the mean, minimum, and maximum value of a variable within those categories and overall.\nResults may be stored in a matrix (or matrices, if varlist is multiple variables) by specifying matrix name(s) to matrix()."
+  },
+  {
+    "objectID": "commands/inspect_2.html#syntax",
+    "href": "commands/inspect_2.html#syntax",
+    "title": "inspect_2",
+    "section": "Syntax",
+    "text": "Syntax\ninspect_2 varlist [if] [weight], [options]\n\n\n\n\n\n\n\nOption\nDescription\n\n\n\n\nmatrix(matname)\nStore results in matrix matname. If multiple variables are specified in varlist, a list of matrix names in which to store the results.\n\n\n\nfweights and iweights are allowed."
+  },
+  {
+    "objectID": "commands/inspect_2.html#examples",
+    "href": "commands/inspect_2.html#examples",
+    "title": "inspect_2",
+    "section": "Examples",
+    "text": "Examples\nInspect a single variable\ninspect_2 thnetworth\nInspect multiple variables, storing the results in matrices.\ninspect_2 pincp_adj pernp_adj, matrix(pincp_mat pernp_mat)"
+  },
+  {
+    "objectID": "commands/label_acs_pums.html",
+    "href": "commands/label_acs_pums.html",
+    "title": "label_acs_pums",
+    "section": "",
+    "text": "label_acs_pums labels American Community Survey public use microdata in memory using information retrieved from the ACS PUMS data dictionaries.\nOnly 2013 and later ACS microdata are supported.\nBy default, the data dictionaries and intermediate labeling .do files are cached. Specify use_cache to use the cached files rather than re-downloading and re-generating them.\n\n\n\n\n\n\nVariable and value labels generated by label_acs_pums are not a substitute for the ACS microdata data dictionary. Labels may be truncated and some important information may be missing."
+  },
+  {
+    "objectID": "commands/label_acs_pums.html#description",
+    "href": "commands/label_acs_pums.html#description",
+    "title": "label_acs_pums",
+    "section": "",
+    "text": "label_acs_pums labels American Community Survey public use microdata in memory using information retrieved from the ACS PUMS data dictionaries.\nOnly 2013 and later ACS microdata are supported.\nBy default, the data dictionaries and intermediate labeling .do files are cached. Specify use_cache to use the cached files rather than re-downloading and re-generating them.\n\n\n\n\n\n\nVariable and value labels generated by label_acs_pums are not a substitute for the ACS microdata data dictionary. Labels may be truncated and some important information may be missing."
+  },
+  {
+    "objectID": "commands/label_acs_pums.html#syntax",
+    "href": "commands/label_acs_pums.html#syntax",
+    "title": "label_acs_pums",
+    "section": "Syntax",
+    "text": "Syntax\nlabel_acs_pums, year(integer) [options]\n\n\n\n\n\n\n\nOption\nDescription\n\n\n\n\nyear(integer)\nYear of dataset in memory; 2013 or later.\n\n\nsample(integer)\nSample of dataset in memory; 1 for the 1-year sample (the default) or 5 for the 5-year sample.\n\n\nuse_cache\nUse data from the cache if it exists. An internet connection is required when use_cache is not specified or cached data does not exist."
+  },
+  {
+    "objectID": "commands/load_data.html",
+    "href": "commands/load_data.html",
+    "title": "load_data",
+    "section": "",
+    "text": "This command is only useful for CBPP staff."
+  },
+  {
+    "objectID": "commands/load_data.html#description",
+    "href": "commands/load_data.html#description",
+    "title": "load_data",
+    "section": "Description",
+    "text": "Description\nload_data loads CPS, ACS, ACS SPM, SNAP QC, or Household Pulse Survey microdata from a CBPP datasets library into memory.\nTo use load_data, first:\n\nSync the datasets library to your laptop.\nAdd CBPP’s global macros to your profile.do with make_cbpp_profile.\n\nMultiple years of data may be loaded at once by specifying a list of years to the years() option. Variable and value labels from the maximum year will be retained.\nWhen loading multiple years of ACS data, if the range of years() spans the introduction of string characters to serialno in 2018, serialno will be edited (“00” and “01” will be substituted for “HU” and “GQ”, respectively) and destringed."
+  },
+  {
+    "objectID": "commands/load_data.html#syntax",
+    "href": "commands/load_data.html#syntax",
+    "title": "load_data",
+    "section": "Syntax",
+    "text": "Syntax\nload_data dataset [if], years(numlist) [options]\nwhere dataset is one of “cps”, “acs”, “acs-spm”, “qc”, or “pulse” (case insensitive).\n\n\n\n\n\n\n\nOption\nDescription\n\n\n\n\nyears(numlist)\nYear(s) of data to load. When dataset is “cps”, years() refers to the survey (data release) year.\n\n\nvars(varlist)\nVariables to load; default is all.\n\n\nweeks(numlist)\nAlias for years(); for use when dataset is “pulse”.\n\n\nperiod(integer)\nWith dataset “qc” and year(2020), period of data to load: 1 for the pre-pandemic period or 2 for the waiver period.\n\n\nsaveas(filename)\nSave dataset to file.\n\n\nreplace\nWhen saveas() is specified, replace existing dataset.\n\n\nclear\nReplace the data in memory, even if the current data have not been saved to disk."
+  },
+  {
+    "objectID": "commands/load_data.html#examples",
+    "href": "commands/load_data.html#examples",
+    "title": "load_data",
+    "section": "Examples",
+    "text": "Examples\nLoad March 2023 CPS ASEC microdata.\nload_data cps, year(2023)\nLoad a subset of variables from ACS microdata for 2019, 2021, and 2022.\nload_data acs, years(2019 2021/2022) vars(serialno sporder st agep povpip pwgtp)\nLoad SNAP QC microdata for 2019.\nload_data qc, years(2019)\nLoad Household Pulse Survey microdata for weeks 61-63.\nload_data pulse, weeks(61/63)"
+  },
+  {
+    "objectID": "commands/svyset_acs.html",
+    "href": "commands/svyset_acs.html",
+    "title": "svyset_acs",
+    "section": "",
+    "text": "svyset_acs is a shortcut program to declare the survey design for ACS microdata in memory with svyset.\nFor example, svyset_acs, record_type(person) is equivalent to svyset [iw=pwgtp], vce(sdr) sdrweight(pwgtp1-pwgtp80) mse."
+  },
+  {
+    "objectID": "commands/svyset_acs.html#description",
+    "href": "commands/svyset_acs.html#description",
+    "title": "svyset_acs",
+    "section": "",
+    "text": "svyset_acs is a shortcut program to declare the survey design for ACS microdata in memory with svyset.\nFor example, svyset_acs, record_type(person) is equivalent to svyset [iw=pwgtp], vce(sdr) sdrweight(pwgtp1-pwgtp80) mse."
+  },
+  {
+    "objectID": "commands/svyset_acs.html#syntax",
+    "href": "commands/svyset_acs.html#syntax",
+    "title": "svyset_acs",
+    "section": "Syntax",
+    "text": "Syntax\nsvyset_acs, record_type(string) [options]\n\n\n\n\n\n\n\nOption\nDescription\n\n\n\n\nrecord_type(string)\nRecord type of the dataset in memory; “person” or “household”. Abbreviations “h”, “hhld”, “hous”, “p”, and “pers” are also accepted.\n\n\nn_years(integer)\nSpecifies the number of years of ACS microdata in memory; default is 1. If n_years() is greater than 1, svyset_acs will generate copies of the weights variables divided by this number and use those weights in svyset."
+  },
+  {
+    "objectID": "commands/svyset_acs.html#examples",
+    "href": "commands/svyset_acs.html#examples",
+    "title": "svyset_acs",
+    "section": "Examples",
+    "text": "Examples\nSurvey set household-level ACS microdata.\nsvyset_acs, record_type(hhld)\nSurvey set a dataset comprised of 3 years of 1-year person-level ACS microdata.\nsvyset_acs, record_type(person) n_years(3)"
+  },
+  {
+    "objectID": "news.html",
+    "href": "news.html",
+    "title": "News",
+    "section": "",
+    "text": "cbppstatautils is now hosted at “https://raw.githubusercontent.com/CenterOnBudget/cbpp-stata-utils/main/src”.\nTo install cbppstatautils, or to update to version 0.2.9, run:\nnet install cbppstatautils, from(\"https://raw.githubusercontent.com/CenterOnBudget/cbpp-stata-utils/main/src\") replace\nAfter installing version 0.2.9, future updates can be installed with:\ncbppstatautils, update\n\n\n\nhttps://centeronbudget.github.io/cbpp-stata-utils/\n\n\n\n\ngenerate_ind_sector_var generates an industry sector variable in ACS or CPS microdata (#22).\ngenerate_occ_group_var generates an occupation group variable in ACS or CPS microdata (#22).\ncopy_curl downloads files from a URL using curl, optionally providing a user-specified user-agent in the HTTP header.\nlabeler replaces labeller. labeller is still available as an alias for labeler. The command gains a lblname() option for users to specify the name of the value label to use; default is “varname_lbl”.\n\n\n\n\n\nget_cpiu falls back to copy_curl if the BLS denies the file download and gains option user_agent() to pass to copy_curl (#23).\nload_data now supports loading ACS SPM datasets (#21) and 2021-2022 SNAP QC datasets. load_data now suggests updating cbppstatautils if an unsupported data year is specified (#20).\nsvyset_acs option multiyear() has been renamed n_years(). multiyear() is still available as an alias for n_years().\ncategorize gains two new options for controlling value labels. lblname() specifies the name of the value label to create and nformat() specifies the numeric display format to use in value labels.\ngenerate_race_var produces more readable value labels. Acronyms and abbreviations have been replaced with full words (for example, “Native Hawaiian or Pacific Islander” replacing “NHOPI”) and capitalization has been changed to sentence case.\nSome small under-the-hood changes and formatting fixes have been made."
+  },
+  {
+    "objectID": "news.html#v-0.2.9",
+    "href": "news.html#v-0.2.9",
+    "title": "News",
+    "section": "",
+    "text": "cbppstatautils is now hosted at “https://raw.githubusercontent.com/CenterOnBudget/cbpp-stata-utils/main/src”.\nTo install cbppstatautils, or to update to version 0.2.9, run:\nnet install cbppstatautils, from(\"https://raw.githubusercontent.com/CenterOnBudget/cbpp-stata-utils/main/src\") replace\nAfter installing version 0.2.9, future updates can be installed with:\ncbppstatautils, update\n\n\n\nhttps://centeronbudget.github.io/cbpp-stata-utils/\n\n\n\n\ngenerate_ind_sector_var generates an industry sector variable in ACS or CPS microdata (#22).\ngenerate_occ_group_var generates an occupation group variable in ACS or CPS microdata (#22).\ncopy_curl downloads files from a URL using curl, optionally providing a user-specified user-agent in the HTTP header.\nlabeler replaces labeller. labeller is still available as an alias for labeler. The command gains a lblname() option for users to specify the name of the value label to use; default is “varname_lbl”.\n\n\n\n\n\nget_cpiu falls back to copy_curl if the BLS denies the file download and gains option user_agent() to pass to copy_curl (#23).\nload_data now supports loading ACS SPM datasets (#21) and 2021-2022 SNAP QC datasets. load_data now suggests updating cbppstatautils if an unsupported data year is specified (#20).\nsvyset_acs option multiyear() has been renamed n_years(). multiyear() is still available as an alias for n_years().\ncategorize gains two new options for controlling value labels. lblname() specifies the name of the value label to create and nformat() specifies the numeric display format to use in value labels.\ngenerate_race_var produces more readable value labels. Acronyms and abbreviations have been replaced with full words (for example, “Native Hawaiian or Pacific Islander” replacing “NHOPI”) and capitalization has been changed to sentence case.\nSome small under-the-hood changes and formatting fixes have been made."
+  },
+  {
+    "objectID": "news.html#v-0.2.2",
+    "href": "news.html#v-0.2.2",
+    "title": "News",
+    "section": "v 0.2.2",
+    "text": "v 0.2.2\n\nload_data messages and help file are clearer about the year for CPS ASEC files #17\nBug fixes: #18, #19,"
+  },
+  {
+    "objectID": "news.html#v-0.2.1",
+    "href": "news.html#v-0.2.1",
+    "title": "News",
+    "section": "v 0.2.1",
+    "text": "v 0.2.1\n\nBug fixes: #16"
+  },
+  {
+    "objectID": "news.html#v-0.2.0",
+    "href": "news.html#v-0.2.0",
+    "title": "News",
+    "section": "v 0.2.0",
+    "text": "v 0.2.0\n\nload_data supports loading the March 2021 CPS.\nBug fixes: #9, #13"
+  },
+  {
+    "objectID": "news.html#v-0.1.9",
+    "href": "news.html#v-0.1.9",
+    "title": "News",
+    "section": "v 0.1.9",
+    "text": "v 0.1.9\nThis release includes breaking changes.\nEnhancements\n\nget_acs_pums now uses label_acs_pums to label data by default. It also displays an error message to the user if unzipping the retrieved files fails.\nload_data now supports if and datasets(pulse). When dataset(acs), serialno is de-stringed only when loading data for a range of years that spans the variable type change. Previously, serialno was de-stringed if any of the years in years() were 2018 and later. De-stringing is now faster; it is implemented with real() instead of destring.\nget_cpiu labels variables (if merge or replace is specified).\nsvyset_acs_pums now supports multi-year average weights for use in a dataset of multiple 1-year ACS samples appended together.\n\nBreaking changes\n\ngenerate_acs_major_group has been removed from the package."
+  },
+  {
+    "objectID": "news.html#v-0.1.8",
+    "href": "news.html#v-0.1.8",
+    "title": "News",
+    "section": "v 0.1.8",
+    "text": "v 0.1.8\nSupport for 2020 March CPS in load_data."
+  },
+  {
+    "objectID": "news.html#v-0.1.7",
+    "href": "news.html#v-0.1.7",
+    "title": "News",
+    "section": "v 0.1.7",
+    "text": "v 0.1.7\nBug fixes to get_acs_pums and make_cbpp_profile."
+  },
+  {
+    "objectID": "news.html#v-0.1.6",
+    "href": "news.html#v-0.1.6",
+    "title": "News",
+    "section": "v 0.1.6",
+    "text": "v 0.1.6\nEnhancement to load_data: Support SNAP QC datasets."
+  },
+  {
+    "objectID": "news.html#v-0.1.5",
+    "href": "news.html#v-0.1.5",
+    "title": "News",
+    "section": "v 0.1.5",
+    "text": "v 0.1.5\nBug fixes to load_data and generate_aian_var."
+  },
+  {
+    "objectID": "news.html#v-0.1.4",
+    "href": "news.html#v-0.1.4",
+    "title": "News",
+    "section": "v 0.1.4",
+    "text": "v 0.1.4\nThis release includes breaking changes (*).\n\nHelp files: Formatting fixes and minor edits.\nError messages: More consistent with Stata’s base error messages and less verbose.\n*Syntax change to svyset_acs: User must specify not to use replicate weights instead of the reverse (nosdrweights option replaces rep_weights).\n*Syntax change to get_acs_pums: Option keep_all replaces keep_csv; is equivalent to keep_zip plus keep_csv.\nEnhancement to get_acs_pums: Results messages now include hyperlinks to the file paths so users can click to open the directory in File Explorer/Finder.\nBug fix to load_data: Does not attempt to destring serialno for 2018 file if user specifies vars() that do not include serialno.\nChange to cbppstatautils, update: Runs ado update instead of net install to avoid potential double-installation.\n*Enhancement and bug fix to inspect_2: For users specifying multiple variables, allows specifying the names of results matrix for each in matrix(), which replaces the save option. If a category (negative, zero, positive, missing) does not appear in the data, it will be shown as a row containing 0 in frequency and percent, and missing in mean, min, and max.\nEnhancement to get_cpiu: For users specifying the merge option, allow user to specify name of variable in memory that contains the year in yearvarname() option.\nEnhancement to etotal: Allow user to specify confidence level in level() option.\n*Replace make_acs_pums_lbls with label_acs_pums: New command generates label .do file, places it in the package cache files, and runs it on data in memory. Previous command required user to choose where to place the label .do file and then proactively run it.\nNew command make_cbpp_profile: Sets up standard data team profile.do."
+  }
+]
