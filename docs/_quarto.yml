@@ -3,6 +3,8 @@ project:
 
 website:
   title: "cbppstatautils"
+  site-url: https://centeronbudget.github.io/cbpp-stata-utils/
+  repo-url: https://github.com/CenterOnBudget/cbpp-stata-utils/
   bread-crumbs: false
   page-footer: "Copyright © 2024 Center on Budget and Policy Priorities." 
   navbar:
