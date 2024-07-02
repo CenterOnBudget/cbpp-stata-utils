@@ -1,4 +1,4 @@
-*! version 0.2.9
+*! version 0.2.10
 
 
 /***
@@ -47,9 +47,9 @@ Contents
 
 {phang}{help generate_aian_var} {hline 2} Generate an AIAN AOIC variable in ACS or CPS microdata.{p_end}
 
-{phang}{help generate_ind_sect_var} {hline 2} Generate an industry sector variable in ACS or CPS microdata.{p_end}
+{phang}{help generate_ind_sector_var} {hline 2} Generate an industry sector variable in ACS or CPS microdata.{p_end}
 
-{phang}{help generate_occ_grp_var} {hline 2} generate an occupation group variable in ACS or CPS microdata.{p_end}
+{phang}{help generate_occ_group_var} {hline 2} generate an occupation group variable in ACS or CPS microdata.{p_end}
 
 {phang}{help generate_race_var} {hline 2} Generate a race-ethnicity variable in ACS or CPS microdata.{p_end}
 
