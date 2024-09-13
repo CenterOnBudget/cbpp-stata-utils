@@ -132,9 +132,9 @@ program define load_data
   **## Check dataset is available for requested years -------------------------
   
   if "`dataset'" == "CPS" {
-    capture numlist "`years'", range(>=1980 <=2023)
+    capture numlist "`years'", range(>=1980 <=2024)
     if _rc != 0 {
-      display as error "{bf:years()} must be between 1980 and 2023 inclusive when {bf:dataset()} is cps"
+      display as error "{bf:years()} must be between 1980 and 2024 inclusive when {bf:dataset()} is cps"
       display as error "to load a recently-released year, you may need to update cbppstatautils"
       exit 198
     }
