@@ -132,8 +132,8 @@ program define get_acs_pums
     }
     * Check state abbreviation is valid
     sysuse state_fips, clear
-    quietly drop if inlist(state_abbrv, "AS", "  GU", "MP", "UM", "VI")  
-    quietly levelsof state_abbrv, local(state_abbrvs) clear
+    quietly drop if inlist(state_abbrv, "AS", "GU", "MP", "UM", "VI")  
+    quietly levelsof state_abbrv, local(state_abbrvs) clean
     if !ustrregexm("`state_abbrvs'", "`state'", 1) {
       display as error "{bf:state()} invalid or unsupported"
       exit 198
