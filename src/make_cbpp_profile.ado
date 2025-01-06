@@ -1,4 +1,4 @@
-*! version 0.2.8
+*! version 0.2.10
 
 
 /***
@@ -81,11 +81,11 @@ program define make_cbpp_profile
     compress
   }
   
-  local root = cond("`c(os)'" == "Windows", "C:", "")
-  local profile_do_path "`root'/Users/`c(username)'/profile.do"
+  local userprofile : env USERPROFILE
+  local profile_do_path "`userprofile'/profile.do"
   * local profile_do_path "`c(pwd)'/profile.do" // for debugging
   
-  outfile using `profile_do_path', noquote `replace'
+  outfile using "`profile_do_path'", noquote `replace'
   display as result `"created {bf:{browse "`profile_do_path'"}}"'
   
   restore

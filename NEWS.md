@@ -1,4 +1,9 @@
 
+## v 0.2.10
+
+- `make_cbpp_profile` no longer relies on ``c(username)'` to construct the folder-shortcut global macros ([#26](https://github.com/CenterOnBudget/cbpp-stata-utils/issues/26)).
+
+
 ## v 0.2.9
 
 ### New installation URL
