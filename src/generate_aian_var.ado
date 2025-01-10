@@ -39,8 +39,7 @@ __generate_aian_var__ {newvar}, {opt data:set(acs|cps)} [_options_]
 Website
 -------
 
-[github.com/CenterOnBudget/cbppstatautils](https://github.com/CenterOnBudget/cbppstatautils)
-
+[centeronbudget.github.io/cbpp-stata-utils](https://centeronbudget.github.io/cbpp-stata-utils/)
 
 ***/
 

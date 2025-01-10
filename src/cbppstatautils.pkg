@@ -7,7 +7,7 @@ d Distribution-Date: 20250110
 d 
 d Online documentation: https://centeronbudget.github.io/cbpp-stata-utils/
 d Support: https://github.com/CenterOnBudget/cbpp-stata-utils/issues
-d Changelog: https://github.com/CenterOnBudget/cbpp-stata-utils/blob/main/NEWS.md
+d Changelog: https://centeronbudget.github.io/cbpp-stata-utils/news.html
 
 * programs and help files
 f acs_relshipp_to_relp.ado

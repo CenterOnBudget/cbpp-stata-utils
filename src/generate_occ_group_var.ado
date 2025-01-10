@@ -79,8 +79,7 @@ Values and Labels
 Website
 -------
 
-[github.com/CenterOnBudget/cbppstatautils](https://github.com/CenterOnBudget/cbppstatautils)
-
+[centeronbudget.github.io/cbpp-stata-utils](https://centeronbudget.github.io/cbpp-stata-utils/)
 
 ***/    
 
