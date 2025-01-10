@@ -1,5 +1,8 @@
 project:
   type: website
+  pre-render: "copy_src.R"
+  resources:
+    - "src"
 
 website:
   title: "cbppstatautils"

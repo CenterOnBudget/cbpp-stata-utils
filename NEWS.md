@@ -1,3 +1,21 @@
+## v 0.2.11
+
+### New (old) installation URL
+
+cbppstatautils is again hosted at "<https://centeronbudget.github.io/cbpp-stata-utils/src>". Some users' firewalls blocked installation from the raw.githubusercontent.com domain.
+
+To install cbppstatautils, or to update to version 0.2.11, run:
+
+``` stata
+net install cbppstatautils, from("https://centeronbudget.github.io/cbpp-stata-utils/src") replace
+```
+
+After installing version 0.2.11, future updates can be installed with:
+
+``` stata
+cbppstatautils, update
+```
+
 
 ## v 0.2.10
 
