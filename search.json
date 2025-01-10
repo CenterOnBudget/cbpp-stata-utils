@@ -25,7 +25,7 @@
     "href": "index.html#installation",
     "title": "Get started",
     "section": "Installation",
-    "text": "Installation\nTo install cbppstatautils, run:\nnet install cbppstatautils, from(\"https://raw.githubusercontent.com/CenterOnBudget/cbpp-stata-utils/main/src\") replace\nTo update your installation to the latest version, run:\ncbppstatautils, update"
+    "text": "Installation\nTo install cbppstatautils, run:\nnet install cbppstatautils, from(\"https://centeronbudget.github.io/cbpp-stata-utils/src\") replace\nTo update your installation to the latest version, run:\ncbppstatautils, update"
   },
   {
     "objectID": "index.html#license",
@@ -508,14 +508,21 @@
     "href": "news.html",
     "title": "News",
     "section": "",
-    "text": "make_cbpp_profile no longer relies on `c(username)' to construct the folder-shortcut global macros (#26)."
+    "text": "cbppstatautils is again hosted at “https://centeronbudget.github.io/cbpp-stata-utils/src”. Some users’ firewalls blocked installation from the raw.githubusercontent.com domain.\nTo install cbppstatautils, or to update to version 0.2.11, run:\nnet install cbppstatautils, from(\"https://centeronbudget.github.io/cbpp-stata-utils/src\") replace\nAfter installing version 0.2.11, future updates can be installed with:\ncbppstatautils, update"
+  },
+  {
+    "objectID": "news.html#v-0.2.11",
+    "href": "news.html#v-0.2.11",
+    "title": "News",
+    "section": "",
+    "text": "cbppstatautils is again hosted at “https://centeronbudget.github.io/cbpp-stata-utils/src”. Some users’ firewalls blocked installation from the raw.githubusercontent.com domain.\nTo install cbppstatautils, or to update to version 0.2.11, run:\nnet install cbppstatautils, from(\"https://centeronbudget.github.io/cbpp-stata-utils/src\") replace\nAfter installing version 0.2.11, future updates can be installed with:\ncbppstatautils, update"
   },
   {
     "objectID": "news.html#v-0.2.10",
     "href": "news.html#v-0.2.10",
     "title": "News",
-    "section": "",
-    "text": "make_cbpp_profile no longer relies on `c(username)' to construct the folder-shortcut global macros (#26)."
+    "section": "v 0.2.10",
+    "text": "v 0.2.10\n\nmake_cbpp_profile no longer relies on `c(username)' to construct the folder-shortcut global macros (#26)."
   },
   {
     "objectID": "news.html#v-0.2.9",

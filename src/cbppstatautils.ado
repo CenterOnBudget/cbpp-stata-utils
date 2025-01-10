@@ -1,4 +1,4 @@
-*! version 0.2.10
+*! version 0.2.11
 
 
 /***
@@ -69,7 +69,7 @@ Contents
 Website
 -------
 
-[github.com/CenterOnBudget/cbppstatautils](https://github.com/CenterOnBudget/cbppstatautils)
+[centeronbudget.github.io/cbpp-stata-utils](https://centeronbudget.github.io/cbpp-stata-utils/)
 
 
 ***/
@@ -88,8 +88,8 @@ program define cbppstatautils
   if "`update'" != "" {
     capture ado uninstall cbppstatautils
     net install cbppstatautils,   ///
-      from("https://raw.githubusercontent.com/CenterOnBudget/cbpp-stata-utils/main/src") replace
-    display `"{browse "https://github.com/CenterOnBudget/cbpp-stata-utils/blob/main/NEWS.md":View changelog}"'
+      from("https://centeronbudget.github.io/cbpp-stata-utils/src") replace
+    display `"{browse "https://centeronbudget.github.io/cbpp-stata-utils/news.html":View changelog}"'
   }
   
 end
