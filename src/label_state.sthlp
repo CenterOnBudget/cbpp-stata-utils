@@ -36,8 +36,7 @@ If the state FIPS code variable in {it:varname} is a string, it will be destring
 {title:Website}
 
 {p 4 4 2}
-{browse "https://github.com/CenterOnBudget/cbppstatautils":github.com/CenterOnBudget/cbppstatautils}
-
+{browse "https://centeronbudget.github.io/cbpp-stata-utils/":centeronbudget.github.io/cbpp-stata-utils}
 
 
 

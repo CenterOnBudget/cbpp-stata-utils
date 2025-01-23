@@ -58,8 +58,7 @@ used if the filename contains embedded blanks.
 {title:Website}
 
 {p 4 4 2}
-{browse "https://github.com/CenterOnBudget/cbppstatautils":github.com/CenterOnBudget/cbppstatautils}
-
+{browse "https://centeronbudget.github.io/cbpp-stata-utils/":centeronbudget.github.io/cbpp-stata-utils}
 
 
 

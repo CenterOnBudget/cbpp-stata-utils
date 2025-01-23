@@ -59,8 +59,7 @@ The standard profile.do includes {bf:set more off, permanently}.
 {title:Website}
 
 {p 4 4 2}
-{browse "https://github.com/CenterOnBudget/cbppstatautils":github.com/CenterOnBudget/cbppstatautils}
-
+{browse "https://centeronbudget.github.io/cbpp-stata-utils/":centeronbudget.github.io/cbpp-stata-utils}
 
 
 
