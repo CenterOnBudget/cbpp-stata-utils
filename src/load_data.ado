@@ -140,9 +140,9 @@ program define load_data
   }
   
   if "`dataset'" == "ACS" {
-    capture numlist "`years'", range(>=2000 <=2022)
+    capture numlist "`years'", range(>=2000 <=2023)
     if _rc != 0 {
-      display as error "{bf:years()} must be between 2000 and 2022 inclusive  (excluding 2020) when {bf:dataset()} is acs"
+      display as error "{bf:years()} must be between 2000 and 2023 inclusive  (excluding 2020) when {bf:dataset()} is acs"
       display as error "to load a recently-released year, you may need to update cbppstatautils"
       exit 198
     }
