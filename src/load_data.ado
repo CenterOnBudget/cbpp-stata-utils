@@ -166,9 +166,9 @@ program define load_data
   }
   
   if "`dataset'" == "QC" {
-    capture numlist "`years'", range(>=1980 <=2022)
+    capture numlist "`years'", range(>=1980 <=2023)
     if _rc != 0 {
-      display as error "{bf:years()} must be between 1980 and 2022 inclusive when {bf:dataset()} is qc"
+      display as error "{bf:years()} must be between 1980 and 2023 inclusive when {bf:dataset()} is qc"
       exit 198
     }
     if !inrange(`period', 0, 2) {
