@@ -10,7 +10,7 @@
 {title:Description}
 
 {p 4 4 2}
-{bf:generate_aian_var} generates a categorial variable for American 
+{bf:generate_aian_var} generates a categorical variable for American 
 Indian or Alaska Native (AIAN) identification, alone or in combination (AOIC),
 regardless of Hispanic or Latino identification. 
 

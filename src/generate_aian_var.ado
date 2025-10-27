@@ -11,7 +11,7 @@ __generate_aian_var__ {hline 2} Generate an AIAN AOIC variable in ACS or CPS mic
 Description
 -----------
 
-__generate_aian_var__ generates a categorial variable for American 
+__generate_aian_var__ generates a categorical variable for American 
 Indian or Alaska Native (AIAN) identification, alone or in combination (AOIC),
 regardless of Hispanic or Latino identification. 
 
