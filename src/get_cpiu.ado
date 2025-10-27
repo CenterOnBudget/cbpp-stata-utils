@@ -17,6 +17,11 @@ get_cpiu retrieves annual average CPI-U (the default) or
 may be loaded as a variable joined to existing data in memory, as a matrix, or as 
 a new dataset replacing data in memory.
 
+To ensure __get_cpiu__ is able to download data from the BLS website, specify 
+your  email address in the __user_agent()__ option, or define a global macro 
+named "BLS_USER_AGENT". The BLS website may block programs without an email 
+address in the user-agent, per its [usage policy](https://www.bls.gov/bls/pss.htm). 
+
 Users may request inflation adjustment factors based on the retrieved price index 
 be generated. Inflation adjustment factors are used to convert current (nominal) 
 dollars into constant (real) dollars. The __base_year()__ option specifies which 
@@ -143,56 +148,48 @@ program define get_cpiu
   
   if `download' {
     
-    quietly {
+    local user_agent = cond("${BLS_USER_AGENT}" != "", "${BLS_USER_AGENT}", "`user_agent'")
     
-      tempfile data
+    quietly {
       
       if "`rs'" != "" {
-        
         local url "https://www.bls.gov/cpi/research-series/r-cpi-u-rs-allitems.xlsx"
+      } 
+      else {
+        local url "https://download.bls.gov/pub/time.series/cu/cu.data.1.AllItems"
+      }
+      
+      tempfile data
+      
+      capture copy `url' `data'
         
-        capture copy `url' `data'
-        if _rc == 679 {
-          if "`user_agent'" != "" {
-            copy_curl "`url'" `data', user_agent(`user_agent')
-          }
-          if "`user_agent'" == "" {
-            display as error "BLS server refused to send file"
-            display as error "please try again specifying your email to {bf:user_agent()}"
-            exit 679
-          }
+      if _rc == 679 {
+        if "`user_agent'" != "" {
+          display "BLS server refused to send file"
+          display "retrying with {help copy_curl} using user-agent '`user_agent''"
+          copy_curl "`url'" `data', user_agent(`user_agent')
         }
-  
+        if "`user_agent'" == "" {
+          display as error "BLS server refused to send file"
+          display as error "{p}please specify your email to {bf:user_agent()} or define a global macro named {bf:BLS_USER_AGENT} and try again{p_end}"
+          exit 679
+        }
+      }
+      
+      if "`rs'" != "" {
         import excel using `data', cellrange(A6) firstrow case(lower) clear
         rename avg `series'
         keep year `series'
         drop if missing(`series')
-      
       }
       
       if "`rs'" == "" {
-        
-        local url "https://download.bls.gov/pub/time.series/cu/cu.data.1.AllItems"
-        
-        capture copy `url' `data'
-        if _rc == 679 {
-          if "`user_agent'" != "" {
-            copy_curl "`url'" `data', user_agent(`user_agent')
-          }
-          if "`user_agent'" == "" {
-            display as error "BLS server refused to send file"
-            display as error "please try again specifying your email to {bf:user_agent()}"
-            exit 679
-          }
-        }
-  
         import delimited using `data', clear
         keep if regexm(series_id, "CUUR0000SA0")
         keep if year >= 1978 & period == "M13"
         label variable value  // Remove variable label of mysterious origin
         rename value `series'
         keep year `series'
-      
       }
       
       * Labeling the dataset has the nice side-effect of displaying the 
@@ -202,8 +199,7 @@ program define get_cpiu
       save "`cache_dir'/`series'.dta", replace
     
     }
-  }  
-
+  }
   
   * Calculate inflation adjustment factor if requested ------------------------
   

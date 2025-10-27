@@ -29,9 +29,14 @@ synced cloud folders and cloned GitHub repositories:
 {p 8 10 2}{c 149} {bf:ghpath} – Path to cloned GitHub repositories, "C:/Users/{username}/Documents/GitHub
 
 {p 4 4 2}
+It also contains global macros for use by other cbppstatautils commands:
+
+{p 8 10 2}{c 149} {bf:BLS_USER_AGENT} User{c 39}s CBPP email address, "{username}@cbpp.org", to enable {help get_cpiu} to download from the BLS website.
+
+{p 4 4 2}
 Users may optionally add the following to the standard profile.do:
 
-{p 8 10 2}{c 149} Census Bureau API key to for use by the  {browse "https://centeronbudget.github.io/getcensus/":getcensus} package, to be stored global macro {bf:censuskey}.
+{p 8 10 2}{c 149} Census Bureau API key to for use by the  {browse "https://centeronbudget.github.io/getcensus/":getcensus} package, to be stored as global macro {bf:censuskey}.
 
 {p 8 10 2}{c 149} Path to the user{c 39}s Rscript excutable for use by the  {browse "https://github.com/reifjulian/rscript":rscript} package, to be stored as global macro {bf:RSCRIPT_PATH}.
 

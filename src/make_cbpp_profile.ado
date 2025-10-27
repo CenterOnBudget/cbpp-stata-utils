@@ -27,9 +27,13 @@ synced cloud folders and cloned GitHub repositories:
 
 {p 8 10 2}{c 149} __ghpath__ – Path to cloned GitHub repositories, "C:/Users/{username}/Documents/GitHub".
 
+It also contains global macros for use by other cbppstatautils commands:
+
+{p 8 10 2}{c 149} __BLS_USER_AGENT__ User's CBPP email address, "{username}@cbpp.org", to enable {help get_cpiu} to download from the BLS website.
+
 Users may optionally add the following to the standard profile.do:
 
-{p 8 10 2}{c 149} Census Bureau API key to for use by the [getcensus](https://centeronbudget.github.io/getcensus/) package, to be stored global macro __censuskey__.
+{p 8 10 2}{c 149} Census Bureau API key to for use by the [getcensus](https://centeronbudget.github.io/getcensus/) package, to be stored as global macro __censuskey__.
 
 {p 8 10 2}{c 149} Path to the user's Rscript excutable for use by the [rscript](https://github.com/reifjulian/rscript) package, to be stored as global macro __RSCRIPT_PATH__.
 
