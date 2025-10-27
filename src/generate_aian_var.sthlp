@@ -34,7 +34,7 @@ before 2012.
 {synopthdr:options}
 {synoptline}
 	{synopt:{opt data:set(string)}}The type of dataset in memory; ACS or CPS (case insensitive).{p_end}
-{space 2}{synopt:{opt nolab:el}}Do not assign value labels to {it:newvar}.{p_end}
+{space 2}{synopt:{opt nolab:el}}Do not assign variable or value labels to {it:newvar}.{p_end}
 {synoptline}
 
 

@@ -21,9 +21,9 @@ In ACS microdata, the variable `rac1p` must exist. In CPS microdata, the variabl
 generate_aian_var newvar, dataset(acs|cps) [options]
 ```
 
-| Options           | Description                                                   |
-|------------------|------------------------------------------------------|
+| Options | Description |
+|--------------------|----------------------------------------------------|
 | `dataset(string)` | The type of dataset in memory; ACS or CPS (case insensitive). |
-| `nolabel`         | Do not assign value labels to *newvar*.                       |
+| `nolabel` | Do not assign variable or value labels to *newvar*. |
 
 : {tbl-colwidths="\[30,70\]"}

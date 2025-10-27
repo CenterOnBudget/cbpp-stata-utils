@@ -32,7 +32,7 @@ __generate_race_var__ {newvar}, {opt data:set(acs|cps)} {opt cat:egories(integer
 {synoptline}
   {synopt:{opt data:set(string)}}The type of dataset in memory; ACS or CPS (case insensitive).{p_end}
   {synopt:{opt cat:egories(integer)}}Number of categories for newvar. With {opt dataset(acs)}, up to 8. With {opt dataset(cps)}, up to 7. See {help generate_race_var##categories:Categories and Labels}.{p_end}
-  {synopt:{opt nolab:el}}Do not assign value labels to {it:newvar}.{p_end}
+  {synopt:{opt nolab:el}}Do not assign variable or value labels to {it:newvar}.{p_end}
 {synoptline}
 
 
@@ -224,6 +224,8 @@ program generate_race_var
   **# Create value labels -----------------------------------------------------
   
   if "`nolabel'" == "" {
+    
+    label variable `newvar' "Race/ethnicity (`categories' categories)"
   
     capture label drop `newvar'_lbl
     

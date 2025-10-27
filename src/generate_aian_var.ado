@@ -32,7 +32,7 @@ __generate_aian_var__ {newvar}, {opt data:set(acs|cps)} [_options_]
 {synopthdr:options}
 {synoptline}
 	{synopt:{opt data:set(string)}}The type of dataset in memory; ACS or CPS (case insensitive).{p_end}
-  {synopt:{opt nolab:el}}Do not assign value labels to {it:newvar}.{p_end}
+  {synopt:{opt nolab:el}}Do not assign variable or value labels to {it:newvar}.{p_end}
 {synoptline}
 
 
@@ -85,6 +85,7 @@ program generate_aian_var
   * create label ------------------------------------------------------------
   
   if "`no_label'" == "" {
+    label variable `newvar' "AIAN AOIC, regardless of Latino ethnicity"
     capture label drop `newvar'_lbl
     label define `newvar'_lbl 1 "AIAN AOIC" 0 "Not AIAN AOIC"
     label values `newvar' `newvar'_lbl
