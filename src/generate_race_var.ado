@@ -53,7 +53,7 @@ Categories and Labels
   4{space 4}Another race or multiracial, not Latino
 {p_end}
 {p2line}
-{p2coldent:6}1{space 4}White, not Latino    
+{p2coldent:5}1{space 4}White, not Latino    
   2{space 4}Black, not Latino
   3{space 4}Latino (of any race)
   4{space 4}Asian, not Latino

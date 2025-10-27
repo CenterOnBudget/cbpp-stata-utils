@@ -55,7 +55,7 @@ microdata, the variables {bf:prdtrace} and {bf:pehspnon} must exist.
 {break}      4{space 4}Another race or multiracial, not Latino
 {p_end}
 {p2line}
-{p2coldent:6}1{space 4}White, not Latino      {break}
+{p2coldent:5}1{space 4}White, not Latino      {break}
 {break}      2{space 4}Black, not Latino
 {break}      3{space 4}Latino (of any race)
 {break}      4{space 4}Asian, not Latino
