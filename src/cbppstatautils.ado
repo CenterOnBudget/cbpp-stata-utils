@@ -38,6 +38,8 @@ Contents
 
 {phang}{help load_data} {hline 2} Load data from CBPP's datasets library into memory.{p_end}
 
+{phang}{help copy_curl} {hline 2} Copy file from URL using curl.{p_end}
+
 
 {dlgtab:ACS and CPS microdata utilities}
 
