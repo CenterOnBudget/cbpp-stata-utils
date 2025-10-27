@@ -15,7 +15,7 @@ Indian or Alaska Native (AIAN) identification, alone or in combination (AOIC),
 regardless of Hispanic or Latino identification. 
 
 {p 4 4 2}
-In ACS microdata, the variable {bf:rac1p} exist. In CPS microdata, the variable 
+In ACS microdata, the variable {bf:rac1p} must exist. In CPS microdata, the variable 
 {bf:prdtrace} must exist.
 
 {p 4 4 2}

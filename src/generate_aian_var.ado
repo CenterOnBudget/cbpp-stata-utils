@@ -15,7 +15,7 @@ __generate_aian_var__ generates a categorial variable for American
 Indian or Alaska Native (AIAN) identification, alone or in combination (AOIC),
 regardless of Hispanic or Latino identification. 
 
-In ACS microdata, the variable __rac1p__ exist. In CPS microdata, the variable 
+In ACS microdata, the variable __rac1p__ must exist. In CPS microdata, the variable 
 __prdtrace__ must exist.
 
 __generate_aian_var__ should not be used in CPS microdata for calendar years 
