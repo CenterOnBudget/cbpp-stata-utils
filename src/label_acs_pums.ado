@@ -105,8 +105,24 @@ program define label_acs_pums
       local dict_url_file "PUMS_Data_Dictionary_`start_year'-`year'"
     }
 
-    quietly copy "https://www2.census.gov/programs-surveys/acs/tech_docs/pums/data_dict/`dict_url_file'.txt"  ///
-      "`cache_dir'/`data_dict'", replace
+    display as result "Downloading data dictionary..."
+    
+    local url_part "programs-surveys/acs/tech_docs/pums/data_dict/`dict_url_file'.txt"
+    
+    * Try HTTPS first
+    capture copy "https://www2.census.gov/`url_part'" "`cache_dir'/`data_dict'", replace
+      
+    * Retry with FTP
+    if _rc == 679 {
+      display as result "Retrying..."
+      capture copy "ftp://ftp2.census.gov/`url_part'" "`cache_dir'/`data_dict'", replace
+    }
+    
+    if _rc != 0 {
+      display as error "Unable to download data dictionary file from the Census Bureau FTP" 
+      exit _rc
+    }
+    
   }
 
   
