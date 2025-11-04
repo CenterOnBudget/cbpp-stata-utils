@@ -37,6 +37,8 @@ Run {bf:{stata cbppstatautils, update}} to update to the latest version.
 
 {phang}{help load_data} {hline 2} Load data from CBPP{c 39}s datasets library into memory.{p_end}
 
+{phang}{help copy_curl} {hline 2} Copy file from URL using curl.{p_end}
+
 
 {dlgtab:ACS and CPS microdata utilities}
 

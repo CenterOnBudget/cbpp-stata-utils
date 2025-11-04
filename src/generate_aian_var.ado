@@ -1,4 +1,4 @@
-*! version 0.2.0
+*! version 0.2.12
 
 
 /***
@@ -11,11 +11,11 @@ __generate_aian_var__ {hline 2} Generate an AIAN AOIC variable in ACS or CPS mic
 Description
 -----------
 
-__generate_aian_var__ generates a categorial variable for American 
+__generate_aian_var__ generates a categorical variable for American 
 Indian or Alaska Native (AIAN) identification, alone or in combination (AOIC),
 regardless of Hispanic or Latino identification. 
 
-In ACS microdata, the variable __rac1p__ exist. In CPS microdata, the variable 
+In ACS microdata, the variable __rac1p__ must exist. In CPS microdata, the variable 
 __prdtrace__ must exist.
 
 __generate_aian_var__ should not be used in CPS microdata for calendar years 
@@ -32,7 +32,7 @@ __generate_aian_var__ {newvar}, {opt data:set(acs|cps)} [_options_]
 {synopthdr:options}
 {synoptline}
 	{synopt:{opt data:set(string)}}The type of dataset in memory; ACS or CPS (case insensitive).{p_end}
-  {synopt:{opt nolab:el}}Do not assign value labels to {it:newvar}.{p_end}
+  {synopt:{opt nolab:el}}Do not assign variable or value labels to {it:newvar}.{p_end}
 {synoptline}
 
 
@@ -85,6 +85,7 @@ program generate_aian_var
   * create label ------------------------------------------------------------
   
   if "`no_label'" == "" {
+    label variable `newvar' "AIAN AOIC, regardless of Latino ethnicity"
     capture label drop `newvar'_lbl
     label define `newvar'_lbl 1 "AIAN AOIC" 0 "Not AIAN AOIC"
     label values `newvar' `newvar'_lbl

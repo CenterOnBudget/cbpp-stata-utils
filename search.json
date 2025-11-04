@@ -21,6 +21,13 @@
     "text": "Commands by category\n\nData exploration & transformation\n\ncategorize\n\n\nCreate a categorical variable from a continuous one.\n\n\netotal\n\n\nFlexible counts and totals.\n\n\ninspect_2\n\n\nSummary statistics for positive, zero, negative, and missing values.\n\n\nlabel_state\n\n\nLabel a state FIPS code variable with state names or postal abbreviations.\n\n\nlabeler\n\n\nCreate and attach variable and value labels in one step.\n\n\n\nData retrieval\n\ncopy_curl\n\n\nCopy file from URL with curl.\n\n\nget_acs_pums\n\n\nDownload ACS microdata files from the Census Bureau FTP and convert them to .dta format.\n\n\nget_cpiu\n\n\nLoad CPI-U or R-CPI-U-RS price index data series into memory or a matrix.\n\n\nload_data\n\n\nLoad data from CBPP’s datasets library into memory.\n\n\n\nACS and CPS microdata utilities\n\nacs_relshipp_to_relp\n\n\nRecode relshipp to relp in ACS microdata.\n\n\ngenerate_acs_adj_vars\n\n\nAdjust income and housing dollar variables with adjinc and adjhsg in ACS microdata.\n\n\ngenerate_aian_var\n\n\nGenerate an AIAN AOIC variable in ACS or CPS microdata.\n\n\ngenerate_ind_sector_var\n\n\nGenerate an industry sector variable in ACS or CPS microdata.\n\n\ngenerate_occ_group_var\n\n\nGenerate an occupation group variable in ACS or CPS microdata.\n\n\ngenerate_race_var\n\n\nGenerate a race-ethnicity variable in ACS or CPS microdata.\n\n\nlabel_acs_pums\n\n\nLabel ACS microdata in memory.\n\n\nsvyset_acs\n\n\nDeclare the survey design in ACS microdata.\n\n\n\nTools for CBPP staff\n\n\n\n\n\n\nThese commands are only useful for CBPP staff.\n\n\n\n\nload_data\n\n\nLoad data from CBPP’s datasets library into memory.\n\n\nmake_cbpp_profile\n\n\nSet up CBPP’s standard profile.do."
   },
   {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Get started",
+    "section": "",
+    "text": "cbppstatautils is a Stata package created by and for researchers at the Center on Budget and Policy Priorities."
+  },
+  {
     "objectID": "index.html#installation",
     "href": "index.html#installation",
     "title": "Get started",
@@ -46,7 +53,7 @@
     "href": "commands/make_cbpp_profile.html#description",
     "title": "make_cbpp_profile",
     "section": "Description",
-    "text": "Description\nmake_cbpp_profile creates CBPP’s standard profile.do in the user’s home directory.\nCBPP’s standard profile.do defines global macros that serve as shortcuts to synced cloud folders and cloned GitHub repositories:\n\nodpath – Path to the user’s OneDrive, “C:/Users/{username}/OneDrive - Center on Budget and Policy Priorities”.\nsppath – Path to the directory for synced SharePoint folders, “C:/Users/{username}/Center on Budget and Policy Priorities”.\nspdatapath – Start of path to a synced datasets libraries, “C:/Users/{username}/Center on Budget and Policy Priorities/Datasets - ”.\nghpath – Path to cloned GitHub repositories, “C:/Users/{username}/Documents/GitHub”.\n\nUsers may optionally add the following to the standard profile.do:\n\nCensus Bureau API key to for use by the getcensus package, to be stored global macro censuskey.\nPath to the user’s Rscript excutable for use by the rscript package, to be stored as global macro RSCRIPT_PATH.\n\nThe standard profile.do includes set more off, permanently."
+    "text": "Description\nmake_cbpp_profile creates CBPP’s standard profile.do in the user’s home directory.\nCBPP’s standard profile.do defines global macros that serve as shortcuts to synced cloud folders and cloned GitHub repositories:\n\nodpath – Path to the user’s OneDrive, “C:/Users/{username}/OneDrive - Center on Budget and Policy Priorities”.\nsppath – Path to the directory for synced SharePoint folders, “C:/Users/{username}/Center on Budget and Policy Priorities”.\nspdatapath – Start of path to a synced datasets libraries, “C:/Users/{username}/Center on Budget and Policy Priorities/Datasets - ”.\nghpath – Path to cloned GitHub repositories, “C:/Users/{username}/Documents/GitHub”.\n\nIt also contains global macros for use by other cbppstatautils commands:\n\nBLS_USER_AGENT User’s CBPP email address, “{username}@cbpp.org”, to enable get_cpiu to download from the BLS website.\n\nUsers may optionally add the following to the standard profile.do:\n\nCensus Bureau API key to for use by the getcensus package, to be stored global macro censuskey.\nPath to the user’s Rscript excutable for use by the rscript package, to be stored as global macro RSCRIPT_PATH.\n\nThe standard profile.do includes set more off, permanently."
   },
   {
     "objectID": "commands/make_cbpp_profile.html#syntax",
@@ -102,14 +109,14 @@
     "href": "commands/get_cpiu.html",
     "title": "get_cpiu",
     "section": "",
-    "text": "get_cpiu retrieves annual average CPI-U (the default) or R-CPI-U-RS (formerly CPI-U-RS) data series from the Bureau of Labor Statistics. The series may be loaded as a variable joined to existing data in memory, as a matrix, or as a new dataset replacing data in memory.\nUsers may request inflation adjustment factors based on the retrieved price index be generated. Inflation adjustment factors are used to convert current (nominal) dollars into constant (real) dollars. The base_year() option specifies which year to use as the base year for the inflation adjustment factor. For example, get_cpiu, base_year(2022) clear will load into memory the CPI-U data series as variable cpiu and generate cpiu_2022_adj. Users may then multiply a variable containing nominal dollar values by cpiu_2022_adj to obtain the values in 2022 constant dollars.\nData series are automatically cached. Users can load the cached data rather than re-downloading it by specifying use_cache. Note that price indices are occasionally back-revised. When loading cached data, get_cpiu will display the date when the was originally downloaded. To refresh the cached data with the latest available data, run get_cpiu without the use_cache option."
+    "text": "get_cpiu retrieves annual average CPI-U (the default) or R-CPI-U-RS (formerly CPI-U-RS) data series from the Bureau of Labor Statistics. The series may be loaded as a variable joined to existing data in memory, as a matrix, or as a new dataset replacing data in memory.\nTo ensure get_cpiu is able to download data from the BLS website, specify your email address in the user_agent() option, or define a global macro named BLS_USER_AGENT. The BLS website may block programs without an email address in the user-agent, per its usage policy.\nUsers may request inflation adjustment factors based on the retrieved price index be generated. Inflation adjustment factors are used to convert current (nominal) dollars into constant (real) dollars. The base_year() option specifies which year to use as the base year for the inflation adjustment factor. For example, get_cpiu, base_year(2022) clear will load into memory the CPI-U data series as variable cpiu and generate cpiu_2022_adj. Users may then multiply a variable containing nominal dollar values by cpiu_2022_adj to obtain the values in 2022 constant dollars.\nData series are automatically cached. Users can load the cached data rather than re-downloading it by specifying use_cache. Note that price indices are occasionally back-revised. When loading cached data, get_cpiu will display the date when the was originally downloaded. To refresh the cached data with the latest available data, run get_cpiu without the use_cache option."
   },
   {
     "objectID": "commands/get_cpiu.html#description",
     "href": "commands/get_cpiu.html#description",
     "title": "get_cpiu",
     "section": "",
-    "text": "get_cpiu retrieves annual average CPI-U (the default) or R-CPI-U-RS (formerly CPI-U-RS) data series from the Bureau of Labor Statistics. The series may be loaded as a variable joined to existing data in memory, as a matrix, or as a new dataset replacing data in memory.\nUsers may request inflation adjustment factors based on the retrieved price index be generated. Inflation adjustment factors are used to convert current (nominal) dollars into constant (real) dollars. The base_year() option specifies which year to use as the base year for the inflation adjustment factor. For example, get_cpiu, base_year(2022) clear will load into memory the CPI-U data series as variable cpiu and generate cpiu_2022_adj. Users may then multiply a variable containing nominal dollar values by cpiu_2022_adj to obtain the values in 2022 constant dollars.\nData series are automatically cached. Users can load the cached data rather than re-downloading it by specifying use_cache. Note that price indices are occasionally back-revised. When loading cached data, get_cpiu will display the date when the was originally downloaded. To refresh the cached data with the latest available data, run get_cpiu without the use_cache option."
+    "text": "get_cpiu retrieves annual average CPI-U (the default) or R-CPI-U-RS (formerly CPI-U-RS) data series from the Bureau of Labor Statistics. The series may be loaded as a variable joined to existing data in memory, as a matrix, or as a new dataset replacing data in memory.\nTo ensure get_cpiu is able to download data from the BLS website, specify your email address in the user_agent() option, or define a global macro named BLS_USER_AGENT. The BLS website may block programs without an email address in the user-agent, per its usage policy.\nUsers may request inflation adjustment factors based on the retrieved price index be generated. Inflation adjustment factors are used to convert current (nominal) dollars into constant (real) dollars. The base_year() option specifies which year to use as the base year for the inflation adjustment factor. For example, get_cpiu, base_year(2022) clear will load into memory the CPI-U data series as variable cpiu and generate cpiu_2022_adj. Users may then multiply a variable containing nominal dollar values by cpiu_2022_adj to obtain the values in 2022 constant dollars.\nData series are automatically cached. Users can load the cached data rather than re-downloading it by specifying use_cache. Note that price indices are occasionally back-revised. When loading cached data, get_cpiu will display the date when the was originally downloaded. To refresh the cached data with the latest available data, run get_cpiu without the use_cache option."
   },
   {
     "objectID": "commands/get_cpiu.html#syntax",
@@ -144,7 +151,7 @@
     "href": "commands/generate_race_var.html#syntax",
     "title": "generate_race_var",
     "section": "Syntax",
-    "text": "Syntax\ngenerate_race_var newvar, dataset(acs|cps) categories(integer) [options]\n\n\n\n\n\n\n\nOption\nDescription\n\n\n\n\ndataset(string)\nThe type of dataset in memory; ACS or CPS (case insensitive).\n\n\ncategories(integer)\nNumber of categories for newvar. With dataset(acs), up to 8. With dataset(cps), up to 7. See Categories and Labels.\n\n\nnolabel\nDo not assign value labels to newvar."
+    "text": "Syntax\ngenerate_race_var newvar, dataset(acs|cps) categories(integer) [options]\n\n\n\n\n\n\n\nOption\nDescription\n\n\n\n\ndataset(string)\nThe type of dataset in memory; ACS or CPS (case insensitive).\n\n\ncategories(integer)\nNumber of categories for newvar. With dataset(acs), up to 8. With dataset(cps), up to 7. See Categories and Labels.\n\n\nnolabel\nDo not assign variable or value labels to newvar."
   },
   {
     "objectID": "commands/generate_race_var.html#categories-and-labels",
@@ -326,21 +333,21 @@
     "href": "commands/generate_aian_var.html",
     "title": "generate_aian_var",
     "section": "",
-    "text": "generate_aian_var generates a categorial variable for American Indian or Alaska Native (AIAN) identification, alone or in combination (AOIC), regardless of Hispanic or Latino identification.\nIn ACS microdata, the variable rac1p exist. In CPS microdata, the variable prdtrace must exist.\n\n\n\n\n\n\ngenerate_aian_var should not be used in CPS microdata for calendar years before 2012."
+    "text": "generate_aian_var generates a categorical variable for American Indian or Alaska Native (AIAN) identification, alone or in combination (AOIC), regardless of Hispanic or Latino identification.\nIn ACS microdata, the variable rac1p must exist. In CPS microdata, the variable prdtrace must exist.\n\n\n\n\n\n\ngenerate_aian_var should not be used in CPS microdata for calendar years before 2012."
   },
   {
     "objectID": "commands/generate_aian_var.html#description",
     "href": "commands/generate_aian_var.html#description",
     "title": "generate_aian_var",
     "section": "",
-    "text": "generate_aian_var generates a categorial variable for American Indian or Alaska Native (AIAN) identification, alone or in combination (AOIC), regardless of Hispanic or Latino identification.\nIn ACS microdata, the variable rac1p exist. In CPS microdata, the variable prdtrace must exist.\n\n\n\n\n\n\ngenerate_aian_var should not be used in CPS microdata for calendar years before 2012."
+    "text": "generate_aian_var generates a categorical variable for American Indian or Alaska Native (AIAN) identification, alone or in combination (AOIC), regardless of Hispanic or Latino identification.\nIn ACS microdata, the variable rac1p must exist. In CPS microdata, the variable prdtrace must exist.\n\n\n\n\n\n\ngenerate_aian_var should not be used in CPS microdata for calendar years before 2012."
   },
   {
     "objectID": "commands/generate_aian_var.html#syntax",
     "href": "commands/generate_aian_var.html#syntax",
     "title": "generate_aian_var",
     "section": "Syntax",
-    "text": "Syntax\ngenerate_aian_var newvar, dataset(acs|cps) [options]\n\n\n\n\n\n\n\nOptions\nDescription\n\n\n\n\ndataset(string)\nThe type of dataset in memory; ACS or CPS (case insensitive).\n\n\nnolabel\nDo not assign value labels to newvar."
+    "text": "Syntax\ngenerate_aian_var newvar, dataset(acs|cps) [options]\n\n\n\n\n\n\n\nOptions\nDescription\n\n\n\n\ndataset(string)\nThe type of dataset in memory; ACS or CPS (case insensitive).\n\n\nnolabel\nDo not assign variable or value labels to newvar."
   },
   {
     "objectID": "commands/generate_occ_group_var.html",
@@ -508,14 +515,21 @@
     "href": "news.html",
     "title": "News",
     "section": "",
-    "text": "cbppstatautils is again hosted at “https://centeronbudget.github.io/cbpp-stata-utils/src”. Some users’ firewalls blocked installation from the raw.githubusercontent.com domain.\nTo install cbppstatautils, or to update to version 0.2.11, run:\nnet install cbppstatautils, from(\"https://centeronbudget.github.io/cbpp-stata-utils/src\") replace\nAfter installing version 0.2.11, future updates can be installed with:\ncbppstatautils, update"
+    "text": "make_cbpp_profile now defines global macro BLS_USER_AGENT for use by get_cpiu.\nget_cpiu is now more resilient if the BLS website refuses its download request. If there is a global macro BLS_USER_AGENT, or the user_agent() option is specified, get_cpiu will retry the download with copy_curl providing a user-agent header to satisfy the BLS website usage policy.\nget_acs_pums and label_acs_pums fall back to downloading via FTP if the HTTPS download request fails (fixes #28).\ngenerate_race_var and generate_aian_var now add variable labels to newvar by default (closes #30.\nload_data no longer hard-codes available dataset years. Attempting to load a dataset not present in the datasets library will result in a “file not found” error. This change means that load_data no longer needs to be updated every time a new dataset is added to the datasets library.\nMiscellaneous help file fixes (#27, #29)"
+  },
+  {
+    "objectID": "news.html#v-0.2.12",
+    "href": "news.html#v-0.2.12",
+    "title": "News",
+    "section": "",
+    "text": "make_cbpp_profile now defines global macro BLS_USER_AGENT for use by get_cpiu.\nget_cpiu is now more resilient if the BLS website refuses its download request. If there is a global macro BLS_USER_AGENT, or the user_agent() option is specified, get_cpiu will retry the download with copy_curl providing a user-agent header to satisfy the BLS website usage policy.\nget_acs_pums and label_acs_pums fall back to downloading via FTP if the HTTPS download request fails (fixes #28).\ngenerate_race_var and generate_aian_var now add variable labels to newvar by default (closes #30.\nload_data no longer hard-codes available dataset years. Attempting to load a dataset not present in the datasets library will result in a “file not found” error. This change means that load_data no longer needs to be updated every time a new dataset is added to the datasets library.\nMiscellaneous help file fixes (#27, #29)"
   },
   {
     "objectID": "news.html#v-0.2.11",
     "href": "news.html#v-0.2.11",
     "title": "News",
-    "section": "",
-    "text": "cbppstatautils is again hosted at “https://centeronbudget.github.io/cbpp-stata-utils/src”. Some users’ firewalls blocked installation from the raw.githubusercontent.com domain.\nTo install cbppstatautils, or to update to version 0.2.11, run:\nnet install cbppstatautils, from(\"https://centeronbudget.github.io/cbpp-stata-utils/src\") replace\nAfter installing version 0.2.11, future updates can be installed with:\ncbppstatautils, update"
+    "section": "v 0.2.11",
+    "text": "v 0.2.11\n\nNew (old) installation URL\ncbppstatautils is again hosted at “https://centeronbudget.github.io/cbpp-stata-utils/src”. Some users’ firewalls blocked installation from the raw.githubusercontent.com domain.\nTo install cbppstatautils, or to update to version 0.2.11, run:\nnet install cbppstatautils, from(\"https://centeronbudget.github.io/cbpp-stata-utils/src\") replace\nAfter installing version 0.2.11, future updates can be installed with:\ncbppstatautils, update"
   },
   {
     "objectID": "news.html#v-0.2.10",
