@@ -9,6 +9,8 @@ categories: ["Data retrieval"]
 
 `get_cpiu` retrieves annual average CPI-U (the default) or [R-CPI-U-RS](https://www.bls.gov/cpi/research-series/r-cpi-u-rs-home.htm) (formerly CPI-U-RS) data series from the [Bureau of Labor Statistics](https://www.bls.gov/cpi/home.htm). The series may be loaded as a variable joined to existing data in memory, as a matrix, or as a new dataset replacing data in memory.
 
+To ensure `get_cpiu` is able to download data from the BLS website, specify your email address in the `user_agent()` option, or define a global macro named `BLS_USER_AGENT`. The BLS website may block programs without an email address in the user-agent, per its [usage policy](https://www.bls.gov/bls/pss.htm).
+
 Users may request inflation adjustment factors based on the retrieved price index be generated. Inflation adjustment factors are used to convert current (nominal) dollars into constant (real) dollars. The `base_year()` option specifies which year to use as the base year for the inflation adjustment factor. For example, `get_cpiu, base_year(2022) clear` will load into memory the CPI-U data series as variable `cpiu` and generate `cpiu_2022_adj`. Users may then multiply a variable containing nominal dollar values by `cpiu_2022_adj` to obtain the values in 2022 constant dollars.
 
 Data series are automatically cached. Users can load the cached data rather than re-downloading it by specifying `use_cache`. Note that price indices are occasionally back-revised. When loading cached data, `get_cpiu` will display the date when the was originally downloaded. To refresh the cached data with the latest available data, run `get_cpiu` without the `use_cache` option.

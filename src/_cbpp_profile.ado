@@ -8,6 +8,9 @@ global sppath "`userprofile'/Center on Budget and Policy Priorities"
 global spdatapath "`userprofile'/Center on Budget and Policy Priorities/Datasets - "
 global ghpath "`userprofile'/Documents/GitHub"
 
+// User-agent for BLS website downloads
+global BLS_USER_AGENT "`userprofile'@cbpp.org"
+
 // Census Bureau API key for getcensus
 global censuskey "your Census Bureau API key here"
 

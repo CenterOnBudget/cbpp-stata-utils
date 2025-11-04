@@ -1,3 +1,12 @@
+## v 0.2.12
+
+-   `make_cbpp_profile` now defines global macro BLS_USER_AGENT for use by `get_cpiu`.
+-   `get_cpiu` is now more resilient if the BLS website refuses its download request. If there is a global macro BLS_USER_AGENT, or the `user_agent()` option is specified, `get_cpiu` will retry the download with `copy_curl` providing a user-agent header to satisfy the BLS website [usage policy](https://www.bls.gov/bls/pss.htm).
+-   `get_acs_pums` and `label_acs_pums` fall back to downloading via FTP if the HTTPS download request fails (fixes [#28](https://github.com/CenterOnBudget/cbpp-stata-utils/issues/28)).
+-   `generate_race_var` and `generate_aian_var` now add variable labels to *newvar* by default (closes [#30](https://github.com/CenterOnBudget/cbpp-stata-utils/issues/30).
+-   `load_data` no longer hard-codes available dataset years. Attempting to load a dataset not present in the datasets library will result in a "file not found" error. This change means that `load_data` no longer needs to be updated every time a new dataset is added to the datasets library.
+-   Miscellaneous help file fixes ([#27](https://github.com/CenterOnBudget/cbpp-stata-utils/issues/27), [#29](https://github.com/CenterOnBudget/cbpp-stata-utils/issues/29))
+
 ## v 0.2.11
 
 ### New (old) installation URL

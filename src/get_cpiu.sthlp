@@ -17,6 +17,12 @@ may be loaded as a variable joined to existing data in memory, as a matrix, or a
 a new dataset replacing data in memory.
 
 {p 4 4 2}
+To ensure {bf:get_cpiu} is able to download data from the BLS website, specify 
+your  email address in the {bf:user_agent()} option, or define a global macro 
+named "BLS_USER_AGENT". The BLS website may block programs without an email 
+address in the user-agent, per its  {browse "https://www.bls.gov/bls/pss.htm":usage policy}. 
+
+{p 4 4 2}
 Users may request inflation adjustment factors based on the retrieved price index 
 be generated. Inflation adjustment factors are used to convert current (nominal) 
 dollars into constant (real) dollars. The {bf:base_year()} option specifies which 

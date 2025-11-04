@@ -1,4 +1,4 @@
-*! version 0.2.9
+*! version 0.2.12
 
 
 /***
@@ -126,56 +126,12 @@ program define load_data
       local years "`weeks'"
     }
   }
-
   
-  **## Check dataset is available for requested years -------------------------
-  
-  if "`dataset'" == "CPS" {
-    capture numlist "`years'", range(>=1980 <=2024)
-    if _rc != 0 {
-      display as error "{bf:years()} must be between 1980 and 2024 inclusive when {bf:dataset()} is cps"
-      display as error "to load a recently-released year, you may need to update cbppstatautils"
-      exit 198
-    }
+  if "`dataset'" == "QC" & !inrange(`period', 0, 2) {
+    display as error "{bf:period()} must be 1 or 2 if specified"
+    exit 198
   }
   
-  if "`dataset'" == "ACS" {
-    capture numlist "`years'", range(>=2000 <=2023)
-    if _rc != 0 {
-      display as error "{bf:years()} must be between 2000 and 2023 inclusive  (excluding 2020) when {bf:dataset()} is acs"
-      display as error "to load a recently-released year, you may need to update cbppstatautils"
-      exit 198
-    }
-    if ustrregexm("`r(numlist)'", "2020") {
-      display as error "{bf:years()} must be between 2000 and 2019 inclusive (excluding 2020) when {bf:dataset()} is acs"
-      exit 198
-    }
-  }
-  
-  if "`dataset'" == "ACS-SPM" {
-    capture numlist "`years'", range(>=2009 <=2022)
-    if _rc != 0 {
-      display as error `"{bf:years()} must be between 2009 and 2022 inclusive  (excluding 2020) when {bf:dataset()} is "acs-spm""'
-      display as error "to load a recently-released year, you may need to update cbppstatautils"
-      exit 198
-    }
-    if ustrregexm("`r(numlist)'", "2020") {
-      display as error `"{bf:years()} must be between 2009 and 2022 inclusive (excluding 2020) when {bf:dataset()} is "acs-spm""'
-      exit 198
-    }
-  }
-  
-  if "`dataset'" == "QC" {
-    capture numlist "`years'", range(>=1980 <=2023)
-    if _rc != 0 {
-      display as error "{bf:years()} must be between 1980 and 2023 inclusive when {bf:dataset()} is qc"
-      exit 198
-    }
-    if !inrange(`period', 0, 2) {
-      display as error "{bf:period()} must be 1 or 2 if specified"
-      exit 198
-    }
-  }
   
   **## Confirm dataset library is synced --------------------------------------
   

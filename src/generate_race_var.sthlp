@@ -34,7 +34,7 @@ microdata, the variables {bf:prdtrace} and {bf:pehspnon} must exist.
 {synoptline}
 {space 2}{synopt:{opt data:set(string)}}The type of dataset in memory; ACS or CPS (case insensitive).{p_end}
 {space 2}{synopt:{opt cat:egories(integer)}}Number of categories for newvar. With {opt dataset(acs)}, up to 8. With {opt dataset(cps)}, up to 7. See {help generate_race_var##categories:Categories and Labels}.{p_end}
-{space 2}{synopt:{opt nolab:el}}Do not assign value labels to {it:newvar}.{p_end}
+{space 2}{synopt:{opt nolab:el}}Do not assign variable or value labels to {it:newvar}.{p_end}
 {synoptline}
 
 
@@ -55,7 +55,7 @@ microdata, the variables {bf:prdtrace} and {bf:pehspnon} must exist.
 {break}      4{space 4}Another race or multiracial, not Latino
 {p_end}
 {p2line}
-{p2coldent:6}1{space 4}White, not Latino      {break}
+{p2coldent:5}1{space 4}White, not Latino      {break}
 {break}      2{space 4}Black, not Latino
 {break}      3{space 4}Latino (of any race)
 {break}      4{space 4}Asian, not Latino

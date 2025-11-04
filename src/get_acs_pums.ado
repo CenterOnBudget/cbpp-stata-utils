@@ -1,4 +1,4 @@
-*! version 0.2.8
+*! version 0.2.12
 
 
 /***
@@ -201,14 +201,29 @@ program define get_acs_pums
     capture confirm file  "csv_`rt'`geo'.zip"
     
     if _rc != 0 | "`replace'" != "" {
-      local ftp_url "https://www2.census.gov/programs-surveys/acs/data/pums/`year'/`smpl'csv_`rt'`geo'.zip"
+      
       display as result "Downloading `rec_type_message' files..."
-      capture noisily copy "`ftp_url'" "csv_`rt'`geo'.zip", `replace'
+      
+      local url_part "programs-surveys/acs/data/pums/`year'/`smpl'csv_`rt'`geo'.zip"
+      
+      * Try HTTPS first
+      local url 
+      capture noisily copy  ///
+        "https://www2.census.gov/`url_part'" "csv_`rt'`geo'.zip", `replace'
+      
+      * Retry with FTP
+      if _rc == 679 {
+        display as result "Retrying..."
+        capture noisily copy  ///
+          "ftp://ftp2.census.gov/`url_part'" "csv_`rt'`geo'.zip", `replace'
+      }
+      
       if _rc != 0 {
         display as error "Unable to download files from the Census Bureau FTP" 
         quietly cd "`start_dir'"  
         exit _rc
       }
+      
     }
     
     **## Unzip ----------------------------------------------------------------

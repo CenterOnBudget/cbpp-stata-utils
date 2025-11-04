@@ -26,7 +26,7 @@ generate_race_var newvar, dataset(acs|cps) categories(integer) [options]
 +-----------------------+-----------------------------------------------------------------------------------------------------------------------------+
 | `categories(integer)` | Number of categories for *newvar*. With `dataset(acs)`, up to 8. With `dataset(cps)`, up to 7. See [Categories and Labels]. |
 +-----------------------+-----------------------------------------------------------------------------------------------------------------------------+
-| `nolabel`             | Do not assign value labels to *newvar*.                                                                                     |
+| `nolabel`             | Do not assign variable or value labels to *newvar*.                                                                         |
 +-----------------------+-----------------------------------------------------------------------------------------------------------------------------+
 
 : {tbl-colwidths="\[30,70\]"}
