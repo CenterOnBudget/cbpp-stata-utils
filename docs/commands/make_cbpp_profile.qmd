@@ -23,6 +23,10 @@ CBPP's standard profile.do defines global macros that serve as shortcuts to sync
 
 -   `ghpath` – Path to cloned GitHub repositories, "C:/Users/{username}/Documents/GitHub".
 
+It also contains global macros for use by other cbppstatautils commands:
+
+-   `BLS_USER_AGENT` User's CBPP email address, "{username}\@cbpp.org", to enable [get_cpiu](get_cpiu.qmd) to download from the BLS website.
+
 Users may optionally add the following to the standard profile.do:
 
 -   Census Bureau API key to for use by the [getcensus](https://centeronbudget.github.io/getcensus/) package, to be stored global macro `censuskey`.
