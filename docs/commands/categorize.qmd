@@ -23,15 +23,15 @@ Unlike `egen` with the `cut()` function, `categorize`:
 categorize varname, generate(newvar) {breaks(numlist)|default(string)} [options]
 ```
 
-| Option             | Description                                                                                                                                                                              |
-|-------------------|-----------------------------------------------------|
-| `generate(newvar)` | Name of the categorical variable to be generated.                                                                                                                                        |
-| `breaks(numlist)`  | Left-hand ends of the grouping intervals. Do not include the minimum or the maximum value of *varname*. Either `breaks()` or `default()` must be specified.                              |
-| `default(string)`  | Use default breaks; "age" or "povratio". For `default("age")`, these are 18 and 65. For `default("povratio")`, these are 50, 100, 150, 200, and 250. Cannot be combined with `breaks()`. |
-| `lblname(string)`  | Name of value label to create; default is "*varname*\_lbl". Ignored if `nolabel` is specified.                                                                                           |
-| `nformat(%fmt)`    | Numeric format to use in value labels; default is *%13.0gc*. Ignored if `nolabel` is specified.                                                                                          |
-| `nolabel`          | Do not assign value labels to *newvar*.                                                                                                                                                  |
-| `varlabel(string)` | Variable label for *newvar*.                                                                                                                                                             |
+| Option | Description |
+|----|----|
+| `generate(newvar)` | Name of the categorical variable to be generated. |
+| `breaks(numlist)` | Left-hand ends of the grouping intervals. Do not include the minimum or the maximum value of *varname*. Either `breaks()` or `default()` must be specified. |
+| `default(string)` | Use default breaks; "age" or "povratio". For `default("age")`, these are 18 and 65. For `default("povratio")`, these are 50, 100, 150, 200, and 250. Cannot be combined with `breaks()`. |
+| `lblname(string)` | Name of value label to create; default is "*varname*\_lbl". Ignored if `nolabel` is specified. |
+| `nformat(%fmt)` | Numeric format to use in value labels; default is *%13.0gc*. Ignored if `nolabel` is specified. |
+| `nolabel` | Do not assign value labels to *newvar*. |
+| `varlabel(string)` | Variable label for *newvar*. |
 
 : {tbl-colwidths="\[30,70\]"}
 

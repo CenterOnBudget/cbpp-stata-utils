@@ -17,8 +17,8 @@ Results may be stored in a matrix (or matrices, if `varlist` is multiple variabl
 inspect_2 varlist [if] [weight], [options]
 ```
 
-| Option            | Description                                                                                                                                |
-|--------------------|----------------------------------------------------|
+| Option | Description |
+|----|----|
 | `matrix(matname)` | Store results in matrix *matname*. If multiple variables are specified in *varlist*, a list of matrix names in which to store the results. |
 
 : {tbl-colwidths="\[30,70\]"}

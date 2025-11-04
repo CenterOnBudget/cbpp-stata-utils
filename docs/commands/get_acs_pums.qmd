@@ -23,17 +23,17 @@ If `year()` is 2013 or later, datasets will be labeled with information from the
 get_acs_pums, year(integer) [options]
 ```
 
-| Option                | Description                                                                                                                                      |
-|------------------|------------------------------------------------------|
-| `year(integer)`       | Data year to retrieve. With `sample(1)`, 2005 to the most recent available, excluding 2020. With `sample(5)`, 2009 to the most recent available. |
-| `sample(integer)`     | Sample to retrieve; 1 for the 1-year sample (the default) or 5 for the 5-year sample.                                                            |
-| `state(string)`       | Postal abbreviation of the state to retrieve (case insensitive).                                                                                 |
-| `record_type(string)` | Record type to retrieve; "person", "household", or "both" (the default). Abbreviations "h", "hhld", "hous", "p", and "pers" are also accepted.   |
-| `nolabel`             | Do not attach variable or value labels to the dataset.                                                                                           |
-| `dest_dir()`          | Directory in which to save the retrieved data. Default is the current working directory.                                                         |
-| `keep_zip`            | Downloaded ZIP files will not be deleted after .dta files are created.                                                                           |
-| `keep_all`            | Downloaded ZIP files and unzipped CSV files will not be deleted after .dta files are created.                                                    |
-| `replace`             | Existing .dta, CSV, and ZIP files will be replaced.                                                                                              |
+| Option | Description |
+|----|----|
+| `year(integer)` | Data year to retrieve. With `sample(1)`, 2005 to the most recent available, excluding 2020. With `sample(5)`, 2009 to the most recent available. |
+| `sample(integer)` | Sample to retrieve; 1 for the 1-year sample (the default) or 5 for the 5-year sample. |
+| `state(string)` | Postal abbreviation of the state to retrieve (case insensitive). |
+| `record_type(string)` | Record type to retrieve; "person", "household", or "both" (the default). Abbreviations "h", "hhld", "hous", "p", and "pers" are also accepted. |
+| `nolabel` | Do not attach variable or value labels to the dataset. |
+| `dest_dir()` | Directory in which to save the retrieved data. Default is the current working directory. |
+| `keep_zip` | Downloaded ZIP files will not be deleted after .dta files are created. |
+| `keep_all` | Downloaded ZIP files and unzipped CSV files will not be deleted after .dta files are created. |
+| `replace` | Existing .dta, CSV, and ZIP files will be replaced. |
 
 : {tbl-colwidths="\[30,70\]"}
 

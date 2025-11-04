@@ -31,13 +31,13 @@ labeler sex, variable("Sex assigned at birth") values(1 "Male" 2 "Female")
 labeler varname, [variable(string)] [values(string)] [options]
 ```
 
-| Option             | Description                                                                                                                                             |
-|-------------------|-----------------------------------------------------|
-| `variable(string)` | Variable label for *varname*.                                                                                                                           |
-| `values(string)`   | Value labels for *varname*, following the same syntax as `label define`: *\# "label" \[# "label" ...\]*                                                 |
-| `lblname(string)`  | Name of the value label to use. Default is "*varname*\_lbl".                                                                                            |
-| `add`              | Add value labels in `values()` to *varname*'s existing value label.                                                                                     |
-| `modify`           | Use value labels in `values()` to modify or delete existing \# to label correspondences or add new correspondences to *varname*'s existing value label. |
-| `remove`           | Remove variable labels and detach value labels from *varname*. Value labels will not be dropped from the dataset.                                       |
+| Option | Description |
+|----|----|
+| `variable(string)` | Variable label for *varname*. |
+| `values(string)` | Value labels for *varname*, following the same syntax as `label define`: *\# "label" \[# "label" ...\]* |
+| `lblname(string)` | Name of the value label to use. Default is "*varname*\_lbl". |
+| `add` | Add value labels in `values()` to *varname*'s existing value label. |
+| `modify` | Use value labels in `values()` to modify or delete existing \# to label correspondences or add new correspondences to *varname*'s existing value label. |
+| `remove` | Remove variable labels and detach value labels from *varname*. Value labels will not be dropped from the dataset. |
 
 : {tbl-colwidths="\[30,70\]"}

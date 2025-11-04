@@ -21,12 +21,12 @@ By default, variable labels will be copied from the original, deleting the phras
 generate_acs_adj_vars [, options]
 ```
 
-| Option           | Description                                                              |
-|-------------------|-----------------------------------------------------|
-| `prefix(string)` | Prefix to prepend to the new variable names.                             |
+| Option | Description |
+|----|----|
+| `prefix(string)` | Prefix to prepend to the new variable names. |
 | `suffix(string)` | Suffix to append to the new variable names; default is `suffix("_adj")`. |
-| `nolabel`        | Do not copy variable or value labels to the new variables.               |
-| `pre_2008`       | Indicate that data in memory is pre-2008 ACS microdata.                  |
+| `nolabel` | Do not copy variable or value labels to the new variables. |
+| `pre_2008` | Indicate that data in memory is pre-2008 ACS microdata. |
 
 : {tbl-colwidths="\[30,70\]"}
 

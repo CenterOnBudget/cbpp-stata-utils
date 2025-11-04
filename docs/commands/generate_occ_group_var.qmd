@@ -25,11 +25,11 @@ The 2-digit SOC codes define 23 major occupation groups. The CPS's occupation re
 generate_occ_group_var newvar, dataset(acs|cps) [options]
 ```
 
-| Options           | Description                                                                                                                        |
-|-------------------------|-----------------------------------------------|
-| `dataset(string)` | The type of dataset in memory; ACS or CPS (case insensitive).                                                                      |
-| `job(string)`     | With `dataset(cps)`, which job to use: "week" for the primary job last week (the default) or "year" for the primary job last year. |
-| `nolabel`         | Do not assign value labels to *newvar*.                                                                                            |
+| Options | Description |
+|----|----|
+| `dataset(string)` | The type of dataset in memory; ACS or CPS (case insensitive). |
+| `job(string)` | With `dataset(cps)`, which job to use: "week" for the primary job last week (the default) or "year" for the primary job last year. |
+| `nolabel` | Do not assign value labels to *newvar*. |
 
 : {tbl-colwidths="\[30,70\]"}
 

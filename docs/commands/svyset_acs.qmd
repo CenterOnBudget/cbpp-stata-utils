@@ -17,10 +17,10 @@ For example, `svyset_acs, record_type(person)` is equivalent to `svyset [iw=pwgt
 svyset_acs, record_type(string) [options]
 ```
 
-| Option                | Description                                                                                                                                                                                                                    |
-|-------------------|-----------------------------------------------------|
-| `record_type(string)` | Record type of the dataset in memory; "person" or "household". Abbreviations "h", "hhld", "hous", "p", and "pers" are also accepted.                                                                                           |
-| `n_years(integer)`    | Specifies the number of years of ACS microdata in memory; default is 1. If `n_years()` is greater than 1, `svyset_acs` will generate copies of the weights variables divided by this number and use those weights in `svyset`. |
+| Option | Description |
+|----|----|
+| `record_type(string)` | Record type of the dataset in memory; "person" or "household". Abbreviations "h", "hhld", "hous", "p", and "pers" are also accepted. |
+| `n_years(integer)` | Specifies the number of years of ACS microdata in memory; default is 1. If `n_years()` is greater than 1, `svyset_acs` will generate copies of the weights variables divided by this number and use those weights in `svyset`. |
 
 : {tbl-colwidths="\[30,70\]"}
 

@@ -17,8 +17,8 @@ If the state FIPS code variable in *varname* is a string, it will be destringed.
 label_state varname [, options]
 ```
 
-| Option  | Description                                                                            |
-|------------------|------------------------------------------------------|
+| Option | Description |
+|----|----|
 | `abbrv` | Use state postal abbreviations rather than state names (the default) for value labels. |
 
 : {tbl-colwidths="\[30,70\]"}

@@ -41,10 +41,10 @@ The standard profile.do includes `set more off, permanently`.
 make_cbpp_profile [, options]
 ```
 
-| Option              | Description                                                                                                           |
-|---------------|---------------------------------------------------------|
-| `censuskey(string)` | Census Bureau API key.                                                                                                |
-| `rscript(string)`   | Path to the Rscript executable; typically "C:/Users/{username}/AppData/Local/Programs/R/R-{version}/bin/Rscript.exe". |
-| `replace`           | Replace existing profile.do.                                                                                          |
+| Option | Description |
+|----|----|
+| `censuskey(string)` | Census Bureau API key. |
+| `rscript(string)` | Path to the Rscript executable; typically "C:/Users/{username}/AppData/Local/Programs/R/R-{version}/bin/Rscript.exe". |
+| `replace` | Replace existing profile.do. |
 
 : {tbl-colwidths="\[30,70\]"}

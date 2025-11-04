@@ -31,13 +31,13 @@ Total of expression
 etotal exp [if] [weight] [, options]
 ```
 
-| Option            | Description                                                                                               |
-|-------------------|-----------------------------------------------------|
-| `over(varname)`   | Group over subpopulations defined by *varname*.                                                           |
-| `svy`             | Adjust the results for survey settings identified by `svyset`.                                            |
-| `level(#)`        | Set confidence level; default is `level(95)`.                                                             |
-| `cformat(%fmt)`   | Specifies how to format estimates, standard errors, and confidence limits; default is `cformat(%14.0fc)`. |
-| `matrix(matname)` | Save results in matrix *matname*.                                                                         |
+| Option | Description |
+|----|----|
+| `over(varname)` | Group over subpopulations defined by *varname*. |
+| `svy` | Adjust the results for survey settings identified by `svyset`. |
+| `level(#)` | Set confidence level; default is `level(95)`. |
+| `cformat(%fmt)` | Specifies how to format estimates, standard errors, and confidence limits; default is `cformat(%14.0fc)`. |
+| `matrix(matname)` | Save results in matrix *matname*. |
 
 : {tbl-colwidths="\[30,70\]"}
 

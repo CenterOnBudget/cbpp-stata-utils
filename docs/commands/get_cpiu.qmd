@@ -21,17 +21,17 @@ Data series are automatically cached. Users can load the cached data rather than
 get_cpiu, { merge | matrix(matname) | clear } [options]
 ```
 
-| Option               | Description                                                                                                                                                |
-|-------------------|-----------------------------------------------------|
-| `merge`              | Merge the data into the dataset in memory.                                                                                                                 |
-| `matrix(matname)`    | Load data into matrix *matname*.                                                                                                                           |
-| `clear`              | Load the data into memory, replacing the dataset currently in memory. Cannot be combined with `merge`.                                                     |
-| `rs`                 | Retrieve the R-CPI-U-RS. If unspecified, the CPI-U will be retrieved.                                                                                      |
-| `base_year(integer)` | Create inflation-adjustment factors from nominal dollars to real dollars, using the specified base year.                                                   |
-| `yearvar(varname)`   | If `merge` is specified, the key variable on which to merge the data into the dataset in memory. Default is `yearvar(year)`.                               |
-| `nolabel`            | Do not attach variable labels to the retrieved data. May only be specified with `merge` or `clear`.                                                        |
-| `use_cache`          | Use data from the cache if it exists. An internet connection is required to retrieve data when `use_cache` is not specified or cached data does not exist. |
-| `user_agent(string)` | Email address to provide in the header of the HTTP request to the BLS website; passed to [copy_curl](copy_curl.qmd).                                       |
+| Option | Description |
+|----|----|
+| `merge` | Merge the data into the dataset in memory. |
+| `matrix(matname)` | Load data into matrix *matname*. |
+| `clear` | Load the data into memory, replacing the dataset currently in memory. Cannot be combined with `merge`. |
+| `rs` | Retrieve the R-CPI-U-RS. If unspecified, the CPI-U will be retrieved. |
+| `base_year(integer)` | Create inflation-adjustment factors from nominal dollars to real dollars, using the specified base year. |
+| `yearvar(varname)` | If `merge` is specified, the key variable on which to merge the data into the dataset in memory. Default is `yearvar(year)`. |
+| `nolabel` | Do not attach variable labels to the retrieved data. May only be specified with `merge` or `clear`. |
+| `use_cache` | Use data from the cache if it exists. An internet connection is required to retrieve data when `use_cache` is not specified or cached data does not exist. |
+| `user_agent(string)` | Email address to provide in the header of the HTTP request to the BLS website; passed to [copy_curl](copy_curl.qmd). |
 
 : {tbl-colwidths="\[30,70\]"}
 

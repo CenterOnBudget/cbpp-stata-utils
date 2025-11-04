@@ -22,7 +22,7 @@ generate_aian_var newvar, dataset(acs|cps) [options]
 ```
 
 | Options | Description |
-|--------------------|----------------------------------------------------|
+|----|----|
 | `dataset(string)` | The type of dataset in memory; ACS or CPS (case insensitive). |
 | `nolabel` | Do not assign variable or value labels to *newvar*. |
 
