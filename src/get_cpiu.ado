@@ -179,6 +179,7 @@ program define get_cpiu
       if "`rs'" != "" {
         import excel using `data', cellrange(A6) firstrow case(lower) clear
         rename avg `series'
+        destring `series', replace
         keep year `series'
         drop if missing(`series')
       }
@@ -189,6 +190,7 @@ program define get_cpiu
         keep if year >= 1978 & period == "M13"
         label variable value  // Remove variable label of mysterious origin
         rename value `series'
+        destring `series', replace
         keep year `series'
       }
       
