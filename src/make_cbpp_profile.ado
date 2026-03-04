@@ -77,10 +77,10 @@ program define make_cbpp_profile
     infix str text 1-100 using "`r(fn)'", clear
     replace text =  ///
       cond("`censuskey'" != "", `"global censuskey "`censuskey'""', "") ///
-      in 12
+      in 15
     replace text =  ///
       cond("`rscript'" != "", `"global RSCRIPT_PATH "`rscript'""', "")  ///
-      in 15
+      in 18
     compress
   }
   
