@@ -12,7 +12,10 @@ Description
 -----------
 
 __generate_ind_sector_var__ generates a categorial variable for 22 industry sectors representing 2-digit 
-{browse "https://www.census.gov/naics/?58967?yearbck=2017":2017 North American Industry Classification System (NAICS) codes}.
+{browse "https://www.census.gov/naics/":North American Industry Classification System (NAICS) codes}. Valid for 2017 and 2022 NAICS industries.
+
+Not all ACS or CPS data years use the 2017 or 2022 NAICS. This command is not
+guaranteed to work properly for data years that use other NAICS versions.
 
 In ACS microdata, the variable __indp__ must exist. 
 
@@ -20,9 +23,6 @@ In CPS microdata, by default, the variable __peioind__ must exist and the new
 variable will reflect the primary job worked last week. Users may specify 
 {opt job(year)} to indicate the new variable should reflect the longest job 
 held last year, in which case __industry__ must exist. 
-
-Not all ACS or CPS data years use the 2017 NAICS. This command will not work 
-properly for data years that use other NAICS versions.
 
 The 2-digit NAICS codes define 22 industry sectors. The CPS's major industry 
 recode variables __a_mjind__ and __wemind__ define 14 industry groups. In the 
@@ -111,10 +111,10 @@ program define generate_ind_sector_var
     (0770      = 23 "Construction") ///
     (1070/3990 = 31 "Manufacturing") /* NAICS 31-33 */ ///
     (4070/4590 = 42 "Wholesale trade")  ///
-    (4670/5790 = 44 "Retail trade") /* NAICS 44-45 */  ///
+    (4670/5791 = 44 "Retail trade") /* NAICS 44-45 */  ///
     (6070/6390 = 48 "Transportation and warehousing") /* NAICS 48-49 */  ///
     (0570/0690 = 22 "Utilities")  ///
-    (6470/6780 = 51 "Information")  ///
+    (6470/6781 = 51 "Information")  ///
     (6870/6992 = 52 "Finance and insurance")  ///
     (7071/7190 = 53 "Real estate and rental and leasing") ///
     (7270/7490 = 54 "Professional, scientific, and technical services") ///
