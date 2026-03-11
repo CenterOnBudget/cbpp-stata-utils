@@ -1,3 +1,9 @@
+##   v 0.2.13
+
+-   Fixed an error in `make_cbpp_profile` that confused BLS_USER_AGENT and censuskey. You may need to regenerate or manually edit your profile.do.
+-   `get_cpiu` no longer occasionally throws a type mismatch error when the `base_year()` option is specified.
+-   `generate_ind_sector_var` now supports 2022 NAICS codes in addition to 2017 NAICS.
+
 ## v 0.2.12
 
 -   `make_cbpp_profile` now defines global macro BLS_USER_AGENT for use by `get_cpiu`.
