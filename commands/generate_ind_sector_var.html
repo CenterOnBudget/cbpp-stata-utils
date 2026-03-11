@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.12">
+<meta name="generator" content="quarto-1.9.29">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -10,6 +10,9 @@
 
 <title>generate_ind_sector_var – cbppstatautils</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -68,15 +71,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="../">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-cdaacfc258cb6f151192107f105ac881.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dfa48a90d809c806c7ea2d5aecd9fc66.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-015ad9bed421a83d7bbe6ae8fcd04572.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-f56e1200f85bd94f22b46a72fa971732.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -196,7 +198,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="description" class="level2">
 <h2 class="anchored" data-anchor-id="description">Description</h2>
-<p><code>generate_ind_sector_var</code> generates a categorical variable for 22 industry sectors representing 2-digit <a href="https://www.census.gov/naics/?58967?yearbck=2017">2017 North American Industry Classification System (NAICS) codes</a>.</p>
+<p><code>generate_ind_sector_var</code> generates a categorical variable for 22 industry sectors representing 2-digit <a href="https://www.census.gov/naics/">North American Industry Classification System (NAICS) codes</a>. Valid for 2017 and 2022 NAICS industries.</p>
 <p>In ACS microdata, the variable <code>indp</code> must exist.</p>
 <p>In CPS microdata, by default, the variable <code>peioind</code> must exist and the new variable will reflect the primary job worked last week. Users may specify <code>job(year)</code> to indicate the new variable should reflect the longest job held last year, in which case <code>industry</code> must exist.</p>
 <div class="callout callout-style-simple callout-caution">
@@ -205,7 +207,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>Not all ACS or CPS data years use the 2017 NAICS. This command will not work properly for data years that use other NAICS versions.</p>
+<p>Not all ACS or CPS data years use the 2017 or 2022 NAICS. This command is not guaranteed to work properly for data years that use other NAICS versions.</p>
 </div>
 </div>
 </div>
